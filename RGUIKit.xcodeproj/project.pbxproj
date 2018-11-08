@@ -1,0 +1,622 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		E61A04CA2192B6A8008D35F1 /* Package */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E61A04CB2192B6A8008D35F1 /* Build configuration list for PBXAggregateTarget "Package" */;
+			buildPhases = (
+				E61A04CE2192B6CB008D35F1 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Package;
+			productName = Package;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		E61A043F21919A13008D35F1 /* RGUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A043D21919A13008D35F1 /* RGUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A044A21919A75008D35F1 /* RGIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A044621919A74008D35F1 /* RGIconCell.m */; };
+		E61A044B21919A75008D35F1 /* RGIconCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A044721919A74008D35F1 /* RGIconCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A044C21919A75008D35F1 /* RGTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A044821919A74008D35F1 /* RGTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A044D21919A75008D35F1 /* RGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A044921919A75008D35F1 /* RGTableViewCell.m */; };
+		E61A047421919AB8008D35F1 /* UIView+RGPanGestureHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045121919AB7008D35F1 /* UIView+RGPanGestureHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A047521919AB8008D35F1 /* UIView+RGParentVC.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045221919AB7008D35F1 /* UIView+RGParentVC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A047721919AB8008D35F1 /* UIView+RGLayoutHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045421919AB7008D35F1 /* UIView+RGLayoutHelp.m */; };
+		E61A047821919AB8008D35F1 /* UIView+RGPanGestureHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045521919AB7008D35F1 /* UIView+RGPanGestureHelp.m */; };
+		E61A047921919AB8008D35F1 /* UIView+RGParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045621919AB7008D35F1 /* UIView+RGParentVC.m */; };
+		E61A047A21919AB8008D35F1 /* UIView+RGLayoutHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045721919AB7008D35F1 /* UIView+RGLayoutHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A047C21919AB8008D35F1 /* UINavigationController+RGShouldPop.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045A21919AB7008D35F1 /* UINavigationController+RGShouldPop.m */; };
+		E61A047D21919AB8008D35F1 /* UINavigationController+RGShouldPop.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045B21919AB7008D35F1 /* UINavigationController+RGShouldPop.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A047E21919AB8008D35F1 /* UITabBar+RGBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045D21919AB7008D35F1 /* UITabBar+RGBadge.m */; };
+		E61A047F21919AB8008D35F1 /* UITabBar+RGBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045E21919AB7008D35F1 /* UITabBar+RGBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A049A2192721D008D35F1 /* UIViewController+RGSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04922192721C008D35F1 /* UIViewController+RGSafeArea.m */; };
+		E61A049B2192721D008D35F1 /* UIViewController+RGPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04932192721C008D35F1 /* UIViewController+RGPresent.m */; };
+		E61A049D2192721D008D35F1 /* UIViewController+RGSafeArea.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04952192721C008D35F1 /* UIViewController+RGSafeArea.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A049F2192721D008D35F1 /* UIViewController+RGBarFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04972192721C008D35F1 /* UIViewController+RGBarFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A04A02192721D008D35F1 /* UIViewController+RGPresent.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04982192721C008D35F1 /* UIViewController+RGPresent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A04A12192721D008D35F1 /* UIViewController+RGBarFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04992192721D008D35F1 /* UIViewController+RGBarFrame.m */; };
+		E61A04A421928A12008D35F1 /* UIImage+RGIconCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04A221928A12008D35F1 /* UIImage+RGIconCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E61A04A521928A12008D35F1 /* UIImage+RGIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04A321928A12008D35F1 /* UIImage+RGIconCell.m */; };
+		E6DA65402192D2AC00BF3201 /* UIImage+RGTint.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA65382192D2AB00BF3201 /* UIImage+RGTint.m */; };
+		E6DA65412192D2AC00BF3201 /* UIImage+RGName.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA65392192D2AB00BF3201 /* UIImage+RGName.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6DA65422192D2AC00BF3201 /* UIImage+RGTint.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA653A2192D2AB00BF3201 /* UIImage+RGTint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6DA65432192D2AC00BF3201 /* UIImage+RGName.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA653B2192D2AB00BF3201 /* UIImage+RGName.m */; };
+		E6DA65442192D2AC00BF3201 /* UIImage+RGImageEdit.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA653C2192D2AB00BF3201 /* UIImage+RGImageEdit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6DA65452192D2AC00BF3201 /* UIImage+RGRead.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA653D2192D2AB00BF3201 /* UIImage+RGRead.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6DA65462192D2AC00BF3201 /* UIImage+RGImageEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA653E2192D2AB00BF3201 /* UIImage+RGImageEdit.m */; };
+		E6DA65472192D2AC00BF3201 /* UIImage+RGRead.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA653F2192D2AB00BF3201 /* UIImage+RGRead.m */; };
+		E6DA65542193972E00BF3201 /* RGNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA654D2193972D00BF3201 /* RGNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6DA65562193972E00BF3201 /* RGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA654F2193972D00BF3201 /* RGNavigationController.m */; };
+		E6DA656F2193CF0A00BF3201 /* UIBezierPath+RGDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA656D2193CF0A00BF3201 /* UIBezierPath+RGDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6DA65702193CF0A00BF3201 /* UIBezierPath+RGDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA656E2193CF0A00BF3201 /* UIBezierPath+RGDraw.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E61A043A21919A13008D35F1 /* RGUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RGUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E61A043D21919A13008D35F1 /* RGUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGUIKit.h; sourceTree = "<group>"; };
+		E61A043E21919A13008D35F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E61A044621919A74008D35F1 /* RGIconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGIconCell.m; sourceTree = "<group>"; };
+		E61A044721919A74008D35F1 /* RGIconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGIconCell.h; sourceTree = "<group>"; };
+		E61A044821919A74008D35F1 /* RGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTableViewCell.h; sourceTree = "<group>"; };
+		E61A044921919A75008D35F1 /* RGTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTableViewCell.m; sourceTree = "<group>"; };
+		E61A045121919AB7008D35F1 /* UIView+RGPanGestureHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGPanGestureHelp.h"; sourceTree = "<group>"; };
+		E61A045221919AB7008D35F1 /* UIView+RGParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGParentVC.h"; sourceTree = "<group>"; };
+		E61A045421919AB7008D35F1 /* UIView+RGLayoutHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGLayoutHelp.m"; sourceTree = "<group>"; };
+		E61A045521919AB7008D35F1 /* UIView+RGPanGestureHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGPanGestureHelp.m"; sourceTree = "<group>"; };
+		E61A045621919AB7008D35F1 /* UIView+RGParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGParentVC.m"; sourceTree = "<group>"; };
+		E61A045721919AB7008D35F1 /* UIView+RGLayoutHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGLayoutHelp.h"; sourceTree = "<group>"; };
+		E61A045A21919AB7008D35F1 /* UINavigationController+RGShouldPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+RGShouldPop.m"; sourceTree = "<group>"; };
+		E61A045B21919AB7008D35F1 /* UINavigationController+RGShouldPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+RGShouldPop.h"; sourceTree = "<group>"; };
+		E61A045D21919AB7008D35F1 /* UITabBar+RGBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RGBadge.m"; sourceTree = "<group>"; };
+		E61A045E21919AB7008D35F1 /* UITabBar+RGBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RGBadge.h"; sourceTree = "<group>"; };
+		E61A04922192721C008D35F1 /* UIViewController+RGSafeArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGSafeArea.m"; sourceTree = "<group>"; };
+		E61A04932192721C008D35F1 /* UIViewController+RGPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGPresent.m"; sourceTree = "<group>"; };
+		E61A04952192721C008D35F1 /* UIViewController+RGSafeArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGSafeArea.h"; sourceTree = "<group>"; };
+		E61A04972192721C008D35F1 /* UIViewController+RGBarFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGBarFrame.h"; sourceTree = "<group>"; };
+		E61A04982192721C008D35F1 /* UIViewController+RGPresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGPresent.h"; sourceTree = "<group>"; };
+		E61A04992192721D008D35F1 /* UIViewController+RGBarFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGBarFrame.m"; sourceTree = "<group>"; };
+		E61A04A221928A12008D35F1 /* UIImage+RGIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGIconCell.h"; sourceTree = "<group>"; };
+		E61A04A321928A12008D35F1 /* UIImage+RGIconCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGIconCell.m"; sourceTree = "<group>"; };
+		E6DA65382192D2AB00BF3201 /* UIImage+RGTint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGTint.m"; sourceTree = "<group>"; };
+		E6DA65392192D2AB00BF3201 /* UIImage+RGName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGName.h"; sourceTree = "<group>"; };
+		E6DA653A2192D2AB00BF3201 /* UIImage+RGTint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGTint.h"; sourceTree = "<group>"; };
+		E6DA653B2192D2AB00BF3201 /* UIImage+RGName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGName.m"; sourceTree = "<group>"; };
+		E6DA653C2192D2AB00BF3201 /* UIImage+RGImageEdit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGImageEdit.h"; sourceTree = "<group>"; };
+		E6DA653D2192D2AB00BF3201 /* UIImage+RGRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGRead.h"; sourceTree = "<group>"; };
+		E6DA653E2192D2AB00BF3201 /* UIImage+RGImageEdit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGImageEdit.m"; sourceTree = "<group>"; };
+		E6DA653F2192D2AB00BF3201 /* UIImage+RGRead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGRead.m"; sourceTree = "<group>"; };
+		E6DA654D2193972D00BF3201 /* RGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGNavigationController.h; sourceTree = "<group>"; };
+		E6DA654F2193972D00BF3201 /* RGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGNavigationController.m; sourceTree = "<group>"; };
+		E6DA656121939A6800BF3201 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6DA656D2193CF0A00BF3201 /* UIBezierPath+RGDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+RGDraw.h"; sourceTree = "<group>"; };
+		E6DA656E2193CF0A00BF3201 /* UIBezierPath+RGDraw.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+RGDraw.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E61A043721919A13008D35F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E61A043021919A13008D35F1 = {
+			isa = PBXGroup;
+			children = (
+				E61A043C21919A13008D35F1 /* RGUIKit */,
+				E6DA656021939A6800BF3201 /* RGUIKitResource */,
+				E61A043B21919A13008D35F1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E61A043B21919A13008D35F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E61A043A21919A13008D35F1 /* RGUIKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E61A043C21919A13008D35F1 /* RGUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				E6DA654C2193969F00BF3201 /* UINavigationController */,
+				E61A044E21919AA6008D35F1 /* Category */,
+				E61A044521919A4E008D35F1 /* UITabelViewCell */,
+				E61A043D21919A13008D35F1 /* RGUIKit.h */,
+				E61A043E21919A13008D35F1 /* Info.plist */,
+			);
+			path = RGUIKit;
+			sourceTree = "<group>";
+		};
+		E61A044521919A4E008D35F1 /* UITabelViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E61A044721919A74008D35F1 /* RGIconCell.h */,
+				E61A044621919A74008D35F1 /* RGIconCell.m */,
+				E61A044821919A74008D35F1 /* RGTableViewCell.h */,
+				E61A044921919A75008D35F1 /* RGTableViewCell.m */,
+				E61A04A221928A12008D35F1 /* UIImage+RGIconCell.h */,
+				E61A04A321928A12008D35F1 /* UIImage+RGIconCell.m */,
+			);
+			path = UITabelViewCell;
+			sourceTree = "<group>";
+		};
+		E61A044E21919AA6008D35F1 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				E6DA656C2193CECA00BF3201 /* UIBezierPath */,
+				E61A046621919AB8008D35F1 /* UIImage */,
+				E61A045921919AB7008D35F1 /* UINavigationController */,
+				E61A045C21919AB7008D35F1 /* UITabBar */,
+				E61A045021919AB7008D35F1 /* UIView */,
+				E61A045F21919AB8008D35F1 /* UIViewController */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		E61A045021919AB7008D35F1 /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				E61A045221919AB7008D35F1 /* UIView+RGParentVC.h */,
+				E61A045621919AB7008D35F1 /* UIView+RGParentVC.m */,
+				E61A045721919AB7008D35F1 /* UIView+RGLayoutHelp.h */,
+				E61A045421919AB7008D35F1 /* UIView+RGLayoutHelp.m */,
+				E61A045121919AB7008D35F1 /* UIView+RGPanGestureHelp.h */,
+				E61A045521919AB7008D35F1 /* UIView+RGPanGestureHelp.m */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
+		E61A045921919AB7008D35F1 /* UINavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				E61A045B21919AB7008D35F1 /* UINavigationController+RGShouldPop.h */,
+				E61A045A21919AB7008D35F1 /* UINavigationController+RGShouldPop.m */,
+			);
+			path = UINavigationController;
+			sourceTree = "<group>";
+		};
+		E61A045C21919AB7008D35F1 /* UITabBar */ = {
+			isa = PBXGroup;
+			children = (
+				E61A045E21919AB7008D35F1 /* UITabBar+RGBadge.h */,
+				E61A045D21919AB7008D35F1 /* UITabBar+RGBadge.m */,
+			);
+			path = UITabBar;
+			sourceTree = "<group>";
+		};
+		E61A045F21919AB8008D35F1 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E61A04972192721C008D35F1 /* UIViewController+RGBarFrame.h */,
+				E61A04992192721D008D35F1 /* UIViewController+RGBarFrame.m */,
+				E61A04952192721C008D35F1 /* UIViewController+RGSafeArea.h */,
+				E61A04922192721C008D35F1 /* UIViewController+RGSafeArea.m */,
+				E61A04982192721C008D35F1 /* UIViewController+RGPresent.h */,
+				E61A04932192721C008D35F1 /* UIViewController+RGPresent.m */,
+			);
+			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		E61A046621919AB8008D35F1 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				E6DA653C2192D2AB00BF3201 /* UIImage+RGImageEdit.h */,
+				E6DA653E2192D2AB00BF3201 /* UIImage+RGImageEdit.m */,
+				E6DA65392192D2AB00BF3201 /* UIImage+RGName.h */,
+				E6DA653B2192D2AB00BF3201 /* UIImage+RGName.m */,
+				E6DA653D2192D2AB00BF3201 /* UIImage+RGRead.h */,
+				E6DA653F2192D2AB00BF3201 /* UIImage+RGRead.m */,
+				E6DA653A2192D2AB00BF3201 /* UIImage+RGTint.h */,
+				E6DA65382192D2AB00BF3201 /* UIImage+RGTint.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		E6DA654C2193969F00BF3201 /* UINavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				E6DA654D2193972D00BF3201 /* RGNavigationController.h */,
+				E6DA654F2193972D00BF3201 /* RGNavigationController.m */,
+			);
+			path = UINavigationController;
+			sourceTree = "<group>";
+		};
+		E6DA656021939A6800BF3201 /* RGUIKitResource */ = {
+			isa = PBXGroup;
+			children = (
+				E6DA656121939A6800BF3201 /* Info.plist */,
+			);
+			path = RGUIKitResource;
+			sourceTree = "<group>";
+		};
+		E6DA656C2193CECA00BF3201 /* UIBezierPath */ = {
+			isa = PBXGroup;
+			children = (
+				E6DA656D2193CF0A00BF3201 /* UIBezierPath+RGDraw.h */,
+				E6DA656E2193CF0A00BF3201 /* UIBezierPath+RGDraw.m */,
+			);
+			path = UIBezierPath;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E61A043521919A13008D35F1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E61A049D2192721D008D35F1 /* UIViewController+RGSafeArea.h in Headers */,
+				E61A047421919AB8008D35F1 /* UIView+RGPanGestureHelp.h in Headers */,
+				E61A049F2192721D008D35F1 /* UIViewController+RGBarFrame.h in Headers */,
+				E61A04A421928A12008D35F1 /* UIImage+RGIconCell.h in Headers */,
+				E61A04A02192721D008D35F1 /* UIViewController+RGPresent.h in Headers */,
+				E61A047F21919AB8008D35F1 /* UITabBar+RGBadge.h in Headers */,
+				E61A044B21919A75008D35F1 /* RGIconCell.h in Headers */,
+				E61A044C21919A75008D35F1 /* RGTableViewCell.h in Headers */,
+				E6DA65452192D2AC00BF3201 /* UIImage+RGRead.h in Headers */,
+				E6DA65412192D2AC00BF3201 /* UIImage+RGName.h in Headers */,
+				E6DA65422192D2AC00BF3201 /* UIImage+RGTint.h in Headers */,
+				E6DA65442192D2AC00BF3201 /* UIImage+RGImageEdit.h in Headers */,
+				E61A047A21919AB8008D35F1 /* UIView+RGLayoutHelp.h in Headers */,
+				E61A043F21919A13008D35F1 /* RGUIKit.h in Headers */,
+				E61A047521919AB8008D35F1 /* UIView+RGParentVC.h in Headers */,
+				E6DA65542193972E00BF3201 /* RGNavigationController.h in Headers */,
+				E6DA656F2193CF0A00BF3201 /* UIBezierPath+RGDraw.h in Headers */,
+				E61A047D21919AB8008D35F1 /* UINavigationController+RGShouldPop.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E61A043921919A13008D35F1 /* RGUIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E61A044221919A13008D35F1 /* Build configuration list for PBXNativeTarget "RGUIKit" */;
+			buildPhases = (
+				E61A043521919A13008D35F1 /* Headers */,
+				E61A043621919A13008D35F1 /* Sources */,
+				E61A043721919A13008D35F1 /* Frameworks */,
+				E61A043821919A13008D35F1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RGUIKit;
+			productName = RGUIKit;
+			productReference = E61A043A21919A13008D35F1 /* RGUIKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E61A043121919A13008D35F1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = ld;
+				TargetAttributes = {
+					E61A043921919A13008D35F1 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					E61A04CA2192B6A8008D35F1 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = E61A043421919A13008D35F1 /* Build configuration list for PBXProject "RGUIKit" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E61A043021919A13008D35F1;
+			productRefGroup = E61A043B21919A13008D35F1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E61A043921919A13008D35F1 /* RGUIKit */,
+				E61A04CA2192B6A8008D35F1 /* Package */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E61A043821919A13008D35F1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E61A04CE2192B6CB008D35F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n#要build的target名\nTARGET_NAME=${PROJECT_NAME}\nif [[ $1 ]]\nthen\nTARGET_NAME=$1\nfi\n# UNIVERSAL_OUTPUT_FOLDER=\"${SRCROOT}/${PROJECT_NAME}/\"\nUNIVERSAL_OUTPUT_FOLDER=\"${SRCROOT}/\"\n\n# 打包 Release 文件\nOUT_TYPE=\"Release\"\n\n#创建输出目录，并删除之前的framework文件\nmkdir -p \"${UNIVERSAL_OUTPUT_FOLDER}\"\nrm -rf \"${UNIVERSAL_OUTPUT_FOLDER}/${TARGET_NAME}.framework\"\n\n#分别编译模拟器和真机的Framework\nxcodebuild -target \"${TARGET_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration OUT_TYPE -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\nxcodebuild -target \"${TARGET_NAME}\" ONLY_ACTIVE_ARCH=NO -configuration OUT_TYPE -sdk iphonesimulator BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" clean build\n\n#拷贝framework到univer目录\ncp -R \"${BUILD_DIR}/${OUT_TYPE}-iphonesimulator/${TARGET_NAME}.framework\" \"${UNIVERSAL_OUTPUT_FOLDER}\"\n\n#合并framework，输出最终的framework到build目录\nlipo -create -output \"${UNIVERSAL_OUTPUT_FOLDER}/${TARGET_NAME}.framework/${TARGET_NAME}\" \"${BUILD_DIR}/${OUT_TYPE}-iphonesimulator/${TARGET_NAME}.framework/${TARGET_NAME}\" \"${BUILD_DIR}/${OUT_TYPE}-iphoneos/${TARGET_NAME}.framework/${TARGET_NAME}\"\n\n# Copy the resources bundle\nditto \"${UNIVERSAL_OUTPUT_FOLDER}/${TARGET_NAME}.bundle\" \\\n\"${SRCROOT}/Products/${TARGET_NAME}.bundle\"\n\n#删除编译之后生成的无关的配置文件\ndir_path=\"${UNIVERSAL_OUTPUT_FOLDER}/${TARGET_NAME}.framework/\"\nfor file in ls $dir_path\ndo\nif [[ ${file} =~ \".xcconfig\" ]]\nthen\nrm -f \"${dir_path}/${file}\"\nfi\ndone\n#判断build文件夹是否存在，存在则删除\nif [ -d \"${SRCROOT}/build\" ]\nthen\nrm -rf \"${SRCROOT}/build\"\nfi\nrm -rf \"${BUILD_DIR}/$OutType-iphonesimulator\" \"${BUILD_DIR}/${OUT_TYPE}-iphoneos\"\n#打开合并后的文件夹\nopen \"${UNIVERSAL_OUTPUT_FOLDER}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E61A043621919A13008D35F1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6DA65702193CF0A00BF3201 /* UIBezierPath+RGDraw.m in Sources */,
+				E6DA65562193972E00BF3201 /* RGNavigationController.m in Sources */,
+				E6DA65462192D2AC00BF3201 /* UIImage+RGImageEdit.m in Sources */,
+				E61A044D21919A75008D35F1 /* RGTableViewCell.m in Sources */,
+				E61A04A521928A12008D35F1 /* UIImage+RGIconCell.m in Sources */,
+				E61A047821919AB8008D35F1 /* UIView+RGPanGestureHelp.m in Sources */,
+				E6DA65402192D2AC00BF3201 /* UIImage+RGTint.m in Sources */,
+				E6DA65432192D2AC00BF3201 /* UIImage+RGName.m in Sources */,
+				E61A047C21919AB8008D35F1 /* UINavigationController+RGShouldPop.m in Sources */,
+				E61A047721919AB8008D35F1 /* UIView+RGLayoutHelp.m in Sources */,
+				E61A047E21919AB8008D35F1 /* UITabBar+RGBadge.m in Sources */,
+				E61A044A21919A75008D35F1 /* RGIconCell.m in Sources */,
+				E61A047921919AB8008D35F1 /* UIView+RGParentVC.m in Sources */,
+				E61A049B2192721D008D35F1 /* UIViewController+RGPresent.m in Sources */,
+				E6DA65472192D2AC00BF3201 /* UIImage+RGRead.m in Sources */,
+				E61A049A2192721D008D35F1 /* UIViewController+RGSafeArea.m in Sources */,
+				E61A04A12192721D008D35F1 /* UIViewController+RGBarFrame.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E61A044021919A13008D35F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E61A044121919A13008D35F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E61A044321919A13008D35F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 59Q4A65TJN;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = RGUIKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.renge.ui.RGUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E61A044421919A13008D35F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 59Q4A65TJN;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = RGUIKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.renge.ui.RGUIKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E61A04CC2192B6A8008D35F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 59Q4A65TJN;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E61A04CD2192B6A8008D35F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 59Q4A65TJN;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E61A043421919A13008D35F1 /* Build configuration list for PBXProject "RGUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E61A044021919A13008D35F1 /* Debug */,
+				E61A044121919A13008D35F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E61A044221919A13008D35F1 /* Build configuration list for PBXNativeTarget "RGUIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E61A044321919A13008D35F1 /* Debug */,
+				E61A044421919A13008D35F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E61A04CB2192B6A8008D35F1 /* Build configuration list for PBXAggregateTarget "Package" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E61A04CC2192B6A8008D35F1 /* Debug */,
+				E61A04CD2192B6A8008D35F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E61A043121919A13008D35F1 /* Project object */;
+}
