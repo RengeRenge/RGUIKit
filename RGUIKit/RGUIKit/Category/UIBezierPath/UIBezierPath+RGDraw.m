@@ -49,7 +49,7 @@
             case RGUIBezierDrawTypeCircleFit:
             case RGUIBezierDrawTypeCircleFill:
             circle = YES;
-            sPonit = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidX(bounds));
+            sPonit = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
             break;
         default:
             return;

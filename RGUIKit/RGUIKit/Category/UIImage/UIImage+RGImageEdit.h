@@ -31,7 +31,7 @@
 /**
  对 scrollView 进行截图
  
- @param rect 截图区域
+ @param rect 截图区域, CGRectZero 为全部截图
  */
 + (UIImage *)rg_captureScrollView:(UIScrollView *)scrollView rect:(CGRect)rect;
 

@@ -74,13 +74,13 @@
 				E61A04B62192B627008D35F1 /* ViewController.m */,
 				E60BEA962192C3500014BF2D /* PopTestViewController.h */,
 				E60BEA972192C3500014BF2D /* PopTestViewController.m */,
+				E6DA65712193E71200BF3201 /* DrawViewController.h */,
+				E6DA65722193E71200BF3201 /* DrawViewController.m */,
 				E61A04B82192B627008D35F1 /* Main.storyboard */,
 				E61A04BB2192B62A008D35F1 /* Assets.xcassets */,
 				E61A04BD2192B62A008D35F1 /* LaunchScreen.storyboard */,
 				E61A04C02192B62A008D35F1 /* Info.plist */,
 				E61A04C12192B62A008D35F1 /* main.m */,
-				E6DA65712193E71200BF3201 /* DrawViewController.h */,
-				E6DA65722193E71200BF3201 /* DrawViewController.m */,
 			);
 			path = RGUIKitDemo;
 			sourceTree = "<group>";
