@@ -11,10 +11,16 @@
 
 #import "PopTestViewController.h"
 #import "DrawViewController.h"
+#import "RGNavigationTestViewController.h"
 
 typedef enum : NSUInteger {
+    VCTestTypeEdgeCell,
+    VCTestTypeCornerCell,
+    VCTestTypeLabelCell,
     VCTestTypeDraw,
     VCTestTypeImageEdit,
+    VCTestTypeCornerCellEnd,
+    VCTestTypeCount,
 } VCTestType;
 
 @interface ViewController ()
@@ -25,22 +31,41 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:RGIconCell.class forCellReuseIdentifier:RGIconCellID];
+    
+    self.tableView.backgroundColor = [UIColor darkGrayColor];
+    
+    self.tableView.tableFooterView = [UIView new];
+    
+    [self.tableView registerClass:RGIconCell.class forCellReuseIdentifier:RGCellID];
+    
     [RGIconCell setThemeColor:[UIColor blackColor]];
     
     [self rg_showBadgeWithValue:@"RGDot"];
-    [self.tabBarController.tabBar rg_showBadgeWithType:RGUITabbarBadgeTypeWarning atIndex:1];
+    [self.tabBarController.tabBar rg_showBadgeWithType:RGUITabbarBadgeTypeNormal atIndex:1];
     [self.tabBarController.tabBar rg_showBadgeWithValue:@"!" atIndex:2];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RGNavigation" style:UIBarButtonItemStylePlain target:self action:@selector(rgNavigation:)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RTL/LTR" style:UIBarButtonItemStylePlain target:self action:@selector(RTLSwitch:)];
 }
 
 - (void)rgNavigation:(id)sender {
-    UIViewController *vc = [UIViewController new];
-    vc.view.backgroundColor = [UIColor blueColor];
-    vc.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dismiss" style:UIBarButtonItemStylePlain target:vc action:@selector(rg_dismiss)];
+    RGNavigationTestViewController *vc = [RGNavigationTestViewController new];
+    vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dismiss" style:UIBarButtonItemStylePlain target:vc action:@selector(rg_dismiss)];
     RGNavigationController *navigation = [RGNavigationController navigationWithRoot:vc style:RGNavigationBackgroundStyleShadow];
+    navigation.tintColor = [UIColor whiteColor];
     [self presentViewController:navigation animated:YES completion:nil];
+}
+
+- (void)RTLSwitch:(id)sender {
+    if (@available(iOS 9.0, *)) {
+        UISemanticContentAttribute att = [UIView appearance].semanticContentAttribute;
+        if (att == UISemanticContentAttributeForceRightToLeft) {
+            [UIView rg_setSemanticContentAttribute:UISemanticContentAttributeForceLeftToRight];
+        } else {
+            [UIView rg_setSemanticContentAttribute:UISemanticContentAttributeForceRightToLeft];
+        }
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -48,12 +73,85 @@ typedef enum : NSUInteger {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 100;
+    return VCTestTypeCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RGIconCell <UIButton *> *cell = [tableView dequeueReusableCellWithIdentifier:RGIconCellID forIndexPath:indexPath];
+    RGIconCell <UIButton *> *cell;
+    
+    if (indexPath.row == 0 || indexPath.row == [tableView numberOfRowsInSection:0] - 1) {
+        cell = [RGCornerTableViewCell dequeueCellWithIdentifier:RGCornerTableViewCellID style:UITableViewCellStyleSubtitle tableView:tableView];
+        
+        RGCornerTableViewCell *cornerCell = (RGCornerTableViewCell *)cell;
+        
+        if (indexPath.row == 0) {
+            cornerCell.corner = UIRectCornerTopLeft | UIRectCornerTopRight;
+        } else {
+            cornerCell.corner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+        }
+        cornerCell.cornerRadius = 10.f;
+    } else {
+        
+    }
+    
+    switch (indexPath.row) {
+            case VCTestTypeDraw:
+            cell = [tableView dequeueReusableCellWithIdentifier:RGCellID forIndexPath:indexPath];
+            cell.textLabel.text = @"VCTestTypeDrawAndLayout";
+            break;
+            case VCTestTypeImageEdit:
+            cell = [tableView dequeueReusableCellWithIdentifier:RGCellID forIndexPath:indexPath];
+            cell.textLabel.text = @"VCTestTypeImageEdit";
+            break;
+        case VCTestTypeCornerCell:
+        case VCTestTypeCornerCellEnd: {
+            cell = [RGCornerTableViewCell dequeueCellWithIdentifier:RGCornerTableViewCellID style:UITableViewCellStyleSubtitle tableView:tableView];
+            cell.textLabel.text = @"【CornerCell】";
+            RGCornerTableViewCell *cornerCell = (RGCornerTableViewCell *)cell;
+            cornerCell.cornerRadius = 10.f;
+            if (indexPath.row == VCTestTypeCornerCell) {
+                cornerCell.corner = UIRectCornerTopLeft | UIRectCornerTopRight;
+            } else {
+                cornerCell.corner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+            }
+            break;
+        }
+        case VCTestTypeLabelCell: {
+            RGLabelTableViewCell *cell = [RGLabelTableViewCell dequeueCellWithIdentifier:RGLabelTableViewCellID style:UITableViewCellStyleDefault tableView:tableView];
+            cell.textEdge = UIEdgeInsetsMake(10, 10, 10, 10);
+            cell.maskEdge = UIEdgeInsetsMake(10, 10, 10, 10);
+            cell.textEdgeMask.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            cell.label.text = @"【LabelCell】";
+            cell.label.textColor = [UIColor purpleColor];
+            return cell;
+        }
+        case VCTestTypeEdgeCell: {
+            cell = [RGEdgeTableViewCell dequeueCellWithIdentifier:RGEdgeTableViewCellID style:UITableViewCellStyleSubtitle tableView:tableView];
+            
+            RGEdgeTableViewCell *edgeCell = (RGEdgeTableViewCell *)cell;
+            edgeCell.edge = UIEdgeInsetsMake(7, 50, 7, 10);
+            edgeCell.textLabel.text = @"【EdgeCell】 longggggggggggggggggggggg long long long long long long long long long long long long";
+            edgeCell.textLabel.numberOfLines = 0;
+            edgeCell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+            edgeCell.rightLabel.text = @"【rightLabel】";
 
+            edgeCell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+            edgeCell.showdowLayer.hidden = NO;
+            edgeCell.corner = UIRectCornerAllCorners;
+            edgeCell.cornerRadius = 10.f;
+            edgeCell.customSeparatorStyle = RGEdgeCellSeparatorStyleDefault;
+            edgeCell.customSeparatorView.backgroundColor = [UIColor blackColor];
+            edgeCell.customSeparatorEdge = UIEdgeInsetsMake(-2, 0, 2, edgeCell.cornerRadius/2.f);
+            edgeCell.highlightedEnable = YES;
+            edgeCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            break;
+        }
+        default:
+            cell.textLabel.text = @(indexPath.row).stringValue;
+            break;
+    }
+    
+    cell.detailTextLabel.text = @"RGIconCell";
     cell.applyThemeColor = YES;
     
     [cell configCustomIcon:^UIButton * _Nullable(UIButton * _Nullable icon) {
@@ -64,18 +162,6 @@ typedef enum : NSUInteger {
         return icon;
     }];
     
-    switch (indexPath.row) {
-            case VCTestTypeDraw:
-            cell.textLabel.text = @"VCTestTypeDrawAndLayout";
-            break;
-            case VCTestTypeImageEdit:
-            cell.textLabel.text = @"VCTestTypeImageEdit";
-            break;
-        default:
-            cell.textLabel.text = @(indexPath.row).stringValue;
-            break;
-    }
-    cell.detailTextLabel.text = @"RGIconCell";
     return cell;
 }
 
@@ -101,7 +187,7 @@ typedef enum : NSUInteger {
                 UIImage *cropImage = [UIImage rg_convertViewToImage:cell size:CGSizeMake(size.width, 20)];
                 image = [image rg_appendImage:cropImage];
                 
-                image = [image rg_appendImage:[UIImage rg_coloredImage:UIColor.purpleColor size:CGSizeMake(size.width, 10)]];
+                image = [image rg_appendImage:[UIImage rg_coloredImage:[UIColor rg_colorWithRGBA:100.f,150.f,200.f,1.f] size:CGSizeMake(size.width, 10)]];
                 
                 image = [image rg_appendImage:[UIImage rg_coloredImage:UIColor.redColor size:CGSizeMake(size.width, 30)]];
                 image = [image rg_appendImage:[UIImage rg_coloredImage:UIColor.yellowColor size:CGSizeMake(size.width, 30)]];
@@ -128,6 +214,13 @@ typedef enum : NSUInteger {
                 [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
+        case VCTestTypeCornerCell:
+        case VCTestTypeCornerCellEnd:
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            break;
+        case VCTestTypeEdgeCell:
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            break;
         default:
             break;
     }

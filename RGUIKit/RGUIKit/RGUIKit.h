@@ -16,7 +16,17 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <RGUIKit/PublicHeader.h>
 
+#ifndef Header_h
+#define Header_h
+
+#import <RGUIKit/RGTableViewCell.h>
 #import <RGUIKit/RGIconCell.h>
+#import <RGUIKit/RGCornerTableViewCell.h>
+#import <RGUIKit/RGLabelTableViewCell.h>
+#import <RGUIKit/RGEdgeTableViewCell.h>
+
+#import <RGUIKit/NSObject+RGSwizzle.h>
+
 #import <RGUIKit/RGNavigationController.h>
 
 #import <RGUIKit/UIViewController+RGPresent.h>
@@ -28,6 +38,8 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 
 #import <RGUIKit/UITabBar+RGBadge.h>
 
+#import <RGUIKit/UIColor+RGColorGet.h>
+
 #import <RGUIKit/UINavigationController+RGShouldPop.h>
 
 #import <RGUIKit/UIImage+RGTint.h>
@@ -36,3 +48,5 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIImage+RGImageEdit.h>
 
 #import <RGUIKit/UIBezierPath+RGDraw.h>
+
+#endif /* Header_h */

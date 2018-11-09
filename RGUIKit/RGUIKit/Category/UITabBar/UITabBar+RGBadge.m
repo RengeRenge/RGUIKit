@@ -75,6 +75,7 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
     if (!self.rg_tabBarBadgeMap) {
         self.rg_tabBarBadgeMap = [[NSMutableDictionary alloc] init];
         [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+        [self addObserver:self forKeyPath:@"semanticContentAttribute" options:NSKeyValueObservingOptionNew context:nil];
     }
     [self.rg_tabBarBadgeMap setObject:badgeView forKey:@(index)];
     [self addBadgeView:badgeView atIndex:index];
@@ -159,7 +160,8 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"frame"] && object == self) {
+    if (object == self &&
+        ([keyPath isEqualToString:@"frame"] || [keyPath isEqualToString:@"semanticContentAttribute"])) {
         if (self.rg_tabBarBadgeMap.allKeys.count > 0) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (self.rg_tabBarBadgeMap.allKeys.count > 0) {
@@ -176,6 +178,7 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
 - (void)dealloc {
     if (self.rg_tabBarBadgeMap) {
         [self removeObserver:self forKeyPath:@"frame"];
+        [self removeObserver:self forKeyPath:@"semanticContentAttribute"];
     }
 }
 

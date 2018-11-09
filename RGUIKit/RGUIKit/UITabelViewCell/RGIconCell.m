@@ -24,10 +24,6 @@
 
 @implementation RGIconCell
 
-NSString * const RGIconCellID = @"IconCell";
-NSString * const RGIconCellIDValue1 = @"IconCellIDValue1";
-NSString * const RGIconCellIDValue2 = @"IconCellIDValue2";
-
 + (RGIconCell *)getCell:(UITableView *)tableView reuseIdentifier:(NSString *)reuseIdentifier {
     RGIconCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
@@ -37,24 +33,14 @@ NSString * const RGIconCellIDValue2 = @"IconCellIDValue2";
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    
-    if ([reuseIdentifier isEqualToString:RGIconCellID]) {
-        style = UITableViewCellStyleSubtitle;
-    } else if ([reuseIdentifier isEqualToString:RGIconCellIDValue1]) {
-        style = UITableViewCellStyleValue1;
-    } else if ([reuseIdentifier isEqualToString:RGIconCellIDValue2]) {
-        style = UITableViewCellStyleValue2;
-    }
-    
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self resetConfig];
     }
-    
     return self;
 }
 
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+    if (self = [super initWithCustomStyle:style reuseIdentifier:reuseIdentifier]) {
         [self resetConfig];
     }
     return self;

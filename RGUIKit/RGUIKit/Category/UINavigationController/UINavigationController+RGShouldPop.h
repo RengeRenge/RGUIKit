@@ -21,4 +21,6 @@
 
 @interface UINavigationController (RGShouldPop)
 
+- (void)rg_updateSemanticContentAttribute;
+
 @end

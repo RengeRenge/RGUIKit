@@ -7,6 +7,7 @@
 //
 
 #import "UINavigationController+RGShouldPop.h"
+#import "NSObject+RGSwizzle.h"
 #import <objc/runtime.h>
 
 static char *rg_kOriginalDelegate = "rg_kOriginalDelegate";
@@ -21,28 +22,53 @@ static char *rg_kInteractiveViewController = "rg_kInteractiveViewController";
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Class class = [self class];
         SEL originalSel = @selector(navigationBar:shouldPopItem:);
         SEL swizzledSel = @selector(rg_navigationBar:shouldPopItem:);
         
-        Method originalMethod = class_getInstanceMethod(class, originalSel);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSel);
+        [self rg_swizzleOriginalSel:originalSel swizzledSel:swizzledSel];
         
-        BOOL didAddMethod =
-        class_addMethod(class,
-                        originalSel,
-                        method_getImplementation(swizzledMethod),
-                        method_getTypeEncoding(swizzledMethod));
+        [self rg_swizzleOriginalSel:@selector(initWithNibName:bundle:) swizzledSel:@selector(rg_initWithNibName:bundle:)];
         
-        if (didAddMethod) {
-            class_replaceMethod(class,
-                                swizzledSel,
-                                method_getImplementation(originalMethod),
-                                method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
+        [self rg_swizzleOriginalSel:@selector(initWithRootViewController:) swizzledSel:@selector(rg_initWithRootViewController:)];
+        
     });
+}
+
+- (instancetype)rg_initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil {
+    if ([self rg_initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [self rg_updateSemanticContentAttribute];
+    }
+    return self;
+}
+
+- (instancetype)rg_initWithCoder:(NSCoder *)aDecoder {
+    if ([self rg_initWithCoder:aDecoder]) {
+        [self rg_updateSemanticContentAttribute];
+    }
+    return self;
+}
+
+- (instancetype)rg_initWithNavigationBarClass:(Class)navigationBarClass toolbarClass:(Class)toolbarClass {
+    if ([self rg_initWithNavigationBarClass:navigationBarClass toolbarClass:toolbarClass]) {
+        [self rg_updateSemanticContentAttribute];
+    }
+    return self;
+}
+
+- (instancetype)rg_initWithRootViewController:(UIViewController *)rootViewController {
+    if ([self rg_initWithRootViewController:rootViewController]) {
+        [self rg_updateSemanticContentAttribute];
+    }
+    return self;
+}
+
+- (void)rg_updateSemanticContentAttribute {
+    if (@available(iOS 9.0, *)) {
+        self.navigationBar.semanticContentAttribute = [UIView appearance].semanticContentAttribute;
+        self.view.semanticContentAttribute = [UIView appearance].semanticContentAttribute;
+        [self.navigationBar setNeedsLayout];
+        [self.navigationBar setNeedsDisplay];
+    }
 }
 
 - (void)viewDidLoad {

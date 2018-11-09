@@ -14,7 +14,8 @@
 + (UIImage *)rg_convertViewToImage:(UIView *)view {
     CGSize size = view.bounds.size;
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    [view drawViewHierarchyInRect:CGRectMake(0, 0, size.width, size.height) afterScreenUpdates:YES];
     UIImage *subImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return subImage;
@@ -25,7 +26,11 @@
     if (CGRectEqualToRect(rect, view.bounds)) {
         return image;
     }
+    if (CGRectIsEmpty(rect)) {
+        return image;
+    }
     image = [image rg_cropInRect:rect];
+    image = [image rg_imageWithScale:[UIScreen mainScreen].scale];
     return image;
 }
 

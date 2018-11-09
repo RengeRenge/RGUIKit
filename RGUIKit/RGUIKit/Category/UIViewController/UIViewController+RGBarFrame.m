@@ -105,8 +105,6 @@ static BOOL rg_isFringeScreenConfirm = NO;
 
 + (BOOL)rg_isFringeScreen {
     
-    NSLog(@"rg_isFringeScreen:%d", rg_isFringeScreen);
-    
     if (rg_isFringeScreenConfirm) {
         return rg_isFringeScreen;
     }
@@ -147,6 +145,7 @@ static BOOL rg_isFringeScreenConfirm = NO;
                     }
                 } else {
                     rg_isFringeScreen = top.view.safeAreaInsets.bottom > 0.f;
+                    rg_isFringeScreenConfirm = YES;
                 }
             }
         }

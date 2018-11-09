@@ -18,6 +18,8 @@
 
 /**
  对 view 的指定区域 进行截图
+ 
+ @param rect 截图区域, CGRectZero 为全部截图
  */
 + (UIImage *)rg_convertViewToImage:(UIView *)view rect:(CGRect)rect;
 

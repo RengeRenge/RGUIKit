@@ -8,9 +8,12 @@
 
 #import "RGTableViewCell.h"
 
-NSString *const kTableViewCellID = @"TableViewCellID";
-
 CGFloat const RGTableViewCellDefaultIconDimension = 40.f;
+
+NSString * const RGCellID = @"RGCellID";
+NSString * const RGCellIDValue1 = @"RGCellIDValue1";
+NSString * const RGCellIDValue2 = @"RGCellIDValue2";
+NSString * const RGCellIDValueDefault = @"RGCellIDValueDefault";
 
 NSString *const kRGTableViewCellThemeColorDidChangeNotification = @"kRGTableViewCellThemeColorDidChangeNotification";
 
@@ -25,13 +28,67 @@ static UIColor * kRGTableViewCellThemeColor;
 
 @implementation RGTableViewCell
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if ([reuseIdentifier hasPrefix:RGCellID]) {
+        style = UITableViewCellStyleSubtitle;
+    } else if ([reuseIdentifier hasPrefix:RGCellIDValue1]) {
+        style = UITableViewCellStyleValue1;
+    } else if ([reuseIdentifier hasPrefix:RGCellIDValue2]) {
+        style = UITableViewCellStyleValue2;
+    }
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self configView];
+    }
+    return self;
+}
+
+- (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [self initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
+    }
+    return self;
+}
+
++ (instancetype)dequeueCellWithIdentifier:(NSString *)reuseIdentifier style:(UITableViewCellStyle)style tableView:(UITableView *)tableView {
+    NSString *iconCellId = nil;
+    switch (style) {
+        case UITableViewCellStyleSubtitle:
+            iconCellId = [RGCellID stringByAppendingString:reuseIdentifier];
+            break;
+        case UITableViewCellStyleValue1:
+            iconCellId = [RGCellIDValue1 stringByAppendingString:reuseIdentifier];
+            break;
+        case UITableViewCellStyleValue2:
+            iconCellId = [RGCellIDValue2 stringByAppendingString:reuseIdentifier];
+            break;
+        case UITableViewCellStyleDefault:
+            iconCellId = [RGCellIDValueDefault stringByAppendingString:reuseIdentifier];
+            break;
+        default:
+            break;
+    }
+    id cell = [tableView dequeueReusableCellWithIdentifier:iconCellId];
+    if (!cell) {
+        return [[self alloc] initWithCustomStyle:style reuseIdentifier:reuseIdentifier];
+    }
+    return cell;
+}
+
+- (void)setDetailTextColor:(UIColor *)detailTextColor {
+    _detailTextColor = detailTextColor;
+    self.detailTextLabel.textColor = detailTextColor;
+}
+
 + (void)setThemeColor:(UIColor *)color {
     kRGTableViewCellThemeColor = [color copy];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRGTableViewCellThemeColorDidChangeNotification object:nil];
-    
 }
 
 - (void)configView {
+    if (!_detailTextColor) {
+        _detailTextColor = [UIColor lightGrayColor];
+    }
+    self.detailTextLabel.textColor = _detailTextColor;
 //    self.backgroundColor = [UIColor whiteColor];
     
     [self themeColorChanged];
@@ -82,15 +139,6 @@ static UIColor * kRGTableViewCellThemeColor;
     backgroundView.backgroundColor = [kRGTableViewCellThemeColor colorWithAlphaComponent:0.3f];
     [self setSelectedBackgroundView:backgroundView];
     self.lastThemeColor = kRGTableViewCellThemeColor;
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        [self configView];
-    }
-    
-    return self;
 }
 
 - (void)dealloc {

@@ -37,6 +37,9 @@
  */
 - (void)rg_setFrameToFitRTL;
 
+
++ (void)rg_setSemanticContentAttribute:(UISemanticContentAttribute)UISemanticContentAttribute API_AVAILABLE(ios(9.0));
+
 @end
 
 @interface UIImage (RGLayoutHelp)

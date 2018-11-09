@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48025CD53BA7D518A64CDB5A /* libPods-RGUIKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54BD3670DAB83B0E7DD379BE /* libPods-RGUIKitDemo.a */; };
 		E60BEA982192C3500014BF2D /* PopTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60BEA972192C3500014BF2D /* PopTestViewController.m */; };
 		E61A04B42192B627008D35F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04B32192B627008D35F1 /* AppDelegate.m */; };
 		E61A04B72192B627008D35F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04B62192B627008D35F1 /* ViewController.m */; };
@@ -14,11 +15,14 @@
 		E61A04BC2192B62A008D35F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BB2192B62A008D35F1 /* Assets.xcassets */; };
 		E61A04BF2192B62A008D35F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BD2192B62A008D35F1 /* LaunchScreen.storyboard */; };
 		E61A04C22192B62A008D35F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04C12192B62A008D35F1 /* main.m */; };
-		E6DA654B2192D38000BF3201 /* RGUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6DA654A2192D38000BF3201 /* RGUIKit.framework */; };
+		E6B53EE5219527DD003D61DB /* RGNavigationTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */; };
 		E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA65722193E71200BF3201 /* DrawViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		106BBB23C8219D6D69F685D5 /* Pods-RGUIKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGUIKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGUIKitDemo/Pods-RGUIKitDemo.release.xcconfig"; sourceTree = "<group>"; };
+		54BD3670DAB83B0E7DD379BE /* libPods-RGUIKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RGUIKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BA5490DA0EF93BE81FCB6B8 /* Pods-RGUIKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGUIKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGUIKitDemo/Pods-RGUIKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		E60BEA962192C3500014BF2D /* PopTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopTestViewController.h; sourceTree = "<group>"; };
 		E60BEA972192C3500014BF2D /* PopTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopTestViewController.m; sourceTree = "<group>"; };
 		E61A04AF2192B627008D35F1 /* RGUIKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,7 +35,8 @@
 		E61A04BE2192B62A008D35F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E61A04C02192B62A008D35F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E61A04C12192B62A008D35F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E6DA654A2192D38000BF3201 /* RGUIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RGUIKit.framework; sourceTree = "<group>"; };
+		E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGNavigationTestViewController.h; sourceTree = "<group>"; };
+		E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGNavigationTestViewController.m; sourceTree = "<group>"; };
 		E6DA65712193E71200BF3201 /* DrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawViewController.h; sourceTree = "<group>"; };
 		E6DA65722193E71200BF3201 /* DrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,18 +46,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6DA654B2192D38000BF3201 /* RGUIKit.framework in Frameworks */,
+				48025CD53BA7D518A64CDB5A /* libPods-RGUIKitDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ADBC4FF162169CCFA40D837B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7BA5490DA0EF93BE81FCB6B8 /* Pods-RGUIKitDemo.debug.xcconfig */,
+				106BBB23C8219D6D69F685D5 /* Pods-RGUIKitDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C6AA543EF5FF6F4D5D772CE6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				54BD3670DAB83B0E7DD379BE /* libPods-RGUIKitDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E61A04A62192B627008D35F1 = {
 			isa = PBXGroup;
 			children = (
 				E61A04B12192B627008D35F1 /* RGUIKitDemo */,
 				E61A04B02192B627008D35F1 /* Products */,
+				ADBC4FF162169CCFA40D837B /* Pods */,
+				C6AA543EF5FF6F4D5D772CE6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,7 +91,6 @@
 		E61A04B12192B627008D35F1 /* RGUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				E6DA654A2192D38000BF3201 /* RGUIKit.framework */,
 				E61A04B22192B627008D35F1 /* AppDelegate.h */,
 				E61A04B32192B627008D35F1 /* AppDelegate.m */,
 				E61A04B52192B627008D35F1 /* ViewController.h */,
@@ -76,6 +99,8 @@
 				E60BEA972192C3500014BF2D /* PopTestViewController.m */,
 				E6DA65712193E71200BF3201 /* DrawViewController.h */,
 				E6DA65722193E71200BF3201 /* DrawViewController.m */,
+				E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */,
+				E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */,
 				E61A04B82192B627008D35F1 /* Main.storyboard */,
 				E61A04BB2192B62A008D35F1 /* Assets.xcassets */,
 				E61A04BD2192B62A008D35F1 /* LaunchScreen.storyboard */,
@@ -92,6 +117,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E61A04C52192B62A008D35F1 /* Build configuration list for PBXNativeTarget "RGUIKitDemo" */;
 			buildPhases = (
+				48486AEEDA4E3563124DA652 /* [CP] Check Pods Manifest.lock */,
 				E61A04AB2192B627008D35F1 /* Sources */,
 				E61A04AC2192B627008D35F1 /* Frameworks */,
 				E61A04AD2192B627008D35F1 /* Resources */,
@@ -150,11 +176,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		48486AEEDA4E3563124DA652 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RGUIKitDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E61A04AB2192B627008D35F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6B53EE5219527DD003D61DB /* RGNavigationTestViewController.m in Sources */,
 				E60BEA982192C3500014BF2D /* PopTestViewController.m in Sources */,
 				E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */,
 				E61A04B72192B627008D35F1 /* ViewController.m in Sources */,
@@ -301,6 +349,7 @@
 		};
 		E61A04C62192B62A008D35F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BA5490DA0EF93BE81FCB6B8 /* Pods-RGUIKitDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -310,11 +359,12 @@
 					"$(PROJECT_DIR)/RGUIKitDemo",
 				);
 				INFOPLIST_FILE = RGUIKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.renge.ui.RGUIKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -323,6 +373,7 @@
 		};
 		E61A04C72192B62A008D35F1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 106BBB23C8219D6D69F685D5 /* Pods-RGUIKitDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -332,11 +383,12 @@
 					"$(PROJECT_DIR)/RGUIKitDemo",
 				);
 				INFOPLIST_FILE = RGUIKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.renge.ui.RGUIKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

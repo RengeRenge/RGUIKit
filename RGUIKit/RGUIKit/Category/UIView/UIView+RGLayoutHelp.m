@@ -7,6 +7,8 @@
 //
 
 #import "UIView+RGLayoutHelp.h"
+#import "UIViewController+RGPresent.h"
+#import "UINavigationController+RGShouldPop.h"
 
 @implementation UIView (RGLayoutHelp)
 
@@ -30,6 +32,19 @@
 
 - (void)rg_setFrameToFitRTL {
     [self rg_setRTLFrame:self.frame];
+}
+
++ (void)rg_setSemanticContentAttribute:(UISemanticContentAttribute)semanticContentAttribute {
+    
+    [UIView appearance].semanticContentAttribute = semanticContentAttribute;
+    [UITabBar appearance].semanticContentAttribute = semanticContentAttribute;
+    [UINavigationBar appearance].semanticContentAttribute = semanticContentAttribute;
+    
+    UIViewController *topVc = [UIViewController rg_topViewController];
+    topVc.view.semanticContentAttribute = semanticContentAttribute;
+    topVc.tabBarController.tabBar.semanticContentAttribute = semanticContentAttribute;
+    
+    [topVc.navigationController rg_updateSemanticContentAttribute];
 }
 
 @end

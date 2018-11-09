@@ -9,10 +9,6 @@
 #import "RGTableViewCell.h"
 #import "UIImage+RGIconCell.h"
 
-extern NSString * const RGIconCellID; // UITableViewCellStyleSubtitle
-extern NSString * const RGIconCellIDValue1; // UITableViewCellStyleValue1
-extern NSString * const RGIconCellIDValue2; // UITableViewCellStyleValue2
-
 @interface RGIconCell <__covariant RGIconCellCustomIcon> : RGTableViewCell
 
 /// config customIcon
@@ -35,9 +31,6 @@ extern NSString * const RGIconCellIDValue2; // UITableViewCellStyleValue2
 
 /// default NO
 @property (nonatomic, assign) BOOL adjustIconBackgroundWhenHighlighted;
-
-/// 初始化cell 自定义 UITableViewCellStyle
-- (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 /// get icon cell
 + (RGIconCell *)getCell:(UITableView *)tableView reuseIdentifier:(NSString *)reuseIdentifier;
