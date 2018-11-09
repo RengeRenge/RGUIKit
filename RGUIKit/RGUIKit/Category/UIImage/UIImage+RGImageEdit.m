@@ -221,7 +221,7 @@
     size.width = masterImage.size.width;
     size.height = masterImage.size.height + height;
     
-    UIGraphicsBeginImageContextWithOptions(size, YES, scale);
+    UIGraphicsBeginImageContextWithOptions(size, NO, scale);
     
     //Draw masterImage
     [masterImage drawInRect:CGRectMake(0, 0, size.width, masterImage.size.height)];
