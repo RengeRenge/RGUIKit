@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  get a color with r g b a
 
- @param R must pass float type
+ @param R must pass double type
  @return color
  */
-+ (UIColor *)rg_colorWithRGBA:(CGFloat)R, ...;
++ (UIColor *)rg_colorWithRGBA:(double)R, ...;
 
 
 /**

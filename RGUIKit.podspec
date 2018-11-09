@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
   #
 
   s.author             = { "RengeRenge" => "lidrkuft123@163.com" }
-  s.social_media_url   = "https://twitter.com/Friends___A"
+  s.social_media_url   = "https://www.twitter.com/Friends___A"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

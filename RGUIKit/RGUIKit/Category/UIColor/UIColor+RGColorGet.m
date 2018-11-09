@@ -13,7 +13,7 @@
     return [UIColor colorWithRed:arc4random()%256 / 255.f green:arc4random()%256 / 255.f blue:arc4random()%256 / 255.f alpha:1.f];
 }
 
-+ (UIColor *)rg_colorWithRGBA:(CGFloat)R, ... {
++ (UIColor *)rg_colorWithRGBA:(double)R, ... {
     if (R) {
         
         va_list args;
@@ -22,7 +22,7 @@
         CGFloat rgba[4] = {1,1,1,1};
         int i = 0;
         
-        CGFloat arg = R;
+        double arg = R;
         
         do {
             if (i < 3) {
@@ -32,7 +32,7 @@
                 break;
             }
             i++;
-        } while ((arg = va_arg(args, CGFloat)));
+        } while ((arg = va_arg(args, double)));
         
         va_end(args);
         return [UIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
