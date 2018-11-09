@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RGUIKit"
-  s.version      = "1.0.5"
+  s.version      = "1.0.6"
   s.summary      = "RGUIKit, My Summary for convenient coding"
 
   # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
 			Wrap Many Methods For UIKit. More Convenient Coding.
                    DESC
 
-  # s.homepage     = "https://github.com/RengeRenge/RGUIKit"
+  s.homepage     = "https://github.com/RengeRenge/RGUIKit"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
   #
 
   s.author             = { "RengeRenge" => "lidrkuft123@163.com" }
-  s.social_media_url   = "https://www.twitter.com/Friends___A"
+  # s.social_media_url   = "https://www.twitter.com/Friends___A"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
