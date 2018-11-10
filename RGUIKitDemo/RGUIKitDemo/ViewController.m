@@ -17,13 +17,14 @@ typedef enum : NSUInteger {
     VCTestTypeEdgeCell,
     VCTestTypeCornerCell,
     VCTestTypeLabelCell,
+    VCTestTypeInputCell,
     VCTestTypeDraw,
     VCTestTypeImageEdit,
     VCTestTypeCornerCellEnd,
     VCTestTypeCount,
 } VCTestType;
 
-@interface ViewController ()
+@interface ViewController () <RGInputCellDelegate>
 
 @end
 
@@ -37,6 +38,9 @@ typedef enum : NSUInteger {
     self.tableView.tableFooterView = [UIView new];
     
     [self.tableView registerClass:RGIconCell.class forCellReuseIdentifier:RGCellID];
+    [self.tableView registerClass:RGInputTableViewCell.class forCellReuseIdentifier:RGInputTableViewCellID];
+    
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
     [RGIconCell setThemeColor:[UIColor blackColor]];
     
@@ -123,6 +127,34 @@ typedef enum : NSUInteger {
             cell.textEdgeMask.backgroundColor = [UIColor groupTableViewBackgroundColor];
             cell.label.text = @"【LabelCell】";
             cell.label.textColor = [UIColor purpleColor];
+            return cell;
+        }
+        case VCTestTypeInputCell: {
+            RGInputTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:RGInputTableViewCellID forIndexPath:indexPath];
+            cell.accessoryType = UITableViewCellAccessoryDetailButton;
+            cell.textField.placeholder = @"InputCell";
+            cell.textFieldEdge = UIEdgeInsetsMake(5, 20, 5, 0); // 左边偏移5
+            cell.rightViewEdge = UIEdgeInsetsMake(0, 5, 0, 10); // 右边偏移5， 和 textField 相距 10
+            cell.lineEdge = UIEdgeInsetsMake(-5, 0, 5, 0); // 上升5个像素
+            
+            cell.textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 5)];
+            cell.textField.leftViewMode = UITextFieldViewModeAlways;
+            cell.textField.clearButtonMode = UITextFieldViewModeAlways;
+            
+            UILabel *rightView = [[UILabel alloc] init];
+            rightView.text = @"rightView";
+            [rightView sizeToFit];
+            
+            cell.rightView = rightView;
+            
+            cell.lineColor = [[UIColor blueColor] colorWithAlphaComponent:0.4];
+            
+            cell.textField.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
+            rightView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.3];
+            
+            cell.contentView.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.15];
+            
+            cell.delegate = self;
             return cell;
         }
         case VCTestTypeEdgeCell: {
@@ -224,6 +256,12 @@ typedef enum : NSUInteger {
         default:
             break;
     }
+}
+
+#pragma mark - RGInputCellDelegate
+
+- (void)rg_inputCellTextDidChange:(RGInputTableViewCell *)cell text:(NSString *)text {
+    NSLog(@"%@", cell.inputText);
 }
 
 @end

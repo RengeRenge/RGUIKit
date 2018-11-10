@@ -21,9 +21,13 @@
 }
 
 - (void)rg_setRTLFrame:(CGRect)frame width:(CGFloat)width {
+    self.frame = [UIView rg_RTLFrameWithLTRFrame:frame superWidth:width];
+}
+
++ (CGRect)rg_RTLFrameWithLTRFrame:(CGRect)frame superWidth:(CGFloat)width {
     CGFloat x = width - frame.origin.x - frame.size.width;
     frame.origin.x = x;
-    self.frame = frame;
+    return frame;
 }
 
 - (void)rg_setRTLFrame:(CGRect)frame {
@@ -38,11 +42,19 @@
     
     [UIView appearance].semanticContentAttribute = semanticContentAttribute;
     [UITabBar appearance].semanticContentAttribute = semanticContentAttribute;
+    [UISearchBar appearance].semanticContentAttribute = semanticContentAttribute;
+    [UITextField appearance].semanticContentAttribute = semanticContentAttribute;
+    [UITextView appearance].semanticContentAttribute = semanticContentAttribute;
+    [UITableViewCell appearance].semanticContentAttribute = semanticContentAttribute;
     [UINavigationBar appearance].semanticContentAttribute = semanticContentAttribute;
     
     UIViewController *topVc = [UIViewController rg_topViewController];
     topVc.view.semanticContentAttribute = semanticContentAttribute;
     topVc.tabBarController.tabBar.semanticContentAttribute = semanticContentAttribute;
+    
+    [topVc.view setNeedsLayout];
+    [topVc.view setNeedsDisplay];
+    [topVc.view setNeedsFocusUpdate];
     
     [topVc.navigationController rg_updateSemanticContentAttribute];
 }

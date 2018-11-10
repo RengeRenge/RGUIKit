@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/RGCornerTableViewCell.h>
 #import <RGUIKit/RGLabelTableViewCell.h>
 #import <RGUIKit/RGEdgeTableViewCell.h>
+#import <RGUIKit/RGInputTableViewCell.h>
 
 #import <RGUIKit/NSObject+RGSwizzle.h>
 

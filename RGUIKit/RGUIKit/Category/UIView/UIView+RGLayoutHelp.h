@@ -38,6 +38,12 @@
 - (void)rg_setFrameToFitRTL;
 
 
+/**
+ 获取 RTL Frame
+ */
++ (CGRect)rg_RTLFrameWithLTRFrame:(CGRect)frame superWidth:(CGFloat)width;
+
+
 + (void)rg_setSemanticContentAttribute:(UISemanticContentAttribute)UISemanticContentAttribute API_AVAILABLE(ios(9.0));
 
 @end
