@@ -21,45 +21,51 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		E607E5B521A5554D00B7F892 /* NSNull+RGSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = E607E5B321A5554D00B7F892 /* NSNull+RGSafe.h */; };
+		E607E5B621A5554D00B7F892 /* NSNull+RGSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = E607E5B421A5554D00B7F892 /* NSNull+RGSafe.m */; };
 		E61A043F21919A13008D35F1 /* RGUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A043D21919A13008D35F1 /* RGUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E61A044A21919A75008D35F1 /* RGIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A044621919A74008D35F1 /* RGIconCell.m */; };
 		E61A044B21919A75008D35F1 /* RGIconCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A044721919A74008D35F1 /* RGIconCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E61A044C21919A75008D35F1 /* RGTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A044821919A74008D35F1 /* RGTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E61A044D21919A75008D35F1 /* RGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A044921919A75008D35F1 /* RGTableViewCell.m */; };
-		E61A047421919AB8008D35F1 /* UIView+RGPanGestureHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045121919AB7008D35F1 /* UIView+RGPanGestureHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A047521919AB8008D35F1 /* UIView+RGParentVC.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045221919AB7008D35F1 /* UIView+RGParentVC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A047721919AB8008D35F1 /* UIView+RGLayoutHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045421919AB7008D35F1 /* UIView+RGLayoutHelp.m */; };
-		E61A047821919AB8008D35F1 /* UIView+RGPanGestureHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045521919AB7008D35F1 /* UIView+RGPanGestureHelp.m */; };
-		E61A047921919AB8008D35F1 /* UIView+RGParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045621919AB7008D35F1 /* UIView+RGParentVC.m */; };
-		E61A047A21919AB8008D35F1 /* UIView+RGLayoutHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045721919AB7008D35F1 /* UIView+RGLayoutHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A047C21919AB8008D35F1 /* UINavigationController+RGShouldPop.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045A21919AB7008D35F1 /* UINavigationController+RGShouldPop.m */; };
-		E61A047D21919AB8008D35F1 /* UINavigationController+RGShouldPop.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045B21919AB7008D35F1 /* UINavigationController+RGShouldPop.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A047E21919AB8008D35F1 /* UITabBar+RGBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A045D21919AB7008D35F1 /* UITabBar+RGBadge.m */; };
-		E61A047F21919AB8008D35F1 /* UITabBar+RGBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A045E21919AB7008D35F1 /* UITabBar+RGBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A049A2192721D008D35F1 /* UIViewController+RGSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04922192721C008D35F1 /* UIViewController+RGSafeArea.m */; };
-		E61A049B2192721D008D35F1 /* UIViewController+RGPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04932192721C008D35F1 /* UIViewController+RGPresent.m */; };
-		E61A049D2192721D008D35F1 /* UIViewController+RGSafeArea.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04952192721C008D35F1 /* UIViewController+RGSafeArea.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A049F2192721D008D35F1 /* UIViewController+RGBarFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04972192721C008D35F1 /* UIViewController+RGBarFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A04A02192721D008D35F1 /* UIViewController+RGPresent.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04982192721C008D35F1 /* UIViewController+RGPresent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E61A04A12192721D008D35F1 /* UIViewController+RGBarFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04992192721D008D35F1 /* UIViewController+RGBarFrame.m */; };
 		E61A04A421928A12008D35F1 /* UIImage+RGIconCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A04A221928A12008D35F1 /* UIImage+RGIconCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E61A04A521928A12008D35F1 /* UIImage+RGIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04A321928A12008D35F1 /* UIImage+RGIconCell.m */; };
-		E6B53EF3219580D3003D61DB /* UIColor+RGColorGet.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B53EEE219580D2003D61DB /* UIColor+RGColorGet.m */; };
-		E6B53EF4219580D3003D61DB /* UIColor+RGColorGet.h in Headers */ = {isa = PBXBuildFile; fileRef = E6B53EEF219580D2003D61DB /* UIColor+RGColorGet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6B53EF5219580D3003D61DB /* NSObject+RGSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B53EF1219580D3003D61DB /* NSObject+RGSwizzle.m */; };
-		E6B53EF6219580D3003D61DB /* NSObject+RGSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = E6B53EF2219580D3003D61DB /* NSObject+RGSwizzle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6DA65402192D2AC00BF3201 /* UIImage+RGTint.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA65382192D2AB00BF3201 /* UIImage+RGTint.m */; };
-		E6DA65412192D2AC00BF3201 /* UIImage+RGName.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA65392192D2AB00BF3201 /* UIImage+RGName.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6DA65422192D2AC00BF3201 /* UIImage+RGTint.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA653A2192D2AB00BF3201 /* UIImage+RGTint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6DA65432192D2AC00BF3201 /* UIImage+RGName.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA653B2192D2AB00BF3201 /* UIImage+RGName.m */; };
-		E6DA65442192D2AC00BF3201 /* UIImage+RGImageEdit.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA653C2192D2AB00BF3201 /* UIImage+RGImageEdit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6DA65452192D2AC00BF3201 /* UIImage+RGRead.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA653D2192D2AB00BF3201 /* UIImage+RGRead.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6DA65462192D2AC00BF3201 /* UIImage+RGImageEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA653E2192D2AB00BF3201 /* UIImage+RGImageEdit.m */; };
-		E6DA65472192D2AC00BF3201 /* UIImage+RGRead.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA653F2192D2AB00BF3201 /* UIImage+RGRead.m */; };
+		E632AF8B21A4FB50003C7A7F /* NSObject+RGSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF6321A4FB50003C7A7F /* NSObject+RGSwizzle.m */; };
+		E632AF8C21A4FB50003C7A7F /* NSObject+RGSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF6421A4FB50003C7A7F /* NSObject+RGSwizzle.h */; };
+		E632AF8D21A4FB50003C7A7F /* UIBezierPath+RGDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF6621A4FB50003C7A7F /* UIBezierPath+RGDraw.h */; };
+		E632AF8E21A4FB50003C7A7F /* UIBezierPath+RGDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF6721A4FB50003C7A7F /* UIBezierPath+RGDraw.m */; };
+		E632AF8F21A4FB50003C7A7F /* UIView+RGLayoutHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF6921A4FB50003C7A7F /* UIView+RGLayoutHelp.m */; };
+		E632AF9021A4FB50003C7A7F /* UIView+RGParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF6A21A4FB50003C7A7F /* UIView+RGParentVC.m */; };
+		E632AF9121A4FB50003C7A7F /* UIView+RGPanGestureHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF6B21A4FB50003C7A7F /* UIView+RGPanGestureHelp.h */; };
+		E632AF9221A4FB50003C7A7F /* UIView+RGParentVC.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF6C21A4FB50003C7A7F /* UIView+RGParentVC.h */; };
+		E632AF9321A4FB50003C7A7F /* UIView+RGLayoutHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF6D21A4FB50003C7A7F /* UIView+RGLayoutHelp.h */; };
+		E632AF9421A4FB50003C7A7F /* UIView+RGPanGestureHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF6E21A4FB50003C7A7F /* UIView+RGPanGestureHelp.m */; };
+		E632AF9521A4FB50003C7A7F /* UIViewController+RGSafeArea.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF7021A4FB50003C7A7F /* UIViewController+RGSafeArea.m */; };
+		E632AF9621A4FB50003C7A7F /* UIViewController+RGBarFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF7121A4FB50003C7A7F /* UIViewController+RGBarFrame.m */; };
+		E632AF9721A4FB50003C7A7F /* UIViewController+RGPresent.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF7221A4FB50003C7A7F /* UIViewController+RGPresent.m */; };
+		E632AF9821A4FB50003C7A7F /* UIViewController+RGSafeArea.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF7321A4FB50003C7A7F /* UIViewController+RGSafeArea.h */; };
+		E632AF9921A4FB50003C7A7F /* UIViewController+RGBarFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF7421A4FB50003C7A7F /* UIViewController+RGBarFrame.h */; };
+		E632AF9A21A4FB50003C7A7F /* UIViewController+RGPresent.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF7521A4FB50003C7A7F /* UIViewController+RGPresent.h */; };
+		E632AF9B21A4FB50003C7A7F /* UIImage+RGRead.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF7721A4FB50003C7A7F /* UIImage+RGRead.m */; };
+		E632AF9C21A4FB50003C7A7F /* UIImage+RGImageEdit.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF7821A4FB50003C7A7F /* UIImage+RGImageEdit.h */; };
+		E632AF9D21A4FB50003C7A7F /* UIImage+RGName.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF7921A4FB50003C7A7F /* UIImage+RGName.h */; };
+		E632AF9E21A4FB50003C7A7F /* UIImage+RGTint.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF7A21A4FB50003C7A7F /* UIImage+RGTint.m */; };
+		E632AF9F21A4FB50003C7A7F /* UIImage+RGImageEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF7B21A4FB50003C7A7F /* UIImage+RGImageEdit.m */; };
+		E632AFA021A4FB50003C7A7F /* UIImage+RGRead.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF7C21A4FB50003C7A7F /* UIImage+RGRead.h */; };
+		E632AFA121A4FB50003C7A7F /* UIImage+RGName.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF7D21A4FB50003C7A7F /* UIImage+RGName.m */; };
+		E632AFA221A4FB50003C7A7F /* UIImage+RGTint.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF7E21A4FB50003C7A7F /* UIImage+RGTint.h */; };
+		E632AFA321A4FB50003C7A7F /* UIColor+RGColorGet.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF8021A4FB50003C7A7F /* UIColor+RGColorGet.m */; };
+		E632AFA421A4FB50003C7A7F /* UIColor+RGColorGet.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF8121A4FB50003C7A7F /* UIColor+RGColorGet.h */; };
+		E632AFA521A4FB50003C7A7F /* UITabBar+RGBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF8321A4FB50003C7A7F /* UITabBar+RGBadge.m */; };
+		E632AFA621A4FB50003C7A7F /* UITabBar+RGBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF8421A4FB50003C7A7F /* UITabBar+RGBadge.h */; };
+		E632AFA721A4FB50003C7A7F /* UINavigationController+RGShouldPop.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF8621A4FB50003C7A7F /* UINavigationController+RGShouldPop.m */; };
+		E632AFA821A4FB50003C7A7F /* UINavigationController+RGShouldPop.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF8721A4FB50003C7A7F /* UINavigationController+RGShouldPop.h */; };
+		E632AFA921A4FB50003C7A7F /* NSTimer+RGBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AF8921A4FB50003C7A7F /* NSTimer+RGBlock.m */; };
+		E632AFAA21A4FB50003C7A7F /* NSTimer+RGBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF8A21A4FB50003C7A7F /* NSTimer+RGBlock.h */; };
+		E632AFAD21A4FB62003C7A7F /* RGInputTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AFAB21A4FB62003C7A7F /* RGInputTableViewCell.h */; };
+		E632AFAE21A4FB62003C7A7F /* RGInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AFAC21A4FB62003C7A7F /* RGInputTableViewCell.m */; };
 		E6DA65542193972E00BF3201 /* RGNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA654D2193972D00BF3201 /* RGNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6DA65562193972E00BF3201 /* RGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA654F2193972D00BF3201 /* RGNavigationController.m */; };
-		E6DA656F2193CF0A00BF3201 /* UIBezierPath+RGDraw.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA656D2193CF0A00BF3201 /* UIBezierPath+RGDraw.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6DA65702193CF0A00BF3201 /* UIBezierPath+RGDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA656E2193CF0A00BF3201 /* UIBezierPath+RGDraw.m */; };
 		E6DA659821948D6700BF3201 /* RGCornerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA659621948D6700BF3201 /* RGCornerTableViewCell.m */; };
 		E6DA659921948D6700BF3201 /* RGCornerTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA659721948D6700BF3201 /* RGCornerTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6DA659E21948FDA00BF3201 /* RGLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA659A21948FDA00BF3201 /* RGLabelTableViewCell.m */; };
@@ -69,6 +75,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E607E5B321A5554D00B7F892 /* NSNull+RGSafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNull+RGSafe.h"; sourceTree = "<group>"; };
+		E607E5B421A5554D00B7F892 /* NSNull+RGSafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNull+RGSafe.m"; sourceTree = "<group>"; };
 		E61A043A21919A13008D35F1 /* RGUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RGUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61A043D21919A13008D35F1 /* RGUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGUIKit.h; sourceTree = "<group>"; };
 		E61A043E21919A13008D35F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,40 +84,44 @@
 		E61A044721919A74008D35F1 /* RGIconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGIconCell.h; sourceTree = "<group>"; };
 		E61A044821919A74008D35F1 /* RGTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTableViewCell.h; sourceTree = "<group>"; };
 		E61A044921919A75008D35F1 /* RGTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTableViewCell.m; sourceTree = "<group>"; };
-		E61A045121919AB7008D35F1 /* UIView+RGPanGestureHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGPanGestureHelp.h"; sourceTree = "<group>"; };
-		E61A045221919AB7008D35F1 /* UIView+RGParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGParentVC.h"; sourceTree = "<group>"; };
-		E61A045421919AB7008D35F1 /* UIView+RGLayoutHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGLayoutHelp.m"; sourceTree = "<group>"; };
-		E61A045521919AB7008D35F1 /* UIView+RGPanGestureHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGPanGestureHelp.m"; sourceTree = "<group>"; };
-		E61A045621919AB7008D35F1 /* UIView+RGParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGParentVC.m"; sourceTree = "<group>"; };
-		E61A045721919AB7008D35F1 /* UIView+RGLayoutHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGLayoutHelp.h"; sourceTree = "<group>"; };
-		E61A045A21919AB7008D35F1 /* UINavigationController+RGShouldPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+RGShouldPop.m"; sourceTree = "<group>"; };
-		E61A045B21919AB7008D35F1 /* UINavigationController+RGShouldPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+RGShouldPop.h"; sourceTree = "<group>"; };
-		E61A045D21919AB7008D35F1 /* UITabBar+RGBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RGBadge.m"; sourceTree = "<group>"; };
-		E61A045E21919AB7008D35F1 /* UITabBar+RGBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RGBadge.h"; sourceTree = "<group>"; };
-		E61A04922192721C008D35F1 /* UIViewController+RGSafeArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGSafeArea.m"; sourceTree = "<group>"; };
-		E61A04932192721C008D35F1 /* UIViewController+RGPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGPresent.m"; sourceTree = "<group>"; };
-		E61A04952192721C008D35F1 /* UIViewController+RGSafeArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGSafeArea.h"; sourceTree = "<group>"; };
-		E61A04972192721C008D35F1 /* UIViewController+RGBarFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGBarFrame.h"; sourceTree = "<group>"; };
-		E61A04982192721C008D35F1 /* UIViewController+RGPresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGPresent.h"; sourceTree = "<group>"; };
-		E61A04992192721D008D35F1 /* UIViewController+RGBarFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGBarFrame.m"; sourceTree = "<group>"; };
 		E61A04A221928A12008D35F1 /* UIImage+RGIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGIconCell.h"; sourceTree = "<group>"; };
 		E61A04A321928A12008D35F1 /* UIImage+RGIconCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGIconCell.m"; sourceTree = "<group>"; };
-		E6B53EEE219580D2003D61DB /* UIColor+RGColorGet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGColorGet.m"; sourceTree = "<group>"; };
-		E6B53EEF219580D2003D61DB /* UIColor+RGColorGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RGColorGet.h"; sourceTree = "<group>"; };
-		E6B53EF1219580D3003D61DB /* NSObject+RGSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGSwizzle.m"; sourceTree = "<group>"; };
-		E6B53EF2219580D3003D61DB /* NSObject+RGSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RGSwizzle.h"; sourceTree = "<group>"; };
-		E6DA65382192D2AB00BF3201 /* UIImage+RGTint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGTint.m"; sourceTree = "<group>"; };
-		E6DA65392192D2AB00BF3201 /* UIImage+RGName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGName.h"; sourceTree = "<group>"; };
-		E6DA653A2192D2AB00BF3201 /* UIImage+RGTint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGTint.h"; sourceTree = "<group>"; };
-		E6DA653B2192D2AB00BF3201 /* UIImage+RGName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGName.m"; sourceTree = "<group>"; };
-		E6DA653C2192D2AB00BF3201 /* UIImage+RGImageEdit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGImageEdit.h"; sourceTree = "<group>"; };
-		E6DA653D2192D2AB00BF3201 /* UIImage+RGRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGRead.h"; sourceTree = "<group>"; };
-		E6DA653E2192D2AB00BF3201 /* UIImage+RGImageEdit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGImageEdit.m"; sourceTree = "<group>"; };
-		E6DA653F2192D2AB00BF3201 /* UIImage+RGRead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGRead.m"; sourceTree = "<group>"; };
+		E632AF6321A4FB50003C7A7F /* NSObject+RGSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RGSwizzle.m"; sourceTree = "<group>"; };
+		E632AF6421A4FB50003C7A7F /* NSObject+RGSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RGSwizzle.h"; sourceTree = "<group>"; };
+		E632AF6621A4FB50003C7A7F /* UIBezierPath+RGDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+RGDraw.h"; sourceTree = "<group>"; };
+		E632AF6721A4FB50003C7A7F /* UIBezierPath+RGDraw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+RGDraw.m"; sourceTree = "<group>"; };
+		E632AF6921A4FB50003C7A7F /* UIView+RGLayoutHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGLayoutHelp.m"; sourceTree = "<group>"; };
+		E632AF6A21A4FB50003C7A7F /* UIView+RGParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGParentVC.m"; sourceTree = "<group>"; };
+		E632AF6B21A4FB50003C7A7F /* UIView+RGPanGestureHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGPanGestureHelp.h"; sourceTree = "<group>"; };
+		E632AF6C21A4FB50003C7A7F /* UIView+RGParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGParentVC.h"; sourceTree = "<group>"; };
+		E632AF6D21A4FB50003C7A7F /* UIView+RGLayoutHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RGLayoutHelp.h"; sourceTree = "<group>"; };
+		E632AF6E21A4FB50003C7A7F /* UIView+RGPanGestureHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RGPanGestureHelp.m"; sourceTree = "<group>"; };
+		E632AF7021A4FB50003C7A7F /* UIViewController+RGSafeArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGSafeArea.m"; sourceTree = "<group>"; };
+		E632AF7121A4FB50003C7A7F /* UIViewController+RGBarFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGBarFrame.m"; sourceTree = "<group>"; };
+		E632AF7221A4FB50003C7A7F /* UIViewController+RGPresent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RGPresent.m"; sourceTree = "<group>"; };
+		E632AF7321A4FB50003C7A7F /* UIViewController+RGSafeArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGSafeArea.h"; sourceTree = "<group>"; };
+		E632AF7421A4FB50003C7A7F /* UIViewController+RGBarFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGBarFrame.h"; sourceTree = "<group>"; };
+		E632AF7521A4FB50003C7A7F /* UIViewController+RGPresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RGPresent.h"; sourceTree = "<group>"; };
+		E632AF7721A4FB50003C7A7F /* UIImage+RGRead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGRead.m"; sourceTree = "<group>"; };
+		E632AF7821A4FB50003C7A7F /* UIImage+RGImageEdit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGImageEdit.h"; sourceTree = "<group>"; };
+		E632AF7921A4FB50003C7A7F /* UIImage+RGName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGName.h"; sourceTree = "<group>"; };
+		E632AF7A21A4FB50003C7A7F /* UIImage+RGTint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGTint.m"; sourceTree = "<group>"; };
+		E632AF7B21A4FB50003C7A7F /* UIImage+RGImageEdit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGImageEdit.m"; sourceTree = "<group>"; };
+		E632AF7C21A4FB50003C7A7F /* UIImage+RGRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGRead.h"; sourceTree = "<group>"; };
+		E632AF7D21A4FB50003C7A7F /* UIImage+RGName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGName.m"; sourceTree = "<group>"; };
+		E632AF7E21A4FB50003C7A7F /* UIImage+RGTint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGTint.h"; sourceTree = "<group>"; };
+		E632AF8021A4FB50003C7A7F /* UIColor+RGColorGet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGColorGet.m"; sourceTree = "<group>"; };
+		E632AF8121A4FB50003C7A7F /* UIColor+RGColorGet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RGColorGet.h"; sourceTree = "<group>"; };
+		E632AF8321A4FB50003C7A7F /* UITabBar+RGBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RGBadge.m"; sourceTree = "<group>"; };
+		E632AF8421A4FB50003C7A7F /* UITabBar+RGBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RGBadge.h"; sourceTree = "<group>"; };
+		E632AF8621A4FB50003C7A7F /* UINavigationController+RGShouldPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+RGShouldPop.m"; sourceTree = "<group>"; };
+		E632AF8721A4FB50003C7A7F /* UINavigationController+RGShouldPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+RGShouldPop.h"; sourceTree = "<group>"; };
+		E632AF8921A4FB50003C7A7F /* NSTimer+RGBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+RGBlock.m"; sourceTree = "<group>"; };
+		E632AF8A21A4FB50003C7A7F /* NSTimer+RGBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+RGBlock.h"; sourceTree = "<group>"; };
+		E632AFAB21A4FB62003C7A7F /* RGInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGInputTableViewCell.h; sourceTree = "<group>"; };
+		E632AFAC21A4FB62003C7A7F /* RGInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGInputTableViewCell.m; sourceTree = "<group>"; };
 		E6DA654D2193972D00BF3201 /* RGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGNavigationController.h; sourceTree = "<group>"; };
 		E6DA654F2193972D00BF3201 /* RGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGNavigationController.m; sourceTree = "<group>"; };
-		E6DA656D2193CF0A00BF3201 /* UIBezierPath+RGDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+RGDraw.h"; sourceTree = "<group>"; };
-		E6DA656E2193CF0A00BF3201 /* UIBezierPath+RGDraw.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+RGDraw.m"; sourceTree = "<group>"; };
 		E6DA659621948D6700BF3201 /* RGCornerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGCornerTableViewCell.m; sourceTree = "<group>"; };
 		E6DA659721948D6700BF3201 /* RGCornerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGCornerTableViewCell.h; sourceTree = "<group>"; };
 		E6DA659A21948FDA00BF3201 /* RGLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGLabelTableViewCell.m; sourceTree = "<group>"; };
@@ -129,6 +141,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E607E5B221A5552500B7F892 /* NSNull */ = {
+			isa = PBXGroup;
+			children = (
+				E607E5B321A5554D00B7F892 /* NSNull+RGSafe.h */,
+				E607E5B421A5554D00B7F892 /* NSNull+RGSafe.m */,
+			);
+			path = NSNull;
+			sourceTree = "<group>";
+		};
 		E61A043021919A13008D35F1 = {
 			isa = PBXGroup;
 			children = (
@@ -160,16 +181,18 @@
 		E61A044521919A4E008D35F1 /* UITabelViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				E61A044821919A74008D35F1 /* RGTableViewCell.h */,
-				E61A044921919A75008D35F1 /* RGTableViewCell.m */,
-				E61A044721919A74008D35F1 /* RGIconCell.h */,
-				E61A044621919A74008D35F1 /* RGIconCell.m */,
-				E6DA659D21948FDA00BF3201 /* RGLabelTableViewCell.h */,
-				E6DA659A21948FDA00BF3201 /* RGLabelTableViewCell.m */,
-				E6DA659C21948FDA00BF3201 /* RGEdgeTableViewCell.h */,
-				E6DA659B21948FDA00BF3201 /* RGEdgeTableViewCell.m */,
 				E6DA659721948D6700BF3201 /* RGCornerTableViewCell.h */,
 				E6DA659621948D6700BF3201 /* RGCornerTableViewCell.m */,
+				E6DA659C21948FDA00BF3201 /* RGEdgeTableViewCell.h */,
+				E6DA659B21948FDA00BF3201 /* RGEdgeTableViewCell.m */,
+				E61A044721919A74008D35F1 /* RGIconCell.h */,
+				E61A044621919A74008D35F1 /* RGIconCell.m */,
+				E632AFAB21A4FB62003C7A7F /* RGInputTableViewCell.h */,
+				E632AFAC21A4FB62003C7A7F /* RGInputTableViewCell.m */,
+				E6DA659D21948FDA00BF3201 /* RGLabelTableViewCell.h */,
+				E6DA659A21948FDA00BF3201 /* RGLabelTableViewCell.m */,
+				E61A044821919A74008D35F1 /* RGTableViewCell.h */,
+				E61A044921919A75008D35F1 /* RGTableViewCell.m */,
 				E61A04A221928A12008D35F1 /* UIImage+RGIconCell.h */,
 				E61A04A321928A12008D35F1 /* UIImage+RGIconCell.m */,
 			);
@@ -179,93 +202,113 @@
 		E61A044E21919AA6008D35F1 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				E6B53EF0219580D3003D61DB /* NSObject */,
-				E6B53EED219580D2003D61DB /* UIColor */,
-				E6DA656C2193CECA00BF3201 /* UIBezierPath */,
-				E61A046621919AB8008D35F1 /* UIImage */,
-				E61A045921919AB7008D35F1 /* UINavigationController */,
-				E61A045C21919AB7008D35F1 /* UITabBar */,
-				E61A045021919AB7008D35F1 /* UIView */,
-				E61A045F21919AB8008D35F1 /* UIViewController */,
+				E607E5B221A5552500B7F892 /* NSNull */,
+				E632AF6221A4FB50003C7A7F /* NSObject */,
+				E632AF8821A4FB50003C7A7F /* NSTimer */,
+				E632AF6521A4FB50003C7A7F /* UIBezierPath */,
+				E632AF7F21A4FB50003C7A7F /* UIColor */,
+				E632AF7621A4FB50003C7A7F /* UIImage */,
+				E632AF8521A4FB50003C7A7F /* UINavigationController */,
+				E632AF8221A4FB50003C7A7F /* UITabBar */,
+				E632AF6821A4FB50003C7A7F /* UIView */,
+				E632AF6F21A4FB50003C7A7F /* UIViewController */,
 			);
 			path = Category;
 			sourceTree = "<group>";
 		};
-		E61A045021919AB7008D35F1 /* UIView */ = {
+		E632AF6221A4FB50003C7A7F /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
-				E61A045221919AB7008D35F1 /* UIView+RGParentVC.h */,
-				E61A045621919AB7008D35F1 /* UIView+RGParentVC.m */,
-				E61A045721919AB7008D35F1 /* UIView+RGLayoutHelp.h */,
-				E61A045421919AB7008D35F1 /* UIView+RGLayoutHelp.m */,
-				E61A045121919AB7008D35F1 /* UIView+RGPanGestureHelp.h */,
-				E61A045521919AB7008D35F1 /* UIView+RGPanGestureHelp.m */,
+				E632AF6421A4FB50003C7A7F /* NSObject+RGSwizzle.h */,
+				E632AF6321A4FB50003C7A7F /* NSObject+RGSwizzle.m */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
+		E632AF6521A4FB50003C7A7F /* UIBezierPath */ = {
+			isa = PBXGroup;
+			children = (
+				E632AF6621A4FB50003C7A7F /* UIBezierPath+RGDraw.h */,
+				E632AF6721A4FB50003C7A7F /* UIBezierPath+RGDraw.m */,
+			);
+			path = UIBezierPath;
+			sourceTree = "<group>";
+		};
+		E632AF6821A4FB50003C7A7F /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				E632AF6D21A4FB50003C7A7F /* UIView+RGLayoutHelp.h */,
+				E632AF6921A4FB50003C7A7F /* UIView+RGLayoutHelp.m */,
+				E632AF6B21A4FB50003C7A7F /* UIView+RGPanGestureHelp.h */,
+				E632AF6E21A4FB50003C7A7F /* UIView+RGPanGestureHelp.m */,
+				E632AF6C21A4FB50003C7A7F /* UIView+RGParentVC.h */,
+				E632AF6A21A4FB50003C7A7F /* UIView+RGParentVC.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
 		};
-		E61A045921919AB7008D35F1 /* UINavigationController */ = {
+		E632AF6F21A4FB50003C7A7F /* UIViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E61A045B21919AB7008D35F1 /* UINavigationController+RGShouldPop.h */,
-				E61A045A21919AB7008D35F1 /* UINavigationController+RGShouldPop.m */,
-			);
-			path = UINavigationController;
-			sourceTree = "<group>";
-		};
-		E61A045C21919AB7008D35F1 /* UITabBar */ = {
-			isa = PBXGroup;
-			children = (
-				E61A045E21919AB7008D35F1 /* UITabBar+RGBadge.h */,
-				E61A045D21919AB7008D35F1 /* UITabBar+RGBadge.m */,
-			);
-			path = UITabBar;
-			sourceTree = "<group>";
-		};
-		E61A045F21919AB8008D35F1 /* UIViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E61A04972192721C008D35F1 /* UIViewController+RGBarFrame.h */,
-				E61A04992192721D008D35F1 /* UIViewController+RGBarFrame.m */,
-				E61A04952192721C008D35F1 /* UIViewController+RGSafeArea.h */,
-				E61A04922192721C008D35F1 /* UIViewController+RGSafeArea.m */,
-				E61A04982192721C008D35F1 /* UIViewController+RGPresent.h */,
-				E61A04932192721C008D35F1 /* UIViewController+RGPresent.m */,
+				E632AF7421A4FB50003C7A7F /* UIViewController+RGBarFrame.h */,
+				E632AF7121A4FB50003C7A7F /* UIViewController+RGBarFrame.m */,
+				E632AF7521A4FB50003C7A7F /* UIViewController+RGPresent.h */,
+				E632AF7221A4FB50003C7A7F /* UIViewController+RGPresent.m */,
+				E632AF7321A4FB50003C7A7F /* UIViewController+RGSafeArea.h */,
+				E632AF7021A4FB50003C7A7F /* UIViewController+RGSafeArea.m */,
 			);
 			path = UIViewController;
 			sourceTree = "<group>";
 		};
-		E61A046621919AB8008D35F1 /* UIImage */ = {
+		E632AF7621A4FB50003C7A7F /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
-				E6DA653C2192D2AB00BF3201 /* UIImage+RGImageEdit.h */,
-				E6DA653E2192D2AB00BF3201 /* UIImage+RGImageEdit.m */,
-				E6DA65392192D2AB00BF3201 /* UIImage+RGName.h */,
-				E6DA653B2192D2AB00BF3201 /* UIImage+RGName.m */,
-				E6DA653D2192D2AB00BF3201 /* UIImage+RGRead.h */,
-				E6DA653F2192D2AB00BF3201 /* UIImage+RGRead.m */,
-				E6DA653A2192D2AB00BF3201 /* UIImage+RGTint.h */,
-				E6DA65382192D2AB00BF3201 /* UIImage+RGTint.m */,
+				E632AF7821A4FB50003C7A7F /* UIImage+RGImageEdit.h */,
+				E632AF7B21A4FB50003C7A7F /* UIImage+RGImageEdit.m */,
+				E632AF7921A4FB50003C7A7F /* UIImage+RGName.h */,
+				E632AF7D21A4FB50003C7A7F /* UIImage+RGName.m */,
+				E632AF7C21A4FB50003C7A7F /* UIImage+RGRead.h */,
+				E632AF7721A4FB50003C7A7F /* UIImage+RGRead.m */,
+				E632AF7E21A4FB50003C7A7F /* UIImage+RGTint.h */,
+				E632AF7A21A4FB50003C7A7F /* UIImage+RGTint.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
 		};
-		E6B53EED219580D2003D61DB /* UIColor */ = {
+		E632AF7F21A4FB50003C7A7F /* UIColor */ = {
 			isa = PBXGroup;
 			children = (
-				E6B53EEE219580D2003D61DB /* UIColor+RGColorGet.m */,
-				E6B53EEF219580D2003D61DB /* UIColor+RGColorGet.h */,
+				E632AF8121A4FB50003C7A7F /* UIColor+RGColorGet.h */,
+				E632AF8021A4FB50003C7A7F /* UIColor+RGColorGet.m */,
 			);
 			path = UIColor;
 			sourceTree = "<group>";
 		};
-		E6B53EF0219580D3003D61DB /* NSObject */ = {
+		E632AF8221A4FB50003C7A7F /* UITabBar */ = {
 			isa = PBXGroup;
 			children = (
-				E6B53EF1219580D3003D61DB /* NSObject+RGSwizzle.m */,
-				E6B53EF2219580D3003D61DB /* NSObject+RGSwizzle.h */,
+				E632AF8421A4FB50003C7A7F /* UITabBar+RGBadge.h */,
+				E632AF8321A4FB50003C7A7F /* UITabBar+RGBadge.m */,
 			);
-			path = NSObject;
+			path = UITabBar;
+			sourceTree = "<group>";
+		};
+		E632AF8521A4FB50003C7A7F /* UINavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				E632AF8721A4FB50003C7A7F /* UINavigationController+RGShouldPop.h */,
+				E632AF8621A4FB50003C7A7F /* UINavigationController+RGShouldPop.m */,
+			);
+			path = UINavigationController;
+			sourceTree = "<group>";
+		};
+		E632AF8821A4FB50003C7A7F /* NSTimer */ = {
+			isa = PBXGroup;
+			children = (
+				E632AF8A21A4FB50003C7A7F /* NSTimer+RGBlock.h */,
+				E632AF8921A4FB50003C7A7F /* NSTimer+RGBlock.m */,
+			);
+			path = NSTimer;
 			sourceTree = "<group>";
 		};
 		E6DA654C2193969F00BF3201 /* UINavigationController */ = {
@@ -277,15 +320,6 @@
 			path = UINavigationController;
 			sourceTree = "<group>";
 		};
-		E6DA656C2193CECA00BF3201 /* UIBezierPath */ = {
-			isa = PBXGroup;
-			children = (
-				E6DA656D2193CF0A00BF3201 /* UIBezierPath+RGDraw.h */,
-				E6DA656E2193CF0A00BF3201 /* UIBezierPath+RGDraw.m */,
-			);
-			path = UIBezierPath;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -293,29 +327,32 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E61A049D2192721D008D35F1 /* UIViewController+RGSafeArea.h in Headers */,
-				E61A047421919AB8008D35F1 /* UIView+RGPanGestureHelp.h in Headers */,
-				E61A049F2192721D008D35F1 /* UIViewController+RGBarFrame.h in Headers */,
+				E632AF8C21A4FB50003C7A7F /* NSObject+RGSwizzle.h in Headers */,
 				E61A04A421928A12008D35F1 /* UIImage+RGIconCell.h in Headers */,
-				E61A04A02192721D008D35F1 /* UIViewController+RGPresent.h in Headers */,
-				E61A047F21919AB8008D35F1 /* UITabBar+RGBadge.h in Headers */,
+				E632AFA821A4FB50003C7A7F /* UINavigationController+RGShouldPop.h in Headers */,
 				E61A044B21919A75008D35F1 /* RGIconCell.h in Headers */,
 				E61A044C21919A75008D35F1 /* RGTableViewCell.h in Headers */,
-				E6DA65452192D2AC00BF3201 /* UIImage+RGRead.h in Headers */,
-				E6DA65412192D2AC00BF3201 /* UIImage+RGName.h in Headers */,
-				E6DA65422192D2AC00BF3201 /* UIImage+RGTint.h in Headers */,
-				E6DA65442192D2AC00BF3201 /* UIImage+RGImageEdit.h in Headers */,
-				E61A047A21919AB8008D35F1 /* UIView+RGLayoutHelp.h in Headers */,
+				E607E5B521A5554D00B7F892 /* NSNull+RGSafe.h in Headers */,
+				E632AF9D21A4FB50003C7A7F /* UIImage+RGName.h in Headers */,
+				E632AFA021A4FB50003C7A7F /* UIImage+RGRead.h in Headers */,
+				E632AF9A21A4FB50003C7A7F /* UIViewController+RGPresent.h in Headers */,
 				E61A043F21919A13008D35F1 /* RGUIKit.h in Headers */,
+				E632AF9921A4FB50003C7A7F /* UIViewController+RGBarFrame.h in Headers */,
 				E6DA659921948D6700BF3201 /* RGCornerTableViewCell.h in Headers */,
 				E6DA65A121948FDA00BF3201 /* RGLabelTableViewCell.h in Headers */,
+				E632AF8D21A4FB50003C7A7F /* UIBezierPath+RGDraw.h in Headers */,
+				E632AFAA21A4FB50003C7A7F /* NSTimer+RGBlock.h in Headers */,
 				E6DA65A021948FDA00BF3201 /* RGEdgeTableViewCell.h in Headers */,
-				E61A047521919AB8008D35F1 /* UIView+RGParentVC.h in Headers */,
+				E632AF9221A4FB50003C7A7F /* UIView+RGParentVC.h in Headers */,
+				E632AF9C21A4FB50003C7A7F /* UIImage+RGImageEdit.h in Headers */,
+				E632AF9821A4FB50003C7A7F /* UIViewController+RGSafeArea.h in Headers */,
+				E632AFAD21A4FB62003C7A7F /* RGInputTableViewCell.h in Headers */,
+				E632AF9121A4FB50003C7A7F /* UIView+RGPanGestureHelp.h in Headers */,
+				E632AF9321A4FB50003C7A7F /* UIView+RGLayoutHelp.h in Headers */,
+				E632AFA421A4FB50003C7A7F /* UIColor+RGColorGet.h in Headers */,
+				E632AFA221A4FB50003C7A7F /* UIImage+RGTint.h in Headers */,
 				E6DA65542193972E00BF3201 /* RGNavigationController.h in Headers */,
-				E6B53EF6219580D3003D61DB /* NSObject+RGSwizzle.h in Headers */,
-				E6B53EF4219580D3003D61DB /* UIColor+RGColorGet.h in Headers */,
-				E6DA656F2193CF0A00BF3201 /* UIBezierPath+RGDraw.h in Headers */,
-				E61A047D21919AB8008D35F1 /* UINavigationController+RGShouldPop.h in Headers */,
+				E632AFA621A4FB50003C7A7F /* UITabBar+RGBadge.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,28 +447,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6DA65702193CF0A00BF3201 /* UIBezierPath+RGDraw.m in Sources */,
-				E6B53EF5219580D3003D61DB /* NSObject+RGSwizzle.m in Sources */,
-				E6B53EF3219580D3003D61DB /* UIColor+RGColorGet.m in Sources */,
 				E6DA65562193972E00BF3201 /* RGNavigationController.m in Sources */,
-				E6DA65462192D2AC00BF3201 /* UIImage+RGImageEdit.m in Sources */,
+				E632AF9021A4FB50003C7A7F /* UIView+RGParentVC.m in Sources */,
 				E61A044D21919A75008D35F1 /* RGTableViewCell.m in Sources */,
 				E61A04A521928A12008D35F1 /* UIImage+RGIconCell.m in Sources */,
-				E61A047821919AB8008D35F1 /* UIView+RGPanGestureHelp.m in Sources */,
-				E6DA65402192D2AC00BF3201 /* UIImage+RGTint.m in Sources */,
+				E632AF8B21A4FB50003C7A7F /* NSObject+RGSwizzle.m in Sources */,
+				E632AF9621A4FB50003C7A7F /* UIViewController+RGBarFrame.m in Sources */,
+				E632AFA921A4FB50003C7A7F /* NSTimer+RGBlock.m in Sources */,
+				E632AF9F21A4FB50003C7A7F /* UIImage+RGImageEdit.m in Sources */,
 				E6DA659E21948FDA00BF3201 /* RGLabelTableViewCell.m in Sources */,
+				E632AF9721A4FB50003C7A7F /* UIViewController+RGPresent.m in Sources */,
 				E6DA659821948D6700BF3201 /* RGCornerTableViewCell.m in Sources */,
-				E6DA65432192D2AC00BF3201 /* UIImage+RGName.m in Sources */,
-				E61A047C21919AB8008D35F1 /* UINavigationController+RGShouldPop.m in Sources */,
-				E61A047721919AB8008D35F1 /* UIView+RGLayoutHelp.m in Sources */,
-				E61A047E21919AB8008D35F1 /* UITabBar+RGBadge.m in Sources */,
+				E632AF9E21A4FB50003C7A7F /* UIImage+RGTint.m in Sources */,
+				E632AFA721A4FB50003C7A7F /* UINavigationController+RGShouldPop.m in Sources */,
+				E632AFAE21A4FB62003C7A7F /* RGInputTableViewCell.m in Sources */,
 				E61A044A21919A75008D35F1 /* RGIconCell.m in Sources */,
-				E61A047921919AB8008D35F1 /* UIView+RGParentVC.m in Sources */,
-				E61A049B2192721D008D35F1 /* UIViewController+RGPresent.m in Sources */,
-				E6DA65472192D2AC00BF3201 /* UIImage+RGRead.m in Sources */,
+				E632AFA521A4FB50003C7A7F /* UITabBar+RGBadge.m in Sources */,
+				E632AF9421A4FB50003C7A7F /* UIView+RGPanGestureHelp.m in Sources */,
 				E6DA659F21948FDA00BF3201 /* RGEdgeTableViewCell.m in Sources */,
-				E61A049A2192721D008D35F1 /* UIViewController+RGSafeArea.m in Sources */,
-				E61A04A12192721D008D35F1 /* UIViewController+RGBarFrame.m in Sources */,
+				E632AF9B21A4FB50003C7A7F /* UIImage+RGRead.m in Sources */,
+				E632AFA321A4FB50003C7A7F /* UIColor+RGColorGet.m in Sources */,
+				E607E5B621A5554D00B7F892 /* NSNull+RGSafe.m in Sources */,
+				E632AF9521A4FB50003C7A7F /* UIViewController+RGSafeArea.m in Sources */,
+				E632AF8F21A4FB50003C7A7F /* UIView+RGLayoutHelp.m in Sources */,
+				E632AFA121A4FB50003C7A7F /* UIImage+RGName.m in Sources */,
+				E632AF8E21A4FB50003C7A7F /* UIBezierPath+RGDraw.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

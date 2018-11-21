@@ -44,9 +44,16 @@ typedef enum : NSUInteger {
     
     [RGIconCell setThemeColor:[UIColor blackColor]];
     
-    [self rg_showBadgeWithValue:@"RGDot"];
+    [self rg_showBadgeWithValue:@"Loading"];
     [self.tabBarController.tabBar rg_showBadgeWithType:RGUITabbarBadgeTypeNormal atIndex:1];
     [self.tabBarController.tabBar rg_showBadgeWithValue:@"!" atIndex:2];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSTimer rg_timerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self rg_showBadgeWithValue:@"RGDot"];
+            });
+        }];
+    });
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RGNavigation" style:UIBarButtonItemStylePlain target:self action:@selector(rgNavigation:)];
     

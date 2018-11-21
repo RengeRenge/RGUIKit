@@ -35,6 +35,7 @@
 		E61A04BE2192B62A008D35F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E61A04C02192B62A008D35F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E61A04C12192B62A008D35F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E632AFB321A4FDD6003C7A7F /* RGUIKitDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RGUIKitDemo.entitlements; sourceTree = "<group>"; };
 		E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGNavigationTestViewController.h; sourceTree = "<group>"; };
 		E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGNavigationTestViewController.m; sourceTree = "<group>"; };
 		E6DA65712193E71200BF3201 /* DrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawViewController.h; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		E61A04B12192B627008D35F1 /* RGUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E632AFB321A4FDD6003C7A7F /* RGUIKitDemo.entitlements */,
 				E61A04B22192B627008D35F1 /* AppDelegate.h */,
 				E61A04B32192B627008D35F1 /* AppDelegate.m */,
 				E61A04B52192B627008D35F1 /* ViewController.h */,
@@ -142,6 +144,17 @@
 				TargetAttributes = {
 					E61A04AE2192B627008D35F1 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -352,6 +365,7 @@
 			baseConfigurationReference = 7BA5490DA0EF93BE81FCB6B8 /* Pods-RGUIKitDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 59Q4A65TJN;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -367,6 +381,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.renge.ui.RGUIKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -376,6 +391,7 @@
 			baseConfigurationReference = 106BBB23C8219D6D69F685D5 /* Pods-RGUIKitDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 59Q4A65TJN;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -391,6 +407,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.renge.ui.RGUIKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
