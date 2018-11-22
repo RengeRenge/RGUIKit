@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    RGNavigationBackgroundStyleShadow,
+    RGNavigationBackgroundStyleNone,
     RGNavigationBackgroundStyleNormal,
+    RGNavigationBackgroundStyleShadow,
     RGNavigationBackgroundStyleAllTranslucent,
 } RGNavigationBackgroundStyle;
 
