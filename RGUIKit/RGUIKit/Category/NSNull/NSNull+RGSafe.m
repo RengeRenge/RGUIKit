@@ -18,4 +18,15 @@
     return nil;
 }
 
+- (BOOL)isEqualToString:(NSString *)aString {
+    if (aString == nil) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSUInteger)count {
+    return 0;
+}
+
 @end
