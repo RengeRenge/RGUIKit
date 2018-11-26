@@ -38,7 +38,7 @@ typedef enum : NSUInteger {
 
 + (RGWeek)rg_weekday;
 
-+ (NSDate * _Nullable)rg_WeekDateWithWeek:(RGWeek)week;
++ (NSDate * _Nullable)rg_currentWeekDateOfWeek:(RGWeek)week;
 
 /**
  get today date 00:00:00

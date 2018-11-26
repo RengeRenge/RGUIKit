@@ -38,7 +38,7 @@
     return [comp weekday];
 }
 
-+ (NSDate * _Nullable)rg_WeekDateWithWeek:(RGWeek)week {
++ (NSDate * _Nullable)rg_currentWeekDateOfWeek:(RGWeek)week {
     if (week <= 0 || week > 7) {
         return nil;
     }
