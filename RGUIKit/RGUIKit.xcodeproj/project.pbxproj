@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		E601267521AB9C6100EE53F4 /* NSDate+RGFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = E601267321AB9C6100EE53F4 /* NSDate+RGFormat.m */; };
+		E601267621AB9C6100EE53F4 /* NSDate+RGFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = E601267421AB9C6100EE53F4 /* NSDate+RGFormat.h */; };
 		E607E5B521A5554D00B7F892 /* NSNull+RGSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = E607E5B321A5554D00B7F892 /* NSNull+RGSafe.h */; };
 		E607E5B621A5554D00B7F892 /* NSNull+RGSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = E607E5B421A5554D00B7F892 /* NSNull+RGSafe.m */; };
 		E61A043F21919A13008D35F1 /* RGUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E61A043D21919A13008D35F1 /* RGUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -75,6 +77,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E601267321AB9C6100EE53F4 /* NSDate+RGFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RGFormat.m"; sourceTree = "<group>"; };
+		E601267421AB9C6100EE53F4 /* NSDate+RGFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RGFormat.h"; sourceTree = "<group>"; };
 		E607E5B321A5554D00B7F892 /* NSNull+RGSafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNull+RGSafe.h"; sourceTree = "<group>"; };
 		E607E5B421A5554D00B7F892 /* NSNull+RGSafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNull+RGSafe.m"; sourceTree = "<group>"; };
 		E61A043A21919A13008D35F1 /* RGUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RGUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +145,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E601267221AB9C4700EE53F4 /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				E601267421AB9C6100EE53F4 /* NSDate+RGFormat.h */,
+				E601267321AB9C6100EE53F4 /* NSDate+RGFormat.m */,
+			);
+			path = NSDate;
+			sourceTree = "<group>";
+		};
 		E607E5B221A5552500B7F892 /* NSNull */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +215,7 @@
 		E61A044E21919AA6008D35F1 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E601267221AB9C4700EE53F4 /* NSDate */,
 				E607E5B221A5552500B7F892 /* NSNull */,
 				E632AF6221A4FB50003C7A7F /* NSObject */,
 				E632AF8821A4FB50003C7A7F /* NSTimer */,
@@ -332,6 +346,7 @@
 				E632AFA821A4FB50003C7A7F /* UINavigationController+RGShouldPop.h in Headers */,
 				E61A044B21919A75008D35F1 /* RGIconCell.h in Headers */,
 				E61A044C21919A75008D35F1 /* RGTableViewCell.h in Headers */,
+				E601267621AB9C6100EE53F4 /* NSDate+RGFormat.h in Headers */,
 				E607E5B521A5554D00B7F892 /* NSNull+RGSafe.h in Headers */,
 				E632AF9D21A4FB50003C7A7F /* UIImage+RGName.h in Headers */,
 				E632AFA021A4FB50003C7A7F /* UIImage+RGRead.h in Headers */,
@@ -466,6 +481,7 @@
 				E632AF9421A4FB50003C7A7F /* UIView+RGPanGestureHelp.m in Sources */,
 				E6DA659F21948FDA00BF3201 /* RGEdgeTableViewCell.m in Sources */,
 				E632AF9B21A4FB50003C7A7F /* UIImage+RGRead.m in Sources */,
+				E601267521AB9C6100EE53F4 /* NSDate+RGFormat.m in Sources */,
 				E632AFA321A4FB50003C7A7F /* UIColor+RGColorGet.m in Sources */,
 				E607E5B621A5554D00B7F892 /* NSNull+RGSafe.m in Sources */,
 				E632AF9521A4FB50003C7A7F /* UIViewController+RGSafeArea.m in Sources */,

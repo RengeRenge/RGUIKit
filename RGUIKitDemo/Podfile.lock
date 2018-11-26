@@ -1,5 +1,5 @@
 PODS:
-  - RGUIKit (1.0.7)
+  - RGUIKit (1.0.9)
 
 DEPENDENCIES:
   - RGUIKit (from `../../RGUIKit`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../../RGUIKit"
 
 SPEC CHECKSUMS:
-  RGUIKit: 6e9ba6dd33b0c8511318fb28ce8c8d29c26cbf2f
+  RGUIKit: c3ebe823afce6b1b8492f9d2141f79968ecff706
 
 PODFILE CHECKSUM: fbaa16b57ccdc8d0214628982c8b0487c8d9ac8f
 
