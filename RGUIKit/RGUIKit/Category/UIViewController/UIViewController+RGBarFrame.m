@@ -8,11 +8,61 @@
 
 #import "UIViewController+RGBarFrame.h"
 #import "UIViewController+RGPresent.h"
+#import "NSObject+RGSwizzle.h"
+
+#import <objc/runtime.h>
 
 static BOOL rg_isFringeScreen = NO;
 static BOOL rg_isFringeScreenConfirm = NO;
 
 #define BarFrame_IS_PAD (UI_USER_INTERFACE_IDIOM()== UIUserInterfaceIdiomPad)
+
+@interface UIViewController (RGNavigationControllerGet)
+
+@property (nonatomic, weak) UINavigationController *rg_navigationController;
+
+@property (atomic, strong) NSPointerArray *rg_weakContainer;
+
+@end
+
+@implementation UIViewController (RGNavigationControllerGet)
+
++ (void)load {
+    [super load];
+    [self rg_swizzleOriginalSel:@selector(viewDidLoad) swizzledSel:@selector(rg_viewDidLoad)];
+}
+
+- (void)rg_viewDidLoad {
+    [self rg_viewDidLoad];
+    self.rg_navigationController = self.navigationController;
+}
+
+- (NSPointerArray *)rg_weakContainer {
+    NSPointerArray *array = objc_getAssociatedObject(self, "rg_weakContainer");
+    if (!array) {
+        array = [NSPointerArray weakObjectsPointerArray];
+        self.rg_weakContainer = array;
+    }
+    return array;
+}
+
+- (void)setRg_weakContainer:(NSPointerArray *)rg_weakContainer {
+    objc_setAssociatedObject(self, "rg_weakContainer", rg_weakContainer, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)setRg_navigationController:(UINavigationController *)rg_navigationController {
+    if (self.rg_weakContainer.count) {
+        [self.rg_weakContainer replacePointerAtIndex:0 withPointer:(__bridge void * _Nullable)(rg_navigationController)];
+    } else {
+        [self.rg_weakContainer addPointer:(__bridge void * _Nullable)(rg_navigationController)];
+    }
+}
+
+- (UINavigationController *)rg_navigationController {
+    return [self.rg_weakContainer pointerAtIndex:0];
+}
+
+@end
 
 @implementation UIViewController (RGBarFrame)
 
@@ -20,7 +70,7 @@ static BOOL rg_isFringeScreenConfirm = NO;
     if ([self isKindOfClass:[UINavigationController class]]) {
         return [(UINavigationController *)self navigationBar];
     }
-    return self.navigationController.navigationBar;
+    return self.rg_navigationController.navigationBar;
 }
 
 - (BOOL)rg_displayedNavigationBar {
@@ -38,7 +88,7 @@ static BOOL rg_isFringeScreenConfirm = NO;
 - (CGFloat)rg_barBottomY {
     if (self.rg_displayedNavigationBar) {
         if (self._rg_navigationBar.translucent) {
-            return CGRectGetMaxY([self._rg_navigationBar convertRect:self._rg_navigationBar.bounds toView:self.view]);
+            return self.rg_barHeight;
         } else {
             return 0.f;
         }
