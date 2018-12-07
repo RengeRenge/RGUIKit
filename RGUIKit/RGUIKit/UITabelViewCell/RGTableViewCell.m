@@ -10,7 +10,7 @@
 
 CGFloat const RGTableViewCellDefaultIconDimension = 40.f;
 
-NSString * const RGCellID = @"RGCellID";
+NSString * const RGCellID = @"RGCellIDSubtitle";
 NSString * const RGCellIDValue1 = @"RGCellIDValue1";
 NSString * const RGCellIDValue2 = @"RGCellIDValue2";
 NSString * const RGCellIDValueDefault = @"RGCellIDValueDefault";
@@ -43,31 +43,14 @@ static UIColor * kRGTableViewCellThemeColor;
 }
 
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [self initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+         [self configView];
     }
     return self;
 }
 
 + (instancetype)dequeueCellWithIdentifier:(NSString *)reuseIdentifier style:(UITableViewCellStyle)style tableView:(UITableView *)tableView {
-    NSString *iconCellId = nil;
-    switch (style) {
-        case UITableViewCellStyleSubtitle:
-            iconCellId = [RGCellID stringByAppendingString:reuseIdentifier];
-            break;
-        case UITableViewCellStyleValue1:
-            iconCellId = [RGCellIDValue1 stringByAppendingString:reuseIdentifier];
-            break;
-        case UITableViewCellStyleValue2:
-            iconCellId = [RGCellIDValue2 stringByAppendingString:reuseIdentifier];
-            break;
-        case UITableViewCellStyleDefault:
-            iconCellId = [RGCellIDValueDefault stringByAppendingString:reuseIdentifier];
-            break;
-        default:
-            break;
-    }
-    id cell = [tableView dequeueReusableCellWithIdentifier:iconCellId];
+    id cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell) {
         return [[self alloc] initWithCustomStyle:style reuseIdentifier:reuseIdentifier];
     }
