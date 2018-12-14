@@ -96,7 +96,8 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     UIViewController *topViewController = self.topViewController;
     while (topViewController.presentedViewController) {
-        if (topViewController.presentedViewController.isBeingDismissed) {
+        UIViewController *next = topViewController.presentedViewController;
+        if (next.isBeingDismissed || [next isKindOfClass:UIAlertController.class]) {
             break;
         }
         topViewController = topViewController.presentedViewController;
