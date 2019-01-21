@@ -132,15 +132,15 @@ static UIColor * kRGTableViewCellThemeColor;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    if (self.highlightedBlock) {
-        self.highlightedBlock(self, selected, animated);
+    if (self.selectedBlock) {
+        self.selectedBlock(self, selected, animated);
     }
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    if (self.selectedBlock) {
-        self.selectedBlock(self, highlighted, animated);
+    if (self.highlightedBlock) {
+        self.highlightedBlock(self, highlighted, animated);
     }
 }
 
