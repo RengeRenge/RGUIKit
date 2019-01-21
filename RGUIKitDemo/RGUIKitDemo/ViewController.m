@@ -39,6 +39,7 @@ typedef enum : NSUInteger {
     
     [self.tableView registerClass:RGIconCell.class forCellReuseIdentifier:RGCellID];
     [self.tableView registerClass:RGInputTableViewCell.class forCellReuseIdentifier:RGInputTableViewCellID];
+    [self.tableView registerClass:RGLabelTableViewCell.class forCellReuseIdentifier:RGLabelTableViewCellID];
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
@@ -132,8 +133,14 @@ typedef enum : NSUInteger {
             cell.textEdge = UIEdgeInsetsMake(10, 10, 10, 10);
             cell.maskEdge = UIEdgeInsetsMake(10, 10, 10, 10);
             cell.textEdgeMask.backgroundColor = [UIColor groupTableViewBackgroundColor];
-            cell.label.text = @"【LabelCell】";
             cell.label.textColor = [UIColor purpleColor];
+            cell.selectedBlock = ^(RGTableViewCell *cell, BOOL selected, BOOL animated) {
+                if (selected) {
+                    [(RGLabelTableViewCell *)cell setText:@"【LabelCell】selected"];
+                } else {
+                    [(RGLabelTableViewCell *)cell setText:@"【LabelCell】"];
+                }
+            };
             return cell;
         }
         case VCTestTypeInputCell: {

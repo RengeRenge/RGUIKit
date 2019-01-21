@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RGTableViewCell.h"
 
 @class RGInputTableViewCell;
 
@@ -18,7 +19,7 @@
 
 extern NSString * const RGInputTableViewCellID;
 
-@interface RGInputTableViewCell : UITableViewCell
+@interface RGInputTableViewCell : RGTableViewCell
 
 @property (nonatomic, strong) UITextField *textField;
 @property (nonatomic, assign) UIEdgeInsets textFieldEdge;

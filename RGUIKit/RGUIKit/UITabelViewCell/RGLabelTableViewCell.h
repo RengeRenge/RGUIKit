@@ -22,6 +22,9 @@ extern NSString * const RGLabelTableViewCellID;
 @property (nonatomic, strong) UIView *textEdgeMask;
 @property (nonatomic, assign) UIEdgeInsets maskEdge;
 
+- (void)setText:(NSString *)text;
+- (void)setAttributedText:(NSAttributedString *)attributedText;
+
 + (CGFloat)heightForText:(NSString *)text
                     font:(UIFont *)font
                tableView:(UITableView *)tableView

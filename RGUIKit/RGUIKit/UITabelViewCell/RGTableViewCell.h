@@ -21,6 +21,11 @@ extern NSString * const RGCellIDValueDefault; // UITableViewCellStyleDefault
 
 @property (nonatomic, strong) UIColor *detailTextColor UI_APPEARANCE_SELECTOR;
 
+@property (nonatomic, copy) void(^selectedBlock)(RGTableViewCell *cell, BOOL selected, BOOL animated);
+@property (nonatomic, copy) void(^highlightedBlock)(RGTableViewCell *cell, BOOL highlighted, BOOL animated);
+
+@property (nonatomic, copy) void(^layoutSubviewsBlock)(RGTableViewCell *cell, CGRect bounds);
+
 /// 初始化cell 自定义 UITableViewCellStyle
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 

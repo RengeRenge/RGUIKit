@@ -124,7 +124,37 @@ static UIColor * kRGTableViewCellThemeColor;
     self.lastThemeColor = kRGTableViewCellThemeColor;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (self.layoutSubviewsBlock)
+        self.layoutSubviewsBlock(self, self.contentView.bounds);
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    if (self.highlightedBlock) {
+        self.highlightedBlock(self, selected, animated);
+    }
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+    if (self.selectedBlock) {
+        self.selectedBlock(self, highlighted, animated);
+    }
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.selectedBlock = nil;
+    self.highlightedBlock = nil;
+    self.layoutSubviewsBlock = nil;
+}
+
 - (void)dealloc {
+    self.selectedBlock = nil;
+    self.highlightedBlock = nil;
+    self.layoutSubviewsBlock = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

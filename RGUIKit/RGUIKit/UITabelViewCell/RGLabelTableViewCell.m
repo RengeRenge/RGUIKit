@@ -46,6 +46,16 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     return self;
 }
 
+- (void)setText:(NSString *)text {
+    _label.text = text;
+    [self setNeedsLayout];
+}
+
+- (void)setAttributedText:(NSAttributedString *)attributedText {
+    _label.attributedText = attributedText;
+    [self setNeedsLayout];
+}
+
 - (void)setLayoutCenter:(BOOL)layoutCenter {
     if (_layoutCenter != layoutCenter) {
         _layoutCenter = layoutCenter;
