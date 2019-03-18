@@ -254,14 +254,14 @@ static void(^RGTimePickerCancel)(void);
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (component == 0) {
-        return [NSString stringWithFormat:@"%02ld", self.minHour + row];
+        return [NSString stringWithFormat:@"%02ld", (long)self.minHour + row];
     }
     if (component == 1) {
         if (self.currentHour == self.minHour) {
-            return [NSString stringWithFormat:@"%02ld", row + self.minMinute];
+            return [NSString stringWithFormat:@"%02ld", (long)row + self.minMinute];
         }
     }
-    return [NSString stringWithFormat:@"%02ld", row];
+    return [NSString stringWithFormat:@"%02ld", (long)row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
