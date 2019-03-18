@@ -53,4 +53,6 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 
 #import <RGUIKit/UIBezierPath+RGDraw.h>
 
+#import <RGUIKit/RGTimePicker.h>
+
 #endif /* Header_h */

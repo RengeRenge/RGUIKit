@@ -66,6 +66,8 @@
 		E632AFAA21A4FB50003C7A7F /* NSTimer+RGBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AF8A21A4FB50003C7A7F /* NSTimer+RGBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E632AFAD21A4FB62003C7A7F /* RGInputTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E632AFAB21A4FB62003C7A7F /* RGInputTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E632AFAE21A4FB62003C7A7F /* RGInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AFAC21A4FB62003C7A7F /* RGInputTableViewCell.m */; };
+		E6915FCA223F464F0019296C /* RGTimePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = E6915FC8223F464F0019296C /* RGTimePicker.h */; };
+		E6915FCB223F464F0019296C /* RGTimePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E6915FC9223F464F0019296C /* RGTimePicker.m */; };
 		E6DA65542193972E00BF3201 /* RGNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA654D2193972D00BF3201 /* RGNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6DA65562193972E00BF3201 /* RGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA654F2193972D00BF3201 /* RGNavigationController.m */; };
 		E6DA659821948D6700BF3201 /* RGCornerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA659621948D6700BF3201 /* RGCornerTableViewCell.m */; };
@@ -124,6 +126,8 @@
 		E632AF8A21A4FB50003C7A7F /* NSTimer+RGBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+RGBlock.h"; sourceTree = "<group>"; };
 		E632AFAB21A4FB62003C7A7F /* RGInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGInputTableViewCell.h; sourceTree = "<group>"; };
 		E632AFAC21A4FB62003C7A7F /* RGInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGInputTableViewCell.m; sourceTree = "<group>"; };
+		E6915FC8223F464F0019296C /* RGTimePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTimePicker.h; sourceTree = "<group>"; };
+		E6915FC9223F464F0019296C /* RGTimePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTimePicker.m; sourceTree = "<group>"; };
 		E6DA654D2193972D00BF3201 /* RGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGNavigationController.h; sourceTree = "<group>"; };
 		E6DA654F2193972D00BF3201 /* RGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGNavigationController.m; sourceTree = "<group>"; };
 		E6DA659621948D6700BF3201 /* RGCornerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGCornerTableViewCell.m; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		E61A043C21919A13008D35F1 /* RGUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				E6915FC7223F46420019296C /* UIView */,
 				E6DA654C2193969F00BF3201 /* UINavigationController */,
 				E61A044E21919AA6008D35F1 /* Category */,
 				E61A044521919A4E008D35F1 /* UITabelViewCell */,
@@ -325,6 +330,15 @@
 			path = NSTimer;
 			sourceTree = "<group>";
 		};
+		E6915FC7223F46420019296C /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				E6915FC8223F464F0019296C /* RGTimePicker.h */,
+				E6915FC9223F464F0019296C /* RGTimePicker.m */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
 		E6DA654C2193969F00BF3201 /* UINavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +365,7 @@
 				E632AF9D21A4FB50003C7A7F /* UIImage+RGName.h in Headers */,
 				E632AFA021A4FB50003C7A7F /* UIImage+RGRead.h in Headers */,
 				E632AF9A21A4FB50003C7A7F /* UIViewController+RGPresent.h in Headers */,
+				E6915FCA223F464F0019296C /* RGTimePicker.h in Headers */,
 				E632AF9921A4FB50003C7A7F /* UIViewController+RGBarFrame.h in Headers */,
 				E632AF8D21A4FB50003C7A7F /* UIBezierPath+RGDraw.h in Headers */,
 				E632AFAA21A4FB50003C7A7F /* NSTimer+RGBlock.h in Headers */,
@@ -487,6 +502,7 @@
 				E632AF9521A4FB50003C7A7F /* UIViewController+RGSafeArea.m in Sources */,
 				E632AF8F21A4FB50003C7A7F /* UIView+RGLayoutHelp.m in Sources */,
 				E632AFA121A4FB50003C7A7F /* UIImage+RGName.m in Sources */,
+				E6915FCB223F464F0019296C /* RGTimePicker.m in Sources */,
 				E632AF8E21A4FB50003C7A7F /* UIBezierPath+RGDraw.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
