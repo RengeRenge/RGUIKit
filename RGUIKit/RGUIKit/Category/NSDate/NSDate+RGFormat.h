@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef enum : NSUInteger {
     RGWeekSun = 1,
     RGWeekMon,
@@ -47,3 +49,5 @@ typedef enum : NSUInteger {
 
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -22,13 +22,13 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) UIColor *tintColor;
 
-+ (RGNavigationController *)navigationWithRoot:(UIViewController *)root;
-+ (RGNavigationController *)navigationWithRoot:(UIViewController *)root style:(RGNavigationBackgroundStyle)style;
++ (__kindof RGNavigationController *)navigationWithRoot:(UIViewController *)root;
++ (__kindof RGNavigationController *)navigationWithRoot:(UIViewController *)root style:(RGNavigationBackgroundStyle)style;
 
 @end
 
 @interface UIViewController (RGNavigationController)
 
-- (RGNavigationController *)rg_navigationController;
+- (__kindof RGNavigationController *)rg_navigationController;
 
 @end

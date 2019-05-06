@@ -29,18 +29,18 @@ typedef enum : NSUInteger {
 @interface UIBezierPath (RGDraw)
 
 - (void)rg_drawLinearGradient:(CGContextRef)context
-                    locations:(CGFloat[])locations
+                    locations:(CGFloat[_Nullable])locations
                        colors:(NSArray <id> *)colors
                      drawType:(RGUIBezierDrawType)drawType;
 
 - (void)rg_drawLinearGradient:(CGContextRef)context
-                    locations:(CGFloat[])locations
+                    locations:(CGFloat[_Nullable])locations
                        colors:(NSArray<id> *)colors
                    startPoint:(CGPoint)startPoint
                      endPoint:(CGPoint)endPoint;
 
 - (void)rg_drawRadialGradient:(CGContextRef)context
-                    locations:(CGFloat [])locations
+                    locations:(CGFloat [_Nullable])locations
                        colors:(NSArray<id> *)colors
                        center:(CGPoint)center
                        radius:(CGFloat)radius;

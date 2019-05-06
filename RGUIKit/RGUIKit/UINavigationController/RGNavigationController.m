@@ -21,7 +21,7 @@
 }
 
 + (RGNavigationController *)navigationWithRoot:(UIViewController *)root style:(RGNavigationBackgroundStyle)style {
-    RGNavigationController *ngv = [[RGNavigationController alloc] initWithRootViewController:root];
+    RGNavigationController *ngv = [[self alloc] initWithRootViewController:root];
     ngv.barBackgroundStyle = style;
     return ngv;
 }

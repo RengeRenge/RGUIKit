@@ -12,10 +12,10 @@
 @interface RGIconCell <__covariant RGIconCellCustomIcon> : RGTableViewCell
 
 /// config customIcon
-- (void)configCustomIcon:(_Nullable RGIconCellCustomIcon (^)(_Nullable RGIconCellCustomIcon icon))config;
+- (void)configCustomIcon:(RGIconCellCustomIcon _Nullable (^_Nullable)(RGIconCellCustomIcon _Nullable icon))config;
 
 /// 设置自定义的图标视图，视图会被自动添加到 contentView 上，视图的大小为 iconSize
-@property (nonatomic, strong) RGIconCellCustomIcon customIcon;
+@property (nonatomic, strong) RGIconCellCustomIcon _Nullable customIcon;
 
 /// RGIconCell will not enlarge the Icon
 @property (nonatomic, assign) RGIconResizeMode iconResizeMode;
@@ -27,13 +27,13 @@
 @property (nonatomic, assign) BOOL iconCornerRound;
 
 /// defalut nil
-@property (nonatomic, strong) UIColor *iconBackgroundColor;
+@property (nonatomic, strong) UIColor * _Nullable iconBackgroundColor;
 
 /// default NO
 @property (nonatomic, assign) BOOL adjustIconBackgroundWhenHighlighted;
 
 /// get icon cell
-+ (RGIconCell *)getCell:(UITableView *)tableView reuseIdentifier:(NSString *)reuseIdentifier;
++ (__kindof RGIconCell * _Nonnull)getCell:(UITableView * _Nonnull)tableView reuseIdentifier:(NSString * _Nullable)reuseIdentifier;
 
 /// reset cell
 - (void)resetConfig;
