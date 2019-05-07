@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+RGIconCell.h"
-#import "UIImage+RGTint.h"
+#import "UIImage+RGSize.h"
 
 @implementation UIImage (RGIconCellResize)
 
@@ -21,16 +21,18 @@
 
 + (UIImage *)rg_resizeImage:(UIImage *)image width:(CGFloat)width height:(CGFloat)height iconResizeMode:(RGIconResizeMode)iconResizeMode {
     
+    CGSize size = image.rg_straightSize;
+    
     if (RGIconResizeModeScaleAspectFit == iconResizeMode) {
         
         CGFloat scaleWidth = width;
-        CGFloat scale = scaleWidth / image.size.width;
-        CGFloat scaleHeight = image.size.height * scale;
+        CGFloat scale = scaleWidth / size.width;
+        CGFloat scaleHeight = size.height * scale;
         
         if (scaleHeight > height) {
             scaleHeight = height;
-            scale = height / image.size.height;
-            scaleWidth = scale * image.size.width;
+            scale = height / size.height;
+            scaleWidth = scale * size.width;
         }
         if (scale < 1) {
             return [self scaleImage:image size:CGSizeMake(scaleWidth, scaleHeight)];
@@ -40,20 +42,19 @@
         
     } else if (RGIconResizeModeCenter == iconResizeMode) {
         
-        BOOL needCut = (image.size.width > width || image.size.height > height);
+        BOOL needCut = (size.width > width || size.height > height);
         
         if (needCut) {
-            
-            if (image.size.width < width) {
-                width = image.size.width;
+            if (size.width < width) {
+                width = size.width;
             }
             
-            if (image.size.height < height) {
-                height = image.size.height;
+            if (size.height < height) {
+                height = size.height;
             }
             
-            CGFloat x = (image.size.width - width) / 2;
-            CGFloat y = (image.size.height - height) / 2;
+            CGFloat x = (size.width - width) / 2;
+            CGFloat y = (size.height - height) / 2;
             
             CGFloat imageScale = image.scale;
             
@@ -67,8 +68,8 @@
         
     } else if (RGIconResizeModeScaleAspectFill == iconResizeMode) {
         
-        CGFloat imageWidth = image.size.width;
-        CGFloat imageHeight = image.size.height;
+        CGFloat imageWidth = size.width;
+        CGFloat imageHeight = size.height;
         
         BOOL needResize = !(width == imageWidth && height == imageHeight);
         if (needResize) {
@@ -78,15 +79,15 @@
             
             if (needCut) {
                 
-                CGFloat cutWidth = image.size.width;
+                CGFloat cutWidth = size.width;
                 CGFloat cutHeight = cutWidth / ratio;
                 
-                if (cutHeight > image.size.height) {
-                    cutHeight = image.size.height;
+                if (cutHeight > size.height) {
+                    cutHeight = size.height;
                     cutWidth = cutHeight * ratio;
                 }
-                CGFloat x = (image.size.width - cutWidth) / 2;
-                CGFloat y = (image.size.height - cutHeight) / 2;
+                CGFloat x = (size.width - cutWidth) / 2;
+                CGFloat y = (size.height - cutHeight) / 2;
                 
                 CGFloat imageScale = image.scale;
                 
@@ -99,11 +100,11 @@
             }
             
             //set scaleSize
-            CGFloat scaleSize = width / image.size.width;
+            CGFloat scaleSize = width / size.width;
             
-            if (image.size.height * scaleSize < height) {
+            if (size.height * scaleSize < height) {
                 
-                scaleSize = height / image.size.height;
+                scaleSize = height / size.height;
             }
             
             if (scaleSize < 1) {
@@ -120,7 +121,7 @@
 {
     CGImageRef subImageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
     
-    UIImage *smallImage = [UIImage imageWithCGImage:subImageRef scale:image.scale orientation:UIImageOrientationUp];
+    UIImage *smallImage = [UIImage imageWithCGImage:subImageRef scale:image.scale orientation:image.imageOrientation];
     
     CGImageRelease(subImageRef);
     

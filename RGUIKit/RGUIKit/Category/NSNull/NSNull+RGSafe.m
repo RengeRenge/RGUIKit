@@ -29,4 +29,8 @@
     return 0;
 }
 
+- (NSUInteger)length {
+    return 0;
+}
+
 @end

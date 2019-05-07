@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)objectForKeyedSubscript:(id)key;
 - (BOOL)isEqualToString:(NSString *)aString;
 - (NSUInteger)count;
+- (NSUInteger)length;
 
 @end
 

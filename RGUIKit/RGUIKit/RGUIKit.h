@@ -49,6 +49,7 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIImage+RGTint.h>
 #import <RGUIKit/UIImage+RGName.h>
 #import <RGUIKit/UIImage+RGRead.h>
+#import <RGUIKit/UIImage+RGSize.h>
 #import <RGUIKit/UIImage+RGImageEdit.h>
 
 #import <RGUIKit/UIBezierPath+RGDraw.h>

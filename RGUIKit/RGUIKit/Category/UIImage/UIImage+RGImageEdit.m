@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+RGImageEdit.h"
-#import "UIImage+RGTint.h"
+#import "UIImage+RGSize.h"
 
 @implementation UIImage (RGImageEdit)
 

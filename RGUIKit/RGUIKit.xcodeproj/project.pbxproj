@@ -68,6 +68,8 @@
 		E632AFAE21A4FB62003C7A7F /* RGInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E632AFAC21A4FB62003C7A7F /* RGInputTableViewCell.m */; };
 		E6915FCA223F464F0019296C /* RGTimePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = E6915FC8223F464F0019296C /* RGTimePicker.h */; };
 		E6915FCB223F464F0019296C /* RGTimePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = E6915FC9223F464F0019296C /* RGTimePicker.m */; };
+		E6B97EEF2281B43B005F86DC /* UIImage+RGSize.h in Headers */ = {isa = PBXBuildFile; fileRef = E6B97EED2281B43B005F86DC /* UIImage+RGSize.h */; };
+		E6B97EF02281B43B005F86DC /* UIImage+RGSize.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B97EEE2281B43B005F86DC /* UIImage+RGSize.m */; };
 		E6DA65542193972E00BF3201 /* RGNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6DA654D2193972D00BF3201 /* RGNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6DA65562193972E00BF3201 /* RGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA654F2193972D00BF3201 /* RGNavigationController.m */; };
 		E6DA659821948D6700BF3201 /* RGCornerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA659621948D6700BF3201 /* RGCornerTableViewCell.m */; };
@@ -128,6 +130,8 @@
 		E632AFAC21A4FB62003C7A7F /* RGInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGInputTableViewCell.m; sourceTree = "<group>"; };
 		E6915FC8223F464F0019296C /* RGTimePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGTimePicker.h; sourceTree = "<group>"; };
 		E6915FC9223F464F0019296C /* RGTimePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGTimePicker.m; sourceTree = "<group>"; };
+		E6B97EED2281B43B005F86DC /* UIImage+RGSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+RGSize.h"; sourceTree = "<group>"; };
+		E6B97EEE2281B43B005F86DC /* UIImage+RGSize.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RGSize.m"; sourceTree = "<group>"; };
 		E6DA654D2193972D00BF3201 /* RGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGNavigationController.h; sourceTree = "<group>"; };
 		E6DA654F2193972D00BF3201 /* RGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGNavigationController.m; sourceTree = "<group>"; };
 		E6DA659621948D6700BF3201 /* RGCornerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGCornerTableViewCell.m; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 				E632AF7721A4FB50003C7A7F /* UIImage+RGRead.m */,
 				E632AF7E21A4FB50003C7A7F /* UIImage+RGTint.h */,
 				E632AF7A21A4FB50003C7A7F /* UIImage+RGTint.m */,
+				E6B97EED2281B43B005F86DC /* UIImage+RGSize.h */,
+				E6B97EEE2281B43B005F86DC /* UIImage+RGSize.m */,
 			);
 			path = UIImage;
 			sourceTree = "<group>";
@@ -370,6 +376,7 @@
 				E632AF8D21A4FB50003C7A7F /* UIBezierPath+RGDraw.h in Headers */,
 				E632AFAA21A4FB50003C7A7F /* NSTimer+RGBlock.h in Headers */,
 				E632AF9221A4FB50003C7A7F /* UIView+RGParentVC.h in Headers */,
+				E6B97EEF2281B43B005F86DC /* UIImage+RGSize.h in Headers */,
 				E632AF9C21A4FB50003C7A7F /* UIImage+RGImageEdit.h in Headers */,
 				E632AF9821A4FB50003C7A7F /* UIViewController+RGSafeArea.h in Headers */,
 				E632AFAD21A4FB62003C7A7F /* RGInputTableViewCell.h in Headers */,
@@ -497,6 +504,7 @@
 				E632AF9421A4FB50003C7A7F /* UIView+RGPanGestureHelp.m in Sources */,
 				E6DA659F21948FDA00BF3201 /* RGEdgeTableViewCell.m in Sources */,
 				E632AF9B21A4FB50003C7A7F /* UIImage+RGRead.m in Sources */,
+				E6B97EF02281B43B005F86DC /* UIImage+RGSize.m in Sources */,
 				E601267521AB9C6100EE53F4 /* NSDate+RGFormat.m in Sources */,
 				E632AFA321A4FB50003C7A7F /* UIColor+RGColorGet.m in Sources */,
 				E607E5B621A5554D00B7F892 /* NSNull+RGSafe.m in Sources */,
