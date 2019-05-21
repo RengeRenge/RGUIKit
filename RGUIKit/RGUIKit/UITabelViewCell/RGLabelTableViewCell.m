@@ -83,6 +83,7 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
 }
 
 - (void)layoutSubviews {
+    [super layoutSubviews];
     CGRect bounds = self.contentView.bounds;
     CGSize size = CGSizeMake(CGRectGetWidth(bounds) - _textEdge.left - _textEdge.right, CGFLOAT_MAX);
     size = [_label sizeThatFits:size];
