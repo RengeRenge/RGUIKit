@@ -24,14 +24,28 @@ extern NSString * const RGCellIDValueDefault; // UITableViewCellStyleDefault
 @property (nonatomic, copy) void(^selectedBlock)(RGTableViewCell *cell, BOOL selected, BOOL animated);
 @property (nonatomic, copy) void(^highlightedBlock)(RGTableViewCell *cell, BOOL highlighted, BOOL animated);
 
+/// 继承 RGTableViewCell 的类如果重写了 layoutSubviews 需要在最后调用一下 subViewsDidLayoutForClass, 以保证 layoutSubviewsBlock 能在正确的时机回调
 @property (nonatomic, copy) void(^layoutSubviewsBlock)(RGTableViewCell *cell, CGRect bounds);
 
-/// 初始化cell 自定义 UITableViewCellStyle
+
+- (void)subViewsDidLayoutForClass:(Class)subClass;
+
+
+/**
+ 初始化cell 自定义 UITableViewCellStyle
+ */
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
-/// 获取复用的 cell 没有则初始化一个
+
+/**
+ 获取复用的 cell 没有则初始化一个
+ */
 + (instancetype)dequeueCellWithIdentifier:(NSString *)reuseIdentifier style:(UITableViewCellStyle)style tableView:(UITableView *)tableView;
 
+
+/**
+ 全局设置 cell 的主题色 影响按下颜色
+ */
 + (void)setThemeColor:(UIColor *)color;
 
 @end

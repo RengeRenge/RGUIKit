@@ -245,6 +245,8 @@ NSString * const RGEdgeTableViewCellID = @"RGEdgeTableViewCellID";
     if (!self.rg_layoutLeftToRight) {
         [_customSeparatorView rg_setFrameToFitRTL];
     }
+    
+    [super subViewsDidLayoutForClass:RGEdgeTableViewCell.class];
 }
 
 - (void)setAccessoryType:(UITableViewCellAccessoryType)accessoryType {

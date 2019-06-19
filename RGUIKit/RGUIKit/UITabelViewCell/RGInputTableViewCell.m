@@ -102,6 +102,8 @@ NSString * const RGInputTableViewCellID = @"RGInputTableViewCellID";
         [self.textField rg_setFrameToFitRTL];
         [self.rightView rg_setFrameToFitRTL];
     }
+    
+    [super subViewsDidLayoutForClass:RGInputTableViewCell.class];
 }
 
 - (void)setTextFieldEdge:(UIEdgeInsets)textFieldEdge {

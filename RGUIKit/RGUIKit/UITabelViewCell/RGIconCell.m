@@ -83,7 +83,6 @@
 
 - (void)resetConfig {
     _iconResizeMode = RGIconResizeModeScaleAspectFill;
-    _iconCornerRound = YES;
     
     _fakeImageView.image = nil;
     _fakeImageView.tintColor = nil;
@@ -99,6 +98,7 @@
     if (!_fakeImageView) {
         _fakeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, _iconSize.width, _iconSize.height)];
         _fakeImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _fakeImageView.clipsToBounds = YES;
         [super imageView].image = [UIImage rg_coloredImage:[UIColor clearColor] size:_iconSize];
         [self.contentView addSubview:_fakeImageView];
     }
@@ -110,14 +110,6 @@
         _iconResizeMode = iconResizeMode;
         [self setNeedsLayout];
     }
-}
-
-- (void)setIconCornerRound:(BOOL)iconCornerRound {
-    if (iconCornerRound == _iconCornerRound) {
-        return;
-    }
-    _iconCornerRound = iconCornerRound;
-    [self setNeedsLayout];
 }
 
 - (void)setIconBackgroundColor:(UIColor *)iconBackgroundColor {
@@ -160,13 +152,7 @@
         displayView = self.imageView;
     }
     
-    if (_iconCornerRound) {
-        displayView.clipsToBounds = YES;
-        displayView.layer.cornerRadius = CGRectGetHeight(displayView.frame)/2.0f;
-    } else {
-        displayView.clipsToBounds = NO;
-        displayView.layer.cornerRadius = 0.0f;
-    }
+    [super subViewsDidLayoutForClass:RGIconCell.class];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

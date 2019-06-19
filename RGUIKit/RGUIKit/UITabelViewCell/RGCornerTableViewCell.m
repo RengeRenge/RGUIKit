@@ -43,6 +43,8 @@ NSString * const RGCornerTableViewCellID = @"RGCornerTableViewCellID";
     shape.strokeColor = [UIColor whiteColor].CGColor;
     [shape setPath:rounded.CGPath];
     self.layer.mask = shape;
+    
+    [super subViewsDidLayoutForClass:RGCornerTableViewCell.class];
 }
 
 @end

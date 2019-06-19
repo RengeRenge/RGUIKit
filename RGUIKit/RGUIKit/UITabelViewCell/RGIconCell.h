@@ -23,9 +23,6 @@
 /// default TableViewCellDefaultIconDimension x TableViewCellDefaultIconDimension (40x40)
 @property (nonatomic, assign) CGSize iconSize;
 
-/// defalut YES
-@property (nonatomic, assign) BOOL iconCornerRound;
-
 /// defalut nil
 @property (nonatomic, strong) UIColor * _Nullable iconBackgroundColor;
 

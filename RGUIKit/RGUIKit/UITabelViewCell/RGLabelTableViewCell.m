@@ -102,6 +102,8 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     }
     _label.frame = frame;
     _textEdgeMask.frame = UIEdgeInsetsInsetRect(frame, UIEdgeInsetsMake(-_maskEdge.top, -_maskEdge.left, -_maskEdge.bottom, -_maskEdge.right));
+    
+    [super subViewsDidLayoutForClass:RGLabelTableViewCell.class];
 }
 
 - (void)awakeFromNib {

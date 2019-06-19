@@ -126,8 +126,45 @@ static UIColor * kRGTableViewCellThemeColor;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (self.layoutSubviewsBlock)
-        self.layoutSubviewsBlock(self, self.contentView.bounds);
+    [self subViewsDidLayoutForClass:RGTableViewCell.class];
+}
+
+- (void)subViewsDidLayoutForClass:(Class)subClass {
+    if (self.layoutSubviewsBlock) {
+        
+        if (subClass == self.class) {
+            self.layoutSubviewsBlock(self, self.contentView.bounds);
+            return;
+        }
+        
+        // find lastLayoutImpClass
+        Class superClass = self.class.superclass;
+        Class lastLayoutImpClass = RGTableViewCell.class;
+        
+        IMP imp1 = [superClass instanceMethodForSelector:@selector(layoutSubviews)];
+        IMP imp2 = [self.class instanceMethodForSelector:@selector(layoutSubviews)];
+        
+        if (imp1 != imp2) { // self.class exist layoutSubviews IMP
+            lastLayoutImpClass = self.class;
+        } else {
+            // find lastLayoutImpClass
+            Class nowClass = self.class;
+            while (nowClass != UITableViewCell.class) {
+                superClass = nowClass.superclass;
+                imp1 = [nowClass instanceMethodForSelector:@selector(layoutSubviews)];
+                imp2 = [superClass instanceMethodForSelector:@selector(layoutSubviews)];
+                if (imp1 != imp2) {
+                    lastLayoutImpClass = nowClass;
+                    break;
+                } else {
+                    nowClass = nowClass.superclass;
+                }
+            }
+        }
+        if (subClass == lastLayoutImpClass) {
+            self.layoutSubviewsBlock(self, self.contentView.bounds);
+        }
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
