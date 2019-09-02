@@ -18,7 +18,10 @@
 - (UIImage *)rg_imageWithColor:(UIColor *)color;
 - (UIImage *)rg_applyingAlpha:(CGFloat)alpha;
 
+- (UIColor *)rg_mainColorWithIgnoreColor:(UIColor *)ignoreColor;
 - (UIColor *)rg_mainColor;
+
 - (BOOL)rg_hasAlpha;
+- (CGBitmapInfo)rg_bitmapInfo;
 
 @end

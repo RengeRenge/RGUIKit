@@ -8,7 +8,7 @@
 
 #import "UIViewController+RGBarFrame.h"
 #import "UIViewController+RGPresent.h"
-#import "NSObject+RGSwizzle.h"
+#import "NSObject+RGRunTime.h"
 
 #import <objc/runtime.h>
 

@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSNull(RGSafe)
 
-- (id)objectAtIndexedSubscript:(NSUInteger)idx;
-- (id)objectForKeyedSubscript:(id)key;
+- (nullable id)objectAtIndexedSubscript:(NSUInteger)idx;
+- (nullable id)objectForKeyedSubscript:(id)key;
 - (BOOL)isEqualToString:(NSString *)aString;
 - (NSUInteger)count;
 - (NSUInteger)length;

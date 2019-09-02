@@ -26,7 +26,8 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/RGEdgeTableViewCell.h>
 #import <RGUIKit/RGInputTableViewCell.h>
 
-#import <RGUIKit/NSObject+RGSwizzle.h>
+#import <RGUIKit/NSObject+RGRunTime.h>
+#import <RGUIKit/NSObject+RGObserver.h>
 #import <RGUIKit/NSNull+RGSafe.h>
 #import <RGUIKit/NSTimer+RGBlock.h>
 #import <RGUIKit/NSDate+RGFormat.h>
@@ -39,10 +40,12 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIView+RGParentVC.h>
 #import <RGUIKit/UIView+RGLayoutHelp.h>
 #import <RGUIKit/UIView+RGPanGestureHelp.h>
+#import <RGUIKit/UIScrollView+RGInset.h>
 
 #import <RGUIKit/UITabBar+RGBadge.h>
 
 #import <RGUIKit/UIColor+RGColorGet.h>
+#import <RGUIKit/UIColor+RGTint.h>
 
 #import <RGUIKit/UINavigationController+RGShouldPop.h>
 
@@ -55,5 +58,6 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIBezierPath+RGDraw.h>
 
 #import <RGUIKit/RGTimePicker.h>
+#import <RGUIKit/RGBluuur.h>
 
 #endif /* Header_h */

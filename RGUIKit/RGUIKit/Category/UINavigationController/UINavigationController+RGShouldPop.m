@@ -7,7 +7,7 @@
 //
 
 #import "UINavigationController+RGShouldPop.h"
-#import "NSObject+RGSwizzle.h"
+#import "NSObject+RGRunTime.h"
 #import <objc/runtime.h>
 
 static char *rg_kOriginalDelegate = "rg_kOriginalDelegate";

@@ -64,3 +64,5 @@ fastlane/test_output
 iOSInjectionProject/
 *.DS_Store
 *.framework
+RGUIKit.framework.zip
+*.podspec

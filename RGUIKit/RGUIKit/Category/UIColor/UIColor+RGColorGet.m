@@ -37,7 +37,7 @@
         va_end(args);
         return [UIColor colorWithRed:rgba[0] green:rgba[1] blue:rgba[2] alpha:rgba[3]];
     }
-    return nil;
+    return [UIColor new];
 }
 
 + (UIColor *)rg_colorWithR:(CGFloat)red g:(CGFloat)green b:(CGFloat)blue alpha:(CGFloat)alpha {

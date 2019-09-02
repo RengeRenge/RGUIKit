@@ -21,6 +21,7 @@ typedef enum : NSUInteger {
 //@property (nonatomic, assign) UIStatusBarStyle barStyle; // UIStatusBarStyleLightContent
 
 @property (nonatomic, strong) UIColor *tintColor;
+@property (nonatomic, strong) UIColor *titleColor;
 
 + (__kindof RGNavigationController *)navigationWithRoot:(UIViewController *)root;
 + (__kindof RGNavigationController *)navigationWithRoot:(UIViewController *)root style:(RGNavigationBackgroundStyle)style;

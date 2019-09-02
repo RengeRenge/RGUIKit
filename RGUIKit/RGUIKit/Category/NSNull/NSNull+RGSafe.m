@@ -10,11 +10,11 @@
 
 @implementation NSNull(RGSafe)
 
-- (id)objectForKeyedSubscript:(id)key {
+- (nullable id)objectForKeyedSubscript:(id)key {
     return nil;
 }
 
-- (id)objectAtIndexedSubscript:(NSUInteger)idx {
+- (nullable id)objectAtIndexedSubscript:(NSUInteger)idx {
     return nil;
 }
 

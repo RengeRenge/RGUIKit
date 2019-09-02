@@ -90,6 +90,12 @@
     return imageSize;
 }
 
++ (CGSize)rg_logicSizeWithPixSize:(CGSize)pixSize {
+    pixSize.height /= UIScreen.mainScreen.scale;
+    pixSize.width /= UIScreen.mainScreen.scale;
+    return pixSize;
+}
+
 - (CGSize)rg_straightSize {
     switch (self.imageOrientation) {
         case UIImageOrientationLeft:

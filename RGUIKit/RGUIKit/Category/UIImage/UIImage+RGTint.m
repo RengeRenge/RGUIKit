@@ -109,15 +109,25 @@
 }
 
 - (BOOL)rg_hasAlpha {
-    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(self.CGImage);
-    return (alpha == kCGImageAlphaFirst ||
-            alpha == kCGImageAlphaLast ||
-            alpha == kCGImageAlphaPremultipliedFirst ||
-            alpha == kCGImageAlphaPremultipliedLast);
+    CGImageAlphaInfo alphaInfo = CGImageGetAlphaInfo(self.CGImage) & kCGBitmapAlphaInfoMask;
+    BOOL hasAlpha = NO;
+    if (alphaInfo == kCGImageAlphaPremultipliedLast ||
+        alphaInfo == kCGImageAlphaPremultipliedFirst ||
+        alphaInfo == kCGImageAlphaLast ||
+        alphaInfo == kCGImageAlphaFirst) {
+        hasAlpha = YES;
+    }
+    return hasAlpha;
 }
 
-//根据图片获取图片的主色调
-- (UIColor *)rg_mainColor {
+- (CGBitmapInfo)rg_bitmapInfo {
+    /*https://www.jianshu.com/p/2e45a2ea7b62*/
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrder32Host;
+    bitmapInfo |= self.rg_hasAlpha ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
+    return bitmapInfo;
+}
+
+- (UIColor *)rg_mainColorWithIgnoreColor:(UIColor *)ignoreColor {
     //第一步 先把图片缩小 加快计算速度. 但越小结果误差可能越大
     CGSize thumbSize = [self rg_sizeThatFits:CGSizeMake(50/[UIScreen mainScreen].scale, 50/[UIScreen mainScreen].scale) stretch:NO];
     thumbSize.width *= [UIScreen mainScreen].scale;
@@ -125,23 +135,37 @@
     
     CGImageRef cgImage = self.CGImage;
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(cgImage);
+    CGBitmapInfo bitmapInfo = self.rg_bitmapInfo;
+    
     CGContextRef context = CGBitmapContextCreate(NULL,
                                                  thumbSize.width,
                                                  thumbSize.height,
                                                  8,//bits per component
                                                  0,
                                                  colorSpace,
-                                                 CGImageGetBitmapInfo(cgImage));
+                                                 bitmapInfo);
     
     CGRect drawRect = CGRectMake(0, 0, thumbSize.width, thumbSize.height);
     CGContextDrawImage(context, drawRect, cgImage);
     
     //第二步 取每个点的像素值
-    unsigned char* data = CGBitmapContextGetData (context);
+    unsigned char* data = CGBitmapContextGetData(context);
     
-    if (data == NULL) {CGContextRelease(context); return nil;}
+    if (data == NULL) {
+        CGContextRelease(context);
+        return nil;
+    }
     
     NSCountedSet *cls=[NSCountedSet setWithCapacity:thumbSize.width*thumbSize.height];
+    
+    CGFloat r=0,g=0,b=0,a=0;
+    if (ignoreColor) {
+        [ignoreColor getRed:&r green:&g blue:&b alpha:&a];
+        r*=255;
+        g*=255;
+        b*=255;
+        a*=255;
+    }
     
     for (int x=0; x<thumbSize.width; x++) {
         for (int y=0; y<thumbSize.height; y++) {
@@ -150,13 +174,13 @@
             int green = data[offset+1];
             int blue = data[offset+2];
             int alpha =  data[offset+3];
-            if (alpha>0) {//去除透明
-                if (red==255&&green==255&&blue==255) {//去除白色
-                }else{
+            if (alpha > 0) {//去除透明
+                if (ignoreColor && red==r && green==g && blue==b && a==alpha) { //去除指定颜色
+                    
+                } else {
                     NSArray *clr=@[@(red),@(green),@(blue),@(alpha)];
                     [cls addObject:clr];
                 }
-                
             }
         }
     }
@@ -175,6 +199,11 @@
         
     }
     return [UIColor colorWithRed:([MaxColor[0] intValue]/255.0f) green:([MaxColor[1] intValue]/255.0f) blue:([MaxColor[2] intValue]/255.0f) alpha:([MaxColor[3] intValue]/255.0f)];
+}
+
+//根据图片获取图片的主色调
+- (UIColor *)rg_mainColor {
+    return [self rg_mainColorWithIgnoreColor:nil];
 }
 
 @end

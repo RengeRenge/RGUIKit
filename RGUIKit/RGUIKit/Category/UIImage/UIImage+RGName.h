@@ -10,6 +10,6 @@
 
 @interface UIImage (RGName)
 
-+ (NSString *)rg_imageFullNameWithName:(NSString *)name extension:(NSString **)extension;
++ (NSString *)rg_imageNameWithName:(NSString *)name extension:(NSString **)extension;
 
 @end

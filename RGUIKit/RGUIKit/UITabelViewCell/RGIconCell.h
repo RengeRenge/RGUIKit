@@ -35,4 +35,6 @@
 /// reset cell
 - (void)resetConfig;
 
+- (void)setIconCorner:(UIRectCorner)corner cornerRadius:(CGFloat)cornerRadius;
+
 @end

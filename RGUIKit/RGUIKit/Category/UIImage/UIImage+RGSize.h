@@ -42,10 +42,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGSize)rg_pixSize;
 
+
 /**
  relative size
  */
 - (CGSize)rg_sizeWithScale:(CGFloat)scale;
+
+
+/**
+ transform pix size to logic size
+ logic size is iOS view's size (follow UIScreen.scale)
+
+ @param pixSize some size like self.rg_pixSize
+ @return logic size
+ */
++ (CGSize)rg_logicSizeWithPixSize:(CGSize)pixSize;
 
 
 /**

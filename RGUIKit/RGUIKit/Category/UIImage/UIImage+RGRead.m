@@ -17,8 +17,8 @@
     }
     
     NSString *extension = nil;
-    NSString *fullName = [self rg_imageFullNameWithName:name extension:&extension];
-    return [self rg_imageWithFullName:fullName extension:extension];
+    NSString *imageName = [self rg_imageNameWithName:name extension:&extension];
+    return [self rg_imageWithFullName:imageName extension:extension];
 }
 
 + (UIImage *)rg_imageWithFullName:(NSString *)fullName extension:(NSString *)extension {

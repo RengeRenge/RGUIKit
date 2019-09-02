@@ -35,7 +35,18 @@
 - (void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
     self.navigationBar.tintColor = tintColor;
-    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
+    if (!_titleColor) {
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
+    }
+}
+
+- (void)setTitleColor:(UIColor *)titleColor {
+    _titleColor = titleColor;
+    if (titleColor) {
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
+    } else {
+        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
+    }
 }
 
 - (void)setBarBackgroundStyle:(RGNavigationBackgroundStyle)barBackgroundStyle {
@@ -103,6 +114,18 @@
         topViewController = topViewController.presentedViewController;
     }
     return [topViewController preferredStatusBarStyle];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    UIViewController *topViewController = self.topViewController;
+    while (topViewController.presentedViewController) {
+        UIViewController *next = topViewController.presentedViewController;
+        if (next.isBeingDismissed || [next isKindOfClass:UIAlertController.class]) {
+            break;
+        }
+        topViewController = topViewController.presentedViewController;
+    }
+    return [topViewController prefersStatusBarHidden];
 }
 
 #pragma mark - draw image

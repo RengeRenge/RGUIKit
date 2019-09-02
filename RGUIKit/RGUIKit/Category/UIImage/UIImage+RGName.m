@@ -10,22 +10,17 @@
 
 @implementation UIImage (RGName)
 
-+ (NSString *)rg_imageFullNameWithName:(NSString *)name extension:(NSString **)extension {
-    NSString *fullName = nil;
++ (NSString *)rg_imageNameWithName:(NSString *)name extension:(NSString **)extension {
+    NSString *imageName = nil;
     NSString *nameExtension = [name pathExtension];
     if (!nameExtension || nameExtension.length == 0) {
-        int scale = (int)[UIScreen mainScreen].scale;
-        if (scale == 1) {
-            scale = 2;
-        }
-        fullName = [NSString stringWithFormat:@"%@@%dx", name, scale];
+        imageName = name;
         nameExtension = @"png";
     } else {
-        fullName = name;
-        nameExtension = nil;
+        imageName = [name stringByDeletingPathExtension];
     }
     *extension = nameExtension;
-    return fullName;
+    return imageName;
 }
 
 @end

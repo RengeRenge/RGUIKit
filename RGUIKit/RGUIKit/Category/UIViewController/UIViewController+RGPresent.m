@@ -22,7 +22,11 @@
 - (void)rg_presentWithCompletion:(void (^)(void))completion
 {
     if (self.presentingViewController) {
-        dispatch_async(dispatch_get_main_queue(), completion);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completion) {
+                completion();
+            }
+        });
     } else {
         UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         UIViewController *presentedViewController = rootViewController;

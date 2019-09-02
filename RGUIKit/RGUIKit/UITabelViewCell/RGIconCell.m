@@ -18,6 +18,10 @@
 
 @interface RGIconCell () {
     UIImageView *_fakeImageView;
+    
+    CAShapeLayer *_cornerLayer;
+    UIRectCorner _corner;
+    CGFloat _cornerRadius;
 }
 
 @end
@@ -57,6 +61,7 @@
         } else {
             self.imageView.hidden = NO;
         }
+        [self setIconCorner:_corner cornerRadius:_cornerRadius];
     }
 }
 
@@ -69,6 +74,42 @@
     }
 }
 
+- (void)setIconCorner:(UIRectCorner)corner cornerRadius:(CGFloat)cornerRadius {
+    
+    if ((corner & UIRectCornerTopLeft ||
+        corner & UIRectCornerTopRight ||
+        corner & UIRectCornerBottomLeft ||
+        corner & UIRectCornerBottomRight ||
+        corner & UIRectCornerAllCorners) &&
+        cornerRadius > 0) {
+        
+        if (!_cornerLayer) {
+            _cornerLayer = [CAShapeLayer new];
+            _cornerLayer.rasterizationScale = UIScreen.mainScreen.scale;
+            _cornerLayer.shouldRasterize = YES;
+        }
+        
+        if (corner != _corner || fabs(_cornerRadius - cornerRadius) > 1e-7) {
+            
+            _corner = corner;
+            _cornerRadius = cornerRadius;
+            
+            CGRect bounds;
+            bounds.size = self.iconSize;
+            bounds.origin = CGPointZero;
+            
+            UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:CGRectIntegral(bounds) byRoundingCorners:_corner cornerRadii:CGSizeMake(_cornerRadius, _cornerRadius)];
+            _cornerLayer.path = rounded.CGPath;
+        }
+        
+        UIView *view = (_customIcon ? _customIcon : self.imageView);
+        view.layer.mask = _cornerLayer;
+    } else {
+        UIView *view = (_customIcon ? _customIcon : self.imageView);
+        view.layer.mask = nil;
+    }
+}
+
 - (void)setIconSize:(CGSize)iconSize {
     _iconSize = iconSize;
     CGRect frame = _fakeImageView.frame;
@@ -78,6 +119,7 @@
         [super imageView].contentMode = UIViewContentModeCenter;
         [super imageView].image = [UIImage rg_coloredImage:[UIColor clearColor] size:_iconSize];
         [self setNeedsLayout];
+        [self setIconCorner:_corner cornerRadius:_cornerRadius];
     }
 }
 
@@ -126,12 +168,10 @@
 }
 
 - (void)updateSubViewFrame {
-    UIView *displayView = nil;
     if (self.imageView.isHidden || self.customIcon) {
         if ([self.customIcon isKindOfClass:UIView.class]) {
             ((UIView *)self.customIcon).frame = [super imageView].frame;
             self.imageView.frame = [super imageView].frame;
-            displayView = self.customIcon;
         }
     } else {
         if (RGIconResizeModeNone != _iconResizeMode) {
@@ -149,7 +189,6 @@
             }
         }
         self.imageView.frame = [super imageView].frame;
-        displayView = self.imageView;
     }
     
     [super subViewsDidLayoutForClass:RGIconCell.class];
