@@ -39,7 +39,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) CALayer *showdowLayer; // default Hidden
 
 @property (nonatomic, strong) CAShapeLayer *roundedLayer;
-@property (nonatomic, assign) UIRectCorner corner;
-@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, assign) UIRectCorner contentCorner;
+@property (nonatomic, assign) CGFloat contentCornerRadius;
 
 @end

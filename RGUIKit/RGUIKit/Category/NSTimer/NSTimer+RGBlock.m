@@ -10,11 +10,20 @@
 #import <objc/runtime.h>
 
 static char *rg_timer_tag_key = "rg_timer_tag_key";
+static char *rg_timer_id_key = "rg_timer_id_key";
 static char *rg_timer_block_key = "rg_timer_block_key";
 
 static NSPointerArray *rg_block_timers = nil;
 
 @implementation NSTimer (Block)
+
+- (void)setRg_identifier:(NSString *)rg_identifier {
+    objc_setAssociatedObject(self, rg_timer_id_key, rg_identifier, OBJC_ASSOCIATION_COPY);
+}
+
+- (NSString *)rg_identifier {
+    return objc_getAssociatedObject(self, rg_timer_id_key);
+}
 
 - (void)setRg_tag:(NSInteger)rg_tag {
     objc_setAssociatedObject(self, rg_timer_tag_key, @(rg_tag), OBJC_ASSOCIATION_COPY);
@@ -69,12 +78,23 @@ static NSPointerArray *rg_block_timers = nil;
     }
 }
 
++ (NSTimer *)rg_timerWithIdentifier:(NSString *)identifier {
+    return [self _rg_timerWithTag:-1 identifier:identifier];
+}
+
 + (NSTimer *)rg_timerWithTag:(NSInteger)tag {
-    
+    return [self _rg_timerWithTag:tag identifier:nil];
+}
+
++ (NSTimer *)_rg_timerWithTag:(NSInteger)tag identifier:(NSString *)identifier {
     NSTimer *(^getTimer)(void) = ^(void) {
         NSArray <NSTimer *> *array = [rg_block_timers allObjects];
         NSInteger index = [array indexOfObjectPassingTest:^BOOL(NSTimer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.rg_tag == tag) {
+            if (identifier) {
+                if ([obj.rg_identifier isEqualToString:identifier]) {
+                    return YES;
+                }
+            } else if (obj.rg_tag == tag) {
                 return YES;
             }
             return NO;

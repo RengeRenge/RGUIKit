@@ -9,21 +9,21 @@
 #import "UIImage+RGImageEdit.h"
 #import "UIImage+RGSize.h"
 
-@implementation UIImage (RGImageEdit)
+@implementation UIView (RGImageEdit)
 
-+ (UIImage *)rg_convertViewToImage:(UIView *)view {
-    CGSize size = view.bounds.size;
+- (UIImage *)rg_convertToImage {
+    CGSize size = self.bounds.size;
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
 //    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    [view drawViewHierarchyInRect:CGRectMake(0, 0, size.width, size.height) afterScreenUpdates:YES];
+    [self drawViewHierarchyInRect:CGRectMake(0, 0, size.width, size.height) afterScreenUpdates:YES];
     UIImage *subImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return subImage;
 }
 
-+ (UIImage *)rg_convertViewToImage:(UIView *)view rect:(CGRect)rect {
-    UIImage *image = [self rg_convertViewToImage:view];
-    if (CGRectEqualToRect(rect, view.bounds)) {
+- (UIImage *)rg_convertToImageInRect:(CGRect)rect {
+    UIImage *image = [self rg_convertToImage];
+    if (CGRectEqualToRect(rect, self.bounds)) {
         return image;
     }
     if (CGRectIsEmpty(rect)) {
@@ -34,6 +34,46 @@
     return image;
 }
 
+- (UIImage *)rg_convertToImageWithSize:(CGSize)size {
+    if (CGSizeEqualToSize(size, CGSizeZero)) {
+        size = self.bounds.size;
+    }
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    [self drawViewHierarchyInRect:rect afterScreenUpdates:YES];
+    UIImage *subImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return subImage;
+}
+
+@end
+
+@implementation UIScrollView (RGImageEdit)
+
+- (UIImage *)rg_captureInRect:(CGRect)rect {
+    UIImage *image = nil;
+    
+    CGRect savedFrame = self.frame;
+    CGRect frame = self.frame;
+    
+    if (CGRectIsEmpty(rect)) {
+        frame.size = self.contentSize;
+    } else {
+        frame.size = rect.size;
+    }
+    
+    CGPoint offset = self.contentOffset;
+    self.frame = frame;
+    image = [self rg_convertToImageInRect:rect];
+    self.frame = savedFrame;
+    self.contentOffset = offset;
+    return image;
+}
+
+@end
+
+@implementation UIImage (RGImageEdit)
+
 - (UIImage *)rg_imageWithScale:(CGFloat)scale {
     if (self.scale == scale) {
         return self;
@@ -43,38 +83,6 @@
 
 - (UIImage *)rg_imageWithScreenScale {
     return [self rg_imageWithScale:[UIScreen mainScreen].scale];
-}
-
-+ (UIImage *)rg_convertViewToImage:(UIView *)view size:(CGSize)size {
-    
-    if (CGSizeEqualToSize(size, CGSizeZero)) {
-        size = view.bounds.size;
-    }
-    
-    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
-    CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    [view drawViewHierarchyInRect:rect afterScreenUpdates:YES];
-    UIImage *subImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return subImage;
-}
-
-+ (UIImage *)rg_captureScrollView:(UIScrollView *)scrollView rect:(CGRect)rect {
-    UIImage *image = nil;
-    
-    CGRect savedFrame = scrollView.frame;
-    CGRect frame = scrollView.frame;
-    
-    if (CGRectIsEmpty(rect)) {
-        frame.size = scrollView.contentSize;
-    } else {
-        frame.size = rect.size;
-    }
-    
-    scrollView.frame = frame;
-    image = [self rg_convertViewToImage:scrollView rect:rect];
-    scrollView.frame = savedFrame;
-    return image;
 }
 
 - (UIImage *)rg_cropInRect:(CGRect)rect {
@@ -129,6 +137,30 @@
     UIImage *subImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return subImage;
+}
+
+- (UIImage *)rg_coveredWithText:(NSString *)text
+                     attributes:(NSDictionary *)attributes
+                   boundingSize:(CGSize)boundingSize
+                           rect:(CGRect(NS_NOESCAPE^)(CGSize textSize, CGSize imageSize))rect {
+    CGFloat scale = self.scale;
+    CGSize size = self.size;
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, scale);
+    
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    CGSize textSize = [text
+                       boundingRectWithSize:boundingSize
+                       options:NSStringDrawingUsesFontLeading
+                       attributes:attributes context:nil].size;
+    
+    [text drawInRect:rect(textSize, size) withAttributes:attributes];
+    
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
 }
 
 - (UIImage *)rg_fixOrientation {

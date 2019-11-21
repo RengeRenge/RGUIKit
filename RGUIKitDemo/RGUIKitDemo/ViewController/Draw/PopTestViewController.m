@@ -9,7 +9,7 @@
 #import "PopTestViewController.h"
 #import <RGUIKit/RGUIKit.h>
 
-@interface PopTestViewController () <RGUINavigationControllerShouldPopDelegate>
+@interface PopTestViewController () 
 
 @property (nonatomic, strong) UIImageView *imageView;
 
@@ -30,15 +30,6 @@
 - (void)setImage:(UIImage *)image {
     _image = image;
     self.imageView.image = image;
-}
-
-- (BOOL)rg_navigationControllerShouldPop:(UINavigationController *)navigationController isInteractive:(BOOL)isInteractive {
-    NSLog(@"will pop");
-    return YES;
-}
-
-- (void)rg_navigationController:(UINavigationController *)navigationController interactivePopResult:(BOOL)finished {
-    NSLog(@"will pop result:%d", finished);
 }
 
 @end

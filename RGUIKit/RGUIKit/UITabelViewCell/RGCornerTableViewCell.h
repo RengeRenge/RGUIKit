@@ -6,14 +6,13 @@
 //  Copyright © 2017年 juphoon. All rights reserved.
 //
 
-#import "RGIconCell.h"
+#import "RGTableViewCell.h"
 
 extern NSString * const RGCornerTableViewCellID;
 
-@interface RGCornerTableViewCell : RGIconCell
+@interface RGCornerTableViewCell : RGTableViewCell
 
 @property (nonatomic, assign) UIRectCorner corner;
 @property (nonatomic, assign) CGFloat cornerRadius;
-@property (nonatomic, assign) CGFloat verticalOffSet;
 
 @end

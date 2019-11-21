@@ -181,8 +181,8 @@
         UIBezierPath *gradientBarBgPath = [UIBezierPath bezierPathWithRect:rect];
         [gradientBarBgPath
          rg_drawLinearGradient:context
-         locations:linearGradientLocations
          colors:colors
+         locations:linearGradientLocations
          startPoint:CGPointMake(0, rect.size.height)
          endPoint:CGPointMake(0, 0)];
     }

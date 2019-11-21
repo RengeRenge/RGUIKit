@@ -15,8 +15,10 @@
 		E61A04BC2192B62A008D35F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BB2192B62A008D35F1 /* Assets.xcassets */; };
 		E61A04BF2192B62A008D35F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BD2192B62A008D35F1 /* LaunchScreen.storyboard */; };
 		E61A04C22192B62A008D35F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04C12192B62A008D35F1 /* main.m */; };
+		E6747472238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6747471238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m */; };
 		E6B53EE5219527DD003D61DB /* RGNavigationTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */; };
 		E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA65722193E71200BF3201 /* DrawViewController.m */; };
+		E6DACA392388AC89006D2EDA /* DrawLineCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DACA382388AC89006D2EDA /* DrawLineCustomViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +38,14 @@
 		E61A04C02192B62A008D35F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E61A04C12192B62A008D35F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E632AFB321A4FDD6003C7A7F /* RGUIKitDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RGUIKitDemo.entitlements; sourceTree = "<group>"; };
+		E6747470238BCA4F00BD4DC8 /* DrawDisplayTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawDisplayTableViewController.h; sourceTree = "<group>"; };
+		E6747471238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawDisplayTableViewController.m; sourceTree = "<group>"; };
 		E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGNavigationTestViewController.h; sourceTree = "<group>"; };
 		E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGNavigationTestViewController.m; sourceTree = "<group>"; };
 		E6DA65712193E71200BF3201 /* DrawViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawViewController.h; sourceTree = "<group>"; };
 		E6DA65722193E71200BF3201 /* DrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawViewController.m; sourceTree = "<group>"; };
+		E6DACA372388AC89006D2EDA /* DrawLineCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawLineCustomViewController.h; sourceTree = "<group>"; };
+		E6DACA382388AC89006D2EDA /* DrawLineCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawLineCustomViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,17 +98,10 @@
 		E61A04B12192B627008D35F1 /* RGUIKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				E674746F238BC9B300BD4DC8 /* ViewController */,
 				E632AFB321A4FDD6003C7A7F /* RGUIKitDemo.entitlements */,
 				E61A04B22192B627008D35F1 /* AppDelegate.h */,
 				E61A04B32192B627008D35F1 /* AppDelegate.m */,
-				E61A04B52192B627008D35F1 /* ViewController.h */,
-				E61A04B62192B627008D35F1 /* ViewController.m */,
-				E60BEA962192C3500014BF2D /* PopTestViewController.h */,
-				E60BEA972192C3500014BF2D /* PopTestViewController.m */,
-				E6DA65712193E71200BF3201 /* DrawViewController.h */,
-				E6DA65722193E71200BF3201 /* DrawViewController.m */,
-				E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */,
-				E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */,
 				E61A04B82192B627008D35F1 /* Main.storyboard */,
 				E61A04BB2192B62A008D35F1 /* Assets.xcassets */,
 				E61A04BD2192B62A008D35F1 /* LaunchScreen.storyboard */,
@@ -110,6 +109,33 @@
 				E61A04C12192B62A008D35F1 /* main.m */,
 			);
 			path = RGUIKitDemo;
+			sourceTree = "<group>";
+		};
+		E626FFD7238BDAC1007200E4 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				E6747470238BCA4F00BD4DC8 /* DrawDisplayTableViewController.h */,
+				E6747471238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m */,
+				E6DA65712193E71200BF3201 /* DrawViewController.h */,
+				E6DA65722193E71200BF3201 /* DrawViewController.m */,
+				E6DACA372388AC89006D2EDA /* DrawLineCustomViewController.h */,
+				E6DACA382388AC89006D2EDA /* DrawLineCustomViewController.m */,
+				E60BEA962192C3500014BF2D /* PopTestViewController.h */,
+				E60BEA972192C3500014BF2D /* PopTestViewController.m */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
+		E674746F238BC9B300BD4DC8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E626FFD7238BDAC1007200E4 /* Draw */,
+				E61A04B52192B627008D35F1 /* ViewController.h */,
+				E61A04B62192B627008D35F1 /* ViewController.m */,
+				E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */,
+				E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,7 +245,9 @@
 				E60BEA982192C3500014BF2D /* PopTestViewController.m in Sources */,
 				E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */,
 				E61A04B72192B627008D35F1 /* ViewController.m in Sources */,
+				E6747472238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m in Sources */,
 				E61A04C22192B62A008D35F1 /* main.m in Sources */,
+				E6DACA392388AC89006D2EDA /* DrawLineCustomViewController.m in Sources */,
 				E61A04B42192B627008D35F1 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

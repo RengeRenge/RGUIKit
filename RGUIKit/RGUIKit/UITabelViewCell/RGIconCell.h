@@ -6,10 +6,10 @@
 //  Copyright © 2016年 juphoon. All rights reserved.
 //
 
-#import "RGTableViewCell.h"
+#import "RGCornerTableViewCell.h"
 #import "UIImage+RGIconCell.h"
 
-@interface RGIconCell <__covariant RGIconCellCustomIcon> : RGTableViewCell
+@interface RGIconCell <__covariant RGIconCellCustomIcon> : RGCornerTableViewCell
 
 /// config customIcon
 - (void)configCustomIcon:(RGIconCellCustomIcon _Nullable (^_Nullable)(RGIconCellCustomIcon _Nullable icon))config;

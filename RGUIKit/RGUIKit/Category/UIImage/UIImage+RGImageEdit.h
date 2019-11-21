@@ -8,34 +8,41 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (RGImageEdit)
-
+@interface UIView (RGImageEdit)
 
 /**
  对 view 进行截图
  */
-+ (UIImage *)rg_convertViewToImage:(UIView *)view;
+- (UIImage *)rg_convertToImage;
 
 /**
  对 view 的指定区域 进行截图
  
  @param rect 截图区域, CGRectZero 为全部截图
  */
-+ (UIImage *)rg_convertViewToImage:(UIView *)view rect:(CGRect)rect;
+- (UIImage *)rg_convertToImageInRect:(CGRect)rect;
 
 /**
  对 view 进行截图
  
  @param size 目标图片大小 (会形变)
  */
-+ (UIImage *)rg_convertViewToImage:(UIView *)view size:(CGSize)size;
+- (UIImage *)rg_convertToImageWithSize:(CGSize)size;
+
+@end
+
+@interface UIScrollView (RGImageEdit)
 
 /**
  对 scrollView 进行截图
  
  @param rect 截图区域, CGRectZero 为全部截图
  */
-+ (UIImage *)rg_captureScrollView:(UIScrollView *)scrollView rect:(CGRect)rect;
+- (UIImage *)rg_captureInRect:(CGRect)rect;
+
+@end
+
+@interface UIImage (RGImageEdit)
 
 /**
  在图片中截取某一区域
@@ -72,6 +79,17 @@
  在图片上覆盖图片
  */
 - (UIImage *)rg_coveredWithImage:(UIImage *)image rect:(CGRect)rect;
+
+
+/// 在图片上覆盖文字
+/// @param text 文字
+/// @param attributes 文字属性
+/// @param boundingSize 文字约束的大小
+/// @param rect 自定义文字的 frame
+- (UIImage *)rg_coveredWithText:(NSString *)text
+                     attributes:(NSDictionary *)attributes
+                   boundingSize:(CGSize)boundingSize
+                           rect:(CGRect(NS_NOESCAPE^)(CGSize textSize, CGSize imageSize))rect;
 
 /**
  把图片的方向调正

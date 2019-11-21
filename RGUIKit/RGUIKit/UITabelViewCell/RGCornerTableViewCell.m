@@ -10,7 +10,9 @@
 
 NSString * const RGCornerTableViewCellID = @"RGCornerTableViewCellID";
 
-@interface RGCornerTableViewCell ()
+@interface RGCornerTableViewCell () {
+    CAShapeLayer *shape;
+}
 
 @end
 
@@ -26,24 +28,26 @@ NSString * const RGCornerTableViewCellID = @"RGCornerTableViewCellID";
     [self setNeedsLayout];
 }
 
-- (void)setVerticalOffSet:(CGFloat)verticalOffSet {
-    _verticalOffSet = verticalOffSet;
-    [self setNeedsLayout];
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    CGRect bounds = self.contentView.bounds;
-    bounds.origin.y = -_verticalOffSet;
-    self.contentView.bounds = bounds;
-    
-    UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:CGRectIntegral(self.bounds) byRoundingCorners:_corner cornerRadii:CGSizeMake(_cornerRadius, _cornerRadius)];
-    CAShapeLayer *shape = [[CAShapeLayer alloc] init];
-    shape.strokeColor = [UIColor whiteColor].CGColor;
-    [shape setPath:rounded.CGPath];
-    self.layer.mask = shape;
-    
+    UIRectCorner corner = self.corner;
+    if ((corner & UIRectCornerTopLeft ||
+         corner & UIRectCornerTopRight ||
+         corner & UIRectCornerBottomLeft ||
+         corner & UIRectCornerBottomRight ||
+         corner & UIRectCornerAllCorners) &&
+        self.cornerRadius > 0) {
+        if (!shape) {
+            shape =  [[CAShapeLayer alloc] init];
+            shape.strokeColor = [UIColor whiteColor].CGColor;
+        }
+        
+        UIBezierPath *rounded = [UIBezierPath bezierPathWithRoundedRect:CGRectIntegral(self.bounds) byRoundingCorners:_corner cornerRadii:CGSizeMake(_cornerRadius, _cornerRadius)];
+        shape.path = rounded.CGPath;
+        self.layer.mask = shape;
+    } else {
+        self.layer.mask = nil;
+    }
     [super subViewsDidLayoutForClass:RGCornerTableViewCell.class];
 }
 

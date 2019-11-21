@@ -59,5 +59,6 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 
 #import <RGUIKit/RGTimePicker.h>
 #import <RGUIKit/RGBluuur.h>
+#import <RGUIKit/RGToastView.h>
 
 #endif /* Header_h */

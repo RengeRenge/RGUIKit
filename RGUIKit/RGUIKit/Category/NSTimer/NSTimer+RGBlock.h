@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSTimer (Block)
 
 @property (nonatomic, assign) NSInteger rg_tag;
+@property (nonatomic, copy) NSString *rg_identifier;
 
 @property (nonatomic, copy) void(^block)(NSTimer *timer);
 
@@ -21,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 block:(void(^)(NSTimer *timer))block;
 
 + (NSTimer *)rg_timerWithTag:(NSInteger)tag;
++ (NSTimer *)rg_timerWithIdentifier:(NSString *)identifier;
 
 @end
 

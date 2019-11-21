@@ -37,7 +37,7 @@ NSString * const RGEdgeTableViewCellID = @"RGEdgeTableViewCellID";
         [self addSubview:self.customSeparatorView];
         CGFloat rgb = 217.f/255.f;
         _hightedColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1.f];
-        _corner = UIRectCornerAllCorners;
+        _contentCorner = UIRectCornerAllCorners;
         self.accessoryType = self.accessoryType;
     }
     return self;
@@ -122,14 +122,14 @@ NSString * const RGEdgeTableViewCellID = @"RGEdgeTableViewCellID";
     }
 }
 
-- (void)setCorner:(UIRectCorner)corner {
-    _corner = corner;
+- (void)setContentCorner:(UIRectCorner)contentCorner {
+    _contentCorner = contentCorner;
     _roundedChanged = YES;
     [self setNeedsLayout];
 }
 
-- (void)setCornerRadius:(CGFloat)cornerRadius {
-    _cornerRadius = cornerRadius;
+- (void)setContentCornerRadius:(CGFloat)contentCornerRadius {
+    _contentCornerRadius = contentCornerRadius;
     _roundedChanged = YES;
     [self setNeedsLayout];
 }
@@ -166,13 +166,13 @@ NSString * const RGEdgeTableViewCellID = @"RGEdgeTableViewCellID";
     self.contentView.bounds = bounds;
     
     _roundedLayer = nil;
-    CGPathRef roundedPathRef = [UIBezierPath bezierPathWithRoundedRect:bounds byRoundingCorners:_corner cornerRadii:CGSizeMake(_cornerRadius, _cornerRadius)].CGPath;
+    CGPathRef roundedPathRef = [UIBezierPath bezierPathWithRoundedRect:bounds byRoundingCorners:_contentCorner cornerRadii:CGSizeMake(_contentCornerRadius, _contentCornerRadius)].CGPath;
     [self.roundedLayer setPath:roundedPathRef];
     self.contentView.layer.mask = self.roundedLayer;
     
     if (_roundedChanged || !CGRectEqualToRect(_showdowLayer.frame, self.contentView.frame)) {
         _showdowLayer.frame = self.contentView.frame;
-        self.showdowLayer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.showdowLayer.bounds cornerRadius:self.cornerRadius].CGPath;
+        self.showdowLayer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.showdowLayer.bounds cornerRadius:self.contentCornerRadius].CGPath;
     }
     
     _roundedChanged = NO;

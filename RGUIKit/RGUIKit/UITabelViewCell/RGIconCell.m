@@ -18,15 +18,17 @@
 
 @interface RGIconCell () {
     UIImageView *_fakeImageView;
-    
-    CAShapeLayer *_cornerLayer;
     UIRectCorner _corner;
     CGFloat _cornerRadius;
 }
 
+@property (nonatomic, strong, readonly) CAShapeLayer *cornerLayer;
+
 @end
 
 @implementation RGIconCell
+
+@synthesize cornerLayer = _cornerLayer;
 
 + (RGIconCell *)getCell:(UITableView *)tableView reuseIdentifier:(NSString *)reuseIdentifier {
     RGIconCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
@@ -48,6 +50,15 @@
         [self resetConfig];
     }
     return self;
+}
+
+- (CAShapeLayer *)cornerLayer {
+    if (!_cornerLayer) {
+        _cornerLayer = [CAShapeLayer new];
+        _cornerLayer.rasterizationScale = UIScreen.mainScreen.scale;
+        _cornerLayer.shouldRasterize = YES;
+    }
+    return _cornerLayer;
 }
 
 - (void)setCustomIcon:(UIView *)customIcon {
@@ -83,11 +94,7 @@
         corner & UIRectCornerAllCorners) &&
         cornerRadius > 0) {
         
-        if (!_cornerLayer) {
-            _cornerLayer = [CAShapeLayer new];
-            _cornerLayer.rasterizationScale = UIScreen.mainScreen.scale;
-            _cornerLayer.shouldRasterize = YES;
-        }
+        [self cornerLayer];
         
         if (corner != _corner || fabs(_cornerRadius - cornerRadius) > 1e-7) {
             
@@ -165,6 +172,7 @@
     if (!_adjustIconBackgroundWhenHighlighted) {
         self.imageView.backgroundColor = _iconBackgroundColor;
     }
+    [super subViewsDidLayoutForClass:RGIconCell.class];
 }
 
 - (void)updateSubViewFrame {
