@@ -30,6 +30,7 @@
 @interface UIView (RGGradientParam)
 
 @property (nonatomic, strong) RGGradientObsever *rg_gradientObsever;
+@property (nonatomic, strong) NSNumber *rg_gradientId;
 
 @end
 
@@ -41,6 +42,14 @@
 
 - (RGGradientObsever *)rg_gradientObsever {
     return [self rg_valueforConstKey:"_rg_gradientObsever"];
+}
+
+- (void)setRg_gradientId:(NSNumber *)rg_gradientId {
+    [self rg_setValue:rg_gradientId forConstKey:"_rg_gradientId" retain:YES];
+}
+
+- (NSNumber *)rg_gradientId {
+    return [self rg_valueforConstKey:"_rg_gradientId"];
 }
 
 @end
@@ -356,11 +365,6 @@ static RGGradientObsever *_rg_gradient_obsever;
     
     if (kDrawByContext) {
         layer.frame = self.layer.bounds;
-
-        UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, [UIScreen mainScreen].scale);
-        
-        CGContextRef gc = UIGraphicsGetCurrentContext();
-        
         NSUInteger count = locations.count;
         CGFloat *los = nil;
         if (count) {
@@ -370,18 +374,34 @@ static RGGradientObsever *_rg_gradient_obsever;
                 los[i] = value;
             }
         }
-        [dPath rg_drawGradient:gc colors:colors locations:los drawType:drawType];
-        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        if (los) {
-            free(los);
-        }
-        layer.contents = (__bridge id _Nullable)(img.CGImage);
+        
+        NSNumber *gradientId = @(arc4random());
+        self.rg_gradientId = gradientId;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            UIImage *img = nil;
+            UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, [UIScreen mainScreen].scale);
+            {
+                CGContextRef gc = UIGraphicsGetCurrentContext();
+                [dPath rg_drawGradient:gc colors:colors locations:los drawType:drawType];
+                img = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+            }
+            if (los) {
+                free(los);
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.rg_gradientId != gradientId) {
+                    return;
+                }
+                layer.contents = (__bridge id _Nullable)(img.CGImage);
+            });
+        });
         return;
     }
     
-    CGRect bounds = path.bounds;
-    layer.frame = bounds;
+//    CGRect bounds = path.bounds;
+//    layer.frame = bounds;
     
 //    CGFloat side = MAX(bounds.size.height, bounds.size.width);
 //    CGRect frame = CGRectMake
@@ -391,14 +411,14 @@ static RGGradientObsever *_rg_gradient_obsever;
 //     side);
 //    layer.frame = frame;
     
-    bounds.origin = CGPointZero;
-    [self __rg_setBackgroundGradientColors:colors locations:nil drawType:drawType bounds:bounds];
+//    bounds.origin = CGPointZero;
+//    [self __rg_setBackgroundGradientColors:colors locations:nil drawType:drawType bounds:bounds];
     
 //    CGAffineTransform transfrom = CGAffineTransformMakeTranslation(-frame.origin.x, -frame.origin.y);
 //    [path applyTransform:transfrom];
 //    self.shapeGradientLayer.path = CGPathCreateCopyByTransformingPath(path.CGPath, &transfrom);;
-    self.shapeGradientLayer.path = dPath.CGPath;
-    self.layer.mask = self.shapeGradientLayer;
+//    self.shapeGradientLayer.path = dPath.CGPath;
+//    self.layer.mask = self.shapeGradientLayer;
 //    self.gradientLayer.mask = self.shapeGradientLayer;
 }
 
@@ -425,6 +445,9 @@ static RGGradientObsever *_rg_gradient_obsever;
         }
     }
     
+    NSNumber *gradientId = @(arc4random());
+    self.rg_gradientId = gradientId;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         UIImage *img = nil;
         UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, [UIScreen mainScreen].scale);
@@ -439,6 +462,9 @@ static RGGradientObsever *_rg_gradient_obsever;
             free(los);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.rg_gradientId != gradientId) {
+                return;
+            }
             layer.contents = (__bridge id _Nullable)(img.CGImage);
         });
     });

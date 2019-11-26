@@ -52,7 +52,7 @@ typedef enum : NSUInteger {
     cell.backgroundColor = UIColor.clearColor;
     switch (indexPath.row) {
         case DrawTypeBersize:
-            cell.textLabel.text = @"DrawAndLayout";
+            cell.textLabel.text = @"Draw Gradient";
             break;
         case DrawTypeImageEdit:
             cell.textLabel.text = @"ImageEdit";

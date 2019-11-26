@@ -95,22 +95,23 @@
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     style.alignment = NSTextAlignmentCenter;
     NSDictionary *dic = @{
-        NSFontAttributeName:[UIFont systemFontOfSize:12],
-        NSForegroundColorAttributeName:[UIColor blackColor]
+        NSFontAttributeName:[UIFont systemFontOfSize:10],
+        NSForegroundColorAttributeName:[UIColor blackColor],
+        NSParagraphStyleAttributeName: style,
     };
     NSString *text = nil;
     switch (type) {
         case RGDrawTypeTopToBottom:
-            text = @"UTD";
+            text = @"TopToBottom";
             break;
         case RGDrawTypeLeftToRight:
-            text = @"LTR";
+            text = @"LeftToRight";
             break;
         case RGDrawTypeDiagonalTopRightToBottomLeft:
-            text = @"Diagonal URTDL";
+            text = @"Diagonal\nTopRightToBottomLeft";
             break;
         case RGDrawTypeDiagonalTopLeftToBottomRight:
-            text = @"Diagonal ULTDR";
+            text = @"Diagonal\nTopLeftToBottomRight";
             break;
         case RGDrawTypeCircleFill:
             text = @"CircleFill";
@@ -121,7 +122,7 @@
         default:
             break;
     }
-    CGSize size = [text boundingRectWithSize:bounds.size options:NSStringDrawingUsesFontLeading attributes:dic context:nil].size;
+    CGSize size = [text boundingRectWithSize:bounds.size options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     bounds.origin = CGPointMake((bounds.size.width - size.width)/2, (bounds.size.height - size.height)/2);
     bounds.size = size;
     

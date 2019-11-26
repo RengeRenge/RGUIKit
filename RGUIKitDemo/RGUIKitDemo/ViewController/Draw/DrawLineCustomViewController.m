@@ -42,7 +42,7 @@
         UIColor.whiteColor,
         UIColor.yellowColor
     ];
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.rg_safeAreaBounds];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.rg_safeAreaBounds cornerRadius:100];
     [self.view rg_setBackgroundGradientColors:colors locations:locations path:path drawRad:_silder.value/180*M_PI];
     
     CGRect frame = self.rg_safeAreaBottomBounds;
