@@ -37,6 +37,8 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIViewController+RGPresent.h>
 #import <RGUIKit/UIViewController+RGSafeArea.h>
 
+#import "UIAlertController+Chainable.h"
+
 #import <RGUIKit/UIView+RGParentVC.h>
 #import <RGUIKit/UIView+RGLayoutHelp.h>
 #import <RGUIKit/UIView+RGPanGestureHelp.h>
