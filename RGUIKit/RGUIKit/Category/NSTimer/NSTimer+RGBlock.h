@@ -21,6 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
                               repeats:(BOOL)repeat
                                 block:(void(^)(NSTimer *timer))block;
 
++ (NSTimer *)rg_timerWithTimeInterval:(NSTimeInterval)interval
+                              repeats:(BOOL)repeat
+                                 mode:(NSRunLoopMode)mode
+                                block:(void(^)(NSTimer *timer))block;
+
 + (NSTimer *)rg_timerWithTag:(NSInteger)tag;
 + (NSTimer *)rg_timerWithIdentifier:(NSString *)identifier;
 

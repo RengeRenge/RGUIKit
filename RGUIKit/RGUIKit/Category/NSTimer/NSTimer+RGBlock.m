@@ -26,7 +26,7 @@ static NSPointerArray *rg_block_timers = nil;
 }
 
 - (void)setRg_tag:(NSInteger)rg_tag {
-    objc_setAssociatedObject(self, rg_timer_tag_key, @(rg_tag), OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, rg_timer_tag_key, @(rg_tag), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSInteger)rg_tag {
@@ -42,10 +42,14 @@ static NSPointerArray *rg_block_timers = nil;
 }
 
 + (NSTimer *)rg_timerWithTimeInterval:(NSTimeInterval)interval repeats:(BOOL)repeat block:(void (^)(NSTimer * _Nonnull))block {
-    NSTimer *timer = [self scheduledTimerWithTimeInterval:interval target:self selector:@selector(support_blockInvoke:) userInfo:nil repeats:repeat];
+    return [self rg_timerWithTimeInterval:interval repeats:repeat mode:NSRunLoopCommonModes block:block];
+}
+
++ (NSTimer *)rg_timerWithTimeInterval:(NSTimeInterval)interval repeats:(BOOL)repeat mode:(nonnull NSRunLoopMode)mode block:(nonnull void (^)(NSTimer * _Nonnull))block {
+    NSTimer *timer = [self timerWithTimeInterval:interval target:self selector:@selector(support_blockInvoke:) userInfo:nil repeats:repeat];
     timer.block = block;
     
-    void(^arrayConfig)(void) = ^{
+    void(^arrayConfig)(void) = ^(void){
         if (!rg_block_timers) {
             rg_block_timers = [NSPointerArray weakObjectsPointerArray];
         }
@@ -59,6 +63,7 @@ static NSPointerArray *rg_block_timers = nil;
             }
         }
         [rg_block_timers addPointer:(__bridge void * _Nullable)(timer)];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:mode];
     };
     
     if ([NSThread isMainThread]) {
@@ -67,7 +72,6 @@ static NSPointerArray *rg_block_timers = nil;
         dispatch_sync(dispatch_get_main_queue(), ^{
             arrayConfig();
         });
-        [[NSRunLoop currentRunLoop] run];
     }
     return timer;
 }
