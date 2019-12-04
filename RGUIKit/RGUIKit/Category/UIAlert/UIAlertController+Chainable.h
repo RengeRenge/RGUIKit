@@ -17,8 +17,7 @@ typedef UIAlertController *_Nonnull(^RGAlertTextFieldParam)(void (^_Nonnull hand
 
 @interface UIAlertController(Chainable)
 
-+ (RGAlertControlParam)rg_newAlert;
-
+@property (class, nonatomic, readonly) RGAlertControlParam rg_newAlert;
 @property (nonatomic, readonly) RGAlertActionParam rg_addAction;
 @property (nonatomic, readonly) RGAlertTextFieldParam rg_addTextField;
 
