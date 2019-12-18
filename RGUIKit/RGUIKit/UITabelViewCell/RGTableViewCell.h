@@ -18,6 +18,7 @@ extern NSString * const RGCellIDValueDefault; // UITableViewCellStyleDefault
 @interface RGTableViewCell : UITableViewCell
 
 @property (nonatomic, assign) BOOL applyThemeColor;
+@property (nonatomic, assign, readonly) UITableViewCellStyle cellStyle;
 
 @property (nonatomic, strong) UIColor *detailTextColor UI_APPEARANCE_SELECTOR;
 

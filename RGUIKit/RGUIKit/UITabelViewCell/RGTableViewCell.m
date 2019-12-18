@@ -39,6 +39,7 @@ static UIColor * kRGTableViewCellThemeColor;
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self configView];
     }
+    _cellStyle = style;
     return self;
 }
 
