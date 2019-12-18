@@ -1,5 +1,5 @@
 //
-//  UIAlertController+RGConfig.m
+//  UIAlertController+Chainable.m
 //  RGUIKit
 //
 //  Created by renge on 2019/11/30.
@@ -27,6 +27,28 @@
 - (RGAlertTextFieldParam)rg_addTextField {
     RGAlertTextFieldParam param = ^UIAlertController *(void (^_Nullable handler)(UITextField *textField)) {
         [self addTextFieldWithConfigurationHandler:handler];
+        return self;
+    };
+    return param;
+}
+
+- (RGAlertActionParams)rg_addActionS {
+    __weak typeof(self) wSelf = self;
+    RGAlertActionParams param = ^UIAlertController *(NSString *title, UIAlertActionStyle style, void (^_Nullable handler)(UIAlertAction *, UIAlertController *)) {
+        [self addAction:[UIAlertAction actionWithTitle:title style:style handler:^(UIAlertAction * _Nonnull action) {
+            handler(action, wSelf);
+        }]];
+        return self;
+    };
+    return param;
+}
+
+- (RGAlertTextFieldParams)rg_addTextFieldS {
+    __weak typeof(self) wSelf = self;
+    RGAlertTextFieldParams param = ^UIAlertController *(void (^_Nullable handler)(UITextField *textField, UIAlertController *alert)) {
+        [self addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            handler(textField, wSelf);
+        }];
         return self;
     };
     return param;
