@@ -38,21 +38,22 @@ static UIColor * kRGTableViewCellThemeColor;
     }
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self configView];
+        _cellStyle = style;
     }
-    _cellStyle = style;
     return self;
 }
 
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
          [self configView];
+        _cellStyle = style;
     }
     return self;
 }
 
 + (instancetype)dequeueCellWithIdentifier:(NSString *)reuseIdentifier style:(UITableViewCellStyle)style tableView:(UITableView *)tableView {
-    id cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell) {
+    RGTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell || ![cell isKindOfClass:RGTableViewCell.class] || cell.cellStyle != style) {
         return [[self alloc] initWithCustomStyle:style reuseIdentifier:reuseIdentifier];
     }
     return cell;
