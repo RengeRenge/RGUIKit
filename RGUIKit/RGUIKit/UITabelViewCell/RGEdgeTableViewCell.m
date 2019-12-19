@@ -228,6 +228,8 @@ NSString * const RGEdgeTableViewCellID = @"RGEdgeTableViewCellID";
     
     CGRect frame = CGRectMake(originX, CGRectGetMaxY(self.contentView.frame) - 0.5f, lineWidth, 0.5f);
     switch (_customSeparatorStyle) {
+        case RGEdgeCellSeparatorStyleNone:
+            frame = CGRectZero;
         case RGEdgeCellSeparatorStyleDefault:
             break;
         case RGEdgeCellSeparatorStyleCenter:
@@ -241,7 +243,8 @@ NSString * const RGEdgeTableViewCellID = @"RGEdgeTableViewCellID";
     }
     frame = UIEdgeInsetsInsetRect(frame, _customSeparatorEdge);
     _customSeparatorView.frame = frame;
-    
+    _customSeparatorView.hidden = RGEdgeCellSeparatorStyleNone == _customSeparatorStyle;
+
     if (!self.rg_layoutLeftToRight) {
         [_customSeparatorView rg_setFrameToFitRTL];
     }

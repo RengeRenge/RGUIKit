@@ -11,6 +11,7 @@
 extern NSString * const RGEdgeTableViewCellID;
 
 typedef enum : NSUInteger {
+    RGEdgeCellSeparatorStyleNone,
     RGEdgeCellSeparatorStyleDefault,
     RGEdgeCellSeparatorStyleCenter,
     RGEdgeCellSeparatorStyleFull,
