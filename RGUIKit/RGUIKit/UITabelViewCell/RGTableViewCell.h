@@ -18,15 +18,18 @@ extern NSString * const RGCellIDValueDefault; // UITableViewCellStyleDefault
 @interface RGTableViewCell : UITableViewCell
 
 @property (nonatomic, assign) BOOL applyThemeColor;
+/// 按下时的背景颜色    applyThemeColor 为 YES 的时候无效，优先使用主题色
+@property (nonatomic, strong) UIColor *selectedBackgroundColor;
+
 @property (nonatomic, assign, readonly) UITableViewCellStyle cellStyle;
 
 @property (nonatomic, strong) UIColor *detailTextColor UI_APPEARANCE_SELECTOR;
 
-@property (nonatomic, copy) void(^selectedBlock)(RGTableViewCell *cell, BOOL selected, BOOL animated);
-@property (nonatomic, copy) void(^highlightedBlock)(RGTableViewCell *cell, BOOL highlighted, BOOL animated);
+@property (nonatomic, copy) void(^selectedBlock)(__kindof RGTableViewCell *cell, BOOL selected, BOOL animated);
+@property (nonatomic, copy) void(^highlightedBlock)(__kindof RGTableViewCell *cell, BOOL highlighted, BOOL animated);
 
 /// 继承 RGTableViewCell 的类如果重写了 layoutSubviews 需要在最后调用一下 subViewsDidLayoutForClass, 以保证 layoutSubviewsBlock 能在正确的时机回调
-@property (nonatomic, copy) void(^layoutSubviewsBlock)(RGTableViewCell *cell, CGRect bounds);
+@property (nonatomic, copy) void(^layoutSubviewsBlock)(__kindof RGTableViewCell *cell, CGRect bounds);
 
 
 - (void)subViewsDidLayoutForClass:(Class)subClass;

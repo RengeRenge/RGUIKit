@@ -111,9 +111,14 @@ static UIColor * kRGTableViewCellThemeColor;
     [self themeColorChanged];
 }
 
+- (void)setSelectedBackgroundColor:(UIColor *)selectedBackgroundColor {
+    _selectedBackgroundColor = selectedBackgroundColor;
+    [self themeColorChanged];
+}
+
 - (void)themeColorChanged {
     
-    if (!self.applyThemeColor) {
+    if (!self.applyThemeColor && !_selectedBackgroundColor) {
         return;
     }
     
@@ -121,7 +126,14 @@ static UIColor * kRGTableViewCellThemeColor;
     
     self.tintColor = kRGTableViewCellThemeColor;
     UIView *backgroundView = self.selectedBackgroundView;
-    backgroundView.backgroundColor = [kRGTableViewCellThemeColor colorWithAlphaComponent:0.3f];
+    
+    // 优先使用主题色
+    if (self.applyThemeColor) {
+        backgroundView.backgroundColor = [kRGTableViewCellThemeColor colorWithAlphaComponent:0.3f];
+    } else {
+        backgroundView.backgroundColor = _selectedBackgroundColor;
+    }
+    
     [self setSelectedBackgroundView:backgroundView];
     self.lastThemeColor = kRGTableViewCellThemeColor;
 }
