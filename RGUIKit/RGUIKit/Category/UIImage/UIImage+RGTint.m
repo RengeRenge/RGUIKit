@@ -37,23 +37,46 @@
     }
     
     UIGraphicsBeginImageContextWithOptions(imageSize, NO, [[UIScreen mainScreen] scale]);
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGFloat width = imageSize.width;
-    CGFloat height = imageSize.height;
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, imageSize.width, imageSize.height) cornerRadius:radius];
+    [path closePath];
+    
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGContextAddPath(context, path.CGPath);
+    CGContextDrawPath(context,kCGPathFill);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
++ (UIImage *)rg_circleImageWithImageSize:(CGSize)imageSize
+                              circleRect:(CGRect)circleRect
+                                  radius:(CGFloat)radius
+                               fillColor:(UIColor *)fillColor
+                             borderColor:(UIColor *)borderColor
+                             borderWidth:(CGFloat)borderWidth {
+    
+    if (imageSize.width == 0 || imageSize.height == 0 || radius == 0) {
+        return nil;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, [[UIScreen mainScreen] scale]);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextMoveToPoint(context, radius, 0);
-    CGContextAddLineToPoint(context, width - radius,0);
-    CGContextAddArc(context, width - radius, radius, radius, -0.5 *M_PI,0.0,0);
-    CGContextAddLineToPoint(context, width, height - radius);
-    CGContextAddArc(context, width - radius, height - radius, radius,0.0,0.5 *M_PI,0);
-    CGContextAddLineToPoint(context, radius, height);
-    CGContextAddArc(context, radius, height - radius, radius,0.5 *M_PI,M_PI,0);
-    CGContextAddLineToPoint(context, 0, radius);
-    CGContextAddArc(context, radius, radius, radius,M_PI,1.5 *M_PI,0);
-    CGContextClosePath(context);
-    CGContextSetFillColorWithColor(context, color.CGColor);
-    CGContextDrawPath(context,kCGPathFill);
+
+    CGContextSetStrokeColorWithColor(context, borderColor.CGColor);
+    CGContextSetLineWidth(context, borderWidth);
+    CGContextSetFillColorWithColor(context, fillColor.CGColor);
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:circleRect cornerRadius:radius];
+    [path closePath];
+    
+    CGContextAddPath(context, path.CGPath);
+    CGContextDrawPath(context, kCGPathFillStroke);
+    
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
