@@ -29,8 +29,13 @@ typedef UIAlertController *_Nonnull(^RGAlertTextFieldParams)(void (^_Nonnull han
 @property (nonatomic, readonly) RGAlertActionParams rg_addActionS;
 @property (nonatomic, readonly) RGAlertTextFieldParams rg_addTextFieldS;
 
+/// must set for iPad when UIAlertControllerStyle is UIAlertControllerStyleActionSheet
 - (UIAlertController *(^)(UIView * _Nullable sourceView))rg_sourceView;
+
+/// must set for iPad when UIAlertControllerStyle is UIAlertControllerStyleActionSheet
 - (UIAlertController *(^)(CGRect sourceRect))rg_sourceRect;
+
+/// be presented with viewController
 - (void(^)(UIViewController *viewController))rg_presentedBy;
 
 @end

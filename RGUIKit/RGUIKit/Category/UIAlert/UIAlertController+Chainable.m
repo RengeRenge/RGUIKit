@@ -36,7 +36,9 @@
     __weak typeof(self) wSelf = self;
     RGAlertActionParams param = ^UIAlertController *(NSString *title, UIAlertActionStyle style, void (^_Nullable handler)(UIAlertAction *, UIAlertController *)) {
         [self addAction:[UIAlertAction actionWithTitle:title style:style handler:^(UIAlertAction * _Nonnull action) {
-            handler(action, wSelf);
+            if (handler) {
+                handler(action, wSelf);
+            }
         }]];
         return self;
     };
@@ -47,7 +49,9 @@
     __weak typeof(self) wSelf = self;
     RGAlertTextFieldParams param = ^UIAlertController *(void (^_Nullable handler)(UITextField *textField, UIAlertController *alert)) {
         [self addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            handler(textField, wSelf);
+            if (handler) {
+                handler(textField, wSelf);
+            }
         }];
         return self;
     };
