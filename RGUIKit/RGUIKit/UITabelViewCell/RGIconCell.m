@@ -94,8 +94,6 @@
         corner & UIRectCornerAllCorners) &&
         cornerRadius > 0) {
         
-        [self cornerLayer];
-        
         if (corner != _corner || fabs(_cornerRadius - cornerRadius) > 1e-7) {
             
             _corner = corner;
@@ -138,6 +136,7 @@
     _fakeImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     self.iconSize = kDefaultIconSize;
+    [self cornerLayer];
     
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     [self setNeedsLayout];
