@@ -52,6 +52,8 @@ typedef enum : NSUInteger {
 
 @interface UIView (RGGradient)
 
+- (CALayer *)rg_gradientLayer;
+
 - (void)rg_setBackgroundGradientColors:(NSArray <id> *)colors
                              locations:(NSArray <NSNumber *> *_Nullable)locations
                               drawType:(RGDrawType)drawType;

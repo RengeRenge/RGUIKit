@@ -314,7 +314,7 @@ static RGGradientObsever *_rg_gradient_obsever;
 
 @implementation UIView (RGGradient)
 
-- (CAGradientLayer *)gradientLayer {
+- (CAGradientLayer *)rg_gradientLayer {
     CAGradientLayer *layer = [self rg_valueforConstKey:"_rg_gradientLayer"];
     if (!layer) {
         layer = [[CAGradientLayer alloc] init];
@@ -361,7 +361,7 @@ static RGGradientObsever *_rg_gradient_obsever;
     }
     [RGGradientObsever addObserverWithView:self colors:colors locations:locations path:path drawType:drawType drawRad:0 isDrawRad:NO];
     
-    CALayer *layer = self.gradientLayer;
+    CALayer *layer = self.rg_gradientLayer;
     
     if (kDrawByContext) {
         layer.frame = self.layer.bounds;
@@ -419,14 +419,14 @@ static RGGradientObsever *_rg_gradient_obsever;
 //    self.shapeGradientLayer.path = CGPathCreateCopyByTransformingPath(path.CGPath, &transfrom);;
 //    self.shapeGradientLayer.path = dPath.CGPath;
 //    self.layer.mask = self.shapeGradientLayer;
-//    self.gradientLayer.mask = self.shapeGradientLayer;
+//    self.rg_gradientLayer.mask = self.shapeGradientLayer;
 }
 
 - (void)rg_setBackgroundGradientColors:(NSArray<id> *)colors
                              locations:(NSArray <NSNumber *> *)locations
                                   path:(UIBezierPath *)path
                                drawRad:(CGFloat)rad {
-    CALayer *layer = self.gradientLayer;
+    CALayer *layer = self.rg_gradientLayer;
     layer.frame = self.layer.bounds;
     
     UIBezierPath *dPath = path;
@@ -486,28 +486,28 @@ static RGGradientObsever *_rg_gradient_obsever;
 
 
 /// unused
-- (void)__rg_setBackgroundGradientColors:(NSArray <id> *)colors
-                               locations:(NSArray<NSNumber *> *)locations
-                                drawType:(RGDrawType)drawType
-                                  bounds:(CGRect)bounds {
-    [NSObject rg_gradientParamWithBounds:bounds drawType:drawType param:^(CGPoint sPonit, CGPoint ePonit, BOOL circle, CGFloat radius) {
-
-        CAGradientLayer *layer = self.gradientLayer;
-        layer.colors = colors.rg_CGColors;
-        layer.locations = locations;
-        
-        CGSize layerSize = layer.frame.size;
-
-        sPonit.x = (sPonit.x)/layerSize.width;
-        sPonit.y = (sPonit.y)/layerSize.height;
-
-        ePonit.x = (ePonit.x)/layerSize.width;
-        ePonit.y = (ePonit.y)/layerSize.height;
-
-        layer.startPoint = sPonit;
-        layer.endPoint = ePonit;
-        layer.type = circle ? kCAGradientLayerRadial : kCAGradientLayerAxial;
-    }];
-}
+//- (void)__rg_setBackgroundGradientColors:(NSArray <id> *)colors
+//                               locations:(NSArray<NSNumber *> *)locations
+//                                drawType:(RGDrawType)drawType
+//                                  bounds:(CGRect)bounds {
+//    [NSObject rg_gradientParamWithBounds:bounds drawType:drawType param:^(CGPoint sPonit, CGPoint ePonit, BOOL circle, CGFloat radius) {
+//
+//        CAGradientLayer *layer = self.rg_gradientLayer;
+//        layer.colors = colors.rg_CGColors;
+//        layer.locations = locations;
+//
+//        CGSize layerSize = layer.frame.size;
+//
+//        sPonit.x = (sPonit.x)/layerSize.width;
+//        sPonit.y = (sPonit.y)/layerSize.height;
+//
+//        ePonit.x = (ePonit.x)/layerSize.width;
+//        ePonit.y = (ePonit.y)/layerSize.height;
+//
+//        layer.startPoint = sPonit;
+//        layer.endPoint = ePonit;
+//        layer.type = circle ? kCAGradientLayerRadial : kCAGradientLayerAxial;
+//    }];
+//}
 
 @end
