@@ -10,6 +10,13 @@
 
 extern NSString * const RGLabelTableViewCellID;
 
+typedef enum : NSUInteger {
+    RGLabelTableViewCellLayoutStyleNone,
+    RGLabelTableViewCellLayoutStyleCenterX,
+    RGLabelTableViewCellLayoutStyleCenterY,
+    RGLabelTableViewCellLayoutStyleCenterXY,
+} RGLabelTableViewCellLayoutStyle;
+
 @interface RGLabelTableViewCell : RGTableViewCell
 
 @property (nonatomic, strong) UILabel *label;
@@ -18,7 +25,7 @@ extern NSString * const RGLabelTableViewCellID;
 @property (nonatomic, assign) UIEdgeInsets textEdge;
 
 /// label layout at center
-@property (nonatomic, assign) BOOL layoutCenter;
+@property (nonatomic, assign) RGLabelTableViewCellLayoutStyle layoutStyle;
 
 @property (nonatomic, strong) UIView *textEdgeMask;
 /// 以文字的 frame 为基准进行扩张

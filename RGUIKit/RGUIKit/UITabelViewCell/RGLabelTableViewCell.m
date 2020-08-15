@@ -19,7 +19,7 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
                 textEdge:(UIEdgeInsets)textEdge
 {
     CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - 50.f - textEdge.left - textEdge.right, CGFLOAT_MAX)
-                                     options:(NSStringDrawingOptions)(NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin)
+                                     options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesDeviceMetrics|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin)
                                   attributes:@{NSFontAttributeName : font}
                                      context:nil].size;
     
@@ -27,7 +27,7 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
 }
 
 + (CGFloat)heightForAttributeText:(NSAttributedString *)attributeText tableView:(UITableView *)tableView textEdge:(UIEdgeInsets)textEdge {
-    CGSize size = [attributeText boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - textEdge.left - textEdge.right, CGFLOAT_MAX) options:(NSStringDrawingOptions)(NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin) context:nil].size;
+    CGSize size = [attributeText boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - textEdge.left - textEdge.right, CGFLOAT_MAX) options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesDeviceMetrics|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin) context:nil].size;
     return size.height + textEdge.top + textEdge.bottom;
 }
 
@@ -36,8 +36,6 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
         _textEdgeMask = [[UIView alloc] init];
         _label = [[UILabel alloc] init];
         _label.numberOfLines = 0.f;
-        _label.textAlignment = NSTextAlignmentCenter;
-        _layoutCenter = YES;
         _maskEdge = UIEdgeInsetsZero;
         self.selectionStyle = UITableViewCellSeparatorStyleNone;
         [self.contentView addSubview:_textEdgeMask];
@@ -56,14 +54,9 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     [self setNeedsLayout];
 }
 
-- (void)setLayoutCenter:(BOOL)layoutCenter {
-    if (_layoutCenter != layoutCenter) {
-        _layoutCenter = layoutCenter;
-        if (_layoutCenter) {
-            _label.textAlignment = NSTextAlignmentCenter;
-        } else {
-            _label.textAlignment = NSTextAlignmentNatural;
-        }
+- (void)setLayoutStyle:(RGLabelTableViewCellLayoutStyle)layoutStyle {
+    if (_layoutStyle != layoutStyle) {
+        _layoutStyle = layoutStyle;
         [self setNeedsLayout];
     }
 }
@@ -91,8 +84,17 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     CGRect frame;
     frame.size = size;
     frame.origin.y = _textEdge.top;
-    if (_layoutCenter) {
-        frame.origin.x = (bounds.size.width - size.width) / 2.f;
+    if (_layoutStyle != RGLabelTableViewCellLayoutStyleNone) {
+        if (_layoutStyle == RGLabelTableViewCellLayoutStyleCenterX ||
+            _layoutStyle == RGLabelTableViewCellLayoutStyleCenterXY) {
+            frame.origin.x = (bounds.size.width - size.width) / 2.f;
+        }
+        
+        if (_layoutStyle == RGLabelTableViewCellLayoutStyleCenterY ||
+            _layoutStyle == RGLabelTableViewCellLayoutStyleCenterXY) {
+            frame.origin.y = (bounds.size.height - size.height) / 2.f;
+        }
+        
     } else {
         if (self.rg_layoutLeftToRight) {
             frame.origin.x = _textEdge.left;
