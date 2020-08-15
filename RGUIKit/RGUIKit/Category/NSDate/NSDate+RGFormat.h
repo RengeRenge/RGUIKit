@@ -25,9 +25,19 @@ typedef enum : NSUInteger {
 /**
  dateString to date
  
- @param format like yyyyMMddHH
+ @param format like yyyyMMddHHmmss
  */
-+ (NSDate *)rg_dateWithString:(NSString *)dateString dateFormat:(NSString *)format;
++ (NSDate *)rg_GMTDateWithString:(NSString *)dateString dateFormat:(NSString *)format;
+
+/// dateString to local date
+/// @param format like yyyyMMddHHmmss
++ (NSDate *)rg_localDateWithString:(NSString *)dateString dateFormat:(NSString *)format;
+
+
+/// dateString to date
+/// @param format like yyyyMMddHHmmss
+/// @param timeZone timeZone
++ (NSDate *)rg_dateWithString:(NSString *)dateString dateFormat:(NSString *)format timeZone:(NSTimeZone *)timeZone;
 
 
 /**
@@ -47,6 +57,14 @@ typedef enum : NSUInteger {
  */
 + (NSDate *)rg_today;
 
+/// get first date of month
++ (NSDate *)rg_firstDateOfMonth:(NSDate *)month;
+
+/// get first date of year
++ (NSDate *)rg_firstDateOfYear:(NSDate *)year;
+
+/// get  date at 00:00:00
+- (NSDate *)rg_today;
 
 @end
 

@@ -18,16 +18,19 @@
     return strDate;
 }
 
-+ (NSDate *)rg_dateWithString:(NSString *)dateString dateFormat:(NSString *)format {
++ (NSDate *)rg_GMTDateWithString:(NSString *)dateString dateFormat:(NSString *)format {
+    return [NSDate rg_dateWithString:dateString dateFormat:format timeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+}
+
++ (NSDate *)rg_localDateWithString:(NSString *)dateString dateFormat:(NSString *)format {
+    return [NSDate rg_dateWithString:dateString dateFormat:format timeZone:[NSTimeZone localTimeZone]];
+}
+
++ (NSDate *)rg_dateWithString:(NSString *)dateString dateFormat:(NSString *)format timeZone:(NSTimeZone *)timeZone {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:format];
-    
-    NSDate *date = [dateFormatter dateFromString:dateString];
-    
-    NSTimeZone *timeZone = [NSTimeZone systemTimeZone];
-    NSInteger interval = [timeZone secondsFromGMTForDate:date];
-    NSDate *localeDate = [date dateByAddingTimeInterval:interval];
-    return localeDate;
+    dateFormatter.dateFormat = format;
+    dateFormatter.timeZone = timeZone;
+    return [dateFormatter dateFromString:dateString];
 }
 
 + (RGWeek)rg_weekday {
@@ -51,10 +54,30 @@
 }
 
 + (NSDate *)rg_today {
+    return [[NSDate date] rg_today];
+}
+
++ (NSDate *)rg_firstDateOfMonth:(NSDate *)month {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    calendar.locale = [NSLocale currentLocale];
+    NSDateComponents *comp = [calendar components:NSCalendarUnitMonth
+                                         fromDate:month];
+    return [calendar dateFromComponents:comp];
+}
+
++ (NSDate *)rg_firstDateOfYear:(NSDate *)year {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    calendar.locale = [NSLocale currentLocale];
+    NSDateComponents *comp = [calendar components:NSCalendarUnitYear
+                                         fromDate:year];
+    return [calendar dateFromComponents:comp];
+}
+
+- (NSDate *)rg_today {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     calendar.locale = [NSLocale currentLocale];
     NSDateComponents *comp = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay
-                                         fromDate:[NSDate date]];
+                                         fromDate:self];
     return [calendar dateFromComponents:comp];
 }
 
