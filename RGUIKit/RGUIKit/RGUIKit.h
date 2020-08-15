@@ -44,6 +44,8 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIView+RGPanGestureHelp.h>
 #import <RGUIKit/UIScrollView+RGInset.h>
 
+#import <RGUIKit/NSString+Compare.h>
+
 #import <RGUIKit/UITabBar+RGBadge.h>
 
 #import <RGUIKit/UIColor+RGColorGet.h>
