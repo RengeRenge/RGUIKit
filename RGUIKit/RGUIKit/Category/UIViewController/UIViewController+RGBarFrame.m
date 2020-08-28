@@ -29,7 +29,10 @@ static BOOL rg_isFringeScreenConfirm = NO;
 
 + (void)load {
     [super load];
-    [self rg_swizzleOriginalSel:@selector(viewDidLoad) swizzledSel:@selector(rg_viewDidLoad)];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self rg_swizzleOriginalSel:@selector(viewDidLoad) swizzledSel:@selector(rg_viewDidLoad)];
+    });
 }
 
 - (void)rg_viewDidLoad {
