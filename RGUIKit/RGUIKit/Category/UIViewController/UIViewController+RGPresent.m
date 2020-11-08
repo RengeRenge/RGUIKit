@@ -72,17 +72,45 @@
     }
 }
 
-- (void)rg_dismiss
+- (BOOL)rg_dismiss
 {
 //    UIViewController *parentViewController = self.parentViewController;
 //    if (!parentViewController) {
 //        parentViewController = self.presentingViewController;
 //    }
+    if (!self.presentingViewController) {
+        return NO;
+    }
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    return YES;
 }
 
-- (void)rg_dismissAnimated:(BOOL)animated completion:(void(^)(void))completion{
+- (BOOL)rg_dismissAnimated:(BOOL)animated completion:(void(^)(void))completion {
+    if (!self.presentingViewController) {
+        if (completion) {
+            completion();
+        }
+        return NO;
+    }
     [self.presentingViewController dismissViewControllerAnimated:animated completion:completion];
+    return YES;
+}
+
+- (void)rg_dismissModalStackAnimated:(BOOL)animated completion:(void(^)(void))completion {
+    
+    UIViewController *vc = self;
+    while (vc.presentingViewController) {
+        vc = vc.presentingViewController;
+    }
+    
+    if (vc.presentedViewController) {
+        [vc dismissViewControllerAnimated:animated completion:completion];
+        return;
+    }
+    
+    if (completion) {
+        completion();
+    }
 }
 
 + (void)rg_dismissModalStackAnimated:(BOOL)animated completion:(void(^)(void))completion{

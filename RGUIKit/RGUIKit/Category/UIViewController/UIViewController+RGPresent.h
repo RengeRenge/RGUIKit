@@ -13,10 +13,14 @@
 - (void)rg_presentWithNavigationController:(void (^)(UINavigationController *navigationController))configBlock;
 - (void)rg_presentWithCompletion:(void (^)(void))completion;
 - (void)rg_presentWithoutDismissOtherWithCompletion:(void (^)(void))completion;
+
+- (BOOL)rg_dismiss;
+- (BOOL)rg_dismissAnimated:(BOOL)animated completion:(void(^)(void))completion;
+
 + (void)rg_dismissModalStackAnimated:(BOOL)animated completion:(void(^)(void))completion;
+- (void)rg_dismissModalStackAnimated:(BOOL)animated completion:(void(^)(void))completion;
+
 + (UIViewController *)rg_topViewController;
 + (UIViewController *)rg_topViewControllerForWindow:(UIWindow *)window;
-- (void)rg_dismiss;
-- (void)rg_dismissAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
 @end
