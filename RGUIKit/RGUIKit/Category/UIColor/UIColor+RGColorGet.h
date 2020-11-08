@@ -32,4 +32,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface UIColor(RGDynamic)
+
++ (UIColor *)rg_colorWithDynamicProvider:(UIColor *(^)(BOOL dark))dynamicProvider;
+
+/// white -> black
++ (UIColor *)rg_systemBackgroundColor;
+
+/// black -> white
++ (UIColor *)rg_labelColor;
+
++ (UIColor *)rg_secondaryLabelColor;
++ (UIColor *)rg_placeholderTextColor;
+
+@end
+
 NS_ASSUME_NONNULL_END

@@ -56,3 +56,57 @@
 }
 
 @end
+
+@implementation UIColor(RGDynamic)
+
++ (UIColor *)rg_colorWithDynamicProvider:(UIColor * _Nonnull (^)(BOOL))dynamicProvider {
+    if (@available(iOS 13, *)) {
+        return [self colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+            return dynamicProvider([traitCollection userInterfaceStyle] == UIUserInterfaceStyleDark);
+        }];
+    } else {
+        return dynamicProvider(NO);
+    }
+}
+
++ (UIColor *)rg_systemBackgroundColor {
+    if (@available(iOS 13, *)) {
+        return self.systemBackgroundColor;
+    } else {
+        return self.whiteColor;
+    }
+}
+
++ (UIColor *)rg_systemGroupedBackgroundColor {
+    if (@available(iOS 13, *)) {
+        return self.systemGroupedBackgroundColor;
+    } else {
+        return [self groupTableViewBackgroundColor];
+    }
+}
+
++ (UIColor *)rg_labelColor {
+    if (@available(iOS 13, *)) {
+        return self.labelColor;
+    } else {
+        return self.darkTextColor;
+    }
+}
+
++ (UIColor *)rg_placeholderTextColor {
+    if (@available(iOS 13, *)) {
+        return self.placeholderTextColor;
+    } else {
+        return [self lightGrayColor];
+    }
+}
+
++ (UIColor *)rg_secondaryLabelColor {
+    if (@available(iOS 13, *)) {
+        return self.secondaryLabelColor;
+    } else {
+        return [self systemGrayColor];
+    }
+}
+
+@end
