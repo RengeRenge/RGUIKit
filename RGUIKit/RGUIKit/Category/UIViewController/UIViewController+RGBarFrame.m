@@ -19,7 +19,7 @@ static BOOL rg_isFringeScreenConfirm = NO;
 
 @interface UIViewController (RGNavigationControllerGet)
 
-@property (nonatomic, weak) UINavigationController *rg_navigationController;
+@property (nonatomic, weak) UINavigationController *rg_bar_navigationController;
 
 @property (atomic, strong) NSPointerArray *rg_weakContainer;
 
@@ -37,7 +37,7 @@ static BOOL rg_isFringeScreenConfirm = NO;
 
 - (void)rg_viewDidLoad {
     [self rg_viewDidLoad];
-    self.rg_navigationController = self.navigationController;
+    self.rg_bar_navigationController = self.navigationController;
 }
 
 - (NSPointerArray *)rg_weakContainer {
@@ -53,16 +53,22 @@ static BOOL rg_isFringeScreenConfirm = NO;
     objc_setAssociatedObject(self, "rg_weakContainer", rg_weakContainer, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (void)setRg_navigationController:(UINavigationController *)rg_navigationController {
+- (void)setRg_bar_navigationController:(UINavigationController *)rg_bar_navigationController {
     if (self.rg_weakContainer.count) {
-        [self.rg_weakContainer replacePointerAtIndex:0 withPointer:(__bridge void * _Nullable)(rg_navigationController)];
+        [self.rg_weakContainer replacePointerAtIndex:0 withPointer:(__bridge void * _Nullable)(rg_bar_navigationController)];
     } else {
-        [self.rg_weakContainer addPointer:(__bridge void * _Nullable)(rg_navigationController)];
+        [self.rg_weakContainer addPointer:(__bridge void * _Nullable)(rg_bar_navigationController)];
     }
 }
 
-- (UINavigationController *)rg_navigationController {
-    return [self.rg_weakContainer pointerAtIndex:0];
+- (UINavigationController *)rg_bar_navigationController {
+    if (self.navigationController) {
+        return self.navigationController;
+    }
+    if (self.rg_weakContainer.count) {
+        return [self.rg_weakContainer pointerAtIndex:0];
+    }
+    return nil;
 }
 
 @end
@@ -73,7 +79,7 @@ static BOOL rg_isFringeScreenConfirm = NO;
     if ([self isKindOfClass:[UINavigationController class]]) {
         return [(UINavigationController *)self navigationBar];
     }
-    return self.rg_navigationController.navigationBar;
+    return self.rg_bar_navigationController.navigationBar;
 }
 
 - (BOOL)rg_displayedNavigationBar {
