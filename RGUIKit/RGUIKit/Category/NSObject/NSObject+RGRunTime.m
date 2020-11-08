@@ -40,11 +40,7 @@ static const char *rg_assoKeyCount = "rg_assoKeyCount";
 
 @implementation NSObject(RGGetSet)
 
-- (id)rg_valueForKey:(NSString *)key {
-    NSUInteger index = [rg_keyCache indexOfObject:key];
-    if (index != NSNotFound) {
-        key = rg_keyCache[index];
-    }
+- (id)rg_valueForKey:(const NSString *)key {
     return [self rg_valueforConstKey:key.UTF8String];
 }
 
@@ -52,13 +48,23 @@ static const char *rg_assoKeyCount = "rg_assoKeyCount";
     return objc_getAssociatedObject(self, key);
 }
 
-- (void)rg_setValue:(id)value forKey:(NSString *)key retain:(BOOL)retain {
+- (void)rg_setValue:(id)value forKey:(const NSString *)key retain:(BOOL)retain {
     [self rg_setValue:value forConstKey:key.UTF8String retain:retain];
 }
 
 - (void)rg_setValue:(id)value forConstKey:(nonnull const char *)key retain:(BOOL)retain {
     objc_AssociationPolicy policy = retain ? OBJC_ASSOCIATION_RETAIN:OBJC_ASSOCIATION_ASSIGN;
     objc_setAssociatedObject(self, key, value, policy);
+}
+
+- (id)rg_valueForDynamicKey:(NSString *)key {
+    if (rg_keyCache) {
+        NSUInteger index = [rg_keyCache indexOfObject:key];
+        if (index != NSNotFound) {
+            key = rg_keyCache[index];
+        }
+    }
+    return [self rg_valueforConstKey:key.UTF8String];
 }
 
 - (void)rg_setValue:(id)value forDynamicKey:(NSString *)key retain:(BOOL)retain {
