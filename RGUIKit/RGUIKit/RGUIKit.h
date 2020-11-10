@@ -64,7 +64,7 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 
 #import <RGUIKit/UIBezierPath+RGDraw.h>
 
-#import <RGUIKit/RGTimePicker.h>
+#import <RGUIKit/RGCountDownTimePicker.h>
 #import <RGUIKit/RGBluuur.h>
 #import <RGUIKit/RGToastView.h>
 
