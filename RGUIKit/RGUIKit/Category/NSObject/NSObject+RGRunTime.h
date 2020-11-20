@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id)rg_valueForDynamicKey:(NSString *)key;
 
 /// 释放动态生成的 key, 调用后key的引用计数会-1, 当key的引用等于0时，会从缓存中移除
-- (void)rg_releaseDynamicKeyIfNeed:(NSString *)key;
++ (void)rg_releaseDynamicKeyIfNeed:(NSString *)key;
 
 @end
 

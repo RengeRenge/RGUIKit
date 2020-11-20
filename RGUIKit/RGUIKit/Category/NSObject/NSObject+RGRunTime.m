@@ -99,7 +99,7 @@ static const char *rg_assoKeyCount = "rg_assoKeyCount";
 //    NSLog(@"set key:%@ Count:%lu", key, (unsigned long)count);
 }
 
-- (void)rg_releaseDynamicKeyIfNeed:(NSString *)key {
++ (void)rg_releaseDynamicKeyIfNeed:(NSString *)key {
     NSUInteger index = [rg_keyCache indexOfObject:key];
     if (index != NSNotFound) {
         key = rg_keyCache[index];

@@ -32,8 +32,8 @@ static NSMutableDictionary *rg_keyCountMap;
 }
 
 - (void)dealloc {
+    [NSObject rg_releaseDynamicKeyIfNeed:self.key];
     if (_obj || (_target && _target == _observer)) {
-        [_target rg_releaseDynamicKeyIfNeed:self.key];
         @try {
             [_target removeObserver:_observer forKeyPath:_keyPath];
         } @catch (NSException *exception) {
@@ -73,7 +73,7 @@ static NSMutableDictionary *rg_keyCountMap;
     NSString *key = [self rg_keyWithObserver:observer forKeyPath:keyPath];
     __block BOOL exist = NO;
     void(^clear)(NSObject *obj) = ^(NSObject *obj){
-        _RGConcubine *concubine = [obj rg_valueForKey:key];
+        _RGConcubine *concubine = [obj rg_valueForDynamicKey:key];
         if (concubine) {
             exist = YES;
             [concubine clearInfo];
@@ -97,7 +97,7 @@ static NSMutableDictionary *rg_keyCountMap;
 }
 
 - (_RGConcubine *)concubineWithKey:(NSString *)key Observer:(NSObject *)observer forKeyPath:(NSString *)keyPath exist:(BOOL *)exist {
-    _RGConcubine *concubine = [self rg_valueForKey:key];
+    _RGConcubine *concubine = [self rg_valueForDynamicKey:key];
     if (exist) {
         *exist = YES;
     }
