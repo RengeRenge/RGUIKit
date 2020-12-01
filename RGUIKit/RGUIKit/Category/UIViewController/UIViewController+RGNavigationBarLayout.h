@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (RGBarFrame)
+@interface UIViewController (RGNavigationBarLayout)
 
 /**
  导航栏底部对于 view 的 y轴坐标

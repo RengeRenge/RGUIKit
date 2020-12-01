@@ -8,7 +8,7 @@
 
 #import "RGNavigationController.h"
 #import "UIBezierPath+RGDraw.h"
-#import "UIViewController+RGBarFrame.h"
+#import "UIViewController+RGNavigationBarLayout.h"
 
 @interface RGNavigationController ()
 

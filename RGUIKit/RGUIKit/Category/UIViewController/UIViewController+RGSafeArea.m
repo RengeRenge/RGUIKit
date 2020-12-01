@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+RGSafeArea.h"
+#import "UIViewController+RGNavigationBarLayout.h"
 
 @implementation UIViewController (RGSafeArea)
 
@@ -14,12 +15,28 @@
     if (@available(iOS 11.0, *)) {
         return self.view.safeAreaInsets;
     } else {
+        return UIEdgeInsetsMake(self.rg_layoutOriginY, 0, self.rg_layoutSafeAreaInsetsBottom, 0);
+    }
+}
+
+- (CGFloat)rg_layoutSafeAreaInsetsBottom {
+    if (@available(iOS 11.0, *)) {
+        return self.view.safeAreaInsets.bottom;
+    } else {
         CGFloat bottom = 0.f;
         if (self.tabBarController && !self.tabBarController.tabBar.hidden) {
             bottom = self.tabBarController.tabBar.frame.size.height;
         }
-        return UIEdgeInsetsMake(self.rg_layoutOriginY, 0, bottom, 0);
+        return bottom;
     }
+}
+
+- (CGFloat)rg_layoutBottomY {
+    return self.view.bounds.size.height - self.rg_layoutSafeAreaInsetsBottom;
+}
+
+- (CGFloat)rg_layoutTopY {
+    return self.rg_layoutOriginY;
 }
 
 - (UIEdgeInsets)rg_viewSafeAreaInsets {

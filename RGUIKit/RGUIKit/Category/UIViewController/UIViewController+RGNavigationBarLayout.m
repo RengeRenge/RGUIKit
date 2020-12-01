@@ -6,7 +6,7 @@
 //  Copyright © 2017年 juphoon. All rights reserved.
 //
 
-#import "UIViewController+RGBarFrame.h"
+#import "UIViewController+RGNavigationBarLayout.h"
 #import "UIViewController+RGPresent.h"
 #import "NSObject+RGRunTime.h"
 

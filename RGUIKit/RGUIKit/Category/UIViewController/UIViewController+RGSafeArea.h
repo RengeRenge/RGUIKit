@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewController+RGBarFrame.h"
 
 @interface UIViewController (RGSafeArea)
 
 - (UIEdgeInsets)rg_layoutSafeAreaInsets; // iOS 11 以下 top 为导航栏, bottom 为 tabBar
 
+- (CGFloat)rg_layoutSafeAreaInsetsBottom;
+
+- (CGFloat)rg_layoutBottomY;
+- (CGFloat)rg_layoutTopY;
+
+/// self.view.safeAreaInsets if available iOS 11 else UIEdgeInsetsZero
 - (UIEdgeInsets)rg_viewSafeAreaInsets;
 
 - (CGRect)rg_safeAreaBounds;
