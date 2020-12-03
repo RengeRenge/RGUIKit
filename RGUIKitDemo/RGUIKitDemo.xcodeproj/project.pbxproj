@@ -15,6 +15,8 @@
 		E61A04BC2192B62A008D35F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BB2192B62A008D35F1 /* Assets.xcassets */; };
 		E61A04BF2192B62A008D35F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BD2192B62A008D35F1 /* LaunchScreen.storyboard */; };
 		E61A04C22192B62A008D35F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04C12192B62A008D35F1 /* main.m */; };
+		E65AE4DC2577372B0065FAB4 /* RGLayoutTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AE4DB2577372A0065FAB4 /* RGLayoutTestViewController.m */; };
+		E65AE4E4257877110065FAB4 /* RGLayoutTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AE4E3257877110065FAB4 /* RGLayoutTestView.m */; };
 		E6747472238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6747471238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m */; };
 		E6B53EE5219527DD003D61DB /* RGNavigationTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */; };
 		E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA65722193E71200BF3201 /* DrawViewController.m */; };
@@ -38,6 +40,10 @@
 		E61A04C02192B62A008D35F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E61A04C12192B62A008D35F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E632AFB321A4FDD6003C7A7F /* RGUIKitDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RGUIKitDemo.entitlements; sourceTree = "<group>"; };
+		E65AE4DA2577372A0065FAB4 /* RGLayoutTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGLayoutTestViewController.h; sourceTree = "<group>"; };
+		E65AE4DB2577372A0065FAB4 /* RGLayoutTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGLayoutTestViewController.m; sourceTree = "<group>"; };
+		E65AE4E2257877110065FAB4 /* RGLayoutTestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGLayoutTestView.h; sourceTree = "<group>"; };
+		E65AE4E3257877110065FAB4 /* RGLayoutTestView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGLayoutTestView.m; sourceTree = "<group>"; };
 		E6747470238BCA4F00BD4DC8 /* DrawDisplayTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawDisplayTableViewController.h; sourceTree = "<group>"; };
 		E6747471238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawDisplayTableViewController.m; sourceTree = "<group>"; };
 		E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGNavigationTestViewController.h; sourceTree = "<group>"; };
@@ -126,9 +132,21 @@
 			path = Draw;
 			sourceTree = "<group>";
 		};
+		E65AE4D9257737080065FAB4 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				E65AE4DA2577372A0065FAB4 /* RGLayoutTestViewController.h */,
+				E65AE4DB2577372A0065FAB4 /* RGLayoutTestViewController.m */,
+				E65AE4E2257877110065FAB4 /* RGLayoutTestView.h */,
+				E65AE4E3257877110065FAB4 /* RGLayoutTestView.m */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		E674746F238BC9B300BD4DC8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E65AE4D9257737080065FAB4 /* Layout */,
 				E626FFD7238BDAC1007200E4 /* Draw */,
 				E61A04B52192B627008D35F1 /* ViewController.h */,
 				E61A04B62192B627008D35F1 /* ViewController.m */,
@@ -243,10 +261,12 @@
 			files = (
 				E6B53EE5219527DD003D61DB /* RGNavigationTestViewController.m in Sources */,
 				E60BEA982192C3500014BF2D /* PopTestViewController.m in Sources */,
+				E65AE4DC2577372B0065FAB4 /* RGLayoutTestViewController.m in Sources */,
 				E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */,
 				E61A04B72192B627008D35F1 /* ViewController.m in Sources */,
 				E6747472238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m in Sources */,
 				E61A04C22192B62A008D35F1 /* main.m in Sources */,
+				E65AE4E4257877110065FAB4 /* RGLayoutTestView.m in Sources */,
 				E6DACA392388AC89006D2EDA /* DrawLineCustomViewController.m in Sources */,
 				E61A04B42192B627008D35F1 /* AppDelegate.m in Sources */,
 			);
