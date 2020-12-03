@@ -26,49 +26,7 @@ static char *rg_kInteractiveViewController = "rg_kInteractiveViewController";
         SEL swizzledSel = @selector(rg_navigationBar:shouldPopItem:);
         
         [self rg_swizzleOriginalSel:originalSel swizzledSel:swizzledSel];
-        
-        [self rg_swizzleOriginalSel:@selector(initWithNibName:bundle:) swizzledSel:@selector(rg_initWithNibName:bundle:)];
-        
-        [self rg_swizzleOriginalSel:@selector(initWithRootViewController:) swizzledSel:@selector(rg_initWithRootViewController:)];
-        
     });
-}
-
-- (instancetype)rg_initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil {
-    if ([self rg_initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        [self rg_updateSemanticContentAttribute];
-    }
-    return self;
-}
-
-- (instancetype)rg_initWithCoder:(NSCoder *)aDecoder {
-    if ([self rg_initWithCoder:aDecoder]) {
-        [self rg_updateSemanticContentAttribute];
-    }
-    return self;
-}
-
-- (instancetype)rg_initWithNavigationBarClass:(Class)navigationBarClass toolbarClass:(Class)toolbarClass {
-    if ([self rg_initWithNavigationBarClass:navigationBarClass toolbarClass:toolbarClass]) {
-        [self rg_updateSemanticContentAttribute];
-    }
-    return self;
-}
-
-- (instancetype)rg_initWithRootViewController:(UIViewController *)rootViewController {
-    if ([self rg_initWithRootViewController:rootViewController]) {
-        [self rg_updateSemanticContentAttribute];
-    }
-    return self;
-}
-
-- (void)rg_updateSemanticContentAttribute {
-    if (@available(iOS 9.0, *)) {
-        self.navigationBar.semanticContentAttribute = [UIView appearance].semanticContentAttribute;
-        self.view.semanticContentAttribute = [UIView appearance].semanticContentAttribute;
-        [self.navigationBar setNeedsLayout];
-        [self.navigationBar setNeedsDisplay];
-    }
 }
 
 - (void)viewDidLoad {

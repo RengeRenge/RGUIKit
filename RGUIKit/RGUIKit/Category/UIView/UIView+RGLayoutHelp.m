@@ -41,22 +41,32 @@
 + (void)rg_setSemanticContentAttribute:(UISemanticContentAttribute)semanticContentAttribute {
     
     [UIView appearance].semanticContentAttribute = semanticContentAttribute;
-    [UITabBar appearance].semanticContentAttribute = semanticContentAttribute;
-    [UISearchBar appearance].semanticContentAttribute = semanticContentAttribute;
-    [UITextField appearance].semanticContentAttribute = semanticContentAttribute;
-    [UITextView appearance].semanticContentAttribute = semanticContentAttribute;
-    [UITableViewCell appearance].semanticContentAttribute = semanticContentAttribute;
-    [UINavigationBar appearance].semanticContentAttribute = semanticContentAttribute;
-    
-    UIViewController *topVc = [UIViewController rg_topViewController];
-    topVc.view.semanticContentAttribute = semanticContentAttribute;
-    topVc.tabBarController.tabBar.semanticContentAttribute = semanticContentAttribute;
-    
-    [topVc.view setNeedsLayout];
-    [topVc.view setNeedsDisplay];
-    [topVc.view setNeedsFocusUpdate];
-    
-    [topVc.navigationController rg_updateSemanticContentAttribute];
+    NSArray *windows = [UIApplication sharedApplication].windows;
+    for (UIWindow *window in windows) {
+        for (UIView *view in window.subviews) {
+            [view removeFromSuperview];
+            [window addSubview:view];
+        }
+        UIViewController *vc = window.rootViewController;
+        [self _semanticContentAttributeDidChange:vc];
+    }
+}
+
++ (void)_semanticContentAttributeDidChange:(UIViewController *)viewController {
+    UIViewController *vc = viewController;
+    if (vc) {
+        [vc.view setNeedsLayout];
+        if (vc.presentedViewController) {
+            [self _semanticContentAttributeDidChange:vc.presentedViewController];
+        }
+        for (UIViewController *childVC in vc.childViewControllers) {
+            if (!childVC.isViewLoaded) {
+                continue;
+            }
+            [self _semanticContentAttributeDidChange:childVC];
+        }
+    }
+}
 }
 
 @end
