@@ -67,6 +67,65 @@
         }
     }
 }
+
+- (CGPoint)rg_centerInSuperView {
+    CGPoint point = RG_CGSelfCenter(self.frame);
+    CGRect bounds = self.superview.bounds;
+    point.x += bounds.origin.x;
+    point.x += bounds.origin.y;
+    return point;
+}
+
+- (CGPoint)rg_centerInSuperViewOriginZero {
+    return RG_CGSelfCenter(self.frame);
+}
+
+- (CGFloat)rg_top {
+    return self.frame.origin.y;
+}
+
+- (CGFloat)rg_bottom {
+    return self.frame.origin.y + self.frame.size.height;
+}
+
+- (CGFloat)rg_leading {
+    if (self.rg_layoutLeftToRight) {
+        return self.frame.origin.x;
+    }
+    return self.frame.origin.x + self.frame.size.width;
+}
+
+- (CGFloat)rg_trailing {
+    if (self.rg_layoutLeftToRight) {
+        return self.frame.origin.x + self.frame.size.width;
+    }
+    return self.frame.origin.x;
+}
+
+- (CGFloat)rg_leadingForBounds {
+    if (self.rg_layoutLeftToRight) {
+        return self.bounds.origin.x;
+    }
+    return self.bounds.origin.x + self.bounds.size.width;
+}
+
+- (CGFloat)rg_trailingForBounds {
+    if (self.rg_layoutLeftToRight) {
+        return self.bounds.origin.x + self.bounds.size.width;
+    }
+    return self.bounds.origin.x;
+}
+
+- (CGSize)rg_size {
+    return self.frame.size;
+}
+
+- (CGFloat)rg_width {
+    return self.frame.size.width;
+}
+
+- (CGFloat)rg_height {
+    return self.frame.size.height;
 }
 
 @end
@@ -81,3 +140,32 @@
 }
 
 @end
+
+CGPoint RG_CGSelfCenter(CGRect frame) {
+    return CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
+}
+
+CGRect RG_CGRectMake(CGPoint center, CGSize size) {
+    return CGRectMake(center.x, center.y, size.width, size.height);
+}
+
+CGFloat RG_Flat(CGFloat value) {
+    if (value == FLT_MIN) {
+        value = 0;
+    }
+    NSUInteger newScale = UIScreen.mainScreen.scale;
+    return ceil(value * newScale) / newScale;
+}
+
+CGRect RG_CGRectMakeFlat(CGFloat x, CGFloat y, CGFloat width, CGFloat height) {
+    return CGRectMake(RG_Flat(x), RG_Flat(y), RG_Flat(width), RG_Flat(height));
+}
+
+CGRect RG_CGRectFlat(CGRect frame) {
+    return RG_CGRectMakeFlat(
+                             frame.origin.x,
+                             frame.origin.y,
+                             frame.size.width,
+                             frame.size.height
+                             );
+}

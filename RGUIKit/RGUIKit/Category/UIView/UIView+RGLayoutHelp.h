@@ -46,6 +46,21 @@
 
 + (void)rg_setSemanticContentAttribute:(UISemanticContentAttribute)UISemanticContentAttribute API_AVAILABLE(ios(9.0));
 
+- (CGPoint)rg_centerInSuperView;
+- (CGPoint)rg_centerInSuperViewOriginZero;
+
+- (CGFloat)rg_bottom;
+- (CGFloat)rg_top;
+- (CGFloat)rg_leading;
+- (CGFloat)rg_trailing;
+
+- (CGFloat)rg_leadingForBounds;
+- (CGFloat)rg_trailingForBounds;
+
+- (CGSize)rg_size;
+- (CGFloat)rg_width;
+- (CGFloat)rg_height;
+
 @end
 
 @interface UIImage (RGLayoutHelp)
@@ -56,3 +71,13 @@
 - (UIImage *)rg_imageFlippedForRightToLeftLayoutDirection;
 
 @end
+
+CGPoint RG_CGSelfCenter(CGRect frame);
+CGRect RG_CGRectMake(CGPoint center, CGSize size);
+
+/// 基于屏幕倍数，进行像素取整
+CGFloat RG_Flat(CGFloat value);
+/// 返回像素对齐的 Rect
+CGRect RG_CGRectMakeFlat(CGFloat x, CGFloat y, CGFloat width, CGFloat height);
+/// 返回像素对齐的 Rect
+CGRect RG_CGRectFlat(CGRect frame);
