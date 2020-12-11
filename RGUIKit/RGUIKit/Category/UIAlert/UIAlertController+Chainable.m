@@ -6,6 +6,7 @@
 //
 
 #import "UIAlertController+Chainable.h"
+#import "UIViewController+RGPresent.h"
 
 @implementation UIAlertController (Chainable)
 
@@ -74,7 +75,7 @@
 
 - (void (^)(UIViewController * _Nonnull viewController))rg_presentedBy {
     return ^(UIViewController * _Nonnull viewController) {
-        [viewController presentViewController:self animated:YES completion:nil];
+        [viewController rg_topPresentViewController:self animated:YES completion:nil];
     };
 }
 

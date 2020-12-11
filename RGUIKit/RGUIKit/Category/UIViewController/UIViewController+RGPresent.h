@@ -10,17 +10,18 @@
 
 @interface UIViewController (RGPresent)
 
-- (void)rg_presentWithNavigationController:(void (^)(UINavigationController *navigationController))configBlock;
-- (void)rg_presentWithCompletion:(void (^)(void))completion;
-- (void)rg_presentWithoutDismissOtherWithCompletion:(void (^)(void))completion;
+- (void)rg_topPresentViewController:(UIViewController *)viewControllerToPresent
+                           animated:(BOOL)flag
+                         completion:(void (^)(void))completion;
+
+- (void)rg_presentViewController:(UIViewController *)viewControllerToPresent
+                        animated:(BOOL)flag
+                    dismissOther:(BOOL(^)(UIViewController *viewController))dismissOther
+                      completion:(void (^)(void))completion;
 
 - (BOOL)rg_dismiss;
 - (BOOL)rg_dismissAnimated:(BOOL)animated completion:(void(^)(void))completion;
 
-+ (void)rg_dismissModalStackAnimated:(BOOL)animated completion:(void(^)(void))completion;
 - (void)rg_dismissModalStackAnimated:(BOOL)animated completion:(void(^)(void))completion;
-
-+ (UIViewController *)rg_topViewController;
-+ (UIViewController *)rg_topViewControllerForWindow:(UIWindow *)window;
 
 @end
