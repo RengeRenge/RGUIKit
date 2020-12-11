@@ -18,6 +18,9 @@
 //
 
 #import "RGBluuurView.h"
+#import "RGBlurEffect.h"
+
+#define RGBluuurViewMaxBlurRadius 30
 
 // grayscaleTintLevel
 // grayscaleTintAlpha
@@ -37,36 +40,49 @@
 
 @interface RGBluuurView ()
 
-@property (strong, nonatomic) UIBlurEffect *blurEffect;
+@property (strong, nonatomic) RGBlurEffect *blurEffect;
+
+@property (assign, nonatomic) BOOL changing;
+
+//@property (strong, nonatomic) UIViewPropertyAnimator *ani;
 
 @end
 
 @implementation RGBluuurView
 
++ (instancetype)new {
+    return [[self alloc] initWithFrame:CGRectZero];
+}
+
 - (instancetype)initWithEffect:(UIVisualEffect *)effect {
-    self = [super initWithEffect:effect];
-    if (self) {
+    if (self = [super initWithEffect:effect]) {
+        [self setup];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
         [self setup];
     }
     return self;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (self) {
+    if (self = [super initWithCoder:coder]) {
         [self setup];
     }
     return self;
 }
 
 - (void)setup {
-    self.scale = 1.0;
+    self.effect = nil;
+    self.effect = self.blurEffect;
 }
 
-- (UIBlurEffect *)blurEffect {
+- (RGBlurEffect *)blurEffect {
     if (_blurEffect == nil) {
-        NSString *className = [@[@"_", @"U", @"I", @"C", @"u", @"s", @"t", @"o", @"m", @"B", @"l", @"u", @"r", @"E", @"f", @"f", @"e", @"c", @"t"] componentsJoinedByString:@""];
-        _blurEffect = [[NSClassFromString(className) alloc] init];
+        _blurEffect = [RGBlurEffect effectWithBlurRadius:0];
     }
     return _blurEffect;
 }
@@ -74,135 +90,68 @@
 #pragma mark - Properties
 
 - (CGFloat)grayscaleTintLevel {
-    return [[self blurValueForSelector:@selector(grayscaleTintLevel)] doubleValue];
+    return self.blurEffect.grayscaleTintLevel;
 }
 
 - (void)setGrayscaleTintLevel:(CGFloat)grayscaleTintLevel {
-    [self setBlurValue:@(grayscaleTintLevel) forSelector:@selector(grayscaleTintLevel)];
+    self.blurEffect.grayscaleTintLevel = grayscaleTintLevel;
+    [self _config];
 }
 
 - (CGFloat)grayscaleTintAlpha {
-    return [[self blurValueForSelector:@selector(grayscaleTintAlpha)] doubleValue];
+    return self.blurEffect.grayscaleTintAlpha;
 }
 
 - (void)setGrayscaleTintAlpha:(CGFloat)grayscaleTintAlpha {
-    [self setBlurValue:@(grayscaleTintAlpha) forSelector:@selector(grayscaleTintAlpha)];
-}
-
-- (BOOL)lightenGrayscaleWithSourceOver {
-    return [[self blurValueForSelector:@selector(lightenGrayscaleWithSourceOver)] boolValue];
-}
-
-- (void)setLightenGrayscaleWithSourceOver:(BOOL)lightenGrayscaleWithSourceOver {
-    [self setBlurValue:@(lightenGrayscaleWithSourceOver) forSelector:@selector(lightenGrayscaleWithSourceOver)];
-}
-
-- (UIColor *)colorTint {
-    return [self blurValueForSelector:@selector(colorTint)] ;
-}
-
-- (void)setColorTint:(UIColor *)colorTint {
-    [self setBlurValue:colorTint forSelector:@selector(colorTint)];
-}
-
-- (CGFloat)colorTintAlpha {
-    return [[self blurValueForSelector:@selector(colorTintAlpha)] doubleValue];
-}
-
-- (void)setColorTintAlpha:(CGFloat)colorTintAlpha {
-    [self setBlurValue:@(colorTintAlpha) forSelector:@selector(colorTintAlpha)];
-}
-
-- (CGFloat)colorBurnTintLevel {
-    return [[self blurValueForSelector:@selector(colorBurnTintLevel)] doubleValue];
-}
-
-- (void)setColorBurnTintLevel:(CGFloat)colorBurnTintLevel {
-    [self setBlurValue:@(colorBurnTintLevel) forSelector:@selector(colorBurnTintLevel)];
-}
-
-- (CGFloat)colorBurnTintAlpha {
-    return [[self blurValueForSelector:@selector(colorBurnTintAlpha)] doubleValue];
-}
-
-- (void)setColorBurnTintAlpha:(CGFloat)colorBurnTintAlpha {
-    [self setBlurValue:@(colorBurnTintAlpha) forSelector:@selector(colorBurnTintAlpha)];
-}
-
-- (CGFloat)darkeningTintAlpha {
-    return [[self blurValueForSelector:@selector(darkeningTintAlpha)] doubleValue];
-}
-
-- (void)setDarkeningTintAlpha:(CGFloat)darkeningTintAlpha {
-    [self setBlurValue:@(darkeningTintAlpha) forSelector:@selector(darkeningTintAlpha)];
-}
-
-- (CGFloat)darkeningTintHue {
-    return [[self blurValueForSelector:@selector(darkeningTintHue)] doubleValue];
-}
-
-- (void)setDarkeningTintHue:(CGFloat)darkeningTintHue {
-    [self setBlurValue:@(darkeningTintHue) forSelector:@selector(darkeningTintHue)];
-}
-
-- (CGFloat)darkeningTintSaturation {
-    return [[self blurValueForSelector:@selector(darkeningTintSaturation)] doubleValue];
-}
-
-- (void)setDarkeningTintSaturation:(CGFloat)darkeningTintSaturation {
-    [self setBlurValue:@(darkeningTintSaturation) forSelector:@selector(darkeningTintSaturation)];
-}
-
-- (BOOL)darkenWithSourceOver {
-    return [[self blurValueForSelector:@selector(darkenWithSourceOver)] boolValue];
-}
-
-- (void)setDarkenWithSourceOver:(BOOL)darkenWithSourceOver {
-    [self setBlurValue:@(darkenWithSourceOver) forSelector:@selector(darkenWithSourceOver)];
+    self.blurEffect.grayscaleTintAlpha = grayscaleTintAlpha;
+    [self _config];
 }
 
 - (CGFloat)blurRadius {
-    return [[self blurValueForSelector:@selector(blurRadius)] doubleValue];
+    return self.blurEffect.blurRadius;
 }
 
 - (void)setBlurRadius:(CGFloat)blurRadius {
-    [self setBlurValue:@(blurRadius) forSelector:@selector(blurRadius)];
+    self.blurEffect.blurRadius = blurRadius;
+    [self _config];
 }
 
 - (CGFloat)saturationDeltaFactor {
-    return [[self blurValueForSelector:@selector(saturationDeltaFactor)] doubleValue];
+    return self.blurEffect.saturationDeltaFactor;
 }
 
 - (void)setSaturationDeltaFactor:(CGFloat)saturationDeltaFactor {
-    [self setBlurValue:@(saturationDeltaFactor) forSelector:@selector(saturationDeltaFactor)];
+    self.blurEffect.saturationDeltaFactor = saturationDeltaFactor;
+    [self _config];
 }
 
-- (CGFloat)scale {
-    return [[self blurValueForSelector:@selector(scale)] doubleValue];
+- (void)beginChange {
+    self.changing = YES;
+    
+    RGBlurEffect *blurEffect = [RGBlurEffect effectWithStyle: self.blurEffect.style == UIBlurEffectStyleDark ? UIBlurEffectStyleLight : UIBlurEffectStyleDark];
+    
+    blurEffect.blurRadius = self.blurRadius;
+    blurEffect.saturationDeltaFactor = self.saturationDeltaFactor;
+    blurEffect.grayscaleTintAlpha = self.grayscaleTintAlpha;
+    blurEffect.grayscaleTintLevel = self.grayscaleTintLevel;
+    
+    self.effect = nil;
+    self.effect = blurEffect;
 }
 
-- (void)setScale:(CGFloat)scale {
-    [self setBlurValue:@(scale) forSelector:@selector(scale)];
-}
-
-- (CGFloat)zoom {
-    return [[self blurValueForSelector:@selector(zoom)] doubleValue];
-}
-
-- (void)setZoom:(CGFloat)zoom {
-    [self setBlurValue:@(zoom) forSelector:@selector(zoom)];
+- (void)commitChange {
+    self.changing = NO;
+    [self _config];
 }
 
 #pragma mark - Private
 
-- (id)blurValueForSelector:(SEL)selector {
-    return [self.blurEffect valueForKeyPath:NSStringFromSelector(selector)];
-}
-
-- (void)setBlurValue:(id)value forSelector:(SEL)selector {
-    [self.blurEffect setValue:value forKeyPath:NSStringFromSelector(selector)];
-    UIBlurEffect *blur = self.blurEffect;
-    if (blur) {
+- (void)_config {
+    if (self.changing) {
+        return;
+    }
+    self.effect = nil;
+    if (self.blurEffect.blurRadius != 0) {
         self.effect = self.blurEffect;
     }
 }
