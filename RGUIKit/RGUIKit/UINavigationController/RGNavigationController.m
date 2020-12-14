@@ -105,18 +105,18 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    UIViewController *topViewController = self.topViewController;
-    while (topViewController.presentedViewController) {
-        UIViewController *next = topViewController.presentedViewController;
-        if (next.isBeingDismissed || [next isKindOfClass:UIAlertController.class]) {
-            break;
-        }
-        topViewController = topViewController.presentedViewController;
-    }
-    return [topViewController preferredStatusBarStyle];
+    return [self.__topViewController preferredStatusBarStyle];
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.__topViewController;
 }
 
 - (BOOL)prefersStatusBarHidden {
+    return [self.__topViewController prefersStatusBarHidden];
+}
+
+- (UIViewController *)__topViewController {
     UIViewController *topViewController = self.topViewController;
     while (topViewController.presentedViewController) {
         UIViewController *next = topViewController.presentedViewController;
@@ -125,7 +125,7 @@
         }
         topViewController = topViewController.presentedViewController;
     }
-    return [topViewController prefersStatusBarHidden];
+    return topViewController;
 }
 
 #pragma mark - draw image
@@ -133,7 +133,7 @@
 - (UIImage *)gradientBarBg {
     CGFloat linearGradient1Locations[] = {0, 0.36, 1};
     UIImage *image =
-    [self drawGradientBarWithHeight:64
+    [self drawGradientBarWithHeight:self.navigationBar.frame.size.height + 20
             linearGradientLocations:linearGradient1Locations
                              colors:@[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
                                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor,
@@ -146,7 +146,7 @@
 - (UIImage *)gradientBarBg_fringe {
     CGFloat linearGradient1Locations[] = {0, 0.36, 1};
     UIImage *image =
-    [self drawGradientBarWithHeight:88
+    [self drawGradientBarWithHeight:self.navigationBar.frame.size.height + 44
             linearGradientLocations:linearGradient1Locations
                              colors:@[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
                                       (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor,
