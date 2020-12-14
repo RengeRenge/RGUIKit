@@ -130,7 +130,7 @@ typedef enum : NSUInteger {
             cell.selectedBlock = ^(RGTableViewCell *cell, BOOL selected, BOOL animated) {
                 if (selected) {
                     [(RGLabelTableViewCell *)cell setText:@"RGLabelTableViewCell selected"];
-                    [RGToastView showWithInfo:@"This is a RGLabelTableViewCell!\nlayout at center" duration:3 percentY:0.8];
+                    [RGToastView showWithInfo:@"This is a RGLabelTableViewCell!\nlayout at center" duration:3 percentY:0.8 viewController:self];
                 } else {
                     [(RGLabelTableViewCell *)cell setText:@"RGLabelTableViewCell"];
                 }
@@ -166,7 +166,7 @@ typedef enum : NSUInteger {
             return cell;
         }
         case VCTestTypeEdgeCell: {
-            cell = [RGEdgeTableViewCell dequeueCellWithIdentifier:RGEdgeTableViewCellID style:UITableViewCellStyleSubtitle tableView:tableView];
+            cell = [RGEdgeTableViewCell dequeueCellWithIdentifier:RGEdgeTableViewCellID style:UITableViewCellStyleValue2 tableView:tableView];
             
             RGEdgeTableViewCell *edgeCell = (RGEdgeTableViewCell *)cell;
             edgeCell.edge = UIEdgeInsetsMake(7, 50, 7, 10);

@@ -8,8 +8,8 @@
 #import "RGToastView.h"
 #import <RGUIKit/RGUIKit.h>
 
-static UIWindow *_rg_toastView_window = nil;
 static RGToastView *_rg_toastView = nil;
+static NSString *rg_toast_createKey = @"rg_toast_key";
 
 @interface RGToastView ()
 
@@ -23,79 +23,96 @@ static RGToastView *_rg_toastView = nil;
 
 @implementation RGToastView
 
-+ (UIWindow *)frontWindow:(UIWindowLevel)maxSupportedWindowLevel {
-#if !defined(SV_APP_EXTENSIONS)
-    NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
-    for (UIWindow *window in frontToBackWindows) {
-        BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
-        BOOL windowIsVisible = !window.hidden && window.alpha > 0;
-        BOOL windowLevelSupported = (window.windowLevel >= UIWindowLevelNormal && window.windowLevel <= maxSupportedWindowLevel);
-        BOOL windowKeyWindow = window.isKeyWindow;
-            
-        if(windowOnMainScreen && windowIsVisible && windowLevelSupported && windowKeyWindow) {
-            return window;
-        }
++ (void)showWithInfo:(NSString *)info duration:(NSTimeInterval)duration percentY:(CGFloat)percentY {
+    RGWindow *window = [RGWindow findWindowWithCreateKey:rg_toast_createKey];
+    RGToastView *toast = nil;
+    if (!window) {
+        window = [RGWindow windowWithCreateKey:rg_toast_createKey];
+        RGToastView *toast = [[self.class alloc] initWithFrame:window.bounds];
+        toast.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [window showWithAddtionView:toast animation:nil completion:nil];
     }
-#endif
-    return nil;
+    
+    toast = (RGToastView *)window.addtionView;
+    [toast configWithInfo:info percentY:percentY];
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:toast selector:@selector(dismiss) object:nil];
+    [toast showAnimateWithCompletion:^(BOOL finished) {
+        if (duration) {
+            [toast performSelector:@selector(dismiss) withObject:nil afterDelay:duration];
+        }
+    }];
 }
 
-+ (void)showWithInfo:(NSString *)info duration:(NSTimeInterval)duration percentY:(CGFloat)percentY {
-//    if (!_rg_toastView_window) {
-//        _rg_toastView_window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//        [_rg_toastView_window setWindowLevel:UIWindowLevelAlert];
-//        _rg_toastView_window.userInteractionEnabled = NO;
-//    }
-    UIWindow *window = [self frontWindow:UIWindowLevelNormal];
-    
-//    if (!window.rootViewController) {
-//        UIViewController *vc = [[UIViewController alloc] init];
-//        window.rootViewController = vc;
-//    }
-    
-    if (!_rg_toastView) {
-//        _rg_toastView = [[self.class alloc] initWithFrame:window.rootViewController.view.bounds];
-        _rg_toastView = [[self.class alloc] initWithFrame:window.bounds];
-        _rg_toastView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-//        window.rootViewController.view.userInteractionEnabled = NO;
-//        [window.rootViewController.view addSubview:_rg_toastView];
-        [window addSubview:_rg_toastView];
++ (void)showWithInfo:(NSString *)info duration:(NSTimeInterval)duration percentY:(CGFloat)percentY viewController:(UIViewController *)viewController {
+    if (@available(iOS 13.0, *)) {
+        UIScene *scene = viewController.rg_scene;
+        if (scene) {
+            [self showWithInfo:info duration:duration percentY:percentY scene:scene];
+            return;
+        }
+    }
+    [self showWithInfo:info duration:duration percentY:percentY];
+}
+
++ (void)showWithInfo:(NSString *)info duration:(NSTimeInterval)duration percentY:(CGFloat)percentY scene:(UIScene *)scene {
+    RGWindow *window = [RGWindow findWindowWithScene:scene createKey:rg_toast_createKey];
+    if (!window) {
+        window = [RGWindow windowWithScene:scene createKey:rg_toast_createKey];
+        RGToastView *toast = [[self.class alloc] initWithFrame:window.bounds];
+        toast.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [window showWithAddtionView:toast animation:nil completion:nil];
     }
     
-    RGToastView *toast = _rg_toastView;
+    RGToastView *toast = (RGToastView *)window.addtionView;
+    [toast configWithInfo:info percentY:percentY];
     
-    toast.cTag = arc4random();
-    toast.percentY = percentY;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismissWithScene:) object:scene];
+    [toast showAnimateWithCompletion:^(BOOL finished) {
+        if (duration) {
+            [self performSelector:@selector(dismissWithScene:) withObject:scene afterDelay:duration];
+        }
+    }];
+}
+
+- (void)configWithInfo:(NSString *)info percentY:(CGFloat)percentY {
+    self.cTag = arc4random();
+    self.percentY = percentY;
     NSMutableParagraphStyle *para = [[NSMutableParagraphStyle alloc] init];
     para.lineSpacing = 10.f;
     para.alignment = NSTextAlignmentCenter;
-    toast.label.attributedText = [[NSAttributedString alloc] initWithString:info attributes:@{NSParagraphStyleAttributeName : para}];
-    [toast setNeedsLayout];
-    
-//    window.hidden = NO;
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:nil];
-    [toast showAnimateWithCompletion:^(BOOL finished) {
-        if (duration) {
-            [self performSelector:@selector(dismiss) withObject:nil afterDelay:duration];
-        }
-    }];
+    self.userInteractionEnabled = NO;
+    self.label.attributedText = [[NSAttributedString alloc] initWithString:info attributes:@{NSParagraphStyleAttributeName : para}];
+    [self setNeedsLayout];
 }
 
 + (void)dismiss {
-    [_rg_toastView dismissAnimateWithCompletion:^(BOOL finished) {
+    RGWindow *window = [RGWindow findWindowWithCreateKey:rg_toast_createKey];
+    RGToastView *toast = (RGToastView *)window.addtionView;
+    [toast dismissAnimateWithCompletion:^(BOOL finished) {
         if (finished) {
-            _rg_toastView_window.hidden = YES;
-            _rg_toastView_window.rootViewController = nil;
-            [_rg_toastView removeFromSuperview];
-            _rg_toastView = nil;
+            [window dismiss];
         }
     }];
 }
 
-- (void)dismiss {
-    [self dismissAnimateWithCompletion:^(BOOL finished) {
-        [self removeFromSuperview];
++ (void)dismissWithViewController:(UIViewController *)viewController {
+    RGWindow *window = [RGWindow findWindowWithViewController:viewController createKey:rg_toast_createKey];
+    RGToastView *toast = (RGToastView *)window.addtionView;
+    [toast dismissAnimateWithCompletion:^(BOOL finished) {
+        if (finished) {
+            [window dismiss];
+        }
+    }];
+}
+
++ (void)dismissWithScene:(UIScene *)scene  API_AVAILABLE(ios(13.0)) {
+    RGWindow *window = [RGWindow findWindowWithScene:scene createKey:rg_toast_createKey];
+    RGToastView *toast = (RGToastView *)window.addtionView;
+    [toast dismissAnimateWithCompletion:^(BOOL finished) {
+        if (finished) {
+            [window dismiss];
+        }
     }];
 }
 
@@ -114,6 +131,18 @@ static RGToastView *_rg_toastView = nil;
         }
     }];
     return toast;
+}
+
+- (void)dismiss {
+    RGWindow *window = (RGWindow *)[self window];
+    [self dismissAnimateWithCompletion:^(BOOL finished) {
+        if (finished) {
+            [self removeFromSuperview];
+            if ([window isKindOfClass:RGWindow.class]) {
+                [window dismiss];
+            }
+        }
+    }];
 }
 
 - (void)dismissAnimateWithCompletion:(void(^)(BOOL finished))completion {
@@ -159,7 +188,6 @@ static RGToastView *_rg_toastView = nil;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.userInteractionEnabled = NO;
         self.alpha = 0;
         [self addSubview:self.backgroundView];
         [self addSubview:self.label];

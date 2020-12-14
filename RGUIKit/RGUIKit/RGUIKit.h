@@ -35,6 +35,7 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/RGNavigationController.h>
 
 #import <RGUIKit/UIViewController+RGPresent.h>
+#import <RGUIKit/UIViewController+RGNavigationBarLayout.h>
 #import <RGUIKit/UIViewController+RGSafeArea.h>
 
 #import <RGUIKit/UIAlertController+Chainable.h>
@@ -44,6 +45,8 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIView+RGLayoutHelp.h>
 #import <RGUIKit/UIView+RGPanGestureHelp.h>
 #import <RGUIKit/UIScrollView+RGInset.h>
+
+#import <RGUIKit/UIWindow+RGGet.h>
 
 #import <RGUIKit/NSString+Compare.h>
 
@@ -68,5 +71,6 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/RGCountDownTimePicker.h>
 #import <RGUIKit/RGBluuur.h>
 #import <RGUIKit/RGToastView.h>
+#import <RGUIKit/RGWindow.h>
 
 #endif /* Header_h */

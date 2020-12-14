@@ -9,6 +9,7 @@
 #import "UIViewController+RGNavigationBarLayout.h"
 #import "UIViewController+RGPresent.h"
 #import "NSObject+RGRunTime.h"
+#import "UIWindow+RGGet.h"
 
 #import <objc/runtime.h>
 
@@ -178,14 +179,14 @@ static BOOL rg_isFringeScreenConfirm = NO;
         if ([UIApplication sharedApplication].statusBarFrame.size.height > 40) {
             rg_isFringeScreen = YES;
         } else {
-            UIEdgeInsets inset = [[UIApplication sharedApplication] delegate].window.safeAreaInsets;
+            UIEdgeInsets inset = [UIWindow rg_firstWindow].safeAreaInsets;
             if (inset.left || inset.right || inset.bottom) {
                 rg_isFringeScreen = YES;
                 rg_isFringeScreenConfirm = YES;
                 return YES;
             }
             
-            UIViewController *top = [UIViewController rg_topViewController];
+            UIViewController *top = [UIViewController rg_topViewController].view.window.rootViewController;
             
             /* 认为非刘海屏幕左右没有安全区域 */
             inset = top.view.safeAreaInsets;

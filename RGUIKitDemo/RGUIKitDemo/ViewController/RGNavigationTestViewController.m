@@ -69,13 +69,13 @@
 
 - (BOOL)rg_navigationControllerShouldPop:(UINavigationController *)navigationController isInteractive:(BOOL)isInteractive {
     NSLog(@"will pop");
-    [RGToastView showWithInfo:@"will pop" duration:3 percentY:0.8];
+    [RGToastView showWithInfo:@"will pop" duration:3 percentY:0.8 viewController:self];
     return YES;
 }
 
 - (void)rg_navigationController:(UINavigationController *)navigationController interactivePopResult:(BOOL)finished {
     NSLog(@"will pop result:%d", finished);
-    [RGToastView showWithInfo:[NSString stringWithFormat:@"pop result %d", finished] duration:3 percentY:0.8];
+    [RGToastView showWithInfo:[NSString stringWithFormat:@"pop result %d", finished] duration:3 percentY:0.8 viewController:self];
 }
 
 @end
