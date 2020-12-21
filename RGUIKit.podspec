@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RGUIKit"
-  s.version      = "1.1.18"
+  s.version      = "1.2.0"
   s.summary      = "RGUIKit, My Summary for convenient coding"
 
   # This description is used to generate tags and improve search results.
@@ -132,5 +132,6 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
-
+  s.dependency "RGObserver"
+  s.dependency "RGRunTime"
 end

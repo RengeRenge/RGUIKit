@@ -26,8 +26,6 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/RGEdgeTableViewCell.h>
 #import <RGUIKit/RGInputTableViewCell.h>
 
-#import <RGUIKit/NSObject+RGRunTime.h>
-#import <RGUIKit/NSObject+RGObserver.h>
 #import <RGUIKit/NSNull+RGSafe.h>
 #import <RGUIKit/NSTimer+RGBlock.h>
 #import <RGUIKit/NSDate+RGFormat.h>

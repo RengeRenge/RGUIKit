@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48025CD53BA7D518A64CDB5A /* libPods-RGUIKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54BD3670DAB83B0E7DD379BE /* libPods-RGUIKitDemo.a */; };
+		77034CEB05B56236E6231D9A /* Pods_RGUIKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7237E9A5883DABE30AD94A4 /* Pods_RGUIKitDemo.framework */; };
 		E60BEA982192C3500014BF2D /* PopTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60BEA972192C3500014BF2D /* PopTestViewController.m */; };
 		E61A04B42192B627008D35F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04B32192B627008D35F1 /* AppDelegate.m */; };
 		E61A04B72192B627008D35F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04B62192B627008D35F1 /* ViewController.m */; };
@@ -25,8 +25,8 @@
 
 /* Begin PBXFileReference section */
 		106BBB23C8219D6D69F685D5 /* Pods-RGUIKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGUIKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-RGUIKitDemo/Pods-RGUIKitDemo.release.xcconfig"; sourceTree = "<group>"; };
-		54BD3670DAB83B0E7DD379BE /* libPods-RGUIKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RGUIKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BA5490DA0EF93BE81FCB6B8 /* Pods-RGUIKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RGUIKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RGUIKitDemo/Pods-RGUIKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		C7237E9A5883DABE30AD94A4 /* Pods_RGUIKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RGUIKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E60BEA962192C3500014BF2D /* PopTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopTestViewController.h; sourceTree = "<group>"; };
 		E60BEA972192C3500014BF2D /* PopTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopTestViewController.m; sourceTree = "<group>"; };
 		E61A04AF2192B627008D35F1 /* RGUIKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48025CD53BA7D518A64CDB5A /* libPods-RGUIKitDemo.a in Frameworks */,
+				77034CEB05B56236E6231D9A /* Pods_RGUIKitDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +78,7 @@
 		C6AA543EF5FF6F4D5D772CE6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				54BD3670DAB83B0E7DD379BE /* libPods-RGUIKitDemo.a */,
+				C7237E9A5883DABE30AD94A4 /* Pods_RGUIKitDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,6 +167,7 @@
 				E61A04AB2192B627008D35F1 /* Sources */,
 				E61A04AC2192B627008D35F1 /* Frameworks */,
 				E61A04AD2192B627008D35F1 /* Resources */,
+				A14E7B2527C7B823FCBEC8FA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -250,6 +251,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A14E7B2527C7B823FCBEC8FA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RGUIKitDemo/Pods-RGUIKitDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RGUIKitDemo/Pods-RGUIKitDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RGUIKitDemo/Pods-RGUIKitDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

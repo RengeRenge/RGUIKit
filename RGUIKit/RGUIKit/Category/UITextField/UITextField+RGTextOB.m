@@ -7,6 +7,7 @@
 
 #import "UITextField+RGTextOB.h"
 #import "RGUIKit.h"
+#import <RGRunTime/RGRunTime.h>
 
 const NSString *rg_text_noti_key = @"rg_text_noti_key";
 

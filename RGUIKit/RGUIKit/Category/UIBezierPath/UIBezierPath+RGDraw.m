@@ -8,8 +8,8 @@
 
 #import "UIBezierPath+RGDraw.h"
 #import <RGUIKit/RGUIKit.h>
-
-
+#import <RGRunTime/RGRunTime.h>
+#import <RGObserver/RGObserver.h>
 
 @interface RGGradientObsever : NSObject
 
