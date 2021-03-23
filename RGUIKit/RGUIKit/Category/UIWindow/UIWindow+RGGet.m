@@ -153,7 +153,11 @@
             return [self rg_topViewControllerByScene:scene];
         }
     }
-    return [self rg_topViewControllerByWindow:[UIWindow rg_firstWindow]];
+    UIWindow *window = UIApplication.sharedApplication.delegate.window;
+    if (!window) {
+        window = [UIWindow rg_firstWindow];
+    }
+    return [self rg_topViewControllerByWindow:window];
 }
 
 - (UIWindowScene *)rg_scene {

@@ -231,6 +231,13 @@ static NSString *rg_common_signle_scene_key = @"rg_common_signle_scene_key";
     return self.randomTag;
 }
 
+- (void)setAddtionViewWillLayout:(void (^)(UIViewController * _Nonnull, CGRect))addtionViewWillLayout {
+    _addtionViewWillLayout = addtionViewWillLayout;
+    if (addtionViewWillLayout && self.rootViewController) {
+        addtionViewWillLayout(self.rootViewController, self.rootViewController.view.bounds);
+    }
+}
+
 - (void)setDismissAnimation:(void (^)(void))animation completion:(void (^)(BOOL))completion {
     self.dismissAnimation = animation;
     self.dismissCompletion = completion;
