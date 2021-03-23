@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (UIColor *)rg_colorWithR:(CGFloat)red g:(CGFloat)green b:(CGFloat)blue alpha:(CGFloat)alpha;
 
++ (UIColor *)rg_colorWithRGBHexString:(NSString *)hexString;
 + (UIColor *)rg_colorWithRGBHex:(UInt32)hex;
 
 @end
@@ -39,10 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// white -> black
 + (UIColor *)rg_systemBackgroundColor;
++ (UIColor *)rg_secondarySystemBackgroundColor;
+
++ (UIColor *)rg_systemGroupedBackgroundColor;
+
++ (UIColor *)rg_separatorColor;
 
 /// black -> white
 + (UIColor *)rg_labelColor;
-
 + (UIColor *)rg_secondaryLabelColor;
 + (UIColor *)rg_placeholderTextColor;
 
