@@ -11,6 +11,7 @@
 extern CGFloat const RGTableViewCellDefaultIconDimension;
 
 extern NSString * const RGCellID; // UITableViewCellStyleSubtitle
+extern NSString * const RGCellIDSubtitle; // UITableViewCellStyleSubtitle
 extern NSString * const RGCellIDValue1; // UITableViewCellStyleValue1
 extern NSString * const RGCellIDValue2; // UITableViewCellStyleValue2
 extern NSString * const RGCellIDValueDefault; // UITableViewCellStyleDefault

@@ -11,6 +11,7 @@
 CGFloat const RGTableViewCellDefaultIconDimension = 40.f;
 
 NSString * const RGCellID = @"RGCellIDSubtitle";
+NSString * const RGCellIDSubtitle = RGCellID;
 NSString * const RGCellIDValue1 = @"RGCellIDValue1";
 NSString * const RGCellIDValue2 = @"RGCellIDValue2";
 NSString * const RGCellIDValueDefault = @"RGCellIDValueDefault";
@@ -29,7 +30,7 @@ static UIColor * kRGTableViewCellThemeColor;
 @implementation RGTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ([reuseIdentifier hasPrefix:RGCellID]) {
+    if ([reuseIdentifier hasPrefix:RGCellIDSubtitle]) {
         style = UITableViewCellStyleSubtitle;
     } else if ([reuseIdentifier hasPrefix:RGCellIDValue1]) {
         style = UITableViewCellStyleValue1;

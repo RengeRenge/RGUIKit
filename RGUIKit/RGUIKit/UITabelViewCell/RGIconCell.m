@@ -187,7 +187,7 @@
                 CGSize size = self->_iconSize;
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                     UIImage *subImage = [icon rg_resizeImageWithSize:size iconResizeMode:self->_iconResizeMode];
-                    dispatch_sync(dispatch_get_main_queue(), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
                         if (icon == self.imageView.image) {
                             self.imageView.image = subImage;
                         }
