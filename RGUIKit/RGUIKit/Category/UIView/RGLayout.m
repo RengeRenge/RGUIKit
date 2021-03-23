@@ -312,7 +312,11 @@
 - (RGLayout * _Nonnull (^)(CGFloat))dx {
     return [self __valueParam:^(CGFloat value) {
         CGRect mframe = self.frame;
-        mframe.origin.x += value;
+        if (self.view.rg_layoutLeftToRight) {
+            mframe.origin.x += value;
+        } else {
+            mframe.origin.x -= value;
+        }
         self.frame = mframe;
     }];
 }

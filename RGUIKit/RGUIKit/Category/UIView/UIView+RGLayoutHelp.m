@@ -76,6 +76,10 @@
     return point;
 }
 
+- (CGPoint)rg_selfCenter {
+    return RG_CGSelfCenter(self.bounds);
+}
+
 - (CGPoint)rg_centerInSuperViewOriginZero {
     return RG_CGSelfCenter(self.frame);
 }

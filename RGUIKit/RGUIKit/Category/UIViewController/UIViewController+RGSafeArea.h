@@ -20,6 +20,7 @@
 /// self.view.safeAreaInsets if available iOS 11 else UIEdgeInsetsZero
 - (UIEdgeInsets)rg_viewSafeAreaInsets;
 
+- (CGRect)rg_zeroBounds;
 - (CGRect)rg_safeAreaBounds;
 - (CGRect)rg_safeAreaTopBounds;
 - (CGRect)rg_safeAreaBottomBounds;

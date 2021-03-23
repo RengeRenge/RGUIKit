@@ -11,6 +11,13 @@
 
 @implementation UIViewController (RGSafeArea)
 
+- (CGRect)rg_zeroBounds {
+    CGRect bounds = self.view.bounds;
+    bounds.origin.x = 0;
+    bounds.origin.y = 0;
+    return bounds;
+}
+
 - (UIEdgeInsets)rg_layoutSafeAreaInsets {
     if (@available(iOS 11.0, *)) {
         return self.view.safeAreaInsets;
@@ -48,17 +55,17 @@
 }
 
 - (CGRect)rg_safeAreaBounds {
-    return [self rg_safeAreaFix:self.view.bounds];
+    return [self rg_safeAreaFix:self.rg_zeroBounds];
 }
 
 - (CGRect)rg_safeAreaTopBounds {
-    CGRect rect = self.view.bounds;
+    CGRect rect = self.rg_zeroBounds;
     rect.size.height = [self rg_safeAreaFixTop:rect stretch:NO].origin.y;
     return rect;
 }
 
 - (CGRect)rg_safeAreaBottomBounds {
-    CGRect rect = self.view.bounds;
+    CGRect rect = self.rg_zeroBounds;
     CGFloat bottom = self.rg_viewSafeAreaInsets.bottom;
     rect.origin.y = rect.size.height - bottom;
     rect.size.height = bottom;
@@ -66,7 +73,6 @@
 }
 
 - (CGRect)rg_safeAreaFix:(CGRect)rect {
-    
     rect = [self rg_safeAreaFixVertical:rect];
     rect = [self rg_safeAreaFixHorizontal:rect];
     return rect;

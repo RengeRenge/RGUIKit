@@ -46,6 +46,7 @@
 
 + (void)rg_setSemanticContentAttribute:(UISemanticContentAttribute)UISemanticContentAttribute API_AVAILABLE(ios(9.0));
 
+- (CGPoint)rg_selfCenter;
 - (CGPoint)rg_centerInSuperView;
 - (CGPoint)rg_centerInSuperViewOriginZero;
 
