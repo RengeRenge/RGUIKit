@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)rg_isTop;
 - (BOOL)rg_isBottom;
 
+- (BOOL)rg_isReachTop;
+- (BOOL)rg_isReachBottom;
+
+- (void)rg_scrollViewToLimit:(BOOL)animated;
+
 - (void)rg_scrollViewToTop:(BOOL)animated;
 - (void)rg_scrollViewToBottom:(BOOL)animated;
 

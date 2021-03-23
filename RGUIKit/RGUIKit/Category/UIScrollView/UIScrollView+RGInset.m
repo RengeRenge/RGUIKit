@@ -54,6 +54,22 @@
     return fabs(self.rg_bottomOffsetY - self.contentOffset.y) < 0.5;
 }
 
+- (BOOL)rg_isReachTop {
+    return self.contentOffset.y <= self.rg_topOffsetY;
+}
+
+- (BOOL)rg_isReachBottom {
+    return self.contentOffset.y >= self.rg_bottomOffsetY;
+}
+
+- (void)rg_scrollViewToLimit:(BOOL)animated {
+    if (self.contentOffset.y < self.rg_topOffsetY) {
+        [self rg_scrollViewToTop:animated];
+    } else if (self.contentOffset.y > self.rg_bottomOffsetY) {
+        [self rg_scrollViewToBottom:animated];
+    }
+}
+
 - (void)rg_scrollViewToTop:(BOOL)animated {
     CGPoint offset = CGPointMake(self.contentOffset.x, self.rg_topOffsetY);
     [self setContentOffset:offset animated:animated];
