@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// search firstWindowScene if available iOS 13 else UIApplication.sharedApplication.windows
 + (UIWindow *)rg_firstWindow;
++ (UIWindow *)rg_activeSceneFirstWindow;
 + (UIWindow *)rg_firstWindowForwindows:(NSArray <UIWindow *> *)windows;
 
 /// search firstWindowScene if available iOS 13 else UIApplication.sharedApplication.windows

@@ -78,6 +78,17 @@
     return window;
 }
 
++ (UIWindow *)rg_activeSceneFirstWindow {
+    UIWindow *window = nil;
+    if (@available(iOS 13.0, *)) {
+        window = [[UIScene rg_firstActiveWindowScene] rg_firstWindow];
+    }
+    if (!window) {
+        window = [self rg_firstWindowForwindows:UIApplication.sharedApplication.windows];
+    }
+    return window;
+}
+
 + (UIWindow *)rg_frontWindow:(UIWindowLevel)maxSupportedWindowLevel {
     UIWindow *window = nil;
     if (@available(iOS 13.0, *)) {
