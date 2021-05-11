@@ -12,7 +12,11 @@
 @implementation UIImage (RGIconCellResize)
 
 - (UIImage *)rg_resizeImageWithSize:(CGSize)size iconResizeMode:(RGIconResizeMode)iconResizeMode {
-    return [UIImage rg_resizeImage:self width:size.width height:size.height iconResizeMode:iconResizeMode];
+    UIImage *image = [UIImage rg_resizeImage:self width:size.width height:size.height iconResizeMode:iconResizeMode];
+    if (image.renderingMode != self.renderingMode) {
+        image = [image imageWithRenderingMode:self.renderingMode];
+    }
+    return image;
 }
 
 - (UIImage *)rg_resizeImageWithWidth:(CGFloat)width height:(CGFloat)height iconResizeMode:(RGIconResizeMode)iconResizeMode {
