@@ -37,9 +37,9 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
 @property (nonatomic, assign) NSInteger currentMinute;
 @property (nonatomic, assign) NSInteger currentSecond;
 
-@property (nonatomic, strong) NSArray <NSNumber *> *steps;
+@property (nonatomic, copy) NSArray <NSNumber *> *steps;
 
-@property (nonatomic, strong) NSArray <NSNumber *> *types;
+@property (nonatomic, copy) NSArray <NSNumber *> *types;
 
 @property (nonatomic, strong) UIBarButtonItem *titleItem;
 @property (nonatomic, strong) UIBarButtonItem *cancelItem;

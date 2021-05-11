@@ -13,7 +13,7 @@
 
 @interface RGGradientObsever : NSObject
 
-@property (nonatomic, strong) NSArray *rg_drawColors;
+@property (nonatomic, copy) NSArray *rg_drawColors;
 @property (nonatomic, assign) RGDrawType rg_drawType;
 @property (nonatomic, assign) CGFloat rg_drawRad;
 @property (nonatomic, assign) BOOL rg_isDrawRad;
