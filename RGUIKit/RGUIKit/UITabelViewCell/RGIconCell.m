@@ -9,6 +9,7 @@
 #import "RGIconCell.h"
 #import "UIImage+RGTint.h"
 #import "UIView+RGLayoutHelp.h"
+#import <RGObserver/RGObserver.h>
 
 #define textLabelFont       [UIFont systemFontOfSize:16.0f]
 #define detailTextLabelFont [UIFont systemFontOfSize:12.0f];
@@ -40,6 +41,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self.imageView rg_addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:@"RGIconCell"];
         [self resetConfig];
     }
     return self;
@@ -47,9 +49,17 @@
 
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithCustomStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self.imageView rg_addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:@"RGIconCell"];
         [self resetConfig];
     }
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    id myContext = (__bridge NSString * _Nonnull)(context);
+    if ([keyPath isEqualToString:@"image"] && object == self.imageView && context && [myContext isKindOfClass:NSString.class] && [@"RGIconCell" isEqualToString:myContext]) {
+        [self updateSubViewFrame];
+    }
 }
 
 - (CAShapeLayer *)cornerLayer {
