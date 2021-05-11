@@ -62,6 +62,29 @@
                            alpha:1.0f];
 }
 
+- (UIColor *)rg_coverOnColor:(UIColor *)backgroundColor {
+    CGFloat r1;
+    CGFloat g1;
+    CGFloat b1;
+    CGFloat a1;
+    [backgroundColor getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
+    
+    CGFloat r2;
+    CGFloat g2;
+    CGFloat b2;
+    CGFloat a2;
+    [self getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
+    
+    return [UIColor colorWithRed:[UIColor _blendWithA1:a1 a2:a2 c1:r1 c2:r2]
+                           green:[UIColor _blendWithA1:a1 a2:a2 c1:g1 c2:g2]
+                            blue:[UIColor _blendWithA1:a1 a2:a2 c1:b1 c2:b2]
+                           alpha:a1 + a2 - a1 * a2];
+}
+
++ (CGFloat)_blendWithA1:(CGFloat)a1 a2:(CGFloat)a2 c1:(CGFloat)c1 c2:(CGFloat)c2 {
+    return (c1 * a1 * (1.0 - a2) + c2 * a2) / (a1 + a2 - a1 * a2);
+}
+
 @end
 
 @implementation UIColor(RGDynamic)
@@ -130,6 +153,18 @@
     } else {
         return [self colorWithRed:0.24 green:0.24 blue:0.26 alpha:0.3];
     }
+}
+
++ (UIColor *)rg_tableCellGroupedBackgroundColor {
+    return [UIColor rg_colorWithDynamicProvider:^UIColor * _Nonnull(BOOL dark) {
+        return dark ? [self colorWithRed:0.11 green:0.11 blue:0.12 alpha:1] : [UIColor colorWithWhite:1 alpha:1];
+    }];
+}
+
++ (UIColor *)rg_tertiarySystemFillColor {
+    return [UIColor rg_colorWithDynamicProvider:^UIColor * _Nonnull(BOOL dark) {
+        return dark ? [self colorWithRed:0.46 green:0.46 blue:0.5 alpha:0.24] : [self colorWithRed:0.46 green:0.46 blue:0.5 alpha:0.12];
+    }];
 }
 
 @end

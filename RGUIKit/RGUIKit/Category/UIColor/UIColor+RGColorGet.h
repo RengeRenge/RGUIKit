@@ -31,6 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)rg_colorWithRGBHexString:(NSString *)hexString;
 + (UIColor *)rg_colorWithRGBHex:(UInt32)hex;
 
+- (UIColor *)rg_coverOnColor:(UIColor *)backgroundColor;
+
 @end
 
 
@@ -50,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)rg_labelColor;
 + (UIColor *)rg_secondaryLabelColor;
 + (UIColor *)rg_placeholderTextColor;
+
++ (UIColor *)rg_tableCellGroupedBackgroundColor;
++ (UIColor *)rg_tertiarySystemFillColor;
 
 @end
 
