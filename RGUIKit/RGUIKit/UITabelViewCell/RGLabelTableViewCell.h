@@ -21,6 +21,9 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) UILabel *label;
 
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSAttributedString *attributedText;
+
 /// 距离contentView边距的配置 .left.right 距离 contentView 左右边最小的距离; .top 顶部的距离
 @property (nonatomic, assign) UIEdgeInsets textEdge;
 
@@ -39,6 +42,12 @@ typedef enum : NSUInteger {
                tableView:(UITableView *)tableView
                 textEdge:(UIEdgeInsets)textEdge;
 
++ (CGFloat)heightForText:(NSString *)text
+                    font:(UIFont *)font
+                 tbWidth:(CGFloat)tbWidth
+                textEdge:(UIEdgeInsets)textEdge;
+
 + (CGFloat)heightForAttributeText:(NSAttributedString *)attributeText tableView:(UITableView *)tableView textEdge:(UIEdgeInsets)textEdge;
++ (CGFloat)heightForAttributeText:(NSAttributedString *)attributeText tbWidth:(CGFloat)tbWidth textEdge:(UIEdgeInsets)textEdge;
 
 @end

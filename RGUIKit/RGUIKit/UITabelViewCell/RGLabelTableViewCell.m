@@ -18,8 +18,12 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
                tableView:(UITableView *)tableView
                 textEdge:(UIEdgeInsets)textEdge
 {
-    CGSize size = [text boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - 50.f - textEdge.left - textEdge.right, CGFLOAT_MAX)
-                                     options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesDeviceMetrics|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin)
+    return [self heightForText:text font:font tbWidth:CGRectGetWidth(tableView.frame) textEdge:textEdge];
+}
+
++ (CGFloat)heightForText:(NSString *)text font:(UIFont *)font tbWidth:(CGFloat)tbWidth textEdge:(UIEdgeInsets)textEdge {
+    CGSize size = [text boundingRectWithSize:CGSizeMake(tbWidth - 50.f - textEdge.left - textEdge.right, CGFLOAT_MAX)
+                                     options:(NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin)
                                   attributes:@{NSFontAttributeName : font}
                                      context:nil].size;
     
@@ -27,21 +31,36 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
 }
 
 + (CGFloat)heightForAttributeText:(NSAttributedString *)attributeText tableView:(UITableView *)tableView textEdge:(UIEdgeInsets)textEdge {
-    CGSize size = [attributeText boundingRectWithSize:CGSizeMake(CGRectGetWidth(tableView.frame) - textEdge.left - textEdge.right, CGFLOAT_MAX) options:(NSStringDrawingUsesFontLeading|NSStringDrawingUsesDeviceMetrics|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin) context:nil].size;
+    return [self heightForAttributeText:attributeText tbWidth:CGRectGetWidth(tableView.frame) textEdge:textEdge];
+}
+
++ (CGFloat)heightForAttributeText:(NSAttributedString *)attributeText tbWidth:(CGFloat)tbWidth textEdge:(UIEdgeInsets)textEdge {
+    CGSize size = [attributeText boundingRectWithSize:CGSizeMake(tbWidth - textEdge.left - textEdge.right, CGFLOAT_MAX) options:(NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin) context:nil].size;
     return size.height + textEdge.top + textEdge.bottom;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _textEdgeMask = [[UIView alloc] init];
-        _label = [[UILabel alloc] init];
-        _label.numberOfLines = 0.f;
-        _maskEdge = UIEdgeInsetsZero;
-        self.selectionStyle = UITableViewCellSeparatorStyleNone;
-        [self.contentView addSubview:_textEdgeMask];
-        [self.contentView addSubview:_label];
+        [self __setup];
     }
     return self;
+}
+
+- (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithCustomStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self __setup];
+    }
+    return self;
+}
+
+- (void)__setup {
+    _textEdgeMask = [[UIView alloc] init];
+    _label = [[UILabel alloc] init];
+    _label.numberOfLines = 0.f;
+    _maskEdge = UIEdgeInsetsZero;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    [self.contentView addSubview:_textEdgeMask];
+    [self.contentView addSubview:_label];
 }
 
 - (void)setText:(NSString *)text {
@@ -49,9 +68,17 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     [self setNeedsLayout];
 }
 
+- (NSString *)text {
+    return _label.text;
+}
+
 - (void)setAttributedText:(NSAttributedString *)attributedText {
     _label.attributedText = attributedText;
     [self setNeedsLayout];
+}
+
+- (NSAttributedString *)attributedText {
+    return _label.attributedText;
 }
 
 - (void)setLayoutStyle:(RGLabelTableViewCellLayoutStyle)layoutStyle {
