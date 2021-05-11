@@ -11,10 +11,10 @@
 extern CGFloat const RGTableViewCellDefaultIconDimension;
 
 extern NSString * const RGCellID; // UITableViewCellStyleSubtitle
+extern NSString * const RGCellIDDefault; // UITableViewCellStyleDefault
 extern NSString * const RGCellIDSubtitle; // UITableViewCellStyleSubtitle
 extern NSString * const RGCellIDValue1; // UITableViewCellStyleValue1
 extern NSString * const RGCellIDValue2; // UITableViewCellStyleValue2
-extern NSString * const RGCellIDValueDefault; // UITableViewCellStyleDefault
 
 @interface RGTableViewCell : UITableViewCell
 
@@ -36,9 +36,22 @@ extern NSString * const RGCellIDValueDefault; // UITableViewCellStyleDefault
 - (void)subViewsDidLayoutForClass:(Class)subClass;
 
 
-/**
- 初始化cell 自定义 UITableViewCellStyle
- */
+/// default UITableViewAutomaticDimension
+@property (nonatomic, assign) CGFloat markHeight;
+
+
+/// 初始化 cell
+/// @param style 不一定会使用这个style，具体 style 根据 reuseIdentifier 来判断 例如 RGCellIDSubtitle.
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+
+
++ (instancetype)cellWithCustomStyle:(UITableViewCellStyle)style;
+
+ /// 初始化 cell 自定义 UITableViewCellStyle
+- (instancetype)initWithCustomStyle:(UITableViewCellStyle)style;
+
+
+/// 初始化 cell 自定义 UITableViewCellStyle
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 

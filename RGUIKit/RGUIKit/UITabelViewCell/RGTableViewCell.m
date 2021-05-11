@@ -14,7 +14,7 @@ NSString * const RGCellID = @"RGCellIDSubtitle";
 NSString * const RGCellIDSubtitle = RGCellID;
 NSString * const RGCellIDValue1 = @"RGCellIDValue1";
 NSString * const RGCellIDValue2 = @"RGCellIDValue2";
-NSString * const RGCellIDValueDefault = @"RGCellIDValueDefault";
+NSString * const RGCellIDDefault = @"RGCellIDDefault";
 
 NSString *const kRGTableViewCellThemeColorDidChangeNotification = @"kRGTableViewCellThemeColorDidChangeNotification";
 
@@ -38,16 +38,24 @@ static UIColor * kRGTableViewCellThemeColor;
         style = UITableViewCellStyleValue2;
     }
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self configView];
         _cellStyle = style;
+        [self configView];
     }
     return self;
 }
 
++ (instancetype)cellWithCustomStyle:(UITableViewCellStyle)style {
+    return [[self alloc] initWithCustomStyle:style];
+}
+
+- (instancetype)initWithCustomStyle:(UITableViewCellStyle)style {
+    return [self initWithCustomStyle:style reuseIdentifier:nil];
+}
+
 - (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-         [self configView];
         _cellStyle = style;
+         [self configView];
     }
     return self;
 }
@@ -71,6 +79,7 @@ static UIColor * kRGTableViewCellThemeColor;
 }
 
 - (void)configView {
+    _markHeight = UITableViewAutomaticDimension;
     if (!_detailTextColor) {
         _detailTextColor = [UIColor lightGrayColor];
     }
