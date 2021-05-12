@@ -8,6 +8,7 @@
 
 #import "RGLabelTableViewCell.h"
 #import <RGUIKit/RGUIKit.h>
+#import <RGObserver/RGObserver.h>
 
 NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
 
@@ -39,18 +40,9 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     return size.height + textEdge.top + textEdge.bottom;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self __setup];
-    }
-    return self;
-}
-
-- (instancetype)initWithCustomStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithCustomStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self __setup];
-    }
-    return self;
+- (void)cellDidInit {
+    [super cellDidInit];
+    [self __setup];
 }
 
 - (void)__setup {
@@ -61,6 +53,18 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.contentView addSubview:_textEdgeMask];
     [self.contentView addSubview:_label];
+    
+    [_label rg_addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:@"RGLabelTableViewCell"];
+    [_label rg_addObserver:self forKeyPath:@"attributedText" options:NSKeyValueObservingOptionNew context:@"RGLabelTableViewCell"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    id myContext = (__bridge NSString * _Nonnull)(context);
+    if ([keyPath isEqualToString:@"text"] && object == _label && context && [myContext isKindOfClass:NSString.class] && [@"RGLabelTableViewCell" isEqualToString:myContext]) {
+        [self setNeedsLayout];
+    } else if ([keyPath isEqualToString:@"attributedText"] && object == _label && context && [myContext isKindOfClass:NSString.class] && [@"RGLabelTableViewCell" isEqualToString:myContext]) {
+        [self setNeedsLayout];
+    }
 }
 
 - (void)setText:(NSString *)text {
@@ -111,6 +115,7 @@ NSString * const RGLabelTableViewCellID = @"RGLabelTableViewCellID";
     CGRect frame;
     frame.size = size;
     frame.origin.y = _textEdge.top;
+    frame.origin.x = 0;
     if (_layoutStyle != RGLabelTableViewCellLayoutStyleNone) {
         if (_layoutStyle == RGLabelTableViewCellLayoutStyleCenterX ||
             _layoutStyle == RGLabelTableViewCellLayoutStyleCenterXY) {
