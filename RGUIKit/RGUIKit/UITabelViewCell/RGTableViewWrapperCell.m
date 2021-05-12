@@ -109,7 +109,7 @@ NSString * const RGTableViewWrapperCellID = @"RGTableViewWrapperCellID";
     CGRect oBounds = self.contentView.bounds;
     CGRect bounds = UIEdgeInsetsInsetRect(oBounds, edge);
     
-    if (!CGRectEqualToRect(self.contentCell.frame, bounds)) {
+    if (!CGRectEqualToRect(self.tbWrapper.frame, bounds)) {
         self.tbWrapper.frame = bounds;
         self.tbWrapper.rowHeight = bounds.size.height;
         self.tbWrapper.contentOffset = CGPointZero;
