@@ -269,13 +269,13 @@ NSString * const RGTableViewWrapperCellID = @"RGTableViewWrapperCellID";
 - (CALayer *)shadowLayer {
     if (!_shadowLayer) {
         _shadowLayer = [CALayer layer];
-        _shadowLayer.frame = _contentCell.frame;
         _shadowLayer.shadowOffset = CGSizeMake(0, 0);
         _shadowLayer.shadowRadius = 4.0;
         _shadowLayer.shadowColor = [UIColor blackColor].CGColor;
         _shadowLayer.shadowOpacity = 0.12;
         _shadowLayer.hidden = YES;
         [self.layer insertSublayer:_shadowLayer atIndex:0];
+        [self setNeedsLayout];
     }
     return _shadowLayer;
 }
