@@ -32,6 +32,7 @@ extern NSString * const RGCellIDValue2; // UITableViewCellStyleValue2
 /// 继承 RGTableViewCell 的类如果重写了 layoutSubviews 需要在最后调用一下 subViewsDidLayoutForClass, 以保证 layoutSubviewsBlock 能在正确的时机回调
 @property (nonatomic, copy) void(^layoutSubviewsBlock)(__kindof RGTableViewCell *cell, CGRect bounds);
 
+- (void)cellDidInit;
 
 - (void)subViewsDidLayoutForClass:(Class)subClass;
 

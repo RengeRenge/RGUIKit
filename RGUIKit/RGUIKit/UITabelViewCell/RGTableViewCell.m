@@ -10,8 +10,8 @@
 
 CGFloat const RGTableViewCellDefaultIconDimension = 40.f;
 
-NSString * const RGCellID = @"RGCellIDSubtitle";
-NSString * const RGCellIDSubtitle = RGCellID;
+NSString * const RGCellID = @"RGCellIDSubtitleID";
+NSString * const RGCellIDSubtitle = @"RGCellIDSubtitle";
 NSString * const RGCellIDValue1 = @"RGCellIDValue1";
 NSString * const RGCellIDValue2 = @"RGCellIDValue2";
 NSString * const RGCellIDDefault = @"RGCellIDDefault";
@@ -92,6 +92,12 @@ static UIColor * kRGTableViewCellThemeColor;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(themeColorChanged) name:kRGTableViewCellThemeColorDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateFontSizeWhenContentSizeChanged) name:UIContentSizeCategoryDidChangeNotification object:nil];
+    
+    [self cellDidInit];
+}
+
+- (void)cellDidInit {
+    
 }
 
 - (void)setCustomBackgroundIfNeed {

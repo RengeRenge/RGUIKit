@@ -9,9 +9,10 @@
 #import "ViewController.h"
 #import <RGUIKit/RGUIKit.h>
 #import "RGNavigationTestViewController.h"
+#import "WrapperCellDisplayTableViewController.h"
 
 typedef enum : NSUInteger {
-    VCTestTypeEdgeCell,
+    VCTestTypeWrapperCell,
     VCTestTypeCornerCell,
     VCTestTypeIconCell,
     VCTestTypeLabelCell,
@@ -36,7 +37,7 @@ typedef enum : NSUInteger {
     [self.tableView registerClass:RGIconCell.class forCellReuseIdentifier:RGCellID];
     [self.tableView registerClass:RGInputTableViewCell.class forCellReuseIdentifier:RGInputTableViewCellID];
     [self.tableView registerClass:RGLabelTableViewCell.class forCellReuseIdentifier:RGLabelTableViewCellID];
-    [self.tableView registerClass:RGEdgeTableViewCell.class forCellReuseIdentifier:RGEdgeTableViewCellID];
+    [self.tableView registerClass:RGTableViewWrapperCell.class forCellReuseIdentifier:RGTableViewWrapperCellID];
     
     self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     
@@ -54,9 +55,9 @@ typedef enum : NSUInteger {
     });
     self.title = @"Cell Display";
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RGNavigation" style:UIBarButtonItemStylePlain target:self action:@selector(rgNavigation:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RGNavigation" style:UIBarButtonItemStylePlain target:self action:@selector(rgNavigation:)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RTL/LTR" style:UIBarButtonItemStylePlain target:self action:@selector(RTLSwitch:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RTL/LTR" style:UIBarButtonItemStylePlain target:self action:@selector(RTLSwitch:)];
 }
 
 - (void)rgNavigation:(id)sender {
@@ -165,38 +166,29 @@ typedef enum : NSUInteger {
             cell.delegate = self;
             return cell;
         }
-        case VCTestTypeEdgeCell: {
-            cell = [RGEdgeTableViewCell dequeueCellWithIdentifier:RGEdgeTableViewCellID style:UITableViewCellStyleValue2 tableView:tableView];
-            
-            RGEdgeTableViewCell *edgeCell = (RGEdgeTableViewCell *)cell;
-            edgeCell.edge = UIEdgeInsetsMake(7, 50, 7, 10);
-            edgeCell.textLabel.text = @"RGEdgeTableViewCell longggggggggggggggggggggg long long long long long long long long long long long long";
-            edgeCell.textLabel.numberOfLines = 0;
-            edgeCell.textLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
-            edgeCell.rightLabel.text = @"rightLabel";
-            edgeCell.rightLabel.textColor = UIColor.blackColor;
+        case VCTestTypeWrapperCell: {
+            RGTableViewWrapperCell *wrapper = [RGTableViewWrapperCell dequeueCellWithIdentifier:RGTableViewWrapperCellID style:UITableViewCellStyleSubtitle tableView:tableView];
+            wrapper.edge = UIEdgeInsetsMake(30, 30, 30, 30);
+            wrapper.shadowLayer.hidden = NO;
+            wrapper.shadowLayer.shadowRadius = 8;
+            wrapper.shadowLayer.shadowOpacity = 0.6;
 
-            edgeCell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-            edgeCell.showdowLayer.hidden = NO;
-            edgeCell.contentCorner = UIRectCornerAllCorners;
-            edgeCell.contentCornerRadius = 10.f;
-            edgeCell.customSeparatorStyle = RGEdgeCellSeparatorStyleDefault;
-            edgeCell.customSeparatorView.backgroundColor = [UIColor blackColor];
-            edgeCell.customSeparatorEdge = UIEdgeInsetsMake(-2, 0, 2, edgeCell.cornerRadius/2.f);
-            edgeCell.highlightedEnable = YES;
-            edgeCell.cornerRadius = 10.f;
-            edgeCell.corner = UIRectCornerAllCorners;
-            edgeCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            edgeCell.imageView.backgroundColor = UIColor.blackColor;
-            [edgeCell configCustomIcon:^id _Nullable(id  _Nullable icon) {
-                if (!icon) {
-                    icon = [UIView new];
-//                    [icon setBackgroundColor:UIColor.rg_randomColor];
-                    [icon rg_setBackgroundGradientColors:@[UIColor.rg_randomColor, UIColor.rg_randomColor] locations:nil drawType:RGDrawTypeCircleFit];
-                }
-                return icon;
-            }];
-            [edgeCell setIconCorner:UIRectCornerBottomLeft cornerRadius:12];
+            wrapper.customSeparatorStyle = RGTableViewWrapperSeparatorStyleContentFull;
+            
+            wrapper.contentCornerRadius = 10.f;
+            wrapper.contentCorner = UIRectCornerAllCorners;
+            
+            wrapper.highlightArea = RGTableViewHighlightAreaContent;
+            cell = wrapper;
+            
+            RGTableViewCell *contentCell = wrapper.contentCell;
+            contentCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            contentCell.applyThemeColor = YES;
+            
+            contentCell.imageView.image = [UIImage rg_coloredImage:UIColor.clearColor size:CGSizeMake(30, 30)];
+            contentCell.imageView.layer.cornerRadius = 15;
+            contentCell.imageView.layer.masksToBounds = YES;
+            [contentCell.imageView rg_setBackgroundGradientColors:@[UIColor.rg_randomColor, UIColor.rg_randomColor] locations:nil drawType:RGDrawTypeCircleFit];
             break;
         }
         default:
@@ -214,9 +206,23 @@ typedef enum : NSUInteger {
         case VCTestTypeLabelCell:{
             break;
         }
+        case VCTestTypeWrapperCell: {
+            WrapperCellDisplayTableViewController *vc = [[WrapperCellDisplayTableViewController alloc] initWithStyle:UITableViewStylePlain];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
         default:
             [tableView deselectRowAtIndexPath:indexPath animated:YES];
             break;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case VCTestTypeWrapperCell:
+            return 160;
+        default:
+            return UITableViewAutomaticDimension;
     }
 }
 

@@ -21,6 +21,7 @@
 		E6B53EE5219527DD003D61DB /* RGNavigationTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */; };
 		E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DA65722193E71200BF3201 /* DrawViewController.m */; };
 		E6DACA392388AC89006D2EDA /* DrawLineCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DACA382388AC89006D2EDA /* DrawLineCustomViewController.m */; };
+		E6FF585E2635A19100A64A68 /* WrapperCellDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FF585D2635A19100A64A68 /* WrapperCellDisplayTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,8 @@
 		E6DA65722193E71200BF3201 /* DrawViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawViewController.m; sourceTree = "<group>"; };
 		E6DACA372388AC89006D2EDA /* DrawLineCustomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawLineCustomViewController.h; sourceTree = "<group>"; };
 		E6DACA382388AC89006D2EDA /* DrawLineCustomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrawLineCustomViewController.m; sourceTree = "<group>"; };
+		E6FF585C2635A19100A64A68 /* WrapperCellDisplayTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WrapperCellDisplayTableViewController.h; sourceTree = "<group>"; };
+		E6FF585D2635A19100A64A68 /* WrapperCellDisplayTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WrapperCellDisplayTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,7 @@
 		E674746F238BC9B300BD4DC8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E6FF585B2635A17700A64A68 /* Cell */,
 				E65AE4D9257737080065FAB4 /* Layout */,
 				E626FFD7238BDAC1007200E4 /* Draw */,
 				E61A04B52192B627008D35F1 /* ViewController.h */,
@@ -154,6 +158,15 @@
 				E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E6FF585B2635A17700A64A68 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E6FF585C2635A19100A64A68 /* WrapperCellDisplayTableViewController.h */,
+				E6FF585D2635A19100A64A68 /* WrapperCellDisplayTableViewController.m */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +298,7 @@
 				E6747472238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m in Sources */,
 				E61A04C22192B62A008D35F1 /* main.m in Sources */,
 				E65AE4E4257877110065FAB4 /* RGLayoutTestView.m in Sources */,
+				E6FF585E2635A19100A64A68 /* WrapperCellDisplayTableViewController.m in Sources */,
 				E6DACA392388AC89006D2EDA /* DrawLineCustomViewController.m in Sources */,
 				E61A04B42192B627008D35F1 /* AppDelegate.m in Sources */,
 			);
