@@ -10,11 +10,14 @@
 		77034CEB05B56236E6231D9A /* Pods_RGUIKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7237E9A5883DABE30AD94A4 /* Pods_RGUIKitDemo.framework */; };
 		E60BEA982192C3500014BF2D /* PopTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60BEA972192C3500014BF2D /* PopTestViewController.m */; };
 		E61A04B42192B627008D35F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04B32192B627008D35F1 /* AppDelegate.m */; };
-		E61A04B72192B627008D35F1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04B62192B627008D35F1 /* ViewController.m */; };
+		E61A04B72192B627008D35F1 /* RGTableViewCellsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04B62192B627008D35F1 /* RGTableViewCellsViewController.m */; };
 		E61A04BA2192B627008D35F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E61A04B82192B627008D35F1 /* Main.storyboard */; };
 		E61A04BC2192B62A008D35F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BB2192B62A008D35F1 /* Assets.xcassets */; };
 		E61A04BF2192B62A008D35F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E61A04BD2192B62A008D35F1 /* LaunchScreen.storyboard */; };
 		E61A04C22192B62A008D35F1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E61A04C12192B62A008D35F1 /* main.m */; };
+		E641AB1B264E156300228E2F /* ViewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E641AB1A264E156300228E2F /* ViewTableViewController.m */; };
+		E641AB1F264E1CAD00228E2F /* RGBluuurViewDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E641AB1E264E1CAD00228E2F /* RGBluuurViewDisplayViewController.m */; };
+		E641AB21264E25F100228E2F /* nyapass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E641AB20264E25F100228E2F /* nyapass.jpg */; };
 		E65AE4DC2577372B0065FAB4 /* RGLayoutTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AE4DB2577372A0065FAB4 /* RGLayoutTestViewController.m */; };
 		E65AE4E4257877110065FAB4 /* RGLayoutTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = E65AE4E3257877110065FAB4 /* RGLayoutTestView.m */; };
 		E6747472238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6747471238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m */; };
@@ -33,14 +36,19 @@
 		E61A04AF2192B627008D35F1 /* RGUIKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RGUIKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61A04B22192B627008D35F1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E61A04B32192B627008D35F1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E61A04B52192B627008D35F1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E61A04B62192B627008D35F1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E61A04B52192B627008D35F1 /* RGTableViewCellsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGTableViewCellsViewController.h; sourceTree = "<group>"; };
+		E61A04B62192B627008D35F1 /* RGTableViewCellsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGTableViewCellsViewController.m; sourceTree = "<group>"; };
 		E61A04B92192B627008D35F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E61A04BB2192B62A008D35F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E61A04BE2192B62A008D35F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E61A04C02192B62A008D35F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E61A04C12192B62A008D35F1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E632AFB321A4FDD6003C7A7F /* RGUIKitDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RGUIKitDemo.entitlements; sourceTree = "<group>"; };
+		E641AB19264E156300228E2F /* ViewTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewTableViewController.h; sourceTree = "<group>"; };
+		E641AB1A264E156300228E2F /* ViewTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewTableViewController.m; sourceTree = "<group>"; };
+		E641AB1D264E1CAD00228E2F /* RGBluuurViewDisplayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGBluuurViewDisplayViewController.h; sourceTree = "<group>"; };
+		E641AB1E264E1CAD00228E2F /* RGBluuurViewDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGBluuurViewDisplayViewController.m; sourceTree = "<group>"; };
+		E641AB20264E25F100228E2F /* nyapass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nyapass.jpg; sourceTree = "<group>"; };
 		E65AE4DA2577372A0065FAB4 /* RGLayoutTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGLayoutTestViewController.h; sourceTree = "<group>"; };
 		E65AE4DB2577372A0065FAB4 /* RGLayoutTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RGLayoutTestViewController.m; sourceTree = "<group>"; };
 		E65AE4E2257877110065FAB4 /* RGLayoutTestView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RGLayoutTestView.h; sourceTree = "<group>"; };
@@ -135,6 +143,27 @@
 			path = Draw;
 			sourceTree = "<group>";
 		};
+		E641AB18264E154400228E2F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E641AB1C264E1C7600228E2F /* RGBluuurView */,
+				E6FF585B2635A17700A64A68 /* Cell */,
+				E641AB19264E156300228E2F /* ViewTableViewController.h */,
+				E641AB1A264E156300228E2F /* ViewTableViewController.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E641AB1C264E1C7600228E2F /* RGBluuurView */ = {
+			isa = PBXGroup;
+			children = (
+				E641AB20264E25F100228E2F /* nyapass.jpg */,
+				E641AB1D264E1CAD00228E2F /* RGBluuurViewDisplayViewController.h */,
+				E641AB1E264E1CAD00228E2F /* RGBluuurViewDisplayViewController.m */,
+			);
+			path = RGBluuurView;
+			sourceTree = "<group>";
+		};
 		E65AE4D9257737080065FAB4 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,13 +178,11 @@
 		E674746F238BC9B300BD4DC8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E6FF585B2635A17700A64A68 /* Cell */,
-				E65AE4D9257737080065FAB4 /* Layout */,
-				E626FFD7238BDAC1007200E4 /* Draw */,
-				E61A04B52192B627008D35F1 /* ViewController.h */,
-				E61A04B62192B627008D35F1 /* ViewController.m */,
 				E6B53EE3219527DD003D61DB /* RGNavigationTestViewController.h */,
 				E6B53EE4219527DD003D61DB /* RGNavigationTestViewController.m */,
+				E641AB18264E154400228E2F /* View */,
+				E65AE4D9257737080065FAB4 /* Layout */,
+				E626FFD7238BDAC1007200E4 /* Draw */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -163,6 +190,8 @@
 		E6FF585B2635A17700A64A68 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				E61A04B52192B627008D35F1 /* RGTableViewCellsViewController.h */,
+				E61A04B62192B627008D35F1 /* RGTableViewCellsViewController.m */,
 				E6FF585C2635A19100A64A68 /* WrapperCellDisplayTableViewController.h */,
 				E6FF585D2635A19100A64A68 /* WrapperCellDisplayTableViewController.m */,
 			);
@@ -239,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E641AB21264E25F100228E2F /* nyapass.jpg in Resources */,
 				E61A04BF2192B62A008D35F1 /* LaunchScreen.storyboard in Resources */,
 				E61A04BC2192B62A008D35F1 /* Assets.xcassets in Resources */,
 				E61A04BA2192B627008D35F1 /* Main.storyboard in Resources */,
@@ -294,10 +324,12 @@
 				E60BEA982192C3500014BF2D /* PopTestViewController.m in Sources */,
 				E65AE4DC2577372B0065FAB4 /* RGLayoutTestViewController.m in Sources */,
 				E6DA65732193E71200BF3201 /* DrawViewController.m in Sources */,
-				E61A04B72192B627008D35F1 /* ViewController.m in Sources */,
+				E61A04B72192B627008D35F1 /* RGTableViewCellsViewController.m in Sources */,
 				E6747472238BCA4F00BD4DC8 /* DrawDisplayTableViewController.m in Sources */,
+				E641AB1B264E156300228E2F /* ViewTableViewController.m in Sources */,
 				E61A04C22192B62A008D35F1 /* main.m in Sources */,
 				E65AE4E4257877110065FAB4 /* RGLayoutTestView.m in Sources */,
+				E641AB1F264E1CAD00228E2F /* RGBluuurViewDisplayViewController.m in Sources */,
 				E6FF585E2635A19100A64A68 /* WrapperCellDisplayTableViewController.m in Sources */,
 				E6DACA392388AC89006D2EDA /* DrawLineCustomViewController.m in Sources */,
 				E61A04B42192B627008D35F1 /* AppDelegate.m in Sources */,

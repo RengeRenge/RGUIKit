@@ -6,9 +6,8 @@
 //  Copyright © 2018 ld. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "RGTableViewCellsViewController.h"
 #import <RGUIKit/RGUIKit.h>
-#import "RGNavigationTestViewController.h"
 #import "WrapperCellDisplayTableViewController.h"
 
 typedef enum : NSUInteger {
@@ -21,11 +20,11 @@ typedef enum : NSUInteger {
     VCTestTypeCount,
 } VCTestType;
 
-@interface ViewController () <RGInputCellDelegate>
+@interface RGTableViewCellsViewController () <RGInputCellDelegate>
 
 @end
 
-@implementation ViewController
+@implementation RGTableViewCellsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,30 +53,6 @@ typedef enum : NSUInteger {
         }];
     });
     self.title = @"Cell Display";
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RGNavigation" style:UIBarButtonItemStylePlain target:self action:@selector(rgNavigation:)];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RTL/LTR" style:UIBarButtonItemStylePlain target:self action:@selector(RTLSwitch:)];
-}
-
-- (void)rgNavigation:(id)sender {
-    RGNavigationTestViewController *vc = [RGNavigationTestViewController new];
-    vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dismiss" style:UIBarButtonItemStylePlain target:vc action:@selector(rg_dismiss)];
-    RGNavigationController *navigation = [RGNavigationController navigationWithRoot:vc style:RGNavigationBackgroundStyleShadow];
-    navigation.tintColor = [UIColor whiteColor];
-    navigation.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:navigation animated:YES completion:nil];
-}
-
-- (void)RTLSwitch:(id)sender {
-    if (@available(iOS 9.0, *)) {
-        UISemanticContentAttribute att = [UIView appearance].semanticContentAttribute;
-        if (att == UISemanticContentAttributeForceRightToLeft) {
-            [UIView rg_setSemanticContentAttribute:UISemanticContentAttributeForceLeftToRight];
-        } else {
-            [UIView rg_setSemanticContentAttribute:UISemanticContentAttributeForceRightToLeft];
-        }
-    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

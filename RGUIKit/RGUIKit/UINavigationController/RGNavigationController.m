@@ -206,4 +206,21 @@
     return nil;
 }
 
+- (__kindof UIViewController *(^)(UIViewController *))rg_pushedBy {
+    return ^(UIViewController *nvg) {
+        if (![nvg isKindOfClass:UINavigationController.class]) {
+            nvg = nvg.navigationController;
+        }
+        [(UINavigationController *)nvg pushViewController:self animated:YES];
+        return self;
+    };
+}
+
+- (__kindof UIViewController *(^)(void))rg_hidesBottomBarWhenPushed {
+    return ^ {
+        self.hidesBottomBarWhenPushed = YES;
+        return self;
+    };
+}
+
 @end

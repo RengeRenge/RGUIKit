@@ -27,16 +27,48 @@
     return effect;
 }
 
-+ (RGBlurEffect *)effectWithBlurRadius:(CGFloat)blurRadius {
-    RGBlurEffect *effect = [self effectWithStyle:UIBlurEffectStyleLight];
-    
++ (RGBlurEffect *)effectWithStyle:(UIBlurEffectStyle)style blurRadius:(CGFloat)blurRadius {
+    RGBlurEffect *effect = [self effectWithStyle:style];
     effect.blurRadius = blurRadius;
-    effect.grayscaleTintLevel = 1;
-    effect.grayscaleTintAlpha = 0;
-    effect.saturationDeltaFactor = 1;
-    
     return effect;
 }
+
++ (RGBlurEffect *)effectWithBlurRadius:(CGFloat)blurRadius {
+    RGBlurEffect *effect = [self effectWithStyle:UIBlurEffectStyleLight];
+    effect.blurRadius = blurRadius;
+    return effect;
+}
+
++ (RGBlurEffect *)effectWithStyle:(UIBlurEffectStyle)style effect:(RGBlurEffect *)effect {
+    if (!effect) {
+        return [self effectWithStyle:style];
+    }
+    RGBlurEffect *eff = [self effectWithStyle:style];
+    eff.blurRadius = effect.blurRadius;
+    eff.grayscaleTintLevel = effect.grayscaleTintLevel;
+    eff.grayscaleTintAlpha = effect.grayscaleTintAlpha;
+    eff.saturationDeltaFactor = effect.saturationDeltaFactor;
+    return eff;
+}
+
+- (void)configDark {
+    self.grayscaleTintLevel = 0.11;
+    self.grayscaleTintAlpha = 0.73;
+    self.saturationDeltaFactor = 1.80;
+}
+
+- (void)configLight {
+    self.grayscaleTintLevel = 1;
+    self.grayscaleTintAlpha = 0.3;
+    self.saturationDeltaFactor = 1.80;
+    //    self.grayscaleTintLevel = 1;
+    //    self.grayscaleTintAlpha = 0;
+    //    self.saturationDeltaFactor = 1;
+}
+
+//- (id)copyWithZone:(NSZone *)zone {
+//    return [self.class effectWithStyle:self.style effect:self];
+//}
 
 - (id)effectSettings {
     if (!_effectSettingsRecord) {
@@ -45,29 +77,45 @@
     return _effectSettingsRecord;
 }
 
+- (CGFloat)blurRadius {
+    return [self getFloatSettingsSelector:@selector(blurRadius)];
+}
+
 - (void)setBlurRadius:(CGFloat)blurRadius {
-    _blurRadius = blurRadius;
     [self setSettingsValue:@(blurRadius) forSelector:@selector(blurRadius)];
 }
 
+- (CGFloat)grayscaleTintLevel {
+    return [self getFloatSettingsSelector:@selector(grayscaleTintLevel)];
+}
+
 - (void)setGrayscaleTintLevel:(CGFloat)grayscaleTintLevel {
-    _grayscaleTintLevel = grayscaleTintLevel;
     [self setSettingsValue:@(grayscaleTintLevel) forSelector:@selector(grayscaleTintLevel)];
 }
 
+- (CGFloat)grayscaleTintAlpha {
+    return [self getFloatSettingsSelector:@selector(grayscaleTintAlpha)];
+}
+
 - (void)setGrayscaleTintAlpha:(CGFloat)grayscaleTintAlpha {
-    _grayscaleTintAlpha = grayscaleTintAlpha;
     [self setSettingsValue:@(grayscaleTintAlpha) forSelector:@selector(grayscaleTintAlpha)];
 }
 
+- (CGFloat)saturationDeltaFactor {
+    return [self getFloatSettingsSelector:@selector(saturationDeltaFactor)];
+}
+
 - (void)setSaturationDeltaFactor:(CGFloat)saturationDeltaFactor {
-    _saturationDeltaFactor = saturationDeltaFactor;
     [self setSettingsValue:@(saturationDeltaFactor) forSelector:@selector(saturationDeltaFactor)];
 }
 
 // 避免审核风险
 - (void)setSettingsValue:(id)value forSelector:(SEL)selector {
     [self.effectSettings setValue:value forKey:NSStringFromSelector(selector)];
+}
+
+- (CGFloat)getFloatSettingsSelector:(SEL)selector {
+    return [[self.effectSettings valueForKey:NSStringFromSelector(selector)] floatValue];
 }
 
 - (id)settingsValueForSelector:(SEL)selector {

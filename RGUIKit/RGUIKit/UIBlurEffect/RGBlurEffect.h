@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) UIBlurEffectStyle style;
 
 + (RGBlurEffect *)effectWithStyle:(UIBlurEffectStyle)style;
++ (RGBlurEffect *)effectWithStyle:(UIBlurEffectStyle)style effect:(RGBlurEffect *)effect;
++ (RGBlurEffect *)effectWithStyle:(UIBlurEffectStyle)style blurRadius:(CGFloat)blurRadius;
 + (RGBlurEffect *)effectWithBlurRadius:(CGFloat)blurRadius;
 
 @end

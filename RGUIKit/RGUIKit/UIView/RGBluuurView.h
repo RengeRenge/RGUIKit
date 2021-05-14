@@ -18,21 +18,42 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RGUIKit/RGBlurEffect.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RGBluuurView : UIVisualEffectView
+
+@property (nonatomic, copy, nullable) RGBlurEffect *effect;
+
+@property (nonatomic, assign) UIBlurEffectStyle style;
 
 @property (nonatomic) CGFloat grayscaleTintLevel;
 @property (nonatomic) CGFloat grayscaleTintAlpha;
 @property (nonatomic) CGFloat saturationDeltaFactor;
 @property (nonatomic) CGFloat blurRadius;
 
-- (void)beginChange;
++ (instancetype)new;
+- (instancetype)initWithEffect:(RGBlurEffect *__nullable)effect;
+- (instancetype)initWithFrame:(CGRect)frame;
+
+- (void)setEffect:(RGBlurEffect *__nullable)effect;
+
+/*
+ Animate Sample.
+ 
+ [self.blurView beginChangeToStyle:UIBlurEffectStyleLight];
+ 
+ [UIView animateWithDuration:0.6 animations:^{
+     self.blurView.blurRadius = 50;
+     [self.blurView commitChange];
+ }];
+ 
+ */
+- (void)beginChangeToStyle:(UIBlurEffectStyle)style;
 - (void)commitChange;
 
-+ (instancetype)new;
-- (instancetype)initWithFrame:(CGRect)frame;
+- (UIVisualEffectView *)vibrancyEffectView;
 
 @end
 

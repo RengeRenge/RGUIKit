@@ -30,6 +30,9 @@ typedef enum : NSUInteger {
 
 @interface UIViewController (RGNavigationController)
 
+@property (nonatomic, copy, readonly) __kindof UIViewController *(^rg_pushedBy)(UIViewController *nvg);
+@property (nonatomic, copy, readonly) __kindof UIViewController *(^rg_hidesBottomBarWhenPushed)(void);
+
 - (__kindof RGNavigationController *)rg_navigationController;
 
 @end

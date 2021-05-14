@@ -44,6 +44,10 @@
 
 @property (assign, nonatomic) BOOL changing;
 
+@property (assign, nonatomic) UIBlurEffectStyle changingStyle;
+
+@property (strong, nonatomic) UIVisualEffectView *subEffectView;
+
 //@property (strong, nonatomic) UIViewPropertyAnimator *ani;
 
 @end
@@ -54,9 +58,9 @@
     return [[self alloc] initWithFrame:CGRectZero];
 }
 
-- (instancetype)initWithEffect:(UIVisualEffect *)effect {
+- (instancetype)initWithEffect:(RGBlurEffect *)effect {
     if (self = [super initWithEffect:effect]) {
-        [self setup];
+        self.blurEffect = effect;
     }
     return self;
 }
@@ -76,7 +80,7 @@
 }
 
 - (void)setup {
-    self.effect = nil;
+    [super setEffect:nil];
     self.effect = self.blurEffect;
 }
 
@@ -87,7 +91,45 @@
     return _blurEffect;
 }
 
+- (void)setEffect:(RGBlurEffect *)effect {
+    if (_blurEffect != effect) {
+        _blurEffect = effect;
+        [self _config];
+    }
+}
+
+- (RGBlurEffect *)effect {
+    return _blurEffect;
+}
+
+- (UIVisualEffectView *)vibrancyEffectView {
+    if (!_subEffectView) {
+        UIVisualEffectView *subEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIVibrancyEffect effectForBlurEffect:self.effect]];
+        _subEffectView = subEffectView;
+        
+        subEffectView.frame = self.bounds;
+        subEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        [self.contentView insertSubview:subEffectView atIndex:0];
+    }
+    return _subEffectView;
+}
+
 #pragma mark - Properties
+
+- (UIBlurEffectStyle)style {
+    return self.blurEffect.style;
+}
+
+- (void)setStyle:(UIBlurEffectStyle)style {
+    if (self.changing) {
+        return;
+    }
+    self.changingStyle = -1;
+    if (style != self.blurEffect.style) {
+        _blurEffect = [RGBlurEffect effectWithStyle:style blurRadius:self.blurRadius];
+        [self _config];
+    }
+}
 
 - (CGFloat)grayscaleTintLevel {
     return self.blurEffect.grayscaleTintLevel;
@@ -125,22 +167,21 @@
     [self _config];
 }
 
-- (void)beginChange {
+- (void)beginChangeToStyle:(UIBlurEffectStyle)style {
     self.changing = YES;
+    self.changingStyle = style;
     
-    RGBlurEffect *blurEffect = [RGBlurEffect effectWithStyle: self.blurEffect.style == UIBlurEffectStyleDark ? UIBlurEffectStyleLight : UIBlurEffectStyleDark];
+    RGBlurEffect *blurEffect = [RGBlurEffect effectWithStyle:[self _otherStyleWithStyle:style] effect:self.blurEffect];
+    super.effect = blurEffect;
     
-    blurEffect.blurRadius = self.blurRadius;
-    blurEffect.saturationDeltaFactor = self.saturationDeltaFactor;
-    blurEffect.grayscaleTintAlpha = self.grayscaleTintAlpha;
-    blurEffect.grayscaleTintLevel = self.grayscaleTintLevel;
-    
-    self.effect = nil;
-    self.effect = blurEffect;
+    _subEffectView.effect = [UIVibrancyEffect effectForBlurEffect:self.effect];
 }
 
 - (void)commitChange {
     self.changing = NO;
+    if (self.changingStyle != -1) {
+        self.style = self.changingStyle;
+    }
     [self _config];
 }
 
@@ -150,10 +191,18 @@
     if (self.changing) {
         return;
     }
-    self.effect = nil;
-    if (self.blurEffect.blurRadius != 0) {
-        self.effect = self.blurEffect;
+    
+    if (_blurEffect.blurRadius == 0) {
+        super.effect = nil;
+    } else {
+        super.effect = nil;
+        super.effect = _blurEffect;
+        _subEffectView.effect = [UIVibrancyEffect effectForBlurEffect:self.effect];
     }
+}
+
+- (UIBlurEffectStyle)_otherStyleWithStyle:(UIBlurEffectStyle)style {
+    return style == UIBlurEffectStyleDark ? UIBlurEffectStyleLight : UIBlurEffectStyleDark;
 }
 
 @end
