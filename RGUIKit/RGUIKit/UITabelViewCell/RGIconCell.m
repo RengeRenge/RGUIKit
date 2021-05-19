@@ -163,6 +163,9 @@
         _fakeImageView.clipsToBounds = YES;
         [super imageView].image = [UIImage rg_coloredImage:[UIColor clearColor] size:_iconSize];
         [self.contentView addSubview:_fakeImageView];
+        
+        [self setIconCorner:_corner cornerRadius:_cornerRadius];
+        [self setIconBackgroundColor:_iconBackgroundColor];
     }
     return _fakeImageView;
 }
