@@ -9,10 +9,12 @@
 #import "DrawDisplayTableViewController.h"
 #import "DrawViewController.h"
 #import "PopTestViewController.h"
+#import "GradientSliderViewController.h"
 #import <RGUIKit/RGUIKit.h>
 
 typedef enum : NSUInteger {
     DrawTypeBersize,
+    DrawTypeGradientGet,
     DrawTypeImageEdit,
     DrawTypeCount,
 } DrawType;
@@ -54,6 +56,9 @@ typedef enum : NSUInteger {
         case DrawTypeBersize:
             cell.textLabel.text = @"Draw Gradient";
             break;
+        case DrawTypeGradientGet:
+            cell.textLabel.text = @"Gradient Get";
+            break;
         case DrawTypeImageEdit:
             cell.textLabel.text = @"ImageEdit";
             break;
@@ -66,6 +71,11 @@ typedef enum : NSUInteger {
     switch (indexPath.row) {
         case DrawTypeBersize:{
             DrawViewController *vc = [[DrawViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case DrawTypeGradientGet: {
+            GradientSliderViewController *vc = [GradientSliderViewController new];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

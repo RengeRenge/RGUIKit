@@ -17,6 +17,9 @@ typedef enum : NSUInteger {
     RGDrawTypeDiagonalTopLeftToBottomRight,
     RGDrawTypeCircleFill,
     RGDrawTypeCircleFit,
+    
+    RGDrawTypeRightToLeft,
+    RGDrawTypeLeadingToTrailing // only valid for view background
 } RGDrawType;
 
 
@@ -50,32 +53,6 @@ typedef enum : NSUInteger {
 
 @end
 
-@interface UIView (RGGradient)
-
-- (CALayer *)rg_gradientLayer;
-
-- (void)rg_setBackgroundGradientColors:(NSArray <id> *)colors
-                             locations:(NSArray <NSNumber *> *_Nullable)locations
-                              drawType:(RGDrawType)drawType;
-
-- (void)rg_setBackgroundGradientColors:(NSArray <id> *)colors
-                             locations:(NSArray <NSNumber *> *_Nullable)locations
-                               drawRad:(CGFloat)rad;
-
-- (void)rg_setBackgroundGradientColors:(NSArray <id> *)colors
-                             locations:(NSArray <NSNumber *> *_Nullable)locations
-                                  path:(UIBezierPath *_Nullable)path
-                              drawType:(RGDrawType)drawType;
-
-- (void)rg_setBackgroundGradientColors:(NSArray <id> *)colors
-                             locations:(NSArray <NSNumber *> *_Nullable)locations
-                                  path:(UIBezierPath *_Nullable)path
-                               drawRad:(CGFloat)rad;
-
-- (void)rg_removeBackgroundGradientColors;
-
-@end
-
 @interface NSObject (RGCalGradientParam)
 
 + (void)rg_gradientParamWithBounds:(CGRect)bounds
@@ -88,9 +65,29 @@ typedef enum : NSUInteger {
 
 @end
 
+@interface UIImage (RGGradientImage)
+
++ (UIImage *)rg_gradientImageWithPath:(UIBezierPath *)path
+                               colors:(NSArray <id> *)colors
+                            locations:(NSArray <NSNumber *> *_Nullable)locations
+                             drawType:(RGDrawType)drawType;
+
++ (UIImage *)rg_gradientImageWithPath:(UIBezierPath *)path
+                               colors:(NSArray <id> *)colors
+                            locations:(NSArray <NSNumber *> *_Nullable)locations
+                              drawRad:(CGFloat)rad;
+
+@end
+
 @interface NSArray (RGGradientColors)
 
 - (NSMutableArray *)rg_CGColors;
+
+@end
+
+@interface NSObject (RGGradientLocations)
+
++ (void)rg_transformNumberLocations:(NSArray <NSNumber *> *)loc toLocations:(void (NS_NOESCAPE^)(CGFloat * _Nonnull locations, void (^_Nonnull free)(void)))locations;
 
 @end
 

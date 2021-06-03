@@ -62,6 +62,72 @@
                            alpha:1.0f];
 }
 
++ (UIColor *)rg_colorInLinearGradientColorStart:(UIColor *)colorStart colorEnd:(UIColor *)colorEnd colorLocation:(NSNumber *)colorLocation {
+    CGFloat r1;
+    CGFloat g1;
+    CGFloat b1;
+    CGFloat a1;
+    [colorStart getRed:&r1 green:&g1 blue:&b1 alpha:&a1];
+    
+    CGFloat r2;
+    CGFloat g2;
+    CGFloat b2;
+    CGFloat a2;
+    [colorEnd getRed:&r2 green:&g2 blue:&b2 alpha:&a2];
+    
+    CGFloat p = MIN(colorLocation.floatValue, 1.f);
+    return [UIColor colorWithRed:r1 + (r2 - r1) * p
+                           green:g1 + (g2 - g1) * p
+                            blue:b1 + (b2 - b1) * p
+                           alpha:a1 + (a2 - a1) * p];
+}
+
++ (UIColor *)rg_colorInLinearGradientColors:(NSArray<UIColor *> *)colors locations:(NSArray<NSNumber *> *)locations colorLocation:(NSNumber *)colorLocation {
+    if (colors.count == 0) {
+        return nil;
+    }
+    if (colors.count == 1) {
+        return colors.firstObject;
+    }
+    
+    CGFloat percent = MIN(colorLocation.floatValue, 1.f);
+    
+    __block NSUInteger s = 0;
+    NSUInteger e = 0;
+    CGFloat p = 0;
+    if (locations) {
+        [locations enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.floatValue < percent) {
+                s = idx;
+            } else if (obj.floatValue == percent) {
+                s = idx;
+                *stop = YES;
+            } else {
+                *stop = YES;
+            }
+        }];
+        e = MIN(s + 1, locations.count - 1);
+        if (e < locations.count && e != s) {
+            CGFloat l = locations[e].floatValue - locations[s].floatValue;
+            p = (percent - locations[s].floatValue) / l;
+        }
+    } else {
+        s = floor(percent * (colors.count - 1));
+        s = MIN(s, colors.count - 1);
+        
+        e = MIN(s + 1, colors.count - 1);
+        
+        CGFloat l = 1.f / (colors.count - 1);
+        p = (percent - s * l) / l;;
+    }
+//    NSLog(@"s:%lu, e:%lu, p:%f", (unsigned long)s, (unsigned long)e, p);
+    if (s < colors.count && e < colors.count) {
+        p = MIN(1, MAX(0, p));
+        return [self rg_colorInLinearGradientColorStart:colors[s] colorEnd:colors[e] colorLocation:@(p)];
+    }
+    return nil;
+}
+
 - (UIColor *)rg_coverOnColor:(UIColor *)backgroundColor {
     CGFloat r1;
     CGFloat g1;

@@ -31,6 +31,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)rg_colorWithRGBHexString:(NSString *)hexString;
 + (UIColor *)rg_colorWithRGBHex:(UInt32)hex;
 
+
+/// get a color in linear gradient color
+/// @param colorLocation 0 - 1
++ (UIColor *)rg_colorInLinearGradientColorStart:(UIColor *)colorStart colorEnd:(UIColor *)colorEnd colorLocation:(NSNumber *)colorLocation;
++ (UIColor *)rg_colorInLinearGradientColors:(NSArray <UIColor *> *)colors
+                                  locations:(NSArray <NSNumber *> *_Nullable)locations
+                              colorLocation:(NSNumber *)colorLocation;
+
 - (UIColor *)rg_coverOnColor:(UIColor *)backgroundColor;
 
 @end
