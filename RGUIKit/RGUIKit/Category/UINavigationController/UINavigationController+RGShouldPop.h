@@ -15,6 +15,7 @@
 
 - (BOOL)rg_navigationControllerShouldPop:(UINavigationController *)navigationController isInteractive:(BOOL)isInteractive;
 
+@optional
 - (void)rg_navigationController:(UINavigationController *)navigationController interactivePopResult:(BOOL)finished;
 
 @end
