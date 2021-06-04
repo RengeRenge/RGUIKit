@@ -58,6 +58,7 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 
 #import <RGUIKit/UINavigationController+RGShouldPop.h>
 #import <RGUIKit/UITextField+RGTextOB.h>
+#import <RGUIKit/UIButton+RGSetting.h>
 
 #import <RGUIKit/UIImage+RGTint.h>
 #import <RGUIKit/UIImage+RGName.h>
