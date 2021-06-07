@@ -9,8 +9,14 @@
 #import "RGNavigationController.h"
 #import "UIBezierPath+RGDraw.h"
 #import "UIViewController+RGNavigationBarLayout.h"
+#import <RGObserver/RGObserver.h>
+
+void *RGNavigationControllerOBKey = "RGNavigationController";
 
 @interface RGNavigationController ()
+
+@property (nonatomic, strong) UIImage *cacheBg;
+@property (nonatomic, strong) UIImage *cacheBgLandscape;
 
 @end
 
@@ -30,6 +36,9 @@
     [super viewDidLoad];
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
     [self performSelector:@selector(configBar) withObject:nil afterDelay:0.f inModes:@[NSRunLoopCommonModes]];
+    
+    [self.navigationBar rg_addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionNew context:RGNavigationControllerOBKey];
+    [self.navigationBar rg_addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew context:RGNavigationControllerOBKey];
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
@@ -54,15 +63,25 @@
     if (self.isViewLoaded) {
         [self configBar];
     } else {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
-        [self performSelector:@selector(configBar) withObject:nil afterDelay:0.f inModes:@[NSRunLoopCommonModes]];
+        [self performConfigBar];
     }
 }
 
-//- (void)setBarStyle:(UIStatusBarStyle)barStyle {
-//    _barStyle = barStyle;
-//    [self setNeedsStatusBarAppearanceUpdate];
-//}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if (RGNavigationControllerOBKey == context) {
+        [self performConfigBar];
+    }
+}
+
+- (void)viewSafeAreaInsetsDidChange {
+    [super viewSafeAreaInsetsDidChange];
+    [self performConfigBar];
+}
+
+- (void)performConfigBar {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
+    [self performSelector:@selector(configBar) withObject:nil afterDelay:0.f inModes:@[NSRunLoopCommonModes]];
+}
 
 - (void)configBar {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
@@ -86,16 +105,8 @@
         case RGNavigationBackgroundStyleShadow: {
             [self.navigationBar setTranslucent:YES];
             [self.navigationBar setShadowImage:[UIImage new]];
-            UIImage *barBg = nil;
-            if ([UIViewController rg_isFringeScreen]) {
-                barBg = self.gradientBarBg_fringe;
-            } else {
-                barBg = self.gradientBarBg;
-            }
-            [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsDefault];
-            
-            barBg = self.gradientBarBg_landscape;
-            [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsCompact];
+            [self.navigationBar setBackgroundImage:self.gradientBarBg forBarMetrics:UIBarMetricsDefault];
+            [self.navigationBar setBackgroundImage:self.gradientBarBg_landscape forBarMetrics:UIBarMetricsCompact];
             [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompactPrompt];
             break;
         }
@@ -131,49 +142,50 @@
 #pragma mark - draw image
 
 - (UIImage *)gradientBarBg {
+    CGFloat top = 20;
+    if (@available(iOS 11.0, *)) {
+        top = self.view.safeAreaInsets.top;
+    }
+    CGSize size = CGSizeMake(self.navigationBar.frame.size.width, self.navigationBar.frame.size.height + top);
+    if (self.cacheBg && CGSizeEqualToSize(size, self.cacheBg.size)) {
+        return self.cacheBg;
+    }
     CGFloat linearGradient1Locations[] = {0, 0.36, 1};
     UIImage *image =
-    [self drawGradientBarWithHeight:self.navigationBar.frame.size.height + 20
-            linearGradientLocations:linearGradient1Locations
-                             colors:@[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
-                                      (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor,
-                                      (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor,
-                                      ]
+    [self drawGradientBarWithSize:size
+          linearGradientLocations:linearGradient1Locations
+                           colors:@[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
+                                    (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor,
+                                    (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor,
+                           ]
      ];
-    return image;
-}
-
-- (UIImage *)gradientBarBg_fringe {
-    CGFloat linearGradient1Locations[] = {0, 0.36, 1};
-    UIImage *image =
-    [self drawGradientBarWithHeight:self.navigationBar.frame.size.height + 44
-            linearGradientLocations:linearGradient1Locations
-                             colors:@[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
-                                      (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.1].CGColor,
-                                      (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor,
-                                      ]
-     ];
+    self.cacheBg = image;
     return image;
 }
 
 - (UIImage *)gradientBarBg_landscape {
+    CGSize size = CGSizeMake(self.navigationBar.frame.size.width, self.navigationBar.frame.size.height);
+    if (self.cacheBgLandscape && CGSizeEqualToSize(size, self.cacheBgLandscape.size)) {
+        return self.cacheBgLandscape;
+    }
     CGFloat linearGradient1Locations[] = {0, 0.5, 1};
     UIImage *image =
-    [self drawGradientBarWithHeight:32
-            linearGradientLocations:linearGradient1Locations
-                             colors:@[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
-                                      (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.15].CGColor,
-                                      (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor,
-                                      ]
+    [self drawGradientBarWithSize:size
+          linearGradientLocations:linearGradient1Locations
+                           colors:@[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0].CGColor,
+                                    (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.15].CGColor,
+                                    (id)[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor,
+                           ]
      ];
+    self.cacheBgLandscape = image;
     return image;
 }
 
-- (UIImage *)drawGradientBarWithHeight:(CGFloat)height
-               linearGradientLocations:(CGFloat[])linearGradientLocations
-                                colors:(NSArray *)colors
+- (UIImage *)drawGradientBarWithSize:(CGSize)size
+             linearGradientLocations:(CGFloat[])linearGradientLocations
+                              colors:(NSArray *)colors
 {
-    CGRect rect = CGRectMake(0, 0, self.navigationBar.frame.size.width, height);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();

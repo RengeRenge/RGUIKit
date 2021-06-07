@@ -37,12 +37,24 @@ typedef enum : NSUInteger {
 }
 
 - (void)rgNavigation:(id)sender {
-    RGNavigationTestViewController *vc = [RGNavigationTestViewController new];
-    vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dismiss" style:UIBarButtonItemStylePlain target:vc action:@selector(rg_dismiss)];
-    RGNavigationController *navigation = [RGNavigationController navigationWithRoot:vc style:RGNavigationBackgroundStyleShadow];
-    navigation.tintColor = [UIColor whiteColor];
-    navigation.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:navigation animated:YES completion:nil];
+    UIAlertController *alert = UIAlertController.rg_newActionSheet(nil, nil, sender, CGRectZero);
+    
+    NSArray *title = @[@"UIModalPresentationFullScreen", @"UIModalPresentationPageSheet", @"UIModalPresentationFormSheet"];
+    [@[
+        @(UIModalPresentationFullScreen),
+        @(UIModalPresentationPageSheet),
+        @(UIModalPresentationFormSheet),
+    ] enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        alert.rg_addAction(title[idx], UIAlertActionStyleDefault, ^(UIAlertAction * _Nonnull action) {
+            RGNavigationTestViewController *vc = [RGNavigationTestViewController new];
+            vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"dismiss" style:UIBarButtonItemStylePlain target:vc action:@selector(rg_dismiss)];
+            RGNavigationController *navigation = [RGNavigationController navigationWithRoot:vc style:RGNavigationBackgroundStyleShadow];
+            navigation.tintColor = [UIColor whiteColor];
+            navigation.modalPresentationStyle = obj.integerValue;
+            [self presentViewController:navigation animated:YES completion:nil];
+        });
+    }];
+    alert.rg_presentedBy(self);
 }
 
 - (void)RTLSwitch:(id)sender {

@@ -56,6 +56,11 @@
 
 - (void)changeType:(UIButton *)sender {
     self.rg_navigationController.barBackgroundStyle = sender.tag;
+    if (RGNavigationBackgroundStyleShadow == sender.tag) {
+        self.rg_navigationController.tintColor = UIColor.whiteColor;
+    } else {
+        self.rg_navigationController.tintColor = UIColor.rg_labelColor;
+    }
 }
 
 - (void)push {
