@@ -10,9 +10,24 @@
 
 @implementation UIAlertController (Chainable)
 
-+ (RGAlertControlParam)rg_newAlert {
-    RGAlertControlParam param = ^UIAlertController *(NSString * _Nullable title, NSString * _Nullable message, UIAlertControllerStyle style) {
++ (RGAlertControlParamWithStyle)rg_newAlert {
+    RGAlertControlParamWithStyle param = ^UIAlertController *(NSString * _Nullable title, NSString * _Nullable message, UIAlertControllerStyle style) {
         return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
+    };
+    return param;
+}
+
++ (RGAlertControlAlertParam)rg_newActionAlert {
+    RGAlertControlAlertParam param = ^UIAlertController *(NSString * _Nullable title, NSString * _Nullable message) {
+        return [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    };
+    return param;
+}
+
++ (RGAlertControlSheetParam)rg_newActionSheet {
+    RGAlertControlSheetParam param = ^UIAlertController *(NSString * _Nullable title, NSString * _Nullable message, id sourceView, CGRect sourceRect) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
+        return alert.rg_sourceView(sourceView).rg_sourceRect(sourceRect);
     };
     return param;
 }
@@ -59,9 +74,13 @@
     return param;
 }
 
-- (UIAlertController * _Nonnull (^)(UIView * _Nullable))rg_sourceView {
-    return ^UIAlertController * _Nonnull(UIView * _Nullable sourceView) {
-        self.popoverPresentationController.sourceView = sourceView;
+- (UIAlertController * _Nonnull (^)(id _Nullable))rg_sourceView {
+    return ^UIAlertController * _Nonnull(id _Nullable sourceView) {
+        if ([sourceView isKindOfClass:UIView.class]) {
+            self.popoverPresentationController.sourceView = sourceView;
+        } else if ([sourceView isKindOfClass:UIBarButtonItem.class]) {
+            self.popoverPresentationController.barButtonItem = sourceView;
+        }
         return self;
     };
 }
