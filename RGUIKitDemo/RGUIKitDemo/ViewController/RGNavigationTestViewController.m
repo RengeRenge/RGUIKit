@@ -20,6 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor rg_randomColor];
+    
+    UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self.view addGestureRecognizer:ges];
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"push" style:UIBarButtonItemStylePlain target:self action:@selector(push)];
     
     if ([self.view.backgroundColor rg_isDarkColor]) {
@@ -42,6 +46,10 @@
     [self.buttons enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMinY(bounds) - 60 - obj.frame.size.height * (idx + 1));
     }];
+}
+
+- (void)tap:(UITapGestureRecognizer *)ges {
+    [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBar.isHidden animated:YES];
 }
 
 - (UIButton *)buttonWithTitle:(NSString *)title tag:(NSInteger)tag {

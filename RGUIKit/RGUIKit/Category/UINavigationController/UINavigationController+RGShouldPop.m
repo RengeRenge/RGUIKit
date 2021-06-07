@@ -110,6 +110,9 @@ static char *rg_kInteractiveViewController = "rg_kInteractiveViewController";
     if (gestureRecognizer == self.interactivePopGestureRecognizer) {
         
         UIViewController *vc = self.topViewController;
+        if (vc == self.viewControllers.firstObject) {
+            return NO;
+        }
         
         if ([vc conformsToProtocol:@protocol(RGUINavigationControllerShouldPopDelegate)]) {
             if ([vc respondsToSelector:@selector(rg_navigationControllerShouldPop:isInteractive:)]) {
