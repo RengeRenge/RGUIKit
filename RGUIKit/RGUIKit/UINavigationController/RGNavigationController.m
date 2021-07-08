@@ -9,6 +9,7 @@
 #import "RGNavigationController.h"
 #import "UIBezierPath+RGDraw.h"
 #import "UIViewController+RGNavigationBarLayout.h"
+#import "UINavigationBar+RGAlpha.h"
 #import <RGObserver/RGObserver.h>
 
 void *RGNavigationControllerOBKey = "RGNavigationController";
@@ -56,6 +57,14 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
     } else {
         self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
     }
+}
+
+- (void)setBarBackgroundAlpha:(CGFloat)barBackgroundAlpha {
+    self.navigationBar.rg_backgroundAlpha = barBackgroundAlpha;
+}
+
+- (CGFloat)barBackgroundAlpha {
+    return self.navigationBar.rg_backgroundAlpha;
 }
 
 - (void)setBarBackgroundStyle:(RGNavigationBackgroundStyle)barBackgroundStyle {
@@ -113,6 +122,7 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
         default:
             break;
     }
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

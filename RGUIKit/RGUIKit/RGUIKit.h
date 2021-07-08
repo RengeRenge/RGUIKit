@@ -32,6 +32,7 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/NSData+RGFormat.h>
 
 #import <RGUIKit/RGNavigationController.h>
+#import <RGUIKit/UINavigationBar+RGAlpha.h>
 
 #import <RGUIKit/UIViewController+RGPresent.h>
 #import <RGUIKit/UIViewController+RGNavigationBarLayout.h>
