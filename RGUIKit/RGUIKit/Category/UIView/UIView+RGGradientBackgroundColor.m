@@ -145,6 +145,14 @@
     return layer;
 }
 
+- (void)__syncBounds {
+    CALayer *layer = self.rg_gradientLayer;
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    layer.frame = self.layer.bounds;
+    [CATransaction commit];
+}
+
 - (void)rg_setBackgroundGradientColors:(NSArray <id> *)colors
                              locations:(NSArray <NSNumber *> *)locations
                               drawType:(RGDrawType)drawType {
@@ -177,7 +185,7 @@
     CALayer *layer = self.rg_gradientLayer;
     
     if (kDrawByContext) {
-        layer.frame = self.layer.bounds;
+        [self __syncBounds];
         
         [NSObject rg_transformNumberLocations:locations toLocations:^(CGFloat * locations, void (^free)(void)) {
             NSNumber *gradientId = @(arc4random());
@@ -231,7 +239,7 @@
                                   path:(UIBezierPath *)path
                                drawRad:(CGFloat)rad {
     CALayer *layer = self.rg_gradientLayer;
-    layer.frame = self.layer.bounds;
+    [self __syncBounds];
     
     UIBezierPath *dPath = path;
     if (!dPath) {
