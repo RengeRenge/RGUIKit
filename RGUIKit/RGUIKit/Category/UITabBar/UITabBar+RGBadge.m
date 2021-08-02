@@ -10,6 +10,7 @@
 #import "UIImage+RGTint.h"
 #import "UIView+RGLayoutHelp.h"
 #import <objc/runtime.h>
+#import <RGObserver/RGObserver.h>
 
 #define kUITabbarCustomBadgeTag 1000
 #define kUITabbarCustomNormalBadgeWidth 10
@@ -33,15 +34,15 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
     objc_setAssociatedObject(self, kRGTabBarBadgeMap, rg_tabBarBadgeMap, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)rg_showBadgeWithValue:(NSString *)value atIndex:(NSInteger)index {
+- (void)rg_showTabBarBadgeWithValue:(NSString *)value atIndex:(NSInteger)index {
     if (index < self.items.count) {
-        [self rg_hideBadgeAtIndex:index];
+        [self rg_hideTabBarBadgeAtIndex:index];
         UITabBarItem *item = self.items[index];
         item.badgeValue = value;
     }
 }
 
-- (void)rg_showBadgeWithType:(RGUITabbarBadgeType)type atIndex:(NSInteger)index {
+- (void)rg_showTabBarBadgeWithType:(RGUITabbarBadgeType)type atIndex:(NSInteger)index {
     if (!self.items.count) {
         return;
     }
@@ -53,14 +54,9 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
     switch (type) {
         case RGUITabbarBadgeTypeNormal:
             break;
-        case RGUITabbarBadgeTypeWarning:
-            [self rg_showBadgeWithValue:@"!" atIndex:index];
-            return;
-//            width = kUITabbarCustomWarningBadgeWidth;
-//            [badgeView setTitle:@"!" forState:UIControlStateNormal];
-//            break;
         default:
-            break;
+            [self rg_hideTabBarBadgeAtIndex:index];
+            return;
     }
     badgeView.layer.cornerRadius = width / 2;
     badgeView.layer.masksToBounds = YES;
@@ -74,14 +70,14 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
     
     if (!self.rg_tabBarBadgeMap) {
         self.rg_tabBarBadgeMap = [[NSMutableDictionary alloc] init];
-        [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
-        [self addObserver:self forKeyPath:@"semanticContentAttribute" options:NSKeyValueObservingOptionNew context:nil];
+        [self rg_addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
+        [self rg_addObserver:self forKeyPath:@"semanticContentAttribute" options:NSKeyValueObservingOptionNew context:nil];
     }
     [self.rg_tabBarBadgeMap setObject:badgeView forKey:@(index)];
-    [self addBadgeView:badgeView atIndex:index];
+    [self __rg_addBadgeView:badgeView atIndex:index];
 }
 
-- (BOOL)addBadgeView:(UIButton *)badgeView atIndex:(NSInteger)index {
+- (BOOL)__rg_addBadgeView:(UIButton *)badgeView atIndex:(NSInteger)index {
     
     BOOL didFind = NO;
     
@@ -144,7 +140,7 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
     return didFind;
 }
 
-- (void)rg_hideBadgeAtIndex:(NSInteger)index {
+- (void)rg_hideTabBarBadgeAtIndex:(NSInteger)index {
     if (index < self.items.count) {
         UITabBarItem *item = self.items[index];
         item.badgeValue = nil;
@@ -167,18 +163,11 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
                 if (self.rg_tabBarBadgeMap.allKeys.count > 0) {
                     [self.rg_tabBarBadgeMap enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull key, UIButton * _Nonnull badgeView, BOOL * _Nonnull stop) {
                         [badgeView removeFromSuperview];
-                        [self addBadgeView:badgeView atIndex:key.integerValue];
+                        [self __rg_addBadgeView:badgeView atIndex:key.integerValue];
                     }];
                 }
             });
         }
-    }
-}
-
-- (void)dealloc {
-    if (self.rg_tabBarBadgeMap) {
-        [self removeObserver:self forKeyPath:@"frame"];
-        [self removeObserver:self forKeyPath:@"semanticContentAttribute"];
     }
 }
 
@@ -193,29 +182,29 @@ static const void *kRGTabBarBadgeMap = "kRGTabBarBadgeMap";
     return self.tabBarItem;
 }
 
-- (void)rg_showBadgeWithType:(RGUITabbarBadgeType)type {
+- (void)rg_showTabBarBadgeWithType:(RGUITabbarBadgeType)type {
     if (!self.tabBarController) {
         return;
     }
     NSInteger index = [self.tabBarController.tabBar.items indexOfObject:self.rg_tabBarItem];
-    [self.tabBarController.tabBar rg_showBadgeWithType:type atIndex:index];
+    [self.tabBarController.tabBar rg_showTabBarBadgeWithType:type atIndex:index];
 }
 
-- (void)rg_showBadgeWithValue:(NSString *)value {
+- (void)rg_showTabBarBadgeWithValue:(NSString *)value {
     if (!self.tabBarController) {
         return;
     }
     NSInteger index = [self.tabBarController.tabBar.items indexOfObject:self.rg_tabBarItem];
-    [self.tabBarController.tabBar rg_showBadgeWithValue:value atIndex:index];
+    [self.tabBarController.tabBar rg_showTabBarBadgeWithValue:value atIndex:index];
 }
 
-- (void)rg_hideBadge {
+- (void)rg_hideTabBarBadge {
     if (!self.tabBarController) {
         return;
     }
     UITabBarItem *tabBarItem = self.rg_tabBarItem;
     NSInteger index = [self.tabBarController.tabBar.items indexOfObject:tabBarItem];
-    [self.tabBarController.tabBar rg_hideBadgeAtIndex:index];
+    [self.tabBarController.tabBar rg_hideTabBarBadgeAtIndex:index];
 }
 
 @end

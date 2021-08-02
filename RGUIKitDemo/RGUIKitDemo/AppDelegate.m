@@ -18,6 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    [[RGIconCell appearance] setDetailTextColor:UIColor.lightGrayColor];
+    [RGIconCell setThemeColor:[UIColor rg_randomColor]];
     return YES;
 }
 

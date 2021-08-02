@@ -34,6 +34,17 @@ typedef enum : NSUInteger {
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RGNavigation" style:UIBarButtonItemStylePlain target:self action:@selector(rgNavigation:)];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"RTL/LTR" style:UIBarButtonItemStylePlain target:self action:@selector(RTLSwitch:)];
+    
+    [self rg_showTabBarBadgeWithValue:@"Loading"];
+    [self.tabBarController.tabBar rg_showTabBarBadgeWithType:RGUITabbarBadgeTypeNormal atIndex:1];
+    [self.tabBarController.tabBar rg_showTabBarBadgeWithValue:@"!" atIndex:2];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [NSTimer rg_timerWithTimeInterval:3 repeats:NO block:^(NSTimer * _Nonnull timer) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self rg_showTabBarBadgeWithValue:@"RGBadge"];
+            });
+        }];
+    });
 }
 
 - (void)rgNavigation:(id)sender {
@@ -85,14 +96,17 @@ typedef enum : NSUInteger {
     switch (indexPath.row) {
         case ViewTypeRGCells:
             cell.textLabel.text = @"RGTableViewCell";
+            [cell.textLabel rg_showBadgeWithType:RGUIViewBadgeTypeNormal];
             break;
         case ViewTypeRGBluuurView:
             cell.textLabel.text = @"RGBluuurView";
+            [cell.textLabel rg_showBadgeWithValue:@"RGBadge"];
             break;
         default:
             cell.textLabel.text = nil;
             break;
     }
+    cell.textLabel.rg_badgePosition = RGUIViewBadgeVerticalCenter | RGUIViewBadgeHorizontalTrailing;
     return cell;
 }
 

@@ -38,6 +38,7 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIViewController+RGNavigationBarLayout.h>
 #import <RGUIKit/UIViewController+RGSafeArea.h>
 #import <RGUIKit/UIView+RGGradientBackgroundColor.h>
+#import <RGUIKit/UIView+RGBadge.h>
 
 #import <RGUIKit/UIAlertController+Chainable.h>
 

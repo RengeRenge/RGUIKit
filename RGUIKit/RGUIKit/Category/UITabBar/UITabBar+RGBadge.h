@@ -9,23 +9,23 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, RGUITabbarBadgeType) {
+    RGUITabbarBadgeTypeNone,
     RGUITabbarBadgeTypeNormal,
-    RGUITabbarBadgeTypeWarning
 };
 
 @interface UITabBar (RGBadge)
 
-- (void)rg_showBadgeWithType:(RGUITabbarBadgeType)type atIndex:(NSInteger)index;
-- (void)rg_showBadgeWithValue:(NSString *)value atIndex:(NSInteger)index;
-- (void)rg_hideBadgeAtIndex:(NSInteger)index;
+- (void)rg_showTabBarBadgeWithType:(RGUITabbarBadgeType)type atIndex:(NSInteger)index;
+- (void)rg_showTabBarBadgeWithValue:(NSString *)value atIndex:(NSInteger)index;
+- (void)rg_hideTabBarBadgeAtIndex:(NSInteger)index;
 
 @end
 
 @interface UIViewController (RGBadge)
 
-- (void)rg_showBadgeWithType:(RGUITabbarBadgeType)type;
-- (void)rg_showBadgeWithValue:(NSString *)value;
-- (void)rg_hideBadge;
+- (void)rg_showTabBarBadgeWithType:(RGUITabbarBadgeType)type;
+- (void)rg_showTabBarBadgeWithValue:(NSString *)value;
+- (void)rg_hideTabBarBadge;
 
 @end
 
