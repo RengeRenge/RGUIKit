@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef UIAlertController *_Nonnull(^RGAlertControlParamWithStyle)(NSString * _Nullable title, NSString * _Nullable message, UIAlertControllerStyle style);
 typedef UIAlertController *_Nonnull(^RGAlertControlAlertParam)(NSString * _Nullable title, NSString * _Nullable message);
 typedef UIAlertController *_Nonnull(^RGAlertControlSheetParam)(NSString * _Nullable title, NSString * _Nullable message, id sourceView, CGRect sourceRect);
+typedef UIAlertController *_Nonnull(^RGAlertControlAttributedStringParam)(NSAttributedString * _Nullable message);
 
 typedef UIAlertController *_Nonnull(^RGAlertActionParam)(NSString * _Nullable title, UIAlertActionStyle style, void (^_Nullable handler)(UIAlertAction *action));
 typedef UIAlertController *_Nonnull(^RGAlertTextFieldParam)(void (^_Nonnull handler)(UITextField *textField));
@@ -33,6 +34,8 @@ typedef UIAlertController *_Nonnull(^RGAlertTextFieldParams)(void (^_Nonnull han
 
 @property (nonatomic, readonly) RGAlertActionParams rg_addActionS;
 @property (nonatomic, readonly) RGAlertTextFieldParams rg_addTextFieldS;
+
+@property (nonatomic, readonly) RGAlertControlAttributedStringParam rg_attributeMessage;
 
 /// must set for iPad when UIAlertControllerStyle is UIAlertControllerStyleActionSheet, sourceView can be UIView or UIBarButtonItem
 - (UIAlertController *(^)(id _Nullable sourceView))rg_sourceView;

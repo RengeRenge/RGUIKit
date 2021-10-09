@@ -18,6 +18,15 @@
 char *rg_badgeViewKey = "rg_badgeView";
 char *rg_badgePositionKey = "rg_badgePosition";
 char *rg_badgeHorizontalMarginKey = "rg_badgeHorizontalMargin";
+char *rg_badgeVerticalMarginKey = "rg_badgeVerticalMargin";
+
+@interface RGBadgeView : UIButton
+
+@end
+
+@implementation RGBadgeView
+
+@end
 
 @implementation UIView(RGBadge)
 
@@ -32,7 +41,7 @@ char *rg_badgeHorizontalMarginKey = "rg_badgeHorizontalMargin";
 - (UIButton *)createBadgeViewIfNeed {
     UIButton *badgeView = self.rg_badgeView;
     if (!badgeView) {
-        badgeView = [[UIButton alloc] init];
+        badgeView = [[RGBadgeView alloc] init];
         badgeView.userInteractionEnabled = NO;
         badgeView.layer.masksToBounds = YES;
         badgeView.tintColor = [UIColor redColor];
@@ -60,6 +69,15 @@ char *rg_badgeHorizontalMarginKey = "rg_badgeHorizontalMargin";
 
 - (void)setRg_badgeHorizontalMargin:(CGFloat)rg_badgeHorizontalMargin {
     [self rg_setValue:@(rg_badgeHorizontalMargin) forConstKey:rg_badgeHorizontalMarginKey retain:YES];
+    [self __rg_addBadgeView:self.rg_badgeView];
+}
+
+- (CGFloat)rg_badgeVerticalMargin {
+    return [[self rg_valueforConstKey:rg_badgeVerticalMarginKey] floatValue];
+}
+
+- (void)setRg_badgeVerticalMargin:(CGFloat)rg_badgeVerticalMargin {
+    [self rg_setValue:@(rg_badgeVerticalMargin) forConstKey:rg_badgeVerticalMarginKey retain:YES];
     [self __rg_addBadgeView:self.rg_badgeView];
 }
 
@@ -114,7 +132,8 @@ char *rg_badgeHorizontalMarginKey = "rg_badgeHorizontalMargin";
     CGFloat y = 0;
     CGFloat width = badgeView.frame.size.width;
     CGFloat height = badgeView.frame.size.height;
-    CGFloat margin = self.rg_badgeHorizontalMargin;
+    CGFloat hMargin = self.rg_badgeHorizontalMargin;
+    CGFloat vMargin = self.rg_badgeVerticalMargin;
     RGUIViewBadgePosition position = self.rg_badgePosition;
     
     if (position & RGUIViewBadgeHorizontalTrailingOutFull) {
@@ -137,9 +156,9 @@ char *rg_badgeHorizontalMarginKey = "rg_badgeHorizontalMargin";
         }
     }
     if (layoutLeftToRight) {
-        x -= margin;
+        x -= hMargin;
     } else {
-        x += margin;
+        x += hMargin;
     }
     
     if (position & RGUIViewBadgeVerticalTopOutFull) {
@@ -149,6 +168,7 @@ char *rg_badgeHorizontalMarginKey = "rg_badgeHorizontalMargin";
     } else if (position & RGUIViewBadgeVerticalCenter) {
         y = (CGRectGetHeight(self.frame) - height) / 2.f;
     }
+    y += vMargin;
 
     badgeView.frame = CGRectMake(x, y, width, height);
     
@@ -187,6 +207,86 @@ char *rg_badgeHorizontalMarginKey = "rg_badgeHorizontalMargin";
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self __rg_addBadgeView:self.rg_badgeView];
             });
+        }
+    }
+}
+
+@end
+
+@interface RGBadgeOB : NSObject
+
+@end
+
+RGBadgeOB *__barButtonItemBadgeOB;
+NSString *__rg_viewCallbackKey = @"__rg_viewCallbackKey";
+
+@implementation UIBarButtonItem(RGBadge)
+
+- (NSMutableArray <void(^)(UIView *)> *)__callbacks {
+    return [self rg_valueForKey:__rg_viewCallbackKey];
+}
+
+- (void)__createCallbacks {
+    NSMutableArray *callbacks = [self __callbacks];
+    if (!callbacks) {
+        callbacks = NSMutableArray.new;
+        [self rg_setValue:callbacks forKey:__rg_viewCallbackKey retain:YES];
+    }
+}
+
+- (void)__releaseCallbacks {
+    [self rg_setValue:nil forKey:__rg_viewCallbackKey retain:YES];
+}
+
+- (UIView *)__rg_view {
+    UIView *navigationButton = [self valueForKey:@"_view"];
+//    double systemVersion = [UIDevice currentDevice].systemVersion.doubleValue;
+//    NSString *controlName = (systemVersion < 11 ? @"UIImageView" : @"UIButton" );
+//    for (UIView *subView in navigationButton.subviews) {
+//        if ([subView isKindOfClass:NSClassFromString(controlName)] && ![subView isKindOfClass:RGBadgeView.class]) {
+//            return subView;
+//        }
+//    }
+    return navigationButton;
+}
+
+- (void)rg_getView:(void (^)(UIView * _Nonnull))result {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __barButtonItemBadgeOB = RGBadgeOB.new;
+    });
+    
+    UIView *view = [self __rg_view];
+    if (view) {
+        result(view);
+        return;
+    }
+    [self __createCallbacks];
+    [self.__callbacks addObject:result];
+    [self rg_addObserver:__barButtonItemBadgeOB forKeyPath:@"view" options:NSKeyValueObservingOptionNew context:(__bridge void * _Nullable)(__rg_viewCallbackKey)];
+}
+
+@end
+
+
+@implementation RGBadgeOB
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"view"] &&
+        [object isKindOfClass:UIBarButtonItem.class] &&
+        context == (__bridge void * _Nullable)(__rg_viewCallbackKey)) {
+        UIView *view = [object __rg_view];
+        if (view) {
+            NSMutableArray <void(^)(UIView *)> *callbacks = [object __callbacks];
+            
+            [object rg_removeObserver:self forKeyPath:@"view"];
+            [object __releaseCallbacks];
+            
+            [callbacks enumerateObjectsUsingBlock:^(void (^_Nonnull obj)(UIView *), NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj) {
+                    obj(view);
+                }
+            }];
         }
     }
 }

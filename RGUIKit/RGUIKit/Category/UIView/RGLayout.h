@@ -20,6 +20,9 @@ typedef RGLayout*_Nonnull(^RGLayoutValue)(CGFloat value);
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic, weak) UIView *view;
 
+@property (nonatomic, weak) UIView *lastLayoutView;
+@property (nonatomic, assign) CGRect lastLayoutFrame;
+
 #pragma mark - config
 
 @property (nonatomic, copy, readonly) RGLayout*(^target)(UIView *view);
@@ -30,6 +33,10 @@ typedef RGLayout*_Nonnull(^RGLayoutValue)(CGFloat value);
 @property (nonatomic, copy, readonly) RGLayout*_Nonnull(^endTransBase)(void);
 
 @property (nonatomic, copy, readonly) RGLayout*(^apply)(void);
+
+#pragma mark - frame
+
+@property (nonatomic, copy, readonly) RGLayout*(^setFrame)(CGRect setFrame);
 
 #pragma mark - size
 
@@ -67,6 +74,9 @@ typedef RGLayout*_Nonnull(^RGLayoutValue)(CGFloat value);
 
 @property (nonatomic, copy, readonly) RGLayout*(^dx)(CGFloat x);
 @property (nonatomic, copy, readonly) RGLayout*(^dy)(CGFloat y);
+
+@property (nonatomic, copy, readonly) RGLayoutValue horizontalCenterInBounds;
+@property (nonatomic, copy, readonly) RGLayoutValue verticalCenterInBounds;
 
 + (RGLayout *)layoutWithView:(UIView * _Nullable)view inFrame:(CGRect)inFrame;
 + (RGLayout *)shared;

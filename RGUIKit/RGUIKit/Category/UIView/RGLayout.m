@@ -100,8 +100,18 @@
     return ^RGLayout*(void) {
         CGRect frame = self.frame;
         self.view.frame = RG_CGRectFlat(frame);
+        self.lastLayoutView = self.view;
+        self.lastLayoutFrame = self.view.frame;
         return self;
     };
+}
+
+#pragma mark - frame
+
+- (RGLayout * _Nonnull (^)(CGRect))setFrame {
+    return [self __frameParam:^(CGRect frame) {
+        self.left(frame.origin.x).top(frame.origin.y).size(frame.size);
+    }];
 }
 
 #pragma mark - size
@@ -326,6 +336,18 @@
         CGRect mframe = self.frame;
         mframe.origin.y += value;
         self.frame = mframe;
+    }];
+}
+
+- (RGLayoutValue)horizontalCenterInBounds {
+    return [self __valueParam:^(CGFloat value) {
+        self.centerX(CGRectGetMidX(self.inBounds) + value);
+    }];
+}
+
+- (RGLayoutValue)verticalCenterInBounds {
+    return [self __valueParam:^(CGFloat value) {
+        self.centerX(CGRectGetMidY(self.inBounds) + value);
     }];
 }
 

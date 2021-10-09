@@ -32,6 +32,13 @@
     return param;
 }
 
+- (RGAlertControlAttributedStringParam)rg_attributeMessage {
+    return ^UIAlertController * (NSAttributedString *string) {
+        [self setValue:string forKey:@"attributedMessage"];
+        return self;
+    };
+}
+
 - (RGAlertActionParam)rg_addAction {
     RGAlertActionParam param = ^UIAlertController *(NSString *title, UIAlertActionStyle style, void (^_Nullable handler)(UIAlertAction *)) {
         [self addAction:[UIAlertAction actionWithTitle:title style:style handler:handler]];

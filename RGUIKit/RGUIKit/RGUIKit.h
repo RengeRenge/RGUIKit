@@ -51,6 +51,8 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UIWindow+RGGet.h>
 
 #import <RGUIKit/NSString+Compare.h>
+#import <RGUIKit/NSString+RGAttribute.h>
+#import <RGUIKit/RGLinkTextView.h>
 
 #import <RGUIKit/UITabBar+RGBadge.h>
 
@@ -62,6 +64,8 @@ FOUNDATION_EXPORT const unsigned char RGUIKitVersionString[];
 #import <RGUIKit/UINavigationController+RGShouldPop.h>
 #import <RGUIKit/UITextField+RGTextOB.h>
 #import <RGUIKit/UIButton+RGSetting.h>
+
+#import <RGUIKit/NSBundle+RGGET.h>
 
 #import <RGUIKit/UIImage+RGTint.h>
 #import <RGUIKit/UIImage+RGName.h>

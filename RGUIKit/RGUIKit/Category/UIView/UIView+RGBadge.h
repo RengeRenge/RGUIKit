@@ -32,9 +32,16 @@ typedef NS_ENUM(NSInteger, RGUIViewBadgePosition) {
 
 @property (nonatomic, assign) RGUIViewBadgePosition rg_badgePosition;
 @property (nonatomic, assign) CGFloat rg_badgeHorizontalMargin;
+@property (nonatomic, assign) CGFloat rg_badgeVerticalMargin;
 
 - (void)rg_showBadgeWithType:(RGUIViewBadgeType)type;
 - (void)rg_showBadgeWithValue:(NSString *__nullable)value;
+
+@end
+
+@interface UIBarButtonItem(RGBadge)
+
+- (void)rg_getView:(void(^)(UIView *view))result;
 
 @end
 
