@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (UIColor *)rg_colorWithR:(CGFloat)red g:(CGFloat)green b:(CGFloat)blue alpha:(CGFloat)alpha;
 
-+ (UIColor *)rg_colorWithRGBHexString:(NSString *)hexString;
++ (UIColor *_Nullable)rg_colorWithRGBHexString:(NSString *_Nullable)hexString;
 + (UIColor *)rg_colorWithRGBHex:(UInt32)hex;
 
 

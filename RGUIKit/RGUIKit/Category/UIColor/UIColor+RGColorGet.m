@@ -44,7 +44,10 @@
     return [UIColor colorWithRed:red/255.f green:green/255.f blue:blue/255.f alpha:alpha];
 }
 
-+ (UIColor *)rg_colorWithRGBHexString:(NSString *)hexString {
++ (UIColor *_Nullable)rg_colorWithRGBHexString:(NSString *_Nullable)hexString {
+    if (!hexString.length) {
+        return nil;
+    }
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
     unsigned hexNum;
     if (![scanner scanHexInt:&hexNum]) return nil;
