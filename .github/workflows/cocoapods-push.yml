@@ -2,13 +2,14 @@ name: pod-deploy
 
 on:
   push:
-    tags: v*
+    tags:
+      - '*'
 
 jobs:
   build:
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Lint
       run: pod spec lint
     - name: Deploy
