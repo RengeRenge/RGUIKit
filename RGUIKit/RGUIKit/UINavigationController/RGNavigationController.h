@@ -19,6 +19,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) RGNavigationBackgroundStyle barBackgroundStyle;
 @property (nonatomic, assign) CGFloat barBackgroundAlpha;
+@property (nonatomic, assign) BOOL hideSeparator;
 
 @property (nonatomic, strong) UIColor *tintColor;
 @property (nonatomic, strong) UIColor *titleColor;

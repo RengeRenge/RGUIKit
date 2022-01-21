@@ -76,6 +76,15 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
     }
 }
 
+- (void)setHideSeparator:(BOOL)hideSeparator {
+    _hideSeparator = hideSeparator;
+    if (self.isViewLoaded) {
+        [self configBar];
+    } else {
+        [self performConfigBar];
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (RGNavigationControllerOBKey == context) {
         [self performConfigBar];
@@ -97,7 +106,11 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
     switch (_barBackgroundStyle) {
         case RGNavigationBackgroundStyleNormal:
             [self.navigationBar setTranslucent:YES];
-            [self.navigationBar setShadowImage:nil];
+            if (_hideSeparator) {
+                [self.navigationBar setShadowImage:[UIImage new]];
+            } else {
+                [self.navigationBar setShadowImage:nil];
+            }
             [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
             [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
             [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompactPrompt];
