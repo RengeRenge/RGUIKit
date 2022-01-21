@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// white -> black
 + (UIColor *)rg_systemBackgroundColor;
 + (UIColor *)rg_secondarySystemBackgroundColor;
++ (UIColor *)rg_secondarySystemGroupedBackgroundColor;
 
 + (UIColor *)rg_systemGroupedBackgroundColor;
 

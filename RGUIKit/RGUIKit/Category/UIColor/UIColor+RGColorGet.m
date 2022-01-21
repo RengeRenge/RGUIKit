@@ -184,6 +184,14 @@
     }
 }
 
++ (UIColor *)rg_secondarySystemGroupedBackgroundColor {
+    if (@available(iOS 13, *)) {
+        return [self secondarySystemGroupedBackgroundColor];
+    } else {
+        return [self whiteColor];
+    }
+}
+
 + (UIColor *)rg_systemGroupedBackgroundColor {
     if (@available(iOS 13, *)) {
         return self.systemGroupedBackgroundColor;
