@@ -36,6 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.rg_navigationController.scrollEdgeKeepPaceWithStandard = YES;
+    self.rg_navigationController.barBackgroundStyle = RGNavigationBackgroundStyleNormal;
+    
     _label = [UILabel new];
     
     _yellowView = [UIView new];

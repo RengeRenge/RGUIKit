@@ -15,14 +15,41 @@ typedef enum : NSUInteger {
     RGNavigationBackgroundStyleAllTranslucent,
 } RGNavigationBackgroundStyle;
 
-@interface RGNavigationController : UINavigationController
+@class RGNavigationController;
+
+@interface RGNavigationBarAppearance : NSObject
 
 @property (nonatomic, assign) RGNavigationBackgroundStyle barBackgroundStyle;
-@property (nonatomic, assign) CGFloat barBackgroundAlpha;
 @property (nonatomic, assign) BOOL hideSeparator;
+@property (nonatomic, strong) UIColor *titleColor;
+@property (nonatomic, strong) UIColor *backgroundColor;
+
+@end
+
+@interface RGNavigationController : UINavigationController
+
+#pragma mark - Appearance Setting
+
+/// default set value for standardAppearance
+@property (nonatomic, assign) RGNavigationBackgroundStyle barBackgroundStyle;
+/// default set value for standardAppearance
+@property (nonatomic, assign) BOOL hideSeparator;
+/// default set value for standardAppearance
+@property (nonatomic, strong) UIColor *titleColor;
+/// default set value for standardAppearance
+@property (nonatomic, strong) UIColor *backgroundColor;
+
+@property (nonatomic, strong) RGNavigationBarAppearance *standardAppearance;
+
+
+/// available  iOS 13
+@property (nonatomic, strong) RGNavigationBarAppearance *scrollEdgeAppearance;
+@property (nonatomic, assign) BOOL scrollEdgeKeepPaceWithStandard;
+
+#pragma mark - Universal Setting
 
 @property (nonatomic, strong) UIColor *tintColor;
-@property (nonatomic, strong) UIColor *titleColor;
+@property (nonatomic, assign) CGFloat barBackgroundAlpha;
 
 + (__kindof RGNavigationController *)navigationWithRoot:(UIViewController *)root;
 + (__kindof RGNavigationController *)navigationWithRoot:(UIViewController *)root style:(RGNavigationBackgroundStyle)style;

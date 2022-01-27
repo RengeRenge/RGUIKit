@@ -33,6 +33,10 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Draw Display";
+    
+    self.rg_navigationController.scrollEdgeKeepPaceWithStandard = YES;
+    self.rg_navigationController.barBackgroundStyle = RGNavigationBackgroundStyleNormal;
+    
     [self.tableView registerClass:RGIconCell.class forCellReuseIdentifier:RGCellIDValue1];
     self.tableView.backgroundView = [UIView new];
     [self.tableView.backgroundView rg_setBackgroundGradientColors:@[UIColor.whiteColor, UIColor.blackColor] locations:nil drawType:RGDrawTypeCircleFill];

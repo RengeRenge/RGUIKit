@@ -10,6 +10,7 @@
 #import "UIBezierPath+RGDraw.h"
 #import "UIViewController+RGNavigationBarLayout.h"
 #import "UINavigationBar+RGAlpha.h"
+#import "UIImage+RGTint.h"
 #import <RGObserver/RGObserver.h>
 
 void *RGNavigationControllerOBKey = "RGNavigationController";
@@ -18,6 +19,199 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
 
 @property (nonatomic, strong) UIImage *cacheBg;
 @property (nonatomic, strong) UIImage *cacheBgLandscape;
+
+- (UIImage *)gradientBarBg;
+- (UIImage *)gradientBarBg_landscape;
+
+@end
+
+@interface RGNavigationBarAppearance ()
+
+@property (nonatomic, weak) RGNavigationController *navigationController;
+
+@end
+
+@implementation RGNavigationBarAppearance
+
+- (UINavigationBar *)navigationBar {
+    return self.navigationController.navigationBar;
+}
+
+- (UINavigationBarAppearance *)appearance  API_AVAILABLE(ios(13.0)) {
+    return self == self.navigationController.standardAppearance ? self.navigationBar.standardAppearance : self.navigationBar.scrollEdgeAppearance;
+}
+
+- (UINavigationBarAppearance *)compactAppearance  API_AVAILABLE(ios(13.0)) {
+    if (@available(iOS 15.0, *)) {
+        return self == self.navigationController.standardAppearance ? self.navigationBar.compactAppearance : self.navigationBar.compactScrollEdgeAppearance;
+    } else {
+        return self == self.navigationController.standardAppearance ? self.navigationBar.compactAppearance : nil;
+    }
+}
+
+- (void)setNavigationController:(RGNavigationController *)navigationController {
+    _navigationController = navigationController;
+    if (@available(iOS 13.0, *)) {
+        if (self == self.navigationController.standardAppearance) {
+            self.navigationBar.standardAppearance = [UINavigationBarAppearance new];
+            self.navigationBar.compactAppearance = [UINavigationBarAppearance new];
+        } else {
+            self.navigationBar.scrollEdgeAppearance = [UINavigationBarAppearance new];
+            if (@available(iOS 15.0, *)) {
+                self.navigationBar.compactScrollEdgeAppearance = [UINavigationBarAppearance new];
+            }
+        }
+    }
+}
+
+- (void)setTitleColor:(UIColor *)titleColor {
+    [self setTitleColor:titleColor withTint:NO];
+}
+
+- (void)setTitleColor:(UIColor *)titleColor withTint:(BOOL)withTint {
+    if (!withTint) {
+        _titleColor = titleColor;
+    }
+    
+    if (!self.enabled) {
+        return;
+    }
+    
+    NSDictionary *titleTextAttributes = nil;
+    if (titleColor) {
+        titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
+    } else {
+        titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        self.appearance.titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
+        self.compactAppearance.titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
+    } else {
+        self.navigationBar.titleTextAttributes = titleTextAttributes;
+    }
+}
+
+- (void)setHideSeparator:(BOOL)hideSeparator {
+    if (hideSeparator == _hideSeparator) {
+        return;
+    }
+    _hideSeparator = hideSeparator;
+    [self performConfigBar];
+}
+
+- (void)setBarBackgroundStyle:(RGNavigationBackgroundStyle)barBackgroundStyle {
+    if (barBackgroundStyle == _barBackgroundStyle) {
+        return;
+    }
+    _barBackgroundStyle = barBackgroundStyle;
+    [self performConfigBar];
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    if ([_backgroundColor isEqual:backgroundColor]) {
+        return;
+    }
+    _backgroundColor = backgroundColor;
+    [self performConfigBar];
+}
+
+- (void)performConfigBar {
+    if (self.navigationController.isViewLoaded) {
+        [self configBar];
+    } else {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
+        [self performSelector:@selector(configBar) withObject:nil afterDelay:0.f inModes:@[NSRunLoopCommonModes]];
+    }
+}
+
+- (BOOL)enabled {
+    if (self == self.navigationController.scrollEdgeAppearance) {
+        if (@available(iOS 13.0, *)) {
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (void)configBar {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
+    
+    if (!self.enabled) {
+        return;
+    }
+    
+    switch (_barBackgroundStyle) {
+        case RGNavigationBackgroundStyleNormal:{
+            [self.navigationBar setTranslucent:YES];
+            
+            UIImage *image = nil;
+            if (self.backgroundColor) {
+                image = [UIImage rg_coloredImage:self.backgroundColor size:CGSizeMake(1, 1)];
+            }
+            if (@available(iOS 13.0, *)) {
+                [self.appearance configureWithDefaultBackground];
+                [self.compactAppearance configureWithDefaultBackground];
+                
+                self.appearance.backgroundImage = image;
+                self.compactAppearance.backgroundImage = image;
+                if (image) {
+                    self.appearance.backgroundEffect = nil;
+                    self.compactAppearance.backgroundEffect = nil;
+                }
+                
+            } else {
+                [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+                [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsCompact];
+                [self.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsCompactPrompt];
+            }
+            
+            UIImage *shadowImage = _hideSeparator ? UIImage.new : nil;
+            if (@available(iOS 13.0, *)) {
+                self.appearance.shadowImage = shadowImage;
+            } else {
+                [self.navigationBar setShadowImage:shadowImage];
+            }
+            break;
+        }
+        case RGNavigationBackgroundStyleAllTranslucent: {
+            [self.navigationBar setTranslucent:YES];
+            
+            if (@available(iOS 13.0, *)) {
+                [self.appearance configureWithTransparentBackground];
+                [self.compactAppearance configureWithTransparentBackground];
+            } else {
+                UIImage *barBg = [UIImage new];
+                [self.navigationBar setShadowImage:barBg];
+                [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsDefault];
+                [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsCompact];
+                [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsCompactPrompt];
+            }
+            break;
+        }
+        case RGNavigationBackgroundStyleShadow: {
+            [self.navigationBar setTranslucent:YES];
+            if (@available(iOS 13.0, *)) {
+                [self.appearance configureWithTransparentBackground];
+                [self.compactAppearance configureWithTransparentBackground];
+                
+                self.appearance.backgroundImage = self.navigationController.gradientBarBg;
+                self.compactAppearance.backgroundImage = self.navigationController.gradientBarBg_landscape;
+            } else {
+                [self.navigationBar setShadowImage:[UIImage new]];
+                [self.navigationBar setBackgroundImage:self.navigationController.gradientBarBg forBarMetrics:UIBarMetricsDefault];
+                [self.navigationBar setBackgroundImage:self.navigationController.gradientBarBg_landscape forBarMetrics:UIBarMetricsCompact];
+                [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompactPrompt];
+            }
+            break;
+        }
+        default:
+            break;
+    }
+    [self.navigationController setNeedsStatusBarAppearanceUpdate];
+}
 
 @end
 
@@ -35,55 +229,82 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
-    [self performSelector:@selector(configBar) withObject:nil afterDelay:0.f inModes:@[NSRunLoopCommonModes]];
+    
+    self.scrollEdgeAppearance = [RGNavigationBarAppearance new];
+    self.standardAppearance = [RGNavigationBarAppearance new];
+    
+    self.scrollEdgeAppearance.navigationController = self;
+    self.standardAppearance.navigationController = self;
+    
+    self.scrollEdgeAppearance.barBackgroundStyle = RGNavigationBackgroundStyleAllTranslucent;
+    [self performConfigBar];
     
     [self.navigationBar rg_addObserver:self forKeyPath:@"hidden" options:NSKeyValueObservingOptionNew context:RGNavigationControllerOBKey];
     [self.navigationBar rg_addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew context:RGNavigationControllerOBKey];
 }
 
+#pragma mark - Setter
+
 - (void)setTintColor:(UIColor *)tintColor {
     _tintColor = tintColor;
     self.navigationBar.tintColor = tintColor;
-    if (!_titleColor) {
-        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
+    
+    if (!self.standardAppearance.titleColor) {
+        [self.standardAppearance setTitleColor:tintColor withTint:YES];
+    }
+    if (!self.scrollEdgeAppearance.titleColor) {
+        [self.scrollEdgeAppearance setTitleColor:tintColor withTint:YES];
     }
 }
 
 - (void)setTitleColor:(UIColor *)titleColor {
     _titleColor = titleColor;
-    if (titleColor) {
-        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
-    } else {
-        self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
+    self.standardAppearance.titleColor = titleColor;
+    if (self.scrollEdgeKeepPaceWithStandard) {
+        self.scrollEdgeAppearance.titleColor = titleColor;
     }
+}
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    _backgroundColor = backgroundColor;
+    self.standardAppearance.backgroundColor = backgroundColor;
+    if (self.scrollEdgeKeepPaceWithStandard) {
+        self.scrollEdgeAppearance.backgroundColor = backgroundColor;
+    }
+}
+
+- (void)setBarBackgroundStyle:(RGNavigationBackgroundStyle)barBackgroundStyle {
+    _barBackgroundStyle = barBackgroundStyle;
+    self.standardAppearance.barBackgroundStyle = barBackgroundStyle;
+    if (self.scrollEdgeKeepPaceWithStandard) {
+        self.scrollEdgeAppearance.barBackgroundStyle = barBackgroundStyle;
+    }
+}
+
+- (void)setHideSeparator:(BOOL)hideSeparator {
+    _hideSeparator = hideSeparator;
+    self.standardAppearance.hideSeparator = hideSeparator;
+    if (self.scrollEdgeKeepPaceWithStandard) {
+        self.scrollEdgeAppearance.hideSeparator = hideSeparator;
+    }
+}
+
+#pragma mark - Universal Setter
+
+- (CGFloat)barBackgroundAlpha {
+    return self.navigationBar.rg_backgroundAlpha;
 }
 
 - (void)setBarBackgroundAlpha:(CGFloat)barBackgroundAlpha {
     self.navigationBar.rg_backgroundAlpha = barBackgroundAlpha;
 }
 
-- (CGFloat)barBackgroundAlpha {
-    return self.navigationBar.rg_backgroundAlpha;
+- (void)performConfigBar {
+    [self.standardAppearance performConfigBar];
+    [self.scrollEdgeAppearance performConfigBar];
 }
 
-- (void)setBarBackgroundStyle:(RGNavigationBackgroundStyle)barBackgroundStyle {
-    _barBackgroundStyle = barBackgroundStyle;
-    if (self.isViewLoaded) {
-        [self configBar];
-    } else {
-        [self performConfigBar];
-    }
-}
-
-- (void)setHideSeparator:(BOOL)hideSeparator {
-    _hideSeparator = hideSeparator;
-    if (self.isViewLoaded) {
-        [self configBar];
-    } else {
-        [self performConfigBar];
-    }
-}
+#pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if (RGNavigationControllerOBKey == context) {
@@ -91,51 +312,11 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
     }
 }
 
+#pragma mark - Life Cycle
+
 - (void)viewSafeAreaInsetsDidChange {
     [super viewSafeAreaInsetsDidChange];
     [self performConfigBar];
-}
-
-- (void)performConfigBar {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
-    [self performSelector:@selector(configBar) withObject:nil afterDelay:0.f inModes:@[NSRunLoopCommonModes]];
-}
-
-- (void)configBar {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configBar) object:nil];
-    switch (_barBackgroundStyle) {
-        case RGNavigationBackgroundStyleNormal:
-            [self.navigationBar setTranslucent:YES];
-            if (_hideSeparator) {
-                [self.navigationBar setShadowImage:[UIImage new]];
-            } else {
-                [self.navigationBar setShadowImage:nil];
-            }
-            [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-            [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompact];
-            [self.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsCompactPrompt];
-            break;
-        case RGNavigationBackgroundStyleAllTranslucent: {
-            [self.navigationBar setTranslucent:YES];
-            UIImage *barBg = [UIImage new];
-            [self.navigationBar setShadowImage:barBg];
-            [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsDefault];
-            [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsCompact];
-            [self.navigationBar setBackgroundImage:barBg forBarMetrics:UIBarMetricsCompactPrompt];
-            break;
-        }
-        case RGNavigationBackgroundStyleShadow: {
-            [self.navigationBar setTranslucent:YES];
-            [self.navigationBar setShadowImage:[UIImage new]];
-            [self.navigationBar setBackgroundImage:self.gradientBarBg forBarMetrics:UIBarMetricsDefault];
-            [self.navigationBar setBackgroundImage:self.gradientBarBg_landscape forBarMetrics:UIBarMetricsCompact];
-            [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompactPrompt];
-            break;
-        }
-        default:
-            break;
-    }
-    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
