@@ -80,13 +80,13 @@ void *RGNavigationControllerOBKey = "RGNavigationController";
     NSDictionary *titleTextAttributes = nil;
     if (titleColor) {
         titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
-    } else {
+    } else if (self.navigationBar.tintColor) {
         titleTextAttributes = @{NSForegroundColorAttributeName : self.navigationBar.tintColor};
     }
     
     if (@available(iOS 13.0, *)) {
-        self.appearance.titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
-        self.compactAppearance.titleTextAttributes = @{NSForegroundColorAttributeName : titleColor};
+        self.appearance.titleTextAttributes = titleTextAttributes;
+        self.compactAppearance.titleTextAttributes = titleTextAttributes;
     } else {
         self.navigationBar.titleTextAttributes = titleTextAttributes;
     }
