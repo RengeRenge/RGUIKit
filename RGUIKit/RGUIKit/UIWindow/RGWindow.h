@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (int)displayTag;
 
+@property (nonatomic, assign) BOOL touchThrough;
 - (void)setBlankClick:(void(^_Nullable)(RGWindow *window))blankClick;
 
 @end

@@ -309,8 +309,13 @@ static NSString *rg_common_signle_scene_key = @"rg_common_signle_scene_key";
     if (view == self || view == self.rootViewController.view) {
         return nil;
     }
-    if (view == _bgView && !_blankClick) {
-        return nil;
+    if (view == _bgView) {
+        if (_touchThrough) {
+            return nil;
+        }
+        if (!_blankClick) {
+            return nil;
+        }
     }
     return view;
 }
