@@ -11,39 +11,32 @@
 NSInteger RGTimePickerDayTimeInterval = 24 * 60 * 60;
 
 //#define _RGTimePickerDayTimeInterval (RGTimePickerDayTimeInterval - (_nextDay ? 0 : 1))
-#define _RGTimePickerDayTimeInterval ((self.pickerType & RGTimePickerTypeHour) ? RGTimePickerDayTimeInterval : ((self.pickerType & RGTimePickerTypeMinute) ? 60*60 : 60))
+#define _RGTimePickerDayTimeInterval ((self.pickerType & RGCountDownTimePickerTypeHours) ? RGTimePickerDayTimeInterval : ((self.pickerType & RGCountDownTimePickerTypeMin) ? 60*60 : 60))
 
 static UIWindow *RGTimePickerWindow = nil;
 static RGCountDownTimePicker *RGTimePickerShared = nil;
+static UIView *RGTimePickerWrapperShared = nil;
 static UIToolbar *RGTimePickerToolBarShared = nil;
-
-static void(^RGTimePickerChange)(RGCountDownTimePicker *, NSInteger);
 static void(^RGTimePickerCommit)(RGCountDownTimePicker *, NSInteger);
 static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
 
+static CGFloat RGCountDownTimePickerRowWidthAddtion = 10;
 @interface RGCountDownTimePicker ()
 
-//@property (nonatomic, assign) BOOL nextDay;
+@property (nonatomic, strong) NSArray <NSNumber *> *minimum;
+@property (nonatomic, strong) NSArray <NSNumber *> *maximum;
+@property (nonatomic, strong) NSMutableArray <NSNumber *> *current;
 
-@property (nonatomic, assign) NSInteger minMinute;
-@property (nonatomic, assign) NSInteger minHour;
-@property (nonatomic, assign) NSInteger minSecond;
+@property (nonatomic, strong) NSArray <NSNumber *> *steps;
 
-@property (nonatomic, assign) NSInteger maxMinute;
-@property (nonatomic, assign) NSInteger maxHour;
-@property (nonatomic, assign) NSInteger maxSecond;
+@property (nonatomic, strong) NSArray <NSNumber *> *types;
+@property (nonatomic, strong) NSArray <UILabel *> *typeUnits;
 
-@property (nonatomic, assign) NSInteger currentHour;
-@property (nonatomic, assign) NSInteger currentMinute;
-@property (nonatomic, assign) NSInteger currentSecond;
+@property (nonatomic, strong) UIFont *rowLabelFont;
+@property (nonatomic, assign) CGFloat space;
 
-@property (nonatomic, copy) NSArray <NSNumber *> *steps;
-
-@property (nonatomic, copy) NSArray <NSNumber *> *types;
-
-@property (nonatomic, strong) UIBarButtonItem *titleItem;
-@property (nonatomic, strong) UIBarButtonItem *cancelItem;
-@property (nonatomic, strong) UIBarButtonItem *okItem;
+@property (nonatomic, copy) NSString *splitString;
+@property (nonatomic, assign) BOOL splitMode;
 
 @end
 
@@ -52,13 +45,35 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
 
 #pragma mark - Window
 
+
++ (UIWindowScene *)rg_firstActiveWindowScene  API_AVAILABLE(ios(13.0)) {
+    NSEnumerator *scenes = [UIApplication.sharedApplication.connectedScenes.allObjects objectEnumerator];
+    for (UIScene *scene in scenes) {
+        if (scene.activationState == UISceneActivationStateForegroundActive &&
+            [scene isKindOfClass:UIWindowScene.class] &&
+            [scene.delegate conformsToProtocol:@protocol(UIWindowSceneDelegate)]
+            ) {
+            return (UIWindowScene *)scene;
+        }
+    }
+    return nil;
+}
+
+
 + (void)showWithDefaultTime:(NSInteger)defaultTime
+                      title:(NSString *)title
+                commitTitle:(NSString *)commitTitle
+                cancelTitle:(NSString *)cancelTitle
                      config:(nonnull void (^)(RGCountDownTimePicker * _Nonnull))config
                      change:(nullable void (^)(RGCountDownTimePicker * _Nonnull, NSInteger))change
                      commit:(nullable void (^)(RGCountDownTimePicker * _Nonnull, NSInteger))commit
                      cancel:(nullable void (^)(RGCountDownTimePicker * _Nonnull))cancel {
     if (!RGTimePickerWindow) {
-        RGTimePickerWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        if (@available(iOS 13.0, *)) {
+            RGTimePickerWindow = [[UIWindow alloc] initWithWindowScene:[self rg_firstActiveWindowScene]];
+        } else {
+            RGTimePickerWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        }
         [RGTimePickerWindow setWindowLevel:UIWindowLevelAlert];
     }
     UIWindow *window = RGTimePickerWindow;
@@ -84,26 +99,42 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
         bounds.origin.y = bounds.size.height;
         bounds.size.height = height;
         
-        UIView *wapper = [[UIView alloc] initWithFrame:bounds];
-        wapper.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        [window.rootViewController.view addSubview:wapper];
+        UIViewAutoresizing autoresizing = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        
+        UIView *wrapper = [[UIView alloc] initWithFrame:bounds];
+        wrapper.autoresizingMask = autoresizing;
+        if (@available(iOS 13.0, *)) {
+            wrapper.backgroundColor = UIColor.secondarySystemBackgroundColor;
+        } else {
+            wrapper.backgroundColor = UIColor.whiteColor;
+        }
+        
+        UIVisualEffectView *effectWrapper = [[UIVisualEffectView alloc] initWithFrame:wrapper.bounds];
+        if (@available(iOS 10.0, *)) {
+            effectWrapper.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleProminent];
+        } else {
+            effectWrapper.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+        }
+        effectWrapper.autoresizingMask = autoresizing;
         
         // picker
-        bounds = UIEdgeInsetsInsetRect(wapper.bounds, UIEdgeInsetsMake(40, 0, 0, 0));
+        bounds = UIEdgeInsetsInsetRect(wrapper.bounds, UIEdgeInsetsMake(40, 0, 0, 0));
         RGTimePickerShared = [[RGCountDownTimePicker alloc] initWithFrame:bounds];
         RGTimePickerShared.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-        RGTimePickerShared.backgroundColor = [UIColor whiteColor];
         
         // tool
-        bounds = UIEdgeInsetsInsetRect(wapper.bounds, UIEdgeInsetsMake(40, 0, 0, 0));
+        bounds = UIEdgeInsetsInsetRect(wrapper.bounds, UIEdgeInsetsMake(40, 0, 0, 0));
         UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 40)];
         toolbar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        toolbar.backgroundColor = [UIColor whiteColor];
-        toolbar.translucent = NO;
-        [wapper addSubview:RGTimePickerShared];
-        [wapper addSubview:toolbar];
+        toolbar.translucent = YES;
+        
+        [window.rootViewController.view addSubview:wrapper];
+        [wrapper addSubview:effectWrapper];
+        [effectWrapper.contentView addSubview:RGTimePickerShared];
+        [effectWrapper.contentView addSubview:toolbar];
         
         RGTimePickerToolBarShared = toolbar;
+        RGTimePickerWrapperShared = wrapper;
         
         bgView.backgroundColor = [UIColor clearColor];
         
@@ -111,17 +142,17 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
             CGRect bounds = window.rootViewController.view.bounds;
             bounds.origin.y = bounds.size.height - height;
             bounds.size.height = height;
-            wapper.frame = bounds;
+            wrapper.frame = bounds;
             
             bgView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.3f];
         }];
     }
     
-    UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(ok)];
+    UIBarButtonItem *okItem = [[UIBarButtonItem alloc] initWithTitle:commitTitle style:UIBarButtonItemStylePlain target:self action:@selector(ok)];
     
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:cancelTitle style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
     
-    UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithTitle:@"时间选择" style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *titleItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:nil action:nil];
     titleItem.enabled = NO;
     
     UIBarButtonItem *fix1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -129,15 +160,12 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
     RGTimePickerToolBarShared.items = @[cancelItem, fix1, titleItem, fix2, okItem];
     
     RGTimePickerShared.step = 1;
-    RGTimePickerShared.titleItem = titleItem;
-    RGTimePickerShared.okItem = okItem;
-    RGTimePickerShared.cancelItem = cancelItem;
     if (config) {
         config(RGTimePickerShared);
     }
     RGTimePickerShared.currentTime = defaultTime;
     
-    RGTimePickerChange = change;
+    RGTimePickerShared.change = change;
     RGTimePickerCommit = commit;
     RGTimePickerCancel = cancel;
     [RGTimePickerShared reloadAllComponents];
@@ -145,7 +173,7 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
 }
 
 + (void)dismiss:(void(^)(void))completion {
-    UIView *wapper = RGTimePickerShared.superview;
+    UIView *wapper = RGTimePickerWrapperShared;
     [UIView animateWithDuration:0.3 animations:^{
         wapper.frame = CGRectOffset(wapper.frame, 0, wapper.frame.size.height);
     } completion:^(BOOL finished) {
@@ -156,6 +184,7 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
         [RGTimePickerToolBarShared removeFromSuperview];
         RGTimePickerToolBarShared = nil;
         RGTimePickerShared = nil;
+        RGTimePickerWrapperShared = nil;
         
         if (completion) {
             completion();
@@ -166,7 +195,7 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
 + (void)ok {
     
     void(^RGTimePickerBlockTemp)(RGCountDownTimePicker *, NSInteger) = RGTimePickerCommit;
-    RGTimePickerChange = nil;
+    RGTimePickerShared.change = nil;
     RGTimePickerCommit = nil;
     RGTimePickerCancel = nil;
     
@@ -182,7 +211,7 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
 + (void)cancel {
     
     void(^RGTimePickerBlockTemp)(RGCountDownTimePicker *) = RGTimePickerCancel;
-    RGTimePickerChange = nil;
+    RGTimePickerShared.change = nil;
     RGTimePickerCommit = nil;
     RGTimePickerCancel = nil;
     
@@ -200,41 +229,127 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
         self.delegate = self;
         self.dataSource = self;
         _steps = @[@1, @1, @1];
+        self.pickerType = RGCountDownTimePickerTypeHours|RGCountDownTimePickerTypeMin;
+        [self.typeUnits enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            obj.font = self.rowLabelFont;
+            [self addSubview:obj];
+        }];
+        [self __setUnit:[self _unitTitleWithType:RGCountDownTimePickerTypeHours] forPickerType:RGCountDownTimePickerTypeHours];
+        [self __setUnit:[self _unitTitleWithType:RGCountDownTimePickerTypeMin] forPickerType:RGCountDownTimePickerTypeMin];
+        [self __setUnit:[self _unitTitleWithType:RGCountDownTimePickerTypeSec] forPickerType:RGCountDownTimePickerTypeSec];
     }
     return self;
 }
 
-- (void)setTitle:(NSString *)title {
-    _title = title;
-    _titleItem.title = title;
-}
-
-- (void)setCommitTitle:(NSString *)commitTitle {
-    _commitTitle = commitTitle;
-    _okItem.title = commitTitle;
-}
-
-- (void)setCancelTitle:(NSString *)cancelTitle {
-    _cancelTitle = cancelTitle;
-    _cancelItem.title = cancelTitle;
-}
-
-//- (void)setNextDay:(BOOL)nextDay {
-//    _nextDay = nextDay;
-//}
-
-- (void)setMinTime:(NSInteger)minTime {
-    
-    _minTime = MIN(minTime, _RGTimePickerDayTimeInterval);
-    
-    self.minHour = _minTime / 3600;
-    self.minMinute = (_minTime - self.minHour * 3600) / 60;
-    self.minSecond = _minTime % 60;
-    if (_currentTime < _minTime) {
-        self.currentTime = _minTime;
-    } else {
-        [self reloadAllComponents];
+- (NSString *)_unitTitleWithType:(RGCountDownTimePickerType)type {
+    NSString *title = nil;
+    switch (type) {
+        case RGCountDownTimePickerTypeHours:
+            title = @"hours";
+            break;
+        case RGCountDownTimePickerTypeMin:
+            title = @"min";
+            break;
+        case RGCountDownTimePickerTypeSec:
+            title = @"sec";
+            break;
+        default:
+            title = @"";
+            break;
     }
+    return title;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (!self.types.count) {
+        return;
+    }
+    CGFloat addtion = self.splitMode ? 0 : RGCountDownTimePickerRowWidthAddtion;
+    
+    __block CGFloat widthSum = self.space * (self.types.count - 1);
+    [self.types enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        widthSum += [self __widthForComponent:idx];
+    }];
+    
+    __block CGFloat start = (self.bounds.size.width - widthSum) / 2.f - addtion;
+    
+    [self.types enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UILabel *label = self.typeUnits[idx];
+        start += [self __widthForComponent:idx];
+        label.center = CGPointMake(
+                                   start + (self.splitMode ? self.space / 2.f : -label.frame.size.width / 2.f),
+                                   self.bounds.size.height / 2.f
+                                   );
+        start += self.space;
+    }];
+}
+
+- (UIFont *)rowLabelFont {
+    if (!_rowLabelFont) {
+        _rowLabelFont = [UIFont systemFontOfSize:UIFont.labelFontSize];
+    }
+    return _rowLabelFont;
+}
+
+- (NSInteger)currentHour {
+    return _current[0].integerValue;
+}
+
+- (void)setCurrentHour:(NSInteger)currentHour {
+    _current[0] = @(MIN(24, MAX(0, currentHour)));
+}
+
+- (NSInteger)currentMinute {
+    return _current[1].integerValue;
+}
+
+- (void)setCurrentMinute:(NSInteger)currentMinute {
+    _current[1] = @(MIN(59, MAX(0, currentMinute)));
+}
+
+- (NSInteger)currentSecond {
+    return _current[2].integerValue;
+}
+
+- (void)setCurrentSecond:(NSInteger)currentSecond {
+    _current[2] = @(currentSecond);
+}
+
+- (NSInteger)minHour {
+    return _minimum[0].integerValue;
+}
+
+- (NSInteger)minMinute {
+    return _minimum[1].integerValue;
+}
+
+- (NSInteger)minSecond {
+    return _minimum[2].integerValue;
+}
+
+- (NSInteger)maxHour {
+    return _maximum[0].integerValue;
+}
+
+- (NSInteger)maxMinute {
+    return _maximum[1].integerValue;
+}
+
+- (NSInteger)maxSecond {
+    return _maximum[2].integerValue;
+}
+
+- (NSArray<UILabel *> *)typeUnits {
+    if (!_typeUnits) {
+        _typeUnits = @[UILabel.new, UILabel.new, UILabel.new];
+    }
+    return _typeUnits;
+}
+
+- (void)setMinimumTime:(NSInteger)minimumTime {
+    _minimumTime = minimumTime;
+    [self __commitConfig];
 }
 
 - (void)setStep:(NSInteger)step {
@@ -244,74 +359,90 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
         @((step >= 60 && step < 3600) ? (step/60)%60 : 1),
         @((step >= 3600 ? (step/3600)%60 : 1))
     ];
+    [self __commitConfig];
 }
 
-- (void)setMaxTime:(NSInteger)maxTime {
-    
-    _maxTime = MIN(maxTime, _RGTimePickerDayTimeInterval);
-    
-    self.maxHour = _maxTime / 3600;
-    self.maxMinute = (_maxTime - self.maxHour * 3600) / 60;
-    self.maxSecond = _maxTime % 60;
-    
-    [self reloadAllComponents];
+- (void)setMaximumTime:(NSInteger)maximumTime {
+    _maximumTime = maximumTime;
+    [self __commitConfig];
 }
 
 - (void)setCurrentTime:(NSInteger)currentTime {
-    if (currentTime < self.minTime) {
+    _currentTime = currentTime;
+    [self __commitConfig];
+}
+
+- (void)setSpace:(CGFloat)space {
+    if (_space == space) {
         return;
     }
-    currentTime = MAX(MIN(currentTime, self.maxTime), self.minTime);
-    self.currentHour = currentTime / 3600;
-    self.currentMinute = (currentTime - self.currentHour * 3600) / 60;
-    self.currentSecond = currentTime % 60;
+    _space = space;
+    [self setNeedsLayout];
+}
+
+- (void)setUnit:(NSString *)unit forPickerType:(RGCountDownTimePickerType)type {
+    self.splitMode = NO;
+    [self __setUnit:unit forPickerType:type];
+    [self setNeedsLayout];
     [self reloadAllComponents];
-    
-    NSUInteger index = [self.types indexOfObject:@(RGTimePickerTypeHour)];
-    if (index != NSNotFound) {
-        [self selectRow:MAX(0, _currentHour - _minHour) / _steps[2].intValue inComponent:index animated:YES];
+}
+
+- (void)setSplit:(NSString *)split forPickerType:(RGCountDownTimePickerType)type {
+    self.splitString = split;
+    self.splitMode = YES;
+    NSMutableArray <NSNumber *> *types = [NSMutableArray array];
+    if (type & RGCountDownTimePickerTypeHours) {
+        [types addObject:@(RGCountDownTimePickerTypeHours)];
     }
-    
-    if (_currentHour == _minHour) {
-        NSUInteger index = [self.types indexOfObject:@(RGTimePickerTypeMinute)];
-        if (index != NSNotFound) {
-            [self selectRow:MAX(0, _currentMinute - _minMinute) / _steps[1].intValue inComponent:index animated:YES];
+    if (type & RGCountDownTimePickerTypeMin) {
+        [types addObject:@(RGCountDownTimePickerTypeMin)];
+    }
+    if (type & RGCountDownTimePickerTypeSec) {
+        [types addObject:@(RGCountDownTimePickerTypeSec)];
+    }
+    [types enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx + 1 < types.count) {
+            [self __setUnit:split forPickerType:obj.integerValue];
         } else {
-            
+            [self __setUnit:@" " forPickerType:obj.integerValue];
         }
-    } else {
-        NSUInteger index = [self.types indexOfObject:@(RGTimePickerTypeMinute)];
-        if (index != NSNotFound) {
-            [self selectRow:_currentMinute / _steps[1].intValue inComponent:index animated:YES];
-        }
+    }];
+    [self setNeedsLayout];
+    [self reloadAllComponents];
+}
+
+- (void)__setUnit:(NSString *)unit forPickerType:(RGCountDownTimePickerType)type {
+    NSUInteger index = 0;
+    switch (type) {
+        case RGCountDownTimePickerTypeHours:
+            index = 0;
+            break;
+        case RGCountDownTimePickerTypeMin:
+            index = 1;
+            break;
+        case RGCountDownTimePickerTypeSec:
+            index = 2;
+            break;
     }
-    
-    if (_currentMinute == _minMinute) {
-        NSUInteger index = [self.types indexOfObject:@(RGTimePickerTypeSecond)];
-        if (index != NSNotFound) {
-            [self selectRow:MAX(0, _currentSecond - _minSecond) / _steps[0].intValue inComponent:index animated:YES];
-        }
-    } else {
-        NSUInteger index = [self.types indexOfObject:@(RGTimePickerTypeSecond)];
-        if (index != NSNotFound) {
-            [self selectRow:_currentSecond / _steps[0].intValue inComponent:index animated:YES];
-        }
-    }
+    self.typeUnits[index].text = unit;
+    self.typeUnits[index].textAlignment = NSTextAlignmentCenter;
+    [self.typeUnits[index] sizeToFit];
+    self.typeUnits[index].frame = UIEdgeInsetsInsetRect(self.typeUnits[index].frame, UIEdgeInsetsMake(0, -5, 0, -5));
 }
 
 - (NSInteger)currentTime {
     __block NSInteger time = 0;
     [self.types enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        RGTimePickerType type = obj.unsignedIntegerValue;
+        RGCountDownTimePickerType type = obj.unsignedIntegerValue;
         switch (type) {
-            case RGTimePickerTypeHour:
-                time += _currentHour*3600;
+            case RGCountDownTimePickerTypeHours:
+                time += _current[0].integerValue * 3600;
                 break;
-            case RGTimePickerTypeMinute:
-                time += _currentMinute*60;
+            case RGCountDownTimePickerTypeMin:
+                time += _current[1].integerValue*60;
                 break;
-            case RGTimePickerTypeSecond:
-                time += _currentSecond;
+            case RGCountDownTimePickerTypeSec:
+                time += _current[2].integerValue;
                 break;
             default:
                 break;
@@ -320,55 +451,148 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
     return time;
 }
 
-- (void)setCurrentHour:(NSInteger)currentHour {
-    _currentHour = MIN(24, MAX(0, currentHour));
-    _currentTime = (_currentHour * 60 + _currentMinute) * 60;
-}
-
-- (void)setCurrentMinute:(NSInteger)currentMinute {
-    _currentMinute = MIN(59, MAX(0, currentMinute));
-    _currentTime = (_currentHour * 60 + _currentMinute) * 60;
-}
-
-- (void)setPickerType:(RGTimePickerType)pickerType {
+- (void)setPickerType:(RGCountDownTimePickerType)pickerType {
     _pickerType = pickerType;
-    
-    NSMutableArray *array = [NSMutableArray array];
-    if (_pickerType & RGTimePickerTypeHour) {
-        [array addObject:@(RGTimePickerTypeHour)];
-    }
-    if (_pickerType & RGTimePickerTypeMinute) {
-        [array addObject:@(RGTimePickerTypeMinute)];
-    }
-    if (_pickerType & RGTimePickerTypeSecond) {
-        [array addObject:@(RGTimePickerTypeSecond)];
-    }
-    self.types = array;
+    _types = nil;
+    [self __commitConfig];
 }
+
+- (NSArray<NSNumber *> *)types {
+    if (!_types) {
+        NSMutableArray *array = [NSMutableArray array];
+        if (_pickerType & RGCountDownTimePickerTypeHours) {
+            [array addObject:@(RGCountDownTimePickerTypeHours)];
+        }
+        if (_pickerType & RGCountDownTimePickerTypeMin) {
+            [array addObject:@(RGCountDownTimePickerTypeMin)];
+        }
+        if (_pickerType & RGCountDownTimePickerTypeSec) {
+            [array addObject:@(RGCountDownTimePickerTypeSec)];
+        }
+        _types = array;
+    }
+    return _types;
+}
+
+- (void)__commitConfig {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(__doCommitConfig) object:nil];
+    [self performSelector:@selector(__doCommitConfig) withObject:nil afterDelay:0 inModes:@[NSRunLoopCommonModes, NSDefaultRunLoopMode]];
+}
+
+- (void)__doCommitConfig {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(__doCommitConfig) object:nil];
+    
+    NSInteger minTime = MIN(self.minimumTime, _RGTimePickerDayTimeInterval);
+    NSInteger maxTime = MIN(self.maximumTime, _RGTimePickerDayTimeInterval);
+    
+    NSInteger maxHour = maxTime / 3600;
+    NSInteger maxMinute = (maxTime - maxHour * 3600) / 60;
+    NSInteger maxSecond = maxTime % 60;
+    
+    NSInteger minHour = minTime / 3600;
+    NSInteger minMinute = (minTime - minHour * 3600) / 60;
+    NSInteger minSecond = minTime % 60;
+    
+    NSInteger currentTime = MAX(MIN(_currentTime, maxTime), minTime);
+    
+    NSInteger currentHour = currentTime / 3600;
+    NSInteger currentMinute = (currentTime - currentHour * 3600) / 60;
+    NSInteger currentSecond = currentTime % 60;
+    
+    self.minimum = @[@(minHour), @(minMinute), @(minSecond)];
+    self.maximum = @[@(maxHour), @(maxMinute), @(maxSecond)];
+    self.current = @[@(currentHour), @(currentMinute), @(currentSecond)].mutableCopy;
+    
+    [self reloadAllComponents];
+    
+    NSMutableArray <NSValue *> *array = [NSMutableArray array];
+    [self.types enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIView *row = [self viewForRow:[self selectedRowInComponent:idx] forComponent:idx];
+        NSValue *value = [NSValue valueWithCGRect:[row convertRect:row.bounds toView:self]];
+        [array addObject:value];
+    }];
+    
+    __block CGFloat space = 0;
+    [array enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx > 0) {
+            space = CGRectGetMinX(obj.CGRectValue) - CGRectGetMaxX(array[idx - 1].CGRectValue);
+        }
+    }];
+    self.space = space;
+    
+    if (currentTime < minTime) {
+        [self __configCurrentTime];
+    } else if (currentTime > maxTime) {
+        [self __configCurrentTime];
+    }
+}
+
+- (void)__configCurrentTime {
+    NSInteger currentHour = self.currentHour;
+    NSInteger currentSecond = self.currentSecond;
+    NSInteger currentMinute = self.currentMinute;
+    
+    NSInteger minHour = self.minHour;
+    NSInteger minMinute = self.minMinute;
+    NSInteger minSecond = self.minSecond;
+    
+    NSUInteger index = [self.types indexOfObject:@(RGCountDownTimePickerTypeHours)];
+    if (index != NSNotFound) {
+        [self selectRow:MAX(0, currentHour - minHour) / _steps[2].intValue inComponent:index animated:YES];
+    }
+    
+    if (currentHour == minHour) {
+        NSUInteger index = [self.types indexOfObject:@(RGCountDownTimePickerTypeMin)];
+        if (index != NSNotFound) {
+            [self selectRow:MAX(0, currentMinute - minMinute) / _steps[1].intValue inComponent:index animated:YES];
+        } else {
+            
+        }
+    } else {
+        NSUInteger index = [self.types indexOfObject:@(RGCountDownTimePickerTypeMin)];
+        if (index != NSNotFound) {
+            [self selectRow:currentMinute / _steps[1].intValue inComponent:index animated:YES];
+        }
+    }
+    
+    if (currentMinute == minMinute) {
+        NSUInteger index = [self.types indexOfObject:@(RGCountDownTimePickerTypeSec)];
+        if (index != NSNotFound) {
+            [self selectRow:MAX(0, currentSecond - minSecond) / _steps[0].intValue inComponent:index animated:YES];
+        }
+    } else {
+        NSUInteger index = [self.types indexOfObject:@(RGCountDownTimePickerTypeSec)];
+        if (index != NSNotFound) {
+            [self selectRow:currentSecond / _steps[0].intValue inComponent:index animated:YES];
+        }
+    }
+}
+
+#pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(nonnull UIPickerView *)pickerView {
     return self.types.count;
 }
 
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return 60;
-}
-
 - (NSInteger)pickerView:(nonnull UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    RGTimePickerType type = [self.types[component] unsignedIntegerValue];
+    RGCountDownTimePickerType type = [self.types[component] unsignedIntegerValue];
+    if (type == 0) {
+        return 1;
+    }
+    
     NSInteger number = 0;
     
     NSInteger start = 0;
     NSInteger end = 59;
     NSInteger step = 1;
     
-    if (type == RGTimePickerTypeHour) {
+    if (type == RGCountDownTimePickerTypeHours) {
         step = _steps[2].intValue;
         start = self.minHour;
         end = self.maxHour;
     }
     
-    if (type == RGTimePickerTypeMinute) {
+    if (type == RGCountDownTimePickerTypeMin) {
         step = _steps[1].intValue;
         end = 59;
         if (self.currentHour == self.maxHour) {
@@ -379,7 +603,7 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
         }
     }
     
-    if (type == RGTimePickerTypeSecond) {
+    if (type == RGCountDownTimePickerTypeSec) {
         step = _steps[0].intValue;
         end = 59;
         if (self.currentMinute == self.maxMinute && self.currentHour == self.maxHour) {
@@ -394,21 +618,21 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
     return number;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    RGTimePickerType type = [self.types[component] unsignedIntegerValue];
+- (NSString *)_titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    RGCountDownTimePickerType type = [self.types[component] unsignedIntegerValue];
     
-    if (type == RGTimePickerTypeHour) {
+    if (type == RGCountDownTimePickerTypeHours) {
         row *= self.steps[2].intValue;
         return [NSString stringWithFormat:@"%02ld", (long)self.minHour + row];
     }
-    if (type == RGTimePickerTypeMinute) {
+    if (type == RGCountDownTimePickerTypeMin) {
         row *= self.steps[1].intValue;
         if (self.currentHour == self.minHour) {
             return [NSString stringWithFormat:@"%02ld", (long)row + self.minMinute];
         }
         return [NSString stringWithFormat:@"%02ld", (long)row];
     }
-    if (type == RGTimePickerTypeSecond) {
+    if (type == RGCountDownTimePickerTypeSec) {
         row *= self.steps[0].intValue;
         if (self.currentMinute == self.minMinute && self.currentHour == self.minHour) {
             return [NSString stringWithFormat:@"%02ld", (long)row + self.minSecond];
@@ -418,53 +642,96 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
     return @"";
 }
 
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self _titleForRow:row forComponent:component];
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    UILabel *label = (UILabel *)view;
+    if (!label) {
+        label = [[UILabel alloc] initWithFrame:view.bounds];
+        label.font = self.rowLabelFont;
+    }
+    label.textAlignment = self.splitMode ? NSTextAlignmentCenter : NSTextAlignmentNatural;
+    label.text = [self _titleForRow:row forComponent:component];
+    return label;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    return [self __widthForComponent:component];
+}
+
+- (CGFloat)__widthForComponent:(NSInteger)component {
+    CGFloat rowWidth = [@"00" boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 20) options:NSStringDrawingUsesFontLeading attributes:@{
+        NSFontAttributeName: self.rowLabelFont
+    } context:nil].size.width;
+    CGFloat unitWith = 0;
+    if (self.splitMode) {
+        unitWith = [self.splitString boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, 20) options:NSStringDrawingUsesFontLeading attributes:@{
+            NSFontAttributeName: self.rowLabelFont
+        } context:nil].size.width;
+    } else {
+        unitWith = self.typeUnits[component].frame.size.width;
+    }
+    return rowWidth + unitWith + RGCountDownTimePickerRowWidthAddtion;
+}
+
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    RGTimePickerType type = [self.types[component] unsignedIntegerValue];
+    RGCountDownTimePickerType type = [self.types[component] unsignedIntegerValue];
     
-    if (type == RGTimePickerTypeHour) {
+    if (type == RGCountDownTimePickerTypeHours) {
         row *= self.steps[2].intValue;
         self.currentHour = self.minHour + row;
         
-        NSInteger minIndex = [self.types indexOfObject:@(RGTimePickerTypeMinute)];
+        NSInteger minIndex = [self.types indexOfObject:@(RGCountDownTimePickerTypeMin)];
         if (minIndex != NSNotFound) {
-            [self fixCurrentMinuteInComponent:minIndex picker:pickerView];
+            [self fixCurrentMinuteInComponent:minIndex];
         }
         
-        NSInteger secIndex = [self.types indexOfObject:@(RGTimePickerTypeSecond)];
+        NSInteger secIndex = [self.types indexOfObject:@(RGCountDownTimePickerTypeSec)];
         if (secIndex != NSNotFound) {
-            [self fixCurrentSecondInComponent:secIndex picker:pickerView];
+            [self fixCurrentSecondInComponent:secIndex];
         }
     }
-    if (type == RGTimePickerTypeMinute) {
+    if (type == RGCountDownTimePickerTypeMin) {
         row *= self.steps[1].intValue;
         [self fixCurrentMinute:row];
-        NSInteger index = [self.types indexOfObject:@(RGTimePickerTypeSecond)];
+        NSInteger index = [self.types indexOfObject:@(RGCountDownTimePickerTypeSec)];
         if (index != NSNotFound) {
-            [self fixCurrentSecondInComponent:index picker:pickerView];
+            [self fixCurrentSecondInComponent:index];
         }
     }
-    if (type == RGTimePickerTypeSecond) {
+    if (type == RGCountDownTimePickerTypeSec) {
         row *= self.steps[0].intValue;
         [self fixCurrentSecond:row];
     }
     
-    if (RGTimePickerChange) {
-        RGTimePickerChange(self, self.currentTime);
+    if (_change) {
+        _change(self, self.currentTime);
     }
 }
 
 - (void)selectRow:(NSInteger)row inComponent:(NSInteger)component animated:(BOOL)animated {
+    NSInteger count = 0;
+    count = [super numberOfComponents];
+    if (component >= count) {
+        return;
+    }
+    count = [super numberOfRowsInComponent:component];
+    if (row >= count) {
+        return;
+    }
     [super selectRow:row inComponent:component animated:animated];
-    RGTimePickerType type = [self.types[component] unsignedIntegerValue];
+    RGCountDownTimePickerType type = [self.types[component] unsignedIntegerValue];
     switch (type) {
-        case RGTimePickerTypeHour:
-            [self fixCurrentHourInComponent:component picker:self];
+        case RGCountDownTimePickerTypeHours:
+            [self fixCurrentHourInComponent:component];
             break;
-        case RGTimePickerTypeMinute:
-            [self fixCurrentMinuteInComponent:component picker:self];
+        case RGCountDownTimePickerTypeMin:
+            [self fixCurrentMinuteInComponent:component];
             break;
-        case RGTimePickerTypeSecond:
-            [self fixCurrentSecondInComponent:component picker:self];
+        case RGCountDownTimePickerTypeSec:
+            [self fixCurrentSecondInComponent:component];
             break;
         default:
             break;
@@ -491,10 +758,10 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
     }
 }
 
-- (void)fixCurrentHourInComponent:(NSInteger)component picker:(UIPickerView *)picker {
-    [picker reloadComponent:component];
-    NSUInteger num = [picker numberOfRowsInComponent:component];
-    NSUInteger row = [picker selectedRowInComponent:component];
+- (void)fixCurrentHourInComponent:(NSInteger)component {
+    [self reloadComponent:component];
+    NSUInteger num = [self numberOfRowsInComponent:component];
+    NSUInteger row = [self selectedRowInComponent:component];
     if (row > num - 1) {
         row = num - 1;
     }
@@ -502,10 +769,10 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
     [self fixCurrentHour:row];
 }
 
-- (void)fixCurrentMinuteInComponent:(NSInteger)component picker:(UIPickerView *)picker {
-    [picker reloadComponent:component];
-    NSUInteger num = [picker numberOfRowsInComponent:component];
-    NSUInteger row = [picker selectedRowInComponent:component];
+- (void)fixCurrentMinuteInComponent:(NSInteger)component {
+    [self reloadComponent:component];
+    NSUInteger num = [self numberOfRowsInComponent:component];
+    NSUInteger row = [self selectedRowInComponent:component];
     if (row > num - 1) {
         row = num - 1;
     }
@@ -513,10 +780,10 @@ static void(^RGTimePickerCancel)(RGCountDownTimePicker *);
     [self fixCurrentMinute:row];
 }
 
-- (void)fixCurrentSecondInComponent:(NSInteger)component picker:(UIPickerView *)picker {
-    [picker reloadComponent:component];
-    NSUInteger num = [picker numberOfRowsInComponent:component];
-    NSUInteger row = [picker selectedRowInComponent:component];
+- (void)fixCurrentSecondInComponent:(NSInteger)component {
+    [self reloadComponent:component];
+    NSUInteger num = [self numberOfRowsInComponent:component];
+    NSUInteger row = [self selectedRowInComponent:component];
     if (row > num - 1) {
         row = num - 1;
     }
