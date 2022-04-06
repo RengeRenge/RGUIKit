@@ -27,6 +27,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger currentTime;
 @property (nonatomic, assign) NSInteger step;
 
+@property (nonatomic, strong) UIColor *labelColor;
+
 - (void)setUnit:(NSString *)unit forPickerType:(RGCountDownTimePickerType)type;
 - (void)setSplit:(NSString *)split forPickerType:(RGCountDownTimePickerType)type;
 

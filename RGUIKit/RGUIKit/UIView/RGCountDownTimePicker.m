@@ -372,6 +372,14 @@ static CGFloat RGCountDownTimePickerRowWidthAddtion = 10;
     [self __commitConfig];
 }
 
+- (void)setLabelColor:(UIColor *)labelColor {
+    _labelColor = labelColor;
+    [self.typeUnits enumerateObjectsUsingBlock:^(UILabel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.textColor = labelColor;
+    }];
+    [self reloadAllComponents];
+}
+
 - (void)setSpace:(CGFloat)space {
     if (_space == space) {
         return;
@@ -654,6 +662,7 @@ static CGFloat RGCountDownTimePickerRowWidthAddtion = 10;
     }
     label.textAlignment = self.splitMode ? NSTextAlignmentCenter : NSTextAlignmentNatural;
     label.text = [self _titleForRow:row forComponent:component];
+    label.textColor = self.labelColor;
     return label;
 }
 
