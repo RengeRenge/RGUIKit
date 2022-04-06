@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RGUIKit"
-  s.version      = "1.3.6"
+  s.version      = "1.3.7"
   s.summary      = "RGUIKit, My Summary for convenient coding"
 
   # This description is used to generate tags and improve search results.
